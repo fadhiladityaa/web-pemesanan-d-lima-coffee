@@ -7,7 +7,7 @@
     <div class="img-wrapper pt-1">
         <img class="w-60 sm:w-72" src="img/about.png" alt="">
     </div>
-    <div class="text-wrapper flex flex-col items-start gap-1 w-60 sm:w-72 mt-7">
+    <div class="text-wrapper flex flex-col items-start gap-1 w-60 sm:w-72 mt-7 text-justify">
         <h2 class="text-sm text-center sm:text-xl">
             Kenapa Memilih Kopi Kami?
         </h2>
