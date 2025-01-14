@@ -1,4 +1,4 @@
-<div class="bg-black font-poppins pt-14 text-white flex-col sm:items-center" >
+<div class="bg-black -mt-1 font-poppins pt-14 pb-8 text-white flex-col sm:items-center" >
     <h1 class="text-lg font-bold text-center text-white sm:text-3xl">
         <span class="text-primary">Tentang</span> Kami
       </h1>
