@@ -1,8 +1,6 @@
 <?php
 
 namespace App\View\Components;
-
-use App\Models\Menu;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -23,7 +21,6 @@ class menu extends Component
      */
     public function render(): View|Closure|string
     {
-        $menus = Menu::all();
-        return view('components.menu', $menus);
+        return view('components.menu',);
     }
 }
