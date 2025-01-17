@@ -1,6 +1,8 @@
 <?php
 
 namespace App\View\Components;
+
+use App\Models\Daftar_menu;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -21,6 +23,8 @@ class menu extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.menu',);
+        return view('components.menu', [
+            'menus' => Daftar_menu::all(),
+        ]);
     }
 }

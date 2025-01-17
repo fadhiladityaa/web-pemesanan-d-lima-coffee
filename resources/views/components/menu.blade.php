@@ -20,13 +20,13 @@
     
             <div class="kanan w-44">
                 <div class="nama-menu flex justify-between mt-1.5">
-                    {{-- <h3>{{ $menu->nama_menu }}</h3> --}}
+                    <h3 class="text-sm">{{ $menu->nama_menu }}</h3>
                     <h3></h3>
-                    <p class="text-primary">7k</p>
+                    <p class="text-primary">Rp.{{ $menu->harga }}</p>
                 </div>
     
                 <div class="deskripsi text-ssm font-extralight mt-1">
-                    <p>Perpaduan sempurna antara espresso, susu hangat, dan foam lembut di atasnya.</p>
+                    <p>{{ $menu->deskripsi }}</p>
                 </div>
     
                 <div class="level text-ssm text-black font-light flex gap-x-1.5 mt-2">
