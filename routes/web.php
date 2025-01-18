@@ -8,7 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 
 // route ke home
-Route::get('/', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
 
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
@@ -21,7 +21,7 @@ Route::post('/login', [loginController::class, 'authenticate']);
 // route  untuk logout
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
-// route untuk profile
+// route untuk profilem
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth'));
 
-Route::post('/cart', [addToCartController::class, 'store'])->name('cart');
+// Route::post('/cart{Daftar_menu}', [addToCartController::class, 'store'])->name('add.to.cart');

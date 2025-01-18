@@ -32,10 +32,10 @@
   
       </div>
 
-      <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="btn btn-ghost p-3">
+      <div x-data="{ open: true }" class="dropdown dropdown-end relative">
+        <div @click="open = !open" role="button" class="btn btn-ghost p-3">
           <div class="indicator">
-            <svg
+            <svg 
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5"
               fill="none"
@@ -50,18 +50,34 @@
             <span class="badge badge-sm indicator-item">1</span>
           </div>
         </div>
+      
+        <!-- Dropdown Content -->
         <div
-          tabindex="0"
-          class="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
-          <div class="card-body">
-            <span class="text-lg font-bold">8 Items</span>
-            <span class="text-info">Subtotal: $999</span>
-            <div class="card-actions">
-              <button class="btn btn-primary btn-block">View cart</button>
+          x-show="open"
+          x-transition
+          class="card card-compact absolute bg-base-100 z-[1] mt-3 -right-12 w-80 shadow"
+          @click.outside="open = false">
+          <div class="card-body flex flex-col justify-between">
+            <!-- Tombol Close -->
+            <div class="topper flex flex-col items-end gap-2">
+              <button @click="open = false" class="font-bold text-lg border border-black-100 px-2 hover:bg-slate-500">
+                X
+              </button>
+            </div>
+            <p>Keranjang Anda</p>
+            <div class="belanjaan flex justify-between border border-blue-300 p-3">
+              <span>Coppucino</span>
+              <span>Rp. 20000</span>
+              <div  x-data="{counter: 1}" class="counter flex gap items-center">
+                <button class="border-2 border-slate rounded-md px-2" @click=counter++>+</button>
+                <span class="border-2 border-slate rounded-md px-2" x-text="counter"></span>
+                <button class="border-2 border-slate rounded-md px-2" class="text-lg" @click=counter-->-</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      
       
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
