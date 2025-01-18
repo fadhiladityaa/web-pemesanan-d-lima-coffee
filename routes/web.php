@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\addToCartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -22,3 +23,5 @@ Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
 // route untuk profile
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth'));
+
+Route::post('/cart', [addToCartController::class, 'store'])->name('cart');
