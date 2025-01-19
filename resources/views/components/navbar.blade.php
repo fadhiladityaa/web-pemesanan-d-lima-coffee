@@ -64,7 +64,8 @@
                 X
               </button>
             </div>
-            <p>Keranjang Anda</p>
+            <p>Keranjang Anda</p> 
+
             <div class="belanjaan flex justify-between border border-blue-300 p-3">
               <span>Coppucino</span>
               <span>Rp. 20000</span>
@@ -74,6 +75,7 @@
                 <button class="border-2 border-slate rounded-md px-2" class="text-lg" @click=counter-->-</button>
               </div>
             </div>
+
           </div>
         </div>
       </div>

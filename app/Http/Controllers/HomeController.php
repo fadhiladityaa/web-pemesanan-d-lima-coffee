@@ -14,9 +14,4 @@ class HomeController extends Controller
             'title' => 'Home',
         ]);
     }
-
-    public function addToCart(Daftar_menu $daftar_menu)
-    {
-        $data = Daftar_menu::findOrfail();
-    }
 }

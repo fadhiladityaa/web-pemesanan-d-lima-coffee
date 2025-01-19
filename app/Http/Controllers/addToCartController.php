@@ -7,9 +7,21 @@ use Illuminate\Http\Request;
 
 class addToCartController extends Controller
 {
-    public function store(Daftar_menu $daftar_menu)
+    public function addToCart(Daftar_menu $daftar_menu)
     {
-        $data = $daftar_menu->id;
-        echo $data;
+        $data = Daftar_menu::findOrFail($daftar_menu);
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$daftar_menu])){
+            $cart[$daftar_menu]['quantity']++;
+        } else {
+            $cart[$daftar_menu] = [
+                'menu' => $data->nama_menu,
+                'quantity' => 1,
+                'harga' => $data->harga
+            ];
+        }
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Menu berhasil masuk ke keranjang!');
     }
 }

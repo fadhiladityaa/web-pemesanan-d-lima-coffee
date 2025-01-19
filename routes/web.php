@@ -24,4 +24,4 @@ Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 // route untuk profilem
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth'));
 
-// Route::post('/cart{Daftar_menu}', [addToCartController::class, 'store'])->name('add.to.cart');
+Route::post('/cart{Daftar_menu}', [addToCartController::class, 'addToCart'])->name('add.to.cart');

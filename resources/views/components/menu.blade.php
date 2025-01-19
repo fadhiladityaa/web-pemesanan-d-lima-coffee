@@ -36,7 +36,7 @@
                     <span class="bg-white px-2 py-1 rounded-xl hover:bg-primary hover:text-white">Strong</span>
                 </div>
 
-                <form method="get" action="{{ route('all.about.home', $menu->id ) }}">
+                <form method="get" action="{{ route('all.about.home') }}">
                     <button class="bg-primary font-normal w-full rounded-2xl py-2 mt-3 text-white hover:bg-amber-800">
                         Add To Cart
                     </button>
