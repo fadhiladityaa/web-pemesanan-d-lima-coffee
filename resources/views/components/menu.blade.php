@@ -8,7 +8,7 @@
 
     <div class="card-container gap-3 mt-5 flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
       @foreach ($menus as $menu)            
-        <div  class="card bg-secondary font-poppins text-menu font-bold flex flex-row gap-4 pt-4 pl-4 pr-6 pb-4">
+        <div x-data="{clickedMenu: {{ $menu }}}" class="card bg-secondary font-poppins text-menu font-bold flex flex-row gap-4 pt-4 pl-4 pr-6 pb-4">
             <div class="kiri w-24 flex flex-col justify-center">
                 <img class="w-24" src="img/kopi-1.png" alt="">
     
@@ -38,7 +38,7 @@
                 </div>
 
                 <form method="get" action="{{ route('all.about.home') }}">
-                    <button @click.prevent="console.log(data)" class="bg-primary font-normal w-full rounded-2xl py-2 mt-3 text-white hover:bg-amber-800">
+                    <button @click.prevent="$store.data.addToCart(clickedMenu)" class="bg-primary font-normal w-full rounded-2xl py-2 mt-3 text-white hover:bg-amber-800">
                         Add To Cart
                     </button>
                 </form>

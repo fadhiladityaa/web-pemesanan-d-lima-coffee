@@ -29,11 +29,10 @@
     // Inisialisasi store sebelum Alpine.js berjalan
     document.addEventListener('alpine:init', () => {
         Alpine.store('data', {
-            menus: [
-              {menu: 'kopi', harga: 100},
-              {menu: 'kue', harga: 120},
-              {menu: 'sabu', harga: 110},
-            ]
+           menus : [],
+            addToCart(menu) {
+              this.menus.push(menu)
+            }
         });
     });
   </script>
