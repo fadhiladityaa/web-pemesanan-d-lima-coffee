@@ -1,7 +1,8 @@
-<div  class="bg-black  -mt-1 text-white font-poppins pt-16 flex items-center flex-col pb-32">
+<div  class="bg-black  -mt-1 text-white font-poppins  flex items-center flex-col pb-32 pt-28">
     <div class="w-52 sm:w-72 text-sm text-center">
         <h1 class="text-center font-bold text-lg  text-white sm:text-3xl "><span class="text-primary ">Menu</span> Kami</h1>
-        <h2 class="font-extralight text-ssm sm:text-mmd sm:mb-3 mt-2">Memastikan menu yang tersedia adalah yang terbaik</h2>
+        <h2 class="font-extralight text-ssm sm:text-mmd sm:mb-3  mt-2">Memastikan menu yang tersedia adalah yang terbaik</h2>
+        <h2 class="font-extralight text-ssm sm:text-mmd sm:mb-3 pb-24 mt-2" ></h2>
     </div>
 
 
@@ -14,8 +15,8 @@
                 
                 <div class="counter text-black flex mx-auto mt-4 font-normal">
                     <button class="px-2.5 py-0 border border-slate-500 rounded-lg">-</button>
-                    <p class="px-2.5 py-0 border border-slate-500 rounded-lg">0</p>
-                    <button class="px-2.5 py-0 border border-slate-500 rounded-lg">+</button>
+                    <span  class="px-2.5 py-0 border border-slate-500 rounded-lg">0</span>
+                    <button @click="increment()" class="px-2.5 py-0 border border-slate-500 rounded-lg">+</button>
                 </div>
             </div>
     
@@ -37,7 +38,7 @@
                 </div>
 
                 <form method="get" action="{{ route('all.about.home') }}">
-                    <button class="bg-primary font-normal w-full rounded-2xl py-2 mt-3 text-white hover:bg-amber-800">
+                    <button @click.prevent="console.log(data)" class="bg-primary font-normal w-full rounded-2xl py-2 mt-3 text-white hover:bg-amber-800">
                         Add To Cart
                     </button>
                 </form>

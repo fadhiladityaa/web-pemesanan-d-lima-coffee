@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\addToCartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\menuController;
 
 // route ke home
-Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
 
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
@@ -21,7 +21,7 @@ Route::post('/login', [loginController::class, 'authenticate']);
 // route  untuk logout
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
-// route untuk profilem
+// route untuk profile
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth'));
 
-Route::post('/cart{Daftar_menu}', [addToCartController::class, 'addToCart'])->name('add.to.cart');
+Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');

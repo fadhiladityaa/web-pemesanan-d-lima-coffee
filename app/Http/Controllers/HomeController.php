@@ -12,6 +12,7 @@ class HomeController extends Controller
     {
         return view('home', [
             'title' => 'Home',
+            'menus' => Daftar_menu::all()
         ]);
     }
 }

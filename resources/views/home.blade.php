@@ -3,7 +3,6 @@
 
      <x-hero></x-hero>
      <x-about></x-about>
-     <x-menu>
-          
-     </x-menu>
+     <x-menu :menus=$menus></x-menu>
+
 </x-layout>

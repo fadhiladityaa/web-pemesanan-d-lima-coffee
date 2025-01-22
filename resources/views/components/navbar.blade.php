@@ -7,8 +7,8 @@
     </div>
     
     <div class="links text-white sm:flex gap-7 hidden font-poppins">
-      <a href="">Home</a>
-      <a href="">Tentang Kami</a>
+      <a class="{{ Request()->is('home') ? 'text-primary font-bold' : ''}}" href="/home">Home</a>
+      <a class="{{ Request()->is('menu')  ? 'text-primary font-bold' : '' }}" href="#">Menu</a>
       <a href="">Kontak</a>
     </div>
 
@@ -32,7 +32,7 @@
   
       </div>
 
-      <div x-data="{ open: true }" class="dropdown dropdown-end relative">
+      <div x-data="{ open: false }" class="dropdown dropdown-end relative">
         <div @click="open = !open" role="button" class="btn btn-ghost p-3">
           <div class="indicator">
             <svg 
@@ -65,16 +65,17 @@
               </button>
             </div>
             <p>Keranjang Anda</p> 
-
-            <div class="belanjaan flex justify-between border border-blue-300 p-3">
-              <span>Coppucino</span>
-              <span>Rp. 20000</span>
-              <div  x-data="{counter: 1}" class="counter flex gap items-center">
-                <button class="border-2 border-slate rounded-md px-2" @click=counter++>+</button>
-                <span class="border-2 border-slate rounded-md px-2" x-text="counter"></span>
-                <button class="border-2 border-slate rounded-md px-2" class="text-lg" @click=counter-->-</button>
+            <template x-for="menu in $store.data.menus">
+              <div class="belanjaan flex justify-between border border-blue-300 p-3">
+                <span x-text="menu.menu"></span>
+                <span x-text="menu.harga"></span>
+                <div  x-data="{counter: 1}" class="counter flex gap items-center">
+                  <button class="border-2 border-slate rounded-md px-2" @click=counter++>+</button>
+                  <span class="border-2 border-slate rounded-md px-2" x-text="counter"></span>
+                  <button class="border-2 border-slate rounded-md px-2" class="text-lg" @click=counter-->-</button>
+                </div>
               </div>
-            </div>
+            </template>
 
           </div>
         </div>
