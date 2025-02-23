@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\menuController;
+use App\Http\Controllers\DashboardController;
+
 
 // route ke home
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
@@ -25,3 +27,7 @@ Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth'));
 
 Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');
+
+// Route ke halaman dashboard
+
+Route::get('/dashboard', [DashboardController::class, 'index']);

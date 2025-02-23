@@ -32,7 +32,7 @@
   
       </div>
 
-      <div x-data="{ open: true }" class="dropdown dropdown-end relative">
+      <div x-data="{ open: false }" class="dropdown dropdown-end relative">
         <div @click="open = !open" role="button" class="btn btn-ghost p-3">
           <div class="indicator">
             <svg 
