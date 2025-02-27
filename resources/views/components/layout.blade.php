@@ -17,7 +17,9 @@
 <body>
   
   @unless (request()->is('login') || request()->is('register'))
+  <div class="">
     <x-navbar></x-navbar>
+  </div>
   @endunless
 
   <div>

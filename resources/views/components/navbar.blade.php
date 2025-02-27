@@ -1,5 +1,4 @@
-<div class="navbar bg-black shadow-lg flex justify-between fixed z-40 lg:p-4">
-
+<nav class="navbar {{ Request()->is('/') ? 'fixed' : '' }} bg-black shadow-lg flex justify-between z-40 lg:p-4">
     <div class="title">
           <a href="/" class="btn btn-ghost text-xl lg:text-2xl text-white font-poppins font-bold">
             D'Lima<span class="text-primary italic">Coffee<span class="text-white">.</span></span>
@@ -118,6 +117,10 @@
             <a href="">Kontak</a>
           </li>
 
+          <li class="sm:hidden">
+            <a href="/dashboard">Dashboard</a>
+          </li>
+
           <li>
             <form action="/logout" method="POST">
               @csrf
@@ -129,6 +132,4 @@
       </div>
     </div>
   </div>
-
-
-</div>
+</nav>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Daftar_menu;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class menuController extends Controller
 {
@@ -12,10 +13,7 @@ class menuController extends Controller
      */
     public function index()
     {
-        // return view('components.menu', [
-        //     'title' => 'Halaman Menu',
-        //     'menus' => Daftar_menu::all(),
-        // ]);
+
     }
 
     /**
@@ -31,8 +29,23 @@ class menuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama_menu' => 'required|string|unique:daftar_menus,nama_menu',
+            'harga' => 'required|integer',
+            'gambar' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:2048',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $gambarPath = $request->file('gambar')->store('menu_images', 'public'); 
+            $validated['gambar'] = $gambarPath; 
+        }
+
+        Daftar_menu::create($validated);
+
+        return redirect('/dashboard')->with('success', 'Menu barhasil ditambahkan');
     }
+
 
     /**
      * Display the specified resource.

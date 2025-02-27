@@ -7,10 +7,11 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\menuController;
 use App\Http\Controllers\DashboardController;
-
+use App\Models\Daftar_menu;
+use Faker\Guesser\Name;
 
 // route ke home
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
 
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
@@ -29,5 +30,12 @@ Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth')
 Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');
 
 // Route ke halaman dashboard
+Route::get('/dashboard', function() {
+    return view('dashboard', [
+        'title' => 'dashboard',
+        'menus' => Daftar_menu::all(),
+    ]);
+});
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+// Route untuk crud 
+Route::post('/tambah-menu', [menuController::class, 'store'])->name('tambah.menu');
