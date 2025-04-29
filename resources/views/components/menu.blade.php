@@ -11,12 +11,12 @@
         <div x-data="{clickedMenu: {{ $menu }}}" class="card bg-secondary font-poppins text-menu font-bold flex flex-row gap-4 pt-4 pl-4 pr-6 pb-4">
             <div class="kiri w-24 flex flex-col justify-center">
                 <img class="w-24" src="img/kopi-1.png" alt="">
-    
                 
+
                 <div class="counter text-black flex mx-auto mt-4 font-normal">
                     <button class="px-2.5 py-0 border border-slate-500 rounded-lg">-</button>
                     <span  class="px-2.5 py-0 border border-slate-500 rounded-lg">0</span>
-                    <button @click="increment()" class="px-2.5 py-0 border border-slate-500 rounded-lg">+</button>
+                    <button @click="$store.data.test" class="px-2.5 py-0 border border-slate-500 rounded-lg">+</button>
                 </div>
             </div>
     

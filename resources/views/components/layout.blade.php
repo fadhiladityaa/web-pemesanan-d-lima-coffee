@@ -14,7 +14,7 @@
   @vite('resources/css/app.css')
   <title>{{ $title }}</title>
 </head>
-<body>
+<body x-data="data">
   
   @unless (request()->is('login') || request()->is('register'))
   <div class="">
@@ -30,8 +30,19 @@
   <script>
     // Inisialisasi store sebelum Alpine.js berjalan
     document.addEventListener('alpine:init', () => {
+      Alpine.data('data', () => ({
+            coba: 'halo ini adlaah data dari data',
+            toggle() {
+                this.open = ! this.open
+            }
+        }))
+
+
         Alpine.store('data', {
            menus : [],
+           test() {
+            console.log('halo'); 
+           },
             addToCart(menu) {
               this.menus.push(menu)
             }
