@@ -1,4 +1,4 @@
-<div  class="bg-black  -mt-1 text-white font-poppins  flex items-center flex-col pb-32 pt-28">
+<div id="menu" class="bg-black  -mt-1 text-white font-poppins  flex items-center flex-col pb-32 pt-28">
     <div class="w-52 sm:w-72 text-sm text-center">
         <h1 class="text-center font-bold text-lg  text-white sm:text-3xl "><span class="text-primary ">Menu</span> Kami</h1>
         <h2 class="font-extralight text-ssm sm:text-mmd sm:mb-3  mt-2">Memastikan menu yang tersedia adalah yang terbaik</h2>

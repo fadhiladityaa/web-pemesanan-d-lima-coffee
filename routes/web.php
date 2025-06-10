@@ -6,9 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\menuController;
-use App\Http\Controllers\DashboardController;
 use App\Models\Daftar_menu;
-use Faker\Guesser\Name;
+// use Faker\Guesser\Name;
+// use App\Http\Controllers\Controller;
+use App\Http\Controllers\beritaController;
 
 // route ke home
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
@@ -39,3 +40,5 @@ Route::get('/dashboard', function() {
 
 // Route untuk crud 
 Route::post('/tambah-menu', [menuController::class, 'store'])->name('tambah.menu');
+
+Route::get('/berita', [beritaController::class, 'index'])->name('halaman-berita');

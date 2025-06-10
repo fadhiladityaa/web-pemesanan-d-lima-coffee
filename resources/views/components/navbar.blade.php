@@ -1,13 +1,14 @@
 <nav class="navbar {{ Request()->is('/') ? 'fixed' : '' }} bg-black shadow-lg flex justify-between z-40 lg:p-4">
     <div class="title">
-          <a href="/" class="btn btn-ghost text-xl lg:text-2xl text-white font-poppins font-bold">
+          <a href="#beranda" class="btn btn-ghost text-xl lg:text-2xl text-white font-poppins font-bold">
             D'Lima<span class="text-primary italic">Coffee<span class="text-white">.</span></span>
         </a>
     </div>
     
     <div class="links text-white sm:flex gap-7 hidden font-poppins">
-      <a class="{{ Request()->is('home') ? 'text-primary font-bold' : ''}}" href="/home">Home</a>
-      <a class="{{ Request()->is('menu')  ? 'text-primary font-bold' : '' }}" href="#">Menu</a>
+      <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : ''}}" href="/">Beranda</a>
+      <a class="" href="/berita">Berita</a>
+      <a class="{{ Request()->is('/#menu')  ? 'text-primary font-bold' : '' }}" href="#menu">Menu</a>
       <a href="">Kontak</a>
     </div>
 

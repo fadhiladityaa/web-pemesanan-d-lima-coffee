@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="scroll-smooth">
 <head>
   <meta charset="utf-8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 <body x-data="data">
   
   @unless (request()->is('login') || request()->is('register'))
-  <div class="">
+  <div id="beranda" class="">
     <x-navbar></x-navbar>
   </div>
   @endunless
