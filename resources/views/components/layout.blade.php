@@ -16,7 +16,7 @@
 </head>
 <body x-data="data">
   
-  @unless (request()->is('login') || request()->is('register'))
+  @unless (request()->is('login') || request()->is('register') )
   <div id="beranda" class="">
     <x-navbar></x-navbar>
   </div>
@@ -26,6 +26,9 @@
     {{ $slot }}
   </div>
   
+   @unless (request()->is('login') || request()->is('register') || request()->is('dashboard'))
+   <x-footer></x-footer>
+  @endunless
 
   <script>
     // Inisialisasi store sebelum Alpine.js berjalan

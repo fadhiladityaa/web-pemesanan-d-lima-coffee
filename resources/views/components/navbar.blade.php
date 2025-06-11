@@ -118,7 +118,7 @@
             <a href="">Kontak</a>
           </li>
 
-          <li class="sm:hidden">
+          <li class="">
             <a href="/dashboard">Dashboard</a>
           </li>
 
