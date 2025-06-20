@@ -47,10 +47,11 @@
         @endforeach
     </div>
 
+
+
 <section class="py-16 bg-gray-800  mt-28 rounded-md">
-    <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-semibold text-primary mb-8 text-center pb-2 border-b border-primary inline-block mx-auto">Hubungi Kami</h2>
-        
+    <div class="container mx-auto px-4 items-center">
+        <h2 class="text-3xl font-semibold text-primary mx-auto text-center mb-8 ">Hubungi <span class="text-white">Kami</span></h2>
         <div class="flex flex-col lg:flex-row gap-12 mt-12">
             <!-- Info Kontak -->
             <div class="lg:w-1/3">
@@ -67,8 +68,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-medium text-primary-100">Alamat Warkop</h4>
-                                <p class="text-gray-300 mt-1">Jl. Kopi Sejahtera No. 123, Kota Warkop, Jawa Tengah</p>
+                                <h4 class="font-medium text-primary-100">Warkop Delima</h4>
+                                <p class="text-gray-300 mt-1">Jl. Abdul Kadir Parepare</p>
                             </div>
                         </div>
                         
@@ -95,8 +96,7 @@
                             </div>
                             <div>
                                 <h4 class="font-medium text-primary-100">Email</h4>
-                                <p class="text-gray-300 mt-1">info@warkopkita.com</p>
-                                <p class="text-gray-300">reservasi@warkopkita.com</p>
+                                <p class="text-gray-300 mt-1">info@warkopdelima.com</p>
                             </div>
                         </div>
                         

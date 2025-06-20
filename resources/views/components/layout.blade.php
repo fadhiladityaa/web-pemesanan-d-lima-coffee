@@ -26,7 +26,7 @@
     {{ $slot }}
   </div>
   
-   @unless (request()->is('login') || request()->is('register') || request()->is('dashboard'))
+   @unless (request()->is('login') || request()->is('register') || request()->is('dashboard') || request()->is('dashboard/menu-management'))
    <x-footer></x-footer>
   @endunless
 

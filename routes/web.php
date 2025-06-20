@@ -32,13 +32,19 @@ Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');
 
 // Route ke halaman dashboard
 Route::get('/dashboard', function() {
-    return view('dashboard', [
-        'title' => 'dashboard',
-        'menus' => Daftar_menu::all(),
+    return view('components.dashboard.dashboard', [
+        'title' => 'dasbor',
+    ]);
+});
+
+Route::get('/dashboard/menu-management', function() {
+    return view('components.dashboard.menu-management', [
+        'title' => 'Menu Management',
+        'menu' => Daftar_menu::all(),
     ]);
 });
 
 // Route untuk crud 
-Route::post('/tambah-menu', [menuController::class, 'store'])->name('tambah.menu');
+Route::post('/tambah-menu', [menuController::class, 'store'])->name('menu.store');
 
 Route::get('/berita', [beritaController::class, 'index'])->name('halaman-berita');
