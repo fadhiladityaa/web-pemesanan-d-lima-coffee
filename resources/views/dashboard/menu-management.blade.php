@@ -49,8 +49,9 @@
                             <button @click="
                                 selectedId = {{ $m->id }};
                                 formData = JSON.parse('{{ json_encode($m) }}');
-                                edit_modal.showModal()
-                                " class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
+                                edit_modal.showModal();
+                                " class="text-blue-600 hover:text-blue-900 mr-3">Edit
+                            </button>
 
                             <form action="{{ route('menu.destroy', $m->id) }}" method="POST" class="inline">
                                 @method('DELETE')

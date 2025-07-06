@@ -18,7 +18,7 @@
   
   @unless (request()->is('login') || request()->is('register') )
   <div id="beranda" class="">
-    <x-navbar></x-navbar>
+    @include('components.partials.navbar')
   </div>
   @endunless
 
@@ -27,31 +27,8 @@
   </div>
   
    @unless (request()->is('login') || request()->is('register') || request()->is('dashboard') || request()->is('dashboard/menu-management'))
-   <x-footer></x-footer>
+   @include('components.partials.footer')
   @endunless
-
-  <script>
-    // Inisialisasi store sebelum Alpine.js berjalan
-    document.addEventListener('alpine:init', () => {
-      Alpine.data('data', () => ({
-            coba: 'halo ini adlaah data dari data',
-            toggle() {
-                this.open = ! this.open
-            }
-        }))
-
-
-        Alpine.store('data', {
-           menus : [],
-           test() {
-            console.log('halo'); 
-           },
-            addToCart(menu) {
-              this.menus.push(menu)
-            }
-        });
-    });
-  </script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
