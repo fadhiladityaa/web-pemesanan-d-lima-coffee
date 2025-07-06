@@ -13,7 +13,7 @@ class menuController extends Controller
      */
     public function index()
     {
-        return view('components.dashboard.menu-management', [
+        return view('dashboard.menu-management', [
             'title' => 'Dashboard',
             'menu' => Daftar_menu::all(),
         ]);

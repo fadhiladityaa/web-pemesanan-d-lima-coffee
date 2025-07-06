@@ -1,6 +1,4 @@
-<x-layout>
-    <x-slot:title>{{ $title }}</x-slot:title>
-  
+@extends('layouts.layout')
     <div class="main-container w-full h-screen flex justify-center items-center" style="background-image: url('/img/bg1.jpeg'); background-repeat: no-repeat; background-size: cover; filter: brightness(85%)">
       <div class="form-container  w-4/5  p-5 rounded-lg flex flex-col items-center sm:w-2/3 md:w-2/5  backdrop-blur-lg border border-cyan-100">
 
@@ -83,4 +81,3 @@
       </div>
     </div>
   
-  </x-layout>

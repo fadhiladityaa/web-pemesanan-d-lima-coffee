@@ -32,7 +32,7 @@ Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');
 
 // Route ke halaman dashboard
 Route::get('/dashboard', function() {
-    return view('components.dashboard.dashboard', [
+    return view('dashboard.index', [
         'title' => 'dasbor',
     ]);
 });

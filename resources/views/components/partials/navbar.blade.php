@@ -1,4 +1,4 @@
-<nav class="navbar {{ Request()->is('/') ? 'fixed' : '' }} bg-black shadow-lg flex justify-between z-40 lg:p-4">
+<nav class="navbar bg-black shadow-lg flex justify-between z-40 lg:p-4">
     <div class="title">
           <a href="#beranda" class="btn btn-ghost text-xl lg:text-2xl text-white font-poppins font-bold">
             D'Lima<span class="text-primary italic">Coffee<span class="text-white">.</span></span>
