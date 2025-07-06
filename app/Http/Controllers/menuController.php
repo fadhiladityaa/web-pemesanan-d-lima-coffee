@@ -13,7 +13,10 @@ class menuController extends Controller
      */
     public function index()
     {
-
+        return view('components.dashboard.menu-management', [
+            'title' => 'Dashboard',
+            'menu' => Daftar_menu::all(),
+        ]);
     }
 
     /**
@@ -42,8 +45,7 @@ class menuController extends Controller
         }
 
         Daftar_menu::create($validated);
-
-        return redirect('/dashboard')->with('success', 'Menu barhasil ditambahkan');
+        return redirect('/dashboard/menu-management')->with('success', 'Menu barhasil ditambahkan');
     }
 
 
@@ -68,14 +70,16 @@ class menuController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Daftar_menu $daftar_menu)
     {
-        //
+        Daftar_menu::destroy($daftar_menu->id);
+        return redirect('/dashboard/menu-management')->with('success', 'Menu barhasil dihapus');
     }
 }

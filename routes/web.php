@@ -37,14 +37,10 @@ Route::get('/dashboard', function() {
     ]);
 });
 
-Route::get('/dashboard/menu-management', function() {
-    return view('components.dashboard.menu-management', [
-        'title' => 'Menu Management',
-        'menu' => Daftar_menu::all(),
-    ]);
-});
-
 // Route untuk crud 
+
+Route::get('/dashboard/menu-management', [menuController::class, 'index']);
 Route::post('/tambah-menu', [menuController::class, 'store'])->name('menu.store');
+Route::delete('/menu/{daftar_menu}', [menuController::class, 'destroy'])->name('menu.destroy');
 
 Route::get('/berita', [beritaController::class, 'index'])->name('halaman-berita');
