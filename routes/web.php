@@ -37,8 +37,10 @@ Route::get('/dashboard', function() {
     ]);
 });
 
-// Route untuk crud 
+// Route untuk crud menu
 Route::get('/dashboard/menu-management', [menuController::class, 'index'])->name('menu.index');
+Route::get('/dashboard/{daftar_menu}/edit', [menuController::class, 'edit'])->name('menu.edit');
+Route::put('/dashboard/{daftar_menu}', [menuController::class, 'update'])->name('menu.update');
 Route::post('/tambah-menu', [menuController::class, 'store'])->name('menu.store');
 Route::delete('/menu/{daftar_menu}', [menuController::class, 'destroy'])->name('menu.destroy');
 Route::get('/dashboard/menu/create', [menuController::class, 'create'])->name('menu.create');

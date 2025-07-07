@@ -22,12 +22,17 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Menu
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            No
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Nama Menu
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Harga
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Deskripsi
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                     </tr>
@@ -43,21 +48,19 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ Str::limit($m->deskripsi, 30) }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <button
-                                    @click="
-                                selectedId = {{ $m->id }};
-                                formData = JSON.parse('{{ json_encode($m) }}');
-                                edit_modal.showModal();
-                                "
-                                    class="text-blue-600 hover:text-blue-900 mr-3">Edit
-                                </button>
 
+                                {{-- edit button --}}
+                                <a class="text-blue-500" href="{{ route('menu.edit', $m) }}">Edit</a>
+                                {{-- end edit button --}}
+
+                                {{-- delete button --}}
                                 <form action="{{ route('menu.destroy', $m->id) }}" method="POST" class="inline">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" onclick="return confirm('Yakin ingin menghapus?')"
                                         class="text-red-500">Delete</button>
                                 </form>
+                                {{-- end delete button --}}
                             </td>
                         </tr>
                     @endforeach

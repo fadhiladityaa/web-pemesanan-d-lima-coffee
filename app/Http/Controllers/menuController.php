@@ -24,7 +24,7 @@ class menuController extends Controller
      */
     public function create()
     {
-        return view('dashboard.create-menu', [
+        return view('dashboard.menu-create', [
             'title' => 'Tambah menu',
         ]);
     }
@@ -42,10 +42,10 @@ class menuController extends Controller
             'deskripsi' => 'nullable|string',
         ]);
 
-        if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('menu_images', 'public'); 
-            $validated['gambar'] = $gambarPath; 
-        }
+        // if ($request->hasFile('gambar')) {
+        //     $gambarPath = $request->file('gambar')->store('menu_images', 'public'); 
+        //     $validated['gambar'] = $gambarPath; 
+        // }
 
         Daftar_menu::create($validated);
         return redirect('/dashboard/menu-management')->with('success', 'Menu barhasil ditambahkan');
@@ -63,18 +63,37 @@ class menuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Daftar_menu $daftar_menu)
     {
-        //
+        // dd($daftar_menu);
+        return view('dashboard.menu-edit', [
+            'title' => 'Edit Menu',
+            'id' => $daftar_menu->id,
+            'nama_menu'=> $daftar_menu->nama_menu,
+            'harga' => $daftar_menu->harga,
+            'deskripsi' => $daftar_menu->deskripsi,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Daftar_menu $daftar_menu)
     {
+          $rules = ([
+            'harga' => 'required|integer',
+            'gambar' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:2048',
+            'deskripsi' => 'nullable|string',
+        ]);
 
-        //
+        if($request->nama_menu != $daftar_menu->nama_menu) {
+            $rules['nama_menu'] = 'required|string|unique:daftar_menus,nama_menu';
+        };
+
+        $validatedData = $request->validate($rules);
+        $daftar_menu->update($validatedData);
+
+        return redirect('/dashboard/menu-management')->with('success', 'Menu barhasil diupdate!');
     }
 
     /**
