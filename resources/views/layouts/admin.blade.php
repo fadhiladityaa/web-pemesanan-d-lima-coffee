@@ -24,6 +24,7 @@
 {{-- navbar --}}
 @include('components.partials.navbar')
 {{-- end navbar --}}
+
 <body x-data="data">
 
     <div class="min-h-screen bg-gray-100">

@@ -14,7 +14,7 @@
         @endif
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-xl font-semibold text-gray-800">Daftar Menu</h2>
-            <button class="btn btn-primary" onclick="menu_modal.showModal()">Tambah Menu</button>
+            <a class="btn btn-primary" href="{{ route('menu.create') }}">Tambah menu</a>
         </div>
 
         <!-- Tabel Menu -->
@@ -63,105 +63,6 @@
                     @endforeach
                 </tbody>
             </table>
-
-            {{-- modal edit --}}
-            <dialog id="edit_modal" class="modal">
-                <div class="modal-box w-11/12 max-w-2xl">
-                    <h3 class="font-bold text-lg mb-4">Edit Menu</h3>
-
-                    <form action="{{ route('menu.store') }}" method="POST">
-                        @csrf
-
-                        <!-- Nama Menu -->
-                        <div class="form-control mb-4">
-                            <label for="nama_menu" class="label">
-                                <span class="label-text">Nama Menu</span>
-                            </label>
-                            <input x-model="formData.nama_menu" type="text" name="nama_menu" id="nama_menu" required
-                                class="input input-bordered w-full">
-                        </div>
-
-                        <!-- Harga -->
-                        <div class="form-control mb-4">
-                            <label for="harga" class="label">
-                                <span class="label-text">Harga (Rp)</span>
-                            </label>
-                            <input x-model="formData.harga" type="number" name="harga" id="harga" required
-                                min="0" class="input input-bordered w-full">
-                        </div>
-
-                        <!-- Deskripsi -->
-                        <div class="form-control mb-4">
-                            <label for="deskripsi" class="label">
-                                <span class="label-text">Deskripsi</span>
-                            </label>
-                            <textarea x-model="formData.deskripsi" name="deskripsi" id="deskripsi" rows="3"
-                                class="textarea textarea-bordered w-full"></textarea>
-                        </div>
-
-                        <!-- Footer Modal -->
-                        <div class="modal-action">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                            <button type="button" onclick="edit_modal.close()" class="btn">Batal</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Click outside to close -->
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
-
         </div>
     </div>
-
-    <!-- Modal Form Tambah Menu -->
-    <dialog id="menu_modal" class="modal">
-        <div class="modal-box w-11/12 max-w-2xl">
-            <h3 class="font-bold text-lg mb-4">Tambah Menu Baru</h3>
-
-            <form action="{{ route('menu.store') }}" method="POST">
-                @csrf
-
-                <!-- Nama Menu -->
-                <div class="form-control mb-4">
-                    <label for="nama_menu" class="label">
-                        <span class="label-text">Nama Menu</span>
-                    </label>
-                    <input type="text" name="nama_menu" id="nama_menu" required placeholder="Masukkan nama menu"
-                        class="input input-bordered w-full">
-                </div>
-
-                <!-- Harga -->
-                <div class="form-control mb-4">
-                    <label for="harga" class="label">
-                        <span class="label-text">Harga (Rp)</span>
-                    </label>
-                    <input type="number" name="harga" id="harga" required min="0"
-                        placeholder="Masukkan harga" class="input input-bordered w-full">
-                </div>
-
-                <!-- Deskripsi -->
-                <div class="form-control mb-4">
-                    <label for="deskripsi" class="label">
-                        <span class="label-text">Deskripsi</span>
-                    </label>
-                    <textarea name="deskripsi" id="deskripsi" rows="3" placeholder="Masukkan deskripsi menu"
-                        class="textarea textarea-bordered w-full"></textarea>
-                </div>
-
-                <!-- Footer Modal -->
-                <div class="modal-action">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                    <button type="button" onclick="menu_modal.close()" class="btn">Batal</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Click outside to close -->
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
-    </dialog>
 @endsection

@@ -24,7 +24,9 @@ class menuController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.create-menu', [
+            'title' => 'Tambah menu',
+        ]);
     }
 
     /**
@@ -32,6 +34,7 @@ class menuController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validated = $request->validate([
             'nama_menu' => 'required|string|unique:daftar_menus,nama_menu',
             'harga' => 'required|integer',
