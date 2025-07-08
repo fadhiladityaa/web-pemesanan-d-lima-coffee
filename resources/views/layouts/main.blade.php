@@ -24,9 +24,7 @@
 <body x-data="data">
 
     @unless (request()->is('login') || request()->is('register'))
-    <div id="beranda" class="">
-            @include('components.partials.navbar')
-        </div>
+            <x-navbar></x-navbar>
     @endunless
 
     <div>
@@ -37,7 +35,7 @@
             request()->is('register') ||
             request()->is('dashboard') ||
             request()->is('dashboard/menu-management'))
-        @include('components.partials.footer')
+        <x-footer></x-footer>
     @endunless
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
