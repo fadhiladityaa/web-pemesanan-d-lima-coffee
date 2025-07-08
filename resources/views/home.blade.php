@@ -60,7 +60,11 @@
                 <div x-data="{ clickedMenu: {{ $menu }} }"
                     class="card bg-secondary font-poppins text-menu font-bold flex flex-row gap-4 pt-4 pl-4 pr-6 pb-4">
                     <div class="kiri w-24 flex flex-col justify-center">
-                        <img class="w-24" src="img/kopi-1.png" alt="">
+                        @if ($menu->gambar)
+                            <img class="w-24" src="{{ asset('storage/' . $menu->gambar) }}" alt="">
+                        @else
+                            <img class="w-24" src="img/kopi-1.png" alt="">
+                        @endif
 
 
                         <div class="counter text-black flex mx-auto mt-4 font-normal">
@@ -100,7 +104,7 @@
         </div>
 
 
-
+        {{-- contact section --}}
         <section class="py-16 bg-gray-800  mt-28 rounded-md">
             <div class="container mx-auto px-4 items-center">
                 <h2 class="text-3xl font-semibold text-primary mx-auto text-center mb-8 ">Hubungi <span
@@ -221,5 +225,4 @@
             </div>
         </section>
     </div>
-    {{-- end menu section --}}
     @endsection

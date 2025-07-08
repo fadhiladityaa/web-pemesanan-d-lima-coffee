@@ -2,17 +2,20 @@
 @section('container')
     <section class="max-w-3xl ml-10 p-3">
         <h1 class="font-[poppins] text-2xl my-5">Tambah Menu</h1>
-        <form class="flex flex-col gap-2" action="{{ route('menu.store') }}" method="POST">
+        <form class="flex flex-col gap-2" action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="text" name="nama_menu" required placeholder="Nama Menu" class="input" />
+            <input type="text" name="nama_menu" required placeholder="Nama Menu" class="input border border-slate-600" />
             @error('nama_menu')
                 <span class="text-red-500 font-[poppins] ml-2 text-sm">{{ $message }}</span>
             @enderror
-            <input type="text" name="harga" required placeholder="Harga" class="input" />
+            <input type="text" name="harga" required placeholder="Harga" class="input border-slate-600" />
             @error('harga')
                 <span class="text-red-500 font-[poppins] ml-2 text-sm">{{ $message }}</span>
             @enderror
-            <textarea name="deskripsi" required placeholder="Deskripsi" class="textarea textarea-xl"></textarea>
+
+            <input name="gambar" type="file" class="file-input file-input-xs" />
+
+            <textarea name="deskripsi"  placeholder="Deskripsi" class="textarea textarea-xl border-slate-600"></textarea>
             @error('deskripsi')
                 <span class="text-red-500 font-[poppins] ml-2 text-sm">{{ $message }}</span>
             @enderror

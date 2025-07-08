@@ -1,6 +1,5 @@
-<x-layout>
-  <x-slot:title>{{ $title }}</x-slot:title>
-
+  @extends('layouts.main')
+  
   <div class="main-container w-full h-screen flex justify-center items-center" style="background-image: url('/img/bg1.jpeg'); background-repeat: no-repeat; background-size: cover; filter: brightness(85%)">
     <div class="form-container  w-4/5  p-5 rounded-lg flex flex-col items-center sm:w-2/3 md:w-2/5  backdrop-blur-lg border border-cyan-100">
       <form autocomplete="on" action="/register" method="POST" class="flex relative flex-col items-center gap-4">
@@ -60,5 +59,3 @@
         <p class="text-sm text-gray-400 font-normal mt-2">Sudah punya akun? Silahkan <a class="text-blue-400" href="/login">login</a></p>
     </div>
   </div>
-
-</x-layout>

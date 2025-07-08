@@ -45,4 +45,5 @@ Route::post('/tambah-menu', [menuController::class, 'store'])->name('menu.store'
 Route::delete('/menu/{daftar_menu}', [menuController::class, 'destroy'])->name('menu.destroy');
 Route::get('/dashboard/menu/create', [menuController::class, 'create'])->name('menu.create');
 
+// Route untuk crud berita (kaliy)
 Route::get('/berita', [beritaController::class, 'index'])->name('halaman-berita');
