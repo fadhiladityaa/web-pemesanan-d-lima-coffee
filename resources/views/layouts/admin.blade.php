@@ -22,7 +22,7 @@
 </head>
 
 {{-- navbar --}}
-@include('components.partials.navbar')
+    <x-navbar></x-navbar>
 {{-- end navbar --}}
 
 <body x-data="data">
