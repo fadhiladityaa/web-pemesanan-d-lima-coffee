@@ -54,7 +54,7 @@
                                 {{-- end edit button --}}
 
                                 {{-- delete button --}}
-                                <form action="{{ route('menu.destroy', $m->id) }}" method="POST" class="inline">
+                                <form action="{{ route('menu.destroy', $m) }}" method="POST" class="inline">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" onclick="return confirm('Yakin ingin menghapus?')"

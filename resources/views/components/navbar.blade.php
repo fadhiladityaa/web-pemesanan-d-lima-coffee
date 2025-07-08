@@ -54,6 +54,7 @@
         <!-- Dropdown Content -->
         <div
           x-show="open"
+          x-cloak
           x-transition
           class="card card-compact absolute bg-base-100 z-[1] mt-3 -right-12 w-96 shadow"
           @click.outside="open = false">

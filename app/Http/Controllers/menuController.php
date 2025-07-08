@@ -87,7 +87,7 @@ class menuController extends Controller
      */
     public function destroy(Daftar_menu $daftar_menu)
     {
-        Daftar_menu::destroy($daftar_menu->id);
+        Daftar_menu::destroy($daftar_menu->nama_menu);
         return redirect('/dashboard/menu-management')->with('success', 'Menu barhasil dihapus');
     }
 }

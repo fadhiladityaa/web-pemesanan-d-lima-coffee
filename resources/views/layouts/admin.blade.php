@@ -22,7 +22,7 @@
 </head>
 
 {{-- navbar --}}
-    <x-navbar></x-navbar>
+<x-navbar></x-navbar>
 {{-- end navbar --}}
 
 <body x-data="data">
