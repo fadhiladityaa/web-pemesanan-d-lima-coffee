@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Daftar_menu;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 // use Illuminate\Support\Facades\Redis;
 
 class menuController extends Controller
@@ -23,7 +24,6 @@ class menuController extends Controller
             'title' => 'Tambah menu',
         ]);
     }
-
     public function store(Request $request)
     {
         // dd($request);
@@ -60,6 +60,7 @@ class menuController extends Controller
             'id' => $daftar_menu->id,
             'nama_menu' => $daftar_menu->nama_menu,
             'harga' => $daftar_menu->harga,
+            'gambar' => $daftar_menu->gambar,
             'deskripsi' => $daftar_menu->deskripsi,
         ]);
     }
@@ -68,7 +69,7 @@ class menuController extends Controller
     {
         $rules = ([
             'harga' => 'required|integer',
-            'gambar' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:png,jpg,jpeg,gif|file|max:1024',
             'deskripsi' => 'nullable|string',
         ]);
 
@@ -77,6 +78,16 @@ class menuController extends Controller
         };
 
         $validatedData = $request->validate($rules);
+        
+        // upload updated gambar setelah validasi
+        if ($request->hasFile('gambar')) {
+            // dd($request->oldImage);
+            if($request->oldImage) {
+                Storage::disk('public')->delete($request->oldImage);
+            }
+            $validatedData['gambar'] = $request->file('gambar')->store('menu-images', 'public');
+        }
+        
         $daftar_menu->update($validatedData);
 
         return redirect('/dashboard/menu-management')->with('success', 'Menu barhasil diupdate!');
