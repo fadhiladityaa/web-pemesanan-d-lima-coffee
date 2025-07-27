@@ -40,4 +40,23 @@
     @endunless
 </body>
 
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('data', () => ({
+            nama: 'fadil',
+            cart: [],
+            quantity: 0,
+            addToCart(menu) {
+                this.cart.push({
+                    menu: menu.nama_menu,
+                    harga: menu.harga,
+                    qty: 
+                })
+                console.log(this.cart);
+                
+            }
+        }))
+    })
+</script>
+
 </html>

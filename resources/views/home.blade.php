@@ -57,7 +57,7 @@
         <div
             class="card-container gap-3 mt-5 flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
             @foreach ($menus as $menu)
-                <div x-data="{ clickedMenu: {{ $menu }} }"
+                <div 
                     class="card bg-secondary font-poppins text-menu font-bold flex flex-row gap-4 pt-4 pl-4 pr-6 pb-4">
                     <div class="kiri w-24 flex flex-col justify-center">
                         @if ($menu->gambar)
@@ -92,12 +92,10 @@
                             <span class="bg-white px-2 py-1 rounded-xl hover:bg-primary hover:text-white">Strong</span>
                         </div>
 
-                        <form method="get" action="{{ route('all.about.home') }}">
-                            <button @click.prevent="$store.data.addToCart(clickedMenu)"
+                            <button x-data @click.prevent="addToCart({{ json_encode($menu) }})"  type="button"
                                 class="bg-primary font-normal w-full rounded-2xl py-2 mt-3 text-white hover:bg-amber-800">
                                 Add To Cart
                             </button>
-                        </form>
                     </div>
                 </div>
             @endforeach
