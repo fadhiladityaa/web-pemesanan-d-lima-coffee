@@ -46,14 +46,48 @@
             nama: 'fadil',
             cart: [],
             quantity: 0,
-            addToCart(menu) {
-                this.cart.push({
-                    menu: menu.nama_menu,
-                    harga: menu.harga,
-                    qty: 
-                })
-                console.log(this.cart);
-                
+            totalPrice: 0,
+            addToCart(newItem) {
+               const duplicate = this.cart.find(item => item.nama_menu == newItem.nama_menu)
+               const {deskripsi, created_at, updated_at, ...newItems} = newItem
+
+               if(!duplicate) {
+                    this.cart.push({...newItems, quantity: 1, subTotal: newItems.harga})
+                    this.totalPrice += newItems.harga
+                    this.quantity++
+                    
+               } else {
+                    this.cart = this.cart.map(oldItem => {
+                        if(oldItem.nama_menu != newItems.nama_menu) {
+                            return oldItem
+                        } else {
+                            oldItem.quantity++
+                            oldItem.subTotal = oldItem.quantity * newItems.harga
+                            this.quantity++
+                            this.totalPrice += oldItem.subTotal
+                            return oldItem
+                        }
+                    })
+               }
+            }, 
+
+            decreaseQuantity(newItem) {
+                if (newItem.quantity <= 1) {
+                    const confirmasi = confirm('Apakah anda yakin ingin menghapus item dari keranjang?')
+                    confirmasi ? this.cart = this.cart.filter(item => item != newItem) : ''
+                } else {
+                    this.cart = this.cart.map(oldItem => {
+                        if (oldItem.id != newItem.id) {
+                            return oldItem
+                        } else {
+                            oldItem.quantity--
+                            oldItem.subTotal -= newItem.harga
+                            this.totalPrice -= newItem.subTotal
+                            this.quantity--
+                            return oldItem
+                        }
+                    })
+                }
             }
         }))
     })

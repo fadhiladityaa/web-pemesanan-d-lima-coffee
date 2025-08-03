@@ -38,7 +38,7 @@
             </div>
 
             <!-- Dropdown Content -->
-            <div x-show="open" x-cloak x-transition
+            <div x-show="!open" x-cloak x-transition
                 class="card card-compact absolute bg-base-100 z-[1] mt-3 -right-12 w-96 shadow"
                 @click.outside="open = false">
 
@@ -49,13 +49,35 @@
                             class="font-bold text-lg border border-black-100 px-2 hover:bg-slate-500">
                             X
                         </button>
-
-                        <p>Keranjang Anda</p>
+                        <p class="">Keranjang Anda</p>
                     </div>
+
+                    
+                    <template x-for="c in cart">
+                        <div class="items w-full flex flex-row border border-black justify-between items-center px-2">
+                            <img class="w-14 h-14" :src="'storage/' + c.gambar" alt="">
+                            <div class="flex flex-col">
+                                <span x-text="c.nama_menu"></span>
+                                <div class="">
+                                    <span x-text="c.harga"></span>
+                                    <span>x</span>
+                                    <span x-text="c.quantity"></span>
+                                    <span>=</span>
+                                    <span x-text="c.subTotal"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <span @click="decreaseQuantity(c)" class="px-2 inline-block rounded-lg border-black border">&minus;</span>
+                                <span class="px-2 inline-block rounded-lg border-black border" x-text="c.quantity"></span>
+                                <span @click="addToCart(c)" class="px-2 inline-block rounded-lg border-black border">&plus;</span>
+                            </div>
+                        </div>
+                    </template>
+                    
                     <div class="checkout flex  items-center ">
                         <span class="bg-yellow-300 w-full p-2 rounded-sm">Total: </span>
                         <span
-                            class="bg-blue-300 hover:hover:bg-blue-500 w-full p-2 text-center rounded-sm">Checkout</span>
+                        class="bg-blue-300 hover:hover:bg-blue-500 w-full p-2 text-center rounded-sm">Checkout</span>
                     </div>
                 </div>
                 {{-- end keranjang --}}
