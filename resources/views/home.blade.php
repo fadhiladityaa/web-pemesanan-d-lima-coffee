@@ -2,7 +2,7 @@
 
 @section('container')
     {{-- hero section --}}
-    <div class="hero-section  font-poppins relative flex bg-center sm:bg-bottom items-start lg:h-screen lg:bg-bottom ">
+    <div class="hero-section  font-poppins relative flex bg-center sm:bg-bottom pt-14 items-start lg:h-screen lg:bg-bottom ">
         <img src="{{ asset('img/hero.png') }}" class="lg:bg-cover relative brightness-90 -z-10 lg:-top-32" alt="">
         <div
             class="text pt-12 sm:pt-[7rem] pl-7 text-xl absolute font-semibold text-white w-72 sm:text-3xl sm:w-2/3 lg:text-5xl lg:pt-28 lg:leading-tight">
@@ -92,10 +92,15 @@
                             <span class="bg-white px-2 py-1 rounded-xl hover:bg-primary hover:text-white">Strong</span>
                         </div>
 
-                            <button x-data @click.prevent="addToCart({{ json_encode($menu) }})"  type="button"
+                        <form action="{{ route('cart.store') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id_menu" value="{{ $menu->id }}">
+                            <button type="submit"
                                 class="bg-primary font-normal w-full rounded-2xl py-2 mt-3 text-white hover:bg-amber-800">
                                 Add To Cart
                             </button>
+                        </form>
+
                     </div>
                 </div>
             @endforeach

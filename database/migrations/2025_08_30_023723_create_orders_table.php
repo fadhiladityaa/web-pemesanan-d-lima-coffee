@@ -18,7 +18,6 @@ return new class extends Migration
                 table: 'users',
                 indexName: 'orders_user_id'
             );
-            $table->decimal('harga', 12, 2);
             $table->enum('payment_status', [
                 'pending',
                 'paid',
@@ -32,9 +31,10 @@ return new class extends Migration
                 'sedang diantar',
                 'completed',
                 'canceled'
-            ])->default('proses');
-            $table->string('metode_pembayaran');
-        });
+                ])->default('proses');
+                $table->string('metode_pembayaran');
+                $table->decimal('total', 12, 2);
+            });
     }
 
     /**

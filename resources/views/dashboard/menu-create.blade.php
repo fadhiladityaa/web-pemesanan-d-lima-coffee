@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('container')
-    <section class="max-w-3xl ml-10 p-3">
+    <section class="max-w-3xl ml-10 p-3 pt-28">
         <h1 class="font-[poppins] text-2xl my-5">Tambah Menu</h1>
         <form x-data="{
             imgSrc: '',

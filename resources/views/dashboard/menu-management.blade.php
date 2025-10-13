@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('container')
-    <div x-data="{ test: 'fadhil aditya', formData: {} }" class="p-6 bg-white rounded-lg shadow">
+    <div x-data="{ test: 'fadhil aditya', formData: {} }" class="p-6 bg-white rounded-lg shadow pt-28">
         <!-- Header Tabel dan Tombol Tambah -->
         @if (session()->has('success'))
             <div role="alert" class="alert alert-success mb-5">

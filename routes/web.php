@@ -10,6 +10,8 @@ use App\Models\Daftar_menu;
 // use Faker\Guesser\Name;
 // use App\Http\Controllers\Controller;
 use App\Http\Controllers\beritaController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\checkout;
 
 // route ke home
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
@@ -45,5 +47,12 @@ Route::post('/tambah-menu', [menuController::class, 'store'])->name('menu.store'
 Route::delete('/menu/{daftar_menu}', [menuController::class, 'destroy'])->name('menu.destroy');
 Route::get('/dashboard/menu/create', [menuController::class, 'create'])->name('menu.create');
 
-// Route untuk crud berita (kaliy)
+// Route untuk crud berita (kali)
 Route::get('/berita', [beritaController::class, 'index'])->name('halaman-berita');
+
+// route untuk halaman checkout
+Route::get('/checkout', [checkout::class, 'index'])->name('checkout');
+Route::post('/buat-pesanan', [checkout::class, 'store'])->name('checkout.store');
+
+// route untuk fitur add to cart
+Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.store');

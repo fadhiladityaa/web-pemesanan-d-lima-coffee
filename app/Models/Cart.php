@@ -3,14 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Cart_item;
 
-class Daftar_menu extends Model
+class Cart extends Model
 {
     protected $guarded = ['id'];
 
+    public function user ()
+    {
+        return $this->belongsTo(User::class);
+    }
 
-    public function cart_item()
+    public function items()
     {
         return $this->hasMany(Cart_item::class);
     }

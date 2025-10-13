@@ -93,9 +93,6 @@ class menuController extends Controller
         return redirect('/dashboard/menu-management')->with('success', 'Menu barhasil diupdate!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Daftar_menu $daftar_menu)
     {
 

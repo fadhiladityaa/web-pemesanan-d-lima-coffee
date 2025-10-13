@@ -1,4 +1,4 @@
-<nav class="navbar bg-black shadow-lg flex justify-between z-40 lg:p-4">
+<nav class="navbar bg-black shadow-lg flex justify-between z-40 lg:p-4 fixed">
     <div class="title">
         <a href="#beranda" class="btn btn-ghost text-xl lg:text-2xl text-white font-poppins font-bold">
             D'Lima<span class="text-primary italic">Coffee<span class="text-white">.</span></span>
@@ -25,7 +25,7 @@
 
         </div>
 
-        <div x-data="{ open: false }" class="dropdown dropdown-end relative">
+        <div x-data="{ open: true }" class="dropdown dropdown-end relative">
             <div @click="open = !open" role="button" class="btn btn-ghost p-3">
                 <div class="indicator">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 20 20"
@@ -33,19 +33,19 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    <span class="badge badge-sm indicator-item"></span>
+                    <template x-if="cart.length !== 0">
+                        <span class="badge badge-sm bg-red-500 text-slate-50 border-none indicator-item" x-text="quantity"></span>
+                    </template>
                 </div>
             </div>
 
             <!-- Dropdown Content -->
-            <div x-show="!open" x-cloak x-transition
-                class="card card-compact absolute bg-base-100 z-[1] mt-3 -right-12 w-96 shadow"
-                @click.outside="open = false">
+            <div class="card card-compact absolute bg-base-100 z-[1] mt-3 -right-12 w-96 shadow" x-show="!open" x-cloak x-transition @click.outside="open = !open">
 
                 <!-- Keranjang -->
                 <div class="card-body flex flex-col justify-between">
                     <div class="topper flex flex-row-reverse items-end gap-2">
-                        <button @click="open = false"
+                        <button @click="open = !open"
                             class="font-bold text-lg border border-black-100 px-2 hover:bg-slate-500">
                             X
                         </button>
@@ -75,9 +75,14 @@
                     </template>
                     
                     <div class="checkout flex  items-center ">
-                        <span class="bg-yellow-300 w-full p-2 rounded-sm">Total: </span>
-                        <span
-                        class="bg-blue-300 hover:hover:bg-blue-500 w-full p-2 text-center rounded-sm">Checkout</span>
+                        <span class="bg-yellow-300 w-full p-2 rounded-sm">Total: <span x-text="totalPrice"></span></span>
+                        <form method="POST" action="{{ route('checkout.store') }}">
+                            @csrf
+                            <input type="hidden" name="menu" :value="JSON.stringify(cart)">
+                            <input type="hidden" name="username" value="{{ auth()->user()->name }}">
+                            <input type="hidden" name="userphone" value="{{ auth()->user()->noHp }}">
+                            <button type="submit">Buat pesanan</button>
+                        </form>
                     </div>
                 </div>
                 {{-- end keranjang --}}
