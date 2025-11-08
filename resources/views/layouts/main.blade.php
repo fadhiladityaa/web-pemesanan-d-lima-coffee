@@ -20,6 +20,47 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite('resources/css/app.css')
     <title>{{ $title }}</title>
+    <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+    .animate-slideIn { animation: slideIn 0.3s ease-out; }
+    .cart-item { animation: slideIn 0.3s ease-out; }
+    .glass-effect {
+      background: rgba(28, 32, 41, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(97, 95, 255, 0.3);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      box-shadow: 0 10px 25px rgba(97, 95, 255, 0.4);
+    }
+    .cart-badge {
+      animation: pulse 2s infinite;
+    }
+    .scroll-smooth { scroll-behavior: smooth; }
+  </style>
 </head>
 
 <body x-data="data">

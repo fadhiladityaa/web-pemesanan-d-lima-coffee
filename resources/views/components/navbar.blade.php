@@ -12,33 +12,6 @@
         <a href="">Kontak</a>
     </div>
 
-
-    <div class="flex-3 gap-0">
-        <div class="dropdown dropdown-end">
-            <button class="btn btn-ghost  p-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-5" fill="none" viewBox="0 0 20 20"
-                    stroke="white">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </button>
-
-        </div>
-
-        <div x-data="{ open: true }" class="dropdown dropdown-end relative">
-            <div @click="open = !open" role="button" class="btn btn-ghost p-3">
-                <div class="indicator">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 20 20"
-                        stroke="white">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <template x-if="cart.length !== 0">
-                        <span class="badge badge-sm bg-red-500 text-slate-50 border-none indicator-item" x-text="quantity"></span>
-                    </template>
-                </div>
-            </div>
-
             <!-- Dropdown Content -->
             <div class="card card-compact absolute bg-base-100 z-[1] mt-3 -right-12 w-96 shadow" x-show="!open" x-cloak x-transition @click.outside="open = !open">
 
@@ -53,26 +26,7 @@
                     </div>
 
                     
-                    <template x-for="c in cart">
-                        <div class="items w-full flex flex-row border border-black justify-between items-center px-2">
-                            <img class="w-14 h-14" :src="'storage/' + c.gambar" alt="">
-                            <div class="flex flex-col">
-                                <span x-text="c.nama_menu"></span>
-                                <div class="">
-                                    <span x-text="c.harga"></span>
-                                    <span>x</span>
-                                    <span x-text="c.quantity"></span>
-                                    <span>=</span>
-                                    <span x-text="c.subTotal"></span>
-                                </div>
-                            </div>
-                            <div>
-                                <span @click="decreaseQuantity(c)" class="px-2 inline-block rounded-lg border-black border">&minus;</span>
-                                <span class="px-2 inline-block rounded-lg border-black border" x-text="c.quantity"></span>
-                                <span @click="addToCart(c)" class="px-2 inline-block rounded-lg border-black border">&plus;</span>
-                            </div>
-                        </div>
-                    </template>
+            
                     
                     <div class="checkout flex  items-center ">
                         <span class="bg-yellow-300 w-full p-2 rounded-sm">Total: <span x-text="totalPrice"></span></span>
