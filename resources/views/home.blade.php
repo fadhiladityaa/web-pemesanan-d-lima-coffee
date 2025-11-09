@@ -104,7 +104,7 @@
                 </div>
                 <div class="cart-items-container mt-4">
                     {{-- cart item --}}
-                    <div class="items-container bg-[#E8E8E8] mt-2 rounded-md p-3 shadow-md flex justify-between">
+                    <div class="items-container bg-[#E8E8E8] mt-5 rounded-md p-3 shadow-md flex justify-between">
                         <img src="{{ asset('img/contoh-kopi-2.png') }}" alt="contoh kopi">
                         <div class="pricing-container flex mr-5 flex-col">
                             <span class="text-[18px]">Espresso</span>
