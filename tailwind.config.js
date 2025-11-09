@@ -24,9 +24,12 @@ export default {
                 'bg1': "url('/img/bg.jpeg')"
             },
             colors: {
-                primary: "#B6895B",
+                primary: "#C67C4E",
                 secondary: "#EAD8C6",
                 menu: "#494949"
+            },
+            boxShadow: {
+                soft: '1px 1px 5px rgba(0, 0, 0, .12)',
             }
         },
     },
