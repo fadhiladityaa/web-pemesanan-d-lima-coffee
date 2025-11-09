@@ -80,7 +80,7 @@
             request()->is('register') ||
             request()->is('dashboard') ||
             request()->is('dashboard/menu-management'))
-        <x-footer></x-footer>
+        {{-- <x-footer></x-footer> --}}
     @endunless
 </body>
 
