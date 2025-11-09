@@ -44,9 +44,9 @@
                             <span class="text-[12px] text-black/50">Espresso single shot pekat dan kuat</span>
 
                             <div class="button  flex flex-col gap-[5px] w-full mt-2">
-                                <button class="text-[12px] border border-[#CE8F69]/50 w-full p-[5px] rounded-[4px]">Lihat
+                                <button class="text-[12px] border border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary hover:text-white transition-all duration-500 rounded-[4px]">Lihat
                                     detail menu</button>
-                                <button class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px]">Tambah</button>
+                                <button class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
                             </div>
                         </div>
                         <div class="item-container flex flex-col items-start rounded-md shadow-soft p-3">
@@ -56,9 +56,9 @@
                             <span class="text-[12px] text-black/50">Espresso single shot pekat dan kuat</span>
 
                             <div class="button  flex flex-col gap-[5px] w-full mt-2">
-                                <button class="text-[12px] border border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary rounded-[4px]">Lihat
+                                <button class="text-[12px] border border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary hover:text-white transition-all duration-500 rounded-[4px]">Lihat
                                     detail menu</button>
-                                <button class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px]">Tambah</button>
+                                <button class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
                             </div>
                         </div>
                         <div class="item-container flex flex-col items-start rounded-md shadow-soft p-3">
@@ -68,15 +68,11 @@
                             <span class="text-[12px] text-black/50">Espresso single shot pekat dan kuat</span>
 
                             <div class="button  flex flex-col gap-[5px] w-full mt-2">
-                                <button class="text-[12px] border border-[#CE8F69]/50 w-full p-[5px] rounded-[4px]">Lihat
+                                <button class="text-[12px] border border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary hover:text-white transition-all duration-500 rounded-[4px]">Lihat
                                     detail menu</button>
-                                <button class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px]">Tambah</button>
+                                <button class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
                             </div>
                         </div>
-                    
-                        </div>
-
-
                     </div>
                 </div>
             </div>
