@@ -29,7 +29,9 @@ export default {
                 menu: "#494949"
             },
             boxShadow: {
-                soft: '1px 1px 5px rgba(0, 0, 0, .12)',
+                soft: '1px 1px 4px rgba(0, 0, 0, .12)',
+                medium:  '0 5px 9px rgba(0, 0, 0, .12), 0 -3px 9px rgba(0, 0, 0, .08)'
+,
             }
         },
     },
