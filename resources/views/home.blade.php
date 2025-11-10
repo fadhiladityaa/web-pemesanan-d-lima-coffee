@@ -70,22 +70,9 @@
                 </div>
                 <div class="cart-items-container mt-4">
                     {{-- cart item --}}
-                    <div class="items-container bg-[#E8E8E8] mt-5 rounded-md p-3 shadow-md flex justify-between">
-                        <img src="{{ asset('img/contoh-kopi-2.png') }}" alt="contoh kopi">
-                        <div class="pricing-container flex mr-5 flex-col">
-                            <span class="text-[18px]">Espresso</span>
-                            <span class="text-[14px]">20.000 x 1 = <span class="text-primary">Rp. 20.0000</span></span>
-                            <div class="counter-container flex gap-2 mt-2">
-                                <span class="px-3 rounded-[4px] bg-[#CACACA]">+</span>
-                                <span>1</span>
-                                <span class="px-3 rounded-[4px] bg-[#CACACA]">-</span>
-                            </div>
-                        </div>
-                        <span class="text-red-500">×</span>
-                    </div>
                     <div class="items-container bg-[#E8E8E8] mt-2 shadow-md rounded-md p-3 flex justify-between">
                         <img src="{{ asset('img/contoh-kopi-2.png') }}" alt="contoh kopi">
-                        <div class="pricing-container flex mr-5 flex-col">
+                        <div class="pricing-container flex  flex-col">
                             <span class="text-[18px]">Espresso</span>
                             <span class="text-[14px]">20.000 x 1 = <span class="text-primary">Rp. 20.0000</span></span>
                             <div class="counter-container flex gap-2 mt-2">
