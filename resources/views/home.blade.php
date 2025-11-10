@@ -65,16 +65,16 @@
         <div class="w-full px-[16px] sm:px-[32px] mt-9 font-poppins mb-[100px]">
             <div class="cart-container w-full shadow-medium rounded-md p-[16px]">
                 <div class="topper-container flex justify-between">
-                    <h2 class="sm:text-3xl">Keranjang</h2>
+                    <h2 class="sm:text-[1.7rem]">Keranjang</h2>
                     <span class="px-8 py-[.2rem] border border-primary rounded-2xl sm:text-lg text-ssm text-primary font-bold">2 Items</span>
                 </div>
                 <div class="cart-items-container mt-4">
                     {{-- cart item --}}
-                    <div class="items-container bg-[#E8E8E8] mt-2 shadow-md rounded-md text-slate-800 p-3 flex justify-between">
-                        <img src="{{ asset('img/contoh-kopi-2.png') }}" class="sm:w-40" alt="contoh kopi">
-                        <div class="pricing-container flex sm:mr-[15rem] flex-col gap-2">
-                            <span class="text-[18px] sm:text-[30px]">Espresso</span>
-                            <span class="text-[14px] sm:mt-2 sm:text-[1.3rem]">20.000 x 1 = <span class="text-primary">Rp. 20.0000</span></span>
+                    <div class="items-container bg-[#E8E8E8] mt-2 sm:mt-4 shadow-md rounded-md text-slate-800 p-3 flex justify-between">
+                        <img src="{{ asset('img/contoh-kopi-2.png') }}" class="sm:w-36" alt="contoh kopi">
+                        <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] flex-col gap-2">
+                            <span class="text-[18px] sm:text-[1.4rem]">Espresso</span>
+                            <span class="text-[14px]  sm:text-[1.3rem]">20.000 x 1 = <span class="text-primary">Rp. 20.0000</span></span>
                             <div class="counter-container flex gap-2 mt-2">
                                 <span class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg rounded-[4px] bg-[#CACACA]">+</span>
                                 <span class="sm:text-lg">1</span>
@@ -83,26 +83,42 @@
                         </div>
                         <span class="text-red-500 sm:text-3xl">×</span>
                     </div>
+                    {{-- end cart item --}}
+                    {{-- cart item --}}
+                    <div class="items-container bg-[#E8E8E8] mt-2 sm:mt-4 shadow-md rounded-md text-slate-800 p-3 flex justify-between">
+                        <img src="{{ asset('img/contoh-kopi-2.png') }}" class="sm:w-36" alt="contoh kopi">
+                        <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] flex-col gap-2">
+                            <span class="text-[18px] sm:text-[1.4rem]">Espresso</span>
+                            <span class="text-[14px]  sm:text-[1.3rem]">20.000 x 1 = <span class="text-primary">Rp. 20.0000</span></span>
+                            <div class="counter-container flex gap-2 mt-2">
+                                <span class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg rounded-[4px] bg-[#CACACA]">+</span>
+                                <span class="sm:text-lg">1</span>
+                                <span class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg rounded-[4px] bg-[#CACACA]">-</span>
+                            </div>
+                        </div>
+                        <span class="text-red-500 sm:text-3xl">×</span>
+                    </div>
+                    {{-- end cart item --}}
 
                     <div class="akumulasi-container mt-5 flex flex-col gap-3">
                         <hr>
-                        <div class="subtotal-container flex justify-between">
+                        <div class="subtotal-container sm:text-xl flex justify-between">
                             <span>Subtotal</span>
                             <span>Rp. 40.000</span>
                         </div>
 
-                        <div class="pajak-container flex justify-between">
+                        <div class="pajak-container sm:text-xl flex justify-between">
                             <span>Pajak (0%)</span>
                             <span>Rp. 0</span>
                         </div>
                         <hr>
 
-                        <div class="total-container flex justify-between">
+                        <div class="total-container sm:text-2xl flex justify-between">
                             <span>Total</span>
                             <span class="text-primary font-bold">Rp. 40.000</span>
                         </div>
 
-                        <button class="w-full bg-green-500 py-2 rounded-md text-white hover:bg-green-600 transition-all duration-300">Checkout</button>
+                        <button class="w-full bg-green-500 py-2 rounded-md text-white hover:bg-green-600 transition-all sm:text-2xl sm:mt-2  duration-300">Checkout</button>
                     </div>
 
                 </div>
