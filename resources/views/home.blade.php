@@ -30,9 +30,12 @@
                 </div>
                 <div class="category-makanan text-black mt-10">
                     <h2 class="text-2xl">Makanan</h2>
-                    <div class="card-container  grid grid-cols-2 gap-6  mt-6 w-full">
-                        <div class="item-container flex flex-col items-start rounded-md shadow-soft p-3">
-                            <img src="{{ asset('img/contoh-kopi.png') }}" alt="">
+                    <div class="card-container grid grid-cols-2 gap-6 mt-6 w-full">
+                        {{-- item container --}}
+                        <div class="container  flex flex-col items-start rounded-lg shadow-soft sm:p-5 p-3">
+                            <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
+                                <img src="{{ asset('img/contoh-kopi.png') }}" class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500" alt="">
+                            </div>
                             <span class="text-[17px] mt-1">Espresso</span>
                             <span class="text-primary text-[17px] font-bold">Rp. 20.000</span>
                             <span class="text-[12px] text-black/50">Espresso single shot pekat dan kuat</span>
@@ -45,8 +48,12 @@
                                     class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
                             </div>
                         </div>
-                        <div class="item-container flex flex-col items-start rounded-md shadow-soft p-3">
-                            <img src="{{ asset('img/contoh-kopi.png') }}" alt="">
+                        {{-- end item container --}}
+                        {{-- item container --}}
+                        <div class="container  flex flex-col items-start rounded-lg shadow-soft sm:p-5 p-3">
+                            <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
+                                <img src="{{ asset('img/contoh-kopi.png') }}" class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500" alt="">
+                            </div>
                             <span class="text-[17px] mt-1">Espresso</span>
                             <span class="text-primary text-[17px] font-bold">Rp. 20.000</span>
                             <span class="text-[12px] text-black/50">Espresso single shot pekat dan kuat</span>
@@ -59,8 +66,12 @@
                                     class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
                             </div>
                         </div>
-                        <div class="item-container flex flex-col items-start rounded-md shadow-soft p-3">
-                            <img src="{{ asset('img/contoh-kopi.png') }}" alt="">
+                        {{-- end item container --}}
+                        {{-- item container --}}
+                        <div class="container  flex flex-col items-start rounded-lg shadow-soft sm:p-5 p-3">
+                            <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
+                                <img src="{{ asset('img/contoh-kopi.png') }}" class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500" alt="">
+                            </div>
                             <span class="text-[17px] mt-1">Espresso</span>
                             <span class="text-primary text-[17px] font-bold">Rp. 20.000</span>
                             <span class="text-[12px] text-black/50">Espresso single shot pekat dan kuat</span>
@@ -73,8 +84,12 @@
                                     class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
                             </div>
                         </div>
-                        <div class="item-container flex flex-col items-start rounded-md shadow-soft p-3">
-                            <img src="{{ asset('img/contoh-kopi.png') }}" alt="">
+                        {{-- end item container --}}
+                        {{-- item container --}}
+                        <div class="container  flex flex-col items-start rounded-lg shadow-soft sm:p-5 p-3">
+                            <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
+                                <img src="{{ asset('img/contoh-kopi.png') }}" class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500" alt="">
+                            </div>
                             <span class="text-[17px] mt-1">Espresso</span>
                             <span class="text-primary text-[17px] font-bold">Rp. 20.000</span>
                             <span class="text-[12px] text-black/50">Espresso single shot pekat dan kuat</span>
@@ -87,6 +102,8 @@
                                     class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
                             </div>
                         </div>
+                        {{-- end item container --}}
+
                     </div>
                 </div>
             </div>
