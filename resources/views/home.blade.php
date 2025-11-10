@@ -3,7 +3,7 @@
 @section('container')
     {{-- Location Section --}}
     <section>
-        <div class="container w-full h-[340px] bg-[#2C2C2C] pt-20 font-poppins text-white">
+        <div class="container w-full h-[340px] sm:h-[390px] bg-[#2C2C2C] pt-20 font-poppins text-white">
             <div class="location-grup flex mt-4 flex-col px-[16px] sm:px-[32px]">
                 <span class="text-[18px]">Location</span>
                 <span>Jalan Delima, Parepare</span>
@@ -15,14 +15,14 @@
                         <img src="{{ asset('img/settings2-svgrepo-com.svg') }}" class="w-7 h-7" alt="search icon" />
                     </button>
                 </div>
-                <div class="kotak w-full h-40 bg-white shadow-md rounded-[10px] border mt-10"></div>
+                <div class="kotak w-full h-40 sm:h-64 bg-white shadow-md rounded-[10px] border mt-10"></div>
             </section>
             {{-- End Location Section --}}
 
 
     {{-- daftar menu section --}}
      <section>
-            <div class="container mt-28 w-full px-[16px] sm:px-[32px]">
+            <div class="container mt-28 sm:mt-40 w-full px-[16px] sm:px-[32px]">
                 <div class="category-section text-black flex gap-5 mt-6">
                     <div class="semua-menu bg-primary px-2 py-1 rounded-[10px] text-white">Semua menu</div>
                     <div class="semua-menu px-3 py-1 rounded-[10px] shadow-md">Makanan</div>
