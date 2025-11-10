@@ -23,13 +23,13 @@
     {{-- daftar menu section --}}
      <section>
             <div class="container mt-28 sm:mt-40 w-full px-[16px] sm:px-[32px]">
-                <div class="category-section text-black flex gap-5 mt-6">
-                    <div class="semua-menu bg-primary px-2 py-1 rounded-[10px] text-white">Semua menu</div>
-                    <div class="semua-menu px-3 py-1 rounded-[10px] shadow-md">Makanan</div>
-                    <div class="semua-menu px-4 py-1 rounded-[10px] shadow-md">Minuman</div>
+                <div class="category-section text-black flex gap-5 text-ssm mt-6">
+                    <div class="semua-menu bg-primary px-4 py-1 rounded-[10px] shadow-soft text-white">Semua menu</div>
+                    <div class="semua-menu px-4 py-1 rounded-[10px] shadow-soft">Makanan</div>
+                    <div class="semua-menu px-4 py-1 rounded-[10px] shadow-soft">Minuman</div>
                 </div>
                 <div class="category-makanan text-black mt-10">
-                    <h2 class="text-2xl">Makanan</h2>
+                    <h2 class="text-2xl text-slate-800">Makanan</h2>
                     <div class="card-container grid grid-cols-2 gap-6 mt-6 w-full">
 
                         @foreach ($menus as $item) 
@@ -38,16 +38,16 @@
                             <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
                                 <img src="{{ asset('img/contoh-kopi.png') }}" class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500" alt="">
                             </div>
-                            <span class="text-[18px] mt-1">{{ $item->nama_menu }}</span>
-                            <span class="text-primary text-[17px] font-bold">Rp. {{ $item->harga }}</span>
+                            <span class="text-[14px] sm:text-[18px] text-slate-800 mt-1">{{ $item->nama_menu }}</span>
+                            <span class="text-primary text-[12px] sm:text-[17px] font-bold">Rp. {{ $item->harga }}</span>
                             <span class="text-[12px] sm:text-[18px] text-black/50">{{ $item->deskripsi }}</span>
 
                             <div class="button  flex flex-col gap-[5px] w-full mt-2">
                                 <button
-                                class="text-[12px] border border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary hover:text-white transition-all duration-500 rounded-[4px]">Lihat
+                                class="text-[12px] border border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">Lihat
                                 detail menu</button>
                                 <button
-                                class="text-[12px] text-white bg-primary w-full p-[5px] rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
+                                class="text-[12px] text-white bg-primary w-full p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">Tambah</button>
                             </div>
                         </div>
                         {{-- end item container --}}
