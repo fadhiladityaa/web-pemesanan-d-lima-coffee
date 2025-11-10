@@ -1,5 +1,5 @@
 <nav class="bg-[#947257] w-full flex justify-between shadow-lg z-40 fixed">
-    <div class="font-[Sriracha] flex items-center justify-between mx-[16px] gap-2 py-2 w-full">
+    <div class="font-[Sriracha] flex items-center justify-between mx-[16px] sm:mx-[32px] gap-2 py-2 w-full">
         {{-- logo section --}}
         <div class="flex items-center gap-2">
             <img src="{{ asset('img/logo-warkop 1.svg') }}" alt="logo-warkop" class="w-10 lg:w-12 mt-1">
@@ -10,7 +10,7 @@
 
         {{-- hamburger section --}}
         <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="lg:hidden">
+            <div tabindex="0" role="button" class="lg:hidden sm:hidden">
                 <div class="w-7 rounded-full">
                     <img alt="hamburger icon" src="{{ asset('img/burger-menu.svg') }}" />
                 </div>
@@ -44,13 +44,12 @@
 
             </ul>
         </div>
-    </div>
-
-    <div class="links text-white sm:flex gap-7 hidden font-poppins">
-        <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : '' }}" href="/">Beranda</a>
-        <a class="" href="/berita">Berita</a>
-        <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">Menu</a>
-        <a href="">Kontak</a>
+        <div class="links text-white sm:flex gap-7 items-center hidden font-poppins">
+            <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : '' }}" href="/">Menu</a>
+            <a class="" href="/berita">Edukasi</a>
+            <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>
+            <a href="">Berita</a>
+        </div>
     </div>
 
     <!-- Dropdown Content -->

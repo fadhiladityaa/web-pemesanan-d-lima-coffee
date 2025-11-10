@@ -4,7 +4,7 @@
     {{-- Location Section --}}
     <section>
         <div class="container w-full h-[340px] bg-[#2C2C2C] pt-20 font-poppins text-white">
-            <div class="location-grup flex mt-4 flex-col px-[16px]">
+            <div class="location-grup flex mt-4 flex-col px-[16px] sm:px-[32px]">
                 <span class="text-[18px]">Location</span>
                 <span>Jalan Delima, Parepare</span>
                 <div class="input-gorup flex items-center gap-2  mt-6">
@@ -22,7 +22,7 @@
 
     {{-- daftar menu section --}}
      <section>
-            <div class="container mt-28 w-full px-[16px] border">
+            <div class="container mt-28 w-full px-[16px] sm:px-[32px]">
                 <div class="category-section text-black flex gap-5 mt-6">
                     <div class="semua-menu bg-primary px-2 py-1 rounded-[10px] text-white">Semua menu</div>
                     <div class="semua-menu px-3 py-1 rounded-[10px] shadow-md">Makanan</div>
@@ -30,7 +30,6 @@
                 </div>
                 <div class="category-makanan text-black mt-10">
                     <h2 class="text-2xl">Makanan</h2>
-
                     <div class="card-container  grid grid-cols-2 gap-6  mt-6 w-full">
                         <div class="item-container flex flex-col items-start rounded-md shadow-soft p-3">
                             <img src="{{ asset('img/contoh-kopi.png') }}" alt="">
@@ -96,7 +95,7 @@
 
       {{-- keranjang section --}}
       <section>
-        <div class="container w-full px-[16px] mt-9 font-poppins mb-[100px]">
+        <div class="container w-full px-[16px] sm:px-[32px] mt-9 font-poppins mb-[100px]">
             <div class="cart-container w-full shadow-medium rounded-md p-[16px]">
                 <div class="topper-container flex justify-between">
                     <h2>Keranjang</h2>
