@@ -22,11 +22,11 @@
 
     {{-- daftar menu section --}}
      <section>
-            <div class=" mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] font-poppins text-slate-700">
+            <div class=" mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] font-poppins">
                 <div class="category-section text-black flex gap-5 text-ssm sm:text-lg mt-6">
-                    <div class="semua-menu bg-primary px-4 py-1 rounded-[10px] shadow-soft text-white">Semua menu</div>
-                    <div class="semua-menu px-4 py-1 rounded-[10px] shadow-soft">Makanan</div>
-                    <div class="semua-menu px-4 py-1 rounded-[10px] shadow-soft">Minuman</div>
+                    <div class="semua-menu bg-primary px-4 py-1 rounded-[10px] shadow-soft text-white">semua menu</div>
+                    <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">makanan</div>
+                    <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">minuman</div>
                 </div>
                 <div class="category-makanan text-black mt-10">
                     <h2 class="text-2xl sm:text-3xl text-slate-800">makanan</h2>
@@ -42,7 +42,7 @@
                             <span class="text-primary text-[12px] sm:text-[17px] font-bold">Rp. {{ $item->harga }}</span>
                             <span class="text-[12px] sm:text-[18px] text-black/50">{{ $item->deskripsi }}</span>
 
-                            <div class="button  flex flex-col gap-[5px] w-full mt-2">
+                            <div class="button  flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
                                 <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">Lihat
                                 detail menu</button>
@@ -65,23 +65,23 @@
         <div class="w-full px-[16px] sm:px-[32px] mt-9 font-poppins mb-[100px]">
             <div class="cart-container w-full shadow-medium rounded-md p-[16px]">
                 <div class="topper-container flex justify-between">
-                    <h2>Keranjang</h2>
-                    <span class="px-8 py-[.2rem] border border-primary rounded-2xl text-ssm text-primary font-bold">2 Items</span>
+                    <h2 class="sm:text-3xl">Keranjang</h2>
+                    <span class="px-8 py-[.2rem] border border-primary rounded-2xl sm:text-lg text-ssm text-primary font-bold">2 Items</span>
                 </div>
                 <div class="cart-items-container mt-4">
                     {{-- cart item --}}
-                    <div class="items-container bg-[#E8E8E8] mt-2 shadow-md rounded-md p-3 flex justify-between">
-                        <img src="{{ asset('img/contoh-kopi-2.png') }}" alt="contoh kopi">
-                        <div class="pricing-container flex  flex-col">
-                            <span class="text-[18px]">Espresso</span>
-                            <span class="text-[14px]">20.000 x 1 = <span class="text-primary">Rp. 20.0000</span></span>
+                    <div class="items-container bg-[#E8E8E8] mt-2 shadow-md rounded-md text-slate-800 p-3 flex justify-between">
+                        <img src="{{ asset('img/contoh-kopi-2.png') }}" class="sm:w-40" alt="contoh kopi">
+                        <div class="pricing-container flex sm:mr-[15rem] flex-col gap-2">
+                            <span class="text-[18px] sm:text-[30px]">Espresso</span>
+                            <span class="text-[14px] sm:mt-2 sm:text-[1.3rem]">20.000 x 1 = <span class="text-primary">Rp. 20.0000</span></span>
                             <div class="counter-container flex gap-2 mt-2">
-                                <span class="px-3 rounded-[4px] bg-[#CACACA]">+</span>
-                                <span>1</span>
-                                <span class="px-3 rounded-[4px] bg-[#CACACA]">-</span>
+                                <span class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg rounded-[4px] bg-[#CACACA]">+</span>
+                                <span class="sm:text-lg">1</span>
+                                <span class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg rounded-[4px] bg-[#CACACA]">-</span>
                             </div>
                         </div>
-                        <span class="text-red-500">×</span>
+                        <span class="text-red-500 sm:text-3xl">×</span>
                     </div>
 
                     <div class="akumulasi-container mt-5 flex flex-col gap-3">
