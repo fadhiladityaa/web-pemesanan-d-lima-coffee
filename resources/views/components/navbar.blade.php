@@ -1,5 +1,5 @@
 <nav class="bg-[#947257] w-full flex justify-between shadow-lg z-40 fixed">
-    <div class="font-[Sriracha] flex items-center justify-between mx-[16px] sm:mx-[32px] gap-2 py-3 w-full">
+    <div class="font-[Sriracha] flex items-center justify-between mx-[16px] sm:mx-[32px] lg:mx-[64px] gap-2 py-3 w-full">
         {{-- logo section --}}
         <div class="flex items-center gap-2">
             <img src="{{ asset('img/logo-warkop 1.svg') }}" alt="logo-warkop" class="w-10 sm:w-11 lg:w-12 mt-1">

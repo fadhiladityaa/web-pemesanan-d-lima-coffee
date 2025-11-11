@@ -4,7 +4,7 @@
     {{-- Location Section --}}
     <section>
         <div class="w-full h-[340px] sm:w-full sm:h-[390px] bg-[#2C2C2C] pt-20 font-poppins text-white">
-            <div class="location-grup flex mt-4 flex-col px-[16px] sm:px-[32px]">
+            <div class="location-grup flex mt-4 flex-col px-[16px] sm:px-[32px] lg:px-[64px]">
                 <span class="text-[18px] sm:text-[24px]">Location</span>
                 <span class="sm:text-[18px]">Jalan Delima, Parepare</span>
                 <div class="input-gorup flex items-center gap-2  mt-6">
@@ -22,7 +22,7 @@
 
     {{-- daftar menu section --}}
     <section>
-        <div class=" mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] font-poppins">
+        <div class=" mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] lg:px-[64px] font-poppins">
             <div class="category-section text-black flex gap-5 text-ssm sm:text-lg mt-6">
                 <div class="semua-menu bg-primary px-4 py-1 rounded-[10px] shadow-soft text-white">semua menu</div>
                 <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">makanan</div>
@@ -30,17 +30,17 @@
             </div>
     </section>
 
-    <section class="px-[16px] sm:px-[32px]">
+    <section class="px-[16px] sm:px-[32px] lg:px-[64px]">
         <div class="category-makanan text-black mt-10">
             <h2 class="text-2xl sm:text-3xl text-slate-800">makanan</h2>
             <div class="card-container grid grid-cols-2 gap-6 mt-6 w-full">
     </section>
 
-<div class="container-asli lg:grid lg:grid-cols-3">
-    <section class="grid grid-cols-2 lg:col-span-2 px-[16px] gap-2 sm:px-[32px]">
+<div class="container-asli lg:grid lg:grid-cols-3 lg:gap-8">
+    <section class="grid grid-cols-2 lg:col-span-2 px-[16px] gap-2 sm:px-[32px] lg:pl-[64px] lg:pr-0">
         @foreach ($menus as $item)
             {{-- item container --}}
-            <div class="font-poppins flex flex-col items-start rounded-lg shadow-soft sm:p-5 p-3">
+            <div class="font-poppins flex flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:mt-5 lg:w-[22rem]">
                 <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
                     <img src="{{ asset('img/contoh-kopi.png') }}"
                         class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500"
@@ -65,7 +65,7 @@
 
     {{-- keranjang section --}}
     <section>
-        <div class="w-full lg:w-auto px-[16px] sm:px-[32px] mt-9 lg:mt-0 font-poppins lg:sticky lg:top-">
+        <div class="w-full px-[16px] sm:px-[32px] lg:px-0 lg:pr-[64px]  mt-9 lg:mt-5 font-poppins lg:sticky lg:top-">
             <div class="cart-container w-full shadow-medium rounded-md p-[16px]">
                 <div class="topper-container flex justify-between">
                     <h2 class="sm:text-[1.7rem]">Keranjang</h2>
@@ -75,12 +75,11 @@
                 </div>
                 <div class="cart-items-container mt-4">
                     {{-- cart item --}}
-                    <div
-                        class="items-container bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 flex justify-between">
+                    <div class="items-container bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 flex justify-between">
                         <img src="{{ asset('img/contoh-kopi-2.png') }}" class="sm:w-36" alt="contoh kopi">
-                        <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] flex-col gap-2">
+                        <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col gap-2">
                             <span class="text-[18px] sm:text-[1.4rem]">Espresso</span>
-                            <span class="text-[14px]  sm:text-[1.3rem]">20.000 x 1 = <span class="text-primary">Rp.
+                            <span class="text-[14px]  sm:text-[1.3rem] lg:text-lg">20.000 x 1 = <span class="text-primary">Rp.
                                     20.0000</span></span>
                             <div class="counter-container flex gap-2 mt-2">
                                 <span class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg rounded-[4px] bg-[#CACACA]">+</span>
