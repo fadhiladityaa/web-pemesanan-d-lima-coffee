@@ -30,7 +30,8 @@ export default {
             },
             boxShadow: {
                 soft: '2px 2px 4px rgba(0, 0, 0, .12), -2px -2px 12px rgba(0, 0, 0, .098)',
-                medium:  '0 5px 9px rgba(0, 0, 0, .12), 0 -3px 9px rgba(0, 0, 0, .08)'
+                medium:  '0 5px 9px rgba(0, 0, 0, .12), 0 -3px 9px rgba(0, 0, 0, .08)',
+                cust: '10px 10px 0px rgba(0, 0, 0, 10), -10px -10px 0px rgba(0, 0, 0, 10)'
 ,
             }
         },
