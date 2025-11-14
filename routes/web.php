@@ -56,3 +56,6 @@ Route::post('/buat-pesanan', [checkout::class, 'store'])->name('checkout.store')
 
 // route untuk fitur add to cart
 Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.store');
+
+
+Route::get('/detail-menu', [menuController::class, 'show']);

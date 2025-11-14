@@ -47,9 +47,12 @@ class menuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        return view('detail-menu', [
+            "menus" => Daftar_menu::class,
+            "title" => "Detail Menu",
+        ]);
     }
 
     public function edit(Daftar_menu $daftar_menu)
