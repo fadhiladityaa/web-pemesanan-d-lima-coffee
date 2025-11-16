@@ -5,7 +5,7 @@
     <div class="max-w-6xl mx-auto">
         
         <!-- Header Section -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-8 pt-24">
             <div class="grid md:grid-cols-2 gap-8 p-6 md:p-10">
                 
                 <!-- Foto Kopi -->
@@ -33,7 +33,7 @@
 
                     <!-- Tombol Aksi -->
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="bg-black"> 
+                        <button class="bg-primary text-white font-medium font-poppins rounded-xl px-4"> 
                             Tambah ke Keranjang
                         </button>
                         
