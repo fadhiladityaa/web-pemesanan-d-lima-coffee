@@ -14,7 +14,7 @@
                 <button class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
                     Lihat detail menu
                 </button>
-                <button wire:click="addToCart({{ $item->id }})"
+                <button wire:click="test"
                     class="text-[12px] sm:text-[18px] text-white bg-primary w-full p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
                     Tambah
                 </button>
