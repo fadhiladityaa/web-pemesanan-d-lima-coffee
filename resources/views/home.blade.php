@@ -65,7 +65,7 @@
 
     {{-- keranjang section --}}
     <section>
-        <div class="w-full px-[16px] sm:px-[32px] lg:px-0 lg:pr-[64px]  mt-9 lg:mt-5 font-poppins lg:sticky lg:top-">
+        <div class="w-full px-[16px] sm:px-[32px] lg:px-0 lg:pr-[64px]  mt-9 lg:mt-5 font-poppins lg:sticky top-24">
             <div class="cart-container w-full shadow-medium rounded-md p-[16px]">
                 <div class="topper-container flex justify-between">
                     <h2 class="sm:text-[1.7rem]">Keranjang</h2>
