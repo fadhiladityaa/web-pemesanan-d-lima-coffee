@@ -30,7 +30,7 @@
             </div>
     </section>
 
-    <section class="px-[16px] sm:px-[32px] lg:px-[64px]">
+    <section class="px-[16px] sm:px-[32px] font-poppins lg:px-[64px]">
         <div class="category-makanan text-black mt-10">
             <h2 class="text-2xl sm:text-3xl text-slate-800">makanan</h2>
             <div class="card-container grid grid-cols-2 gap-6 mt-6 w-full">
@@ -40,7 +40,7 @@
     <section class="grid grid-cols-2 lg:col-span-2 px-[16px] gap-2 sm:px-[32px] lg:pl-[64px] lg:pr-0">
         @foreach ($menus as $item)
             {{-- item container --}}
-            <div class="font-poppins flex flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:mt-5 lg:w-[22rem]">
+            <div class="flex font-poppins flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:mt-5 lg:w-[22rem]">
                 <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
                     <img src="{{ asset('img/contoh-kopi.png') }}"
                         class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500"
@@ -69,9 +69,7 @@
             <div class="cart-container w-full shadow-medium rounded-md p-[16px]">
                 <div class="topper-container flex justify-between">
                     <h2 class="sm:text-[1.7rem]">Keranjang</h2>
-                    <span
-                        class="px-8 py-[.2rem] border border-primary rounded-2xl sm:text-lg text-ssm text-primary font-bold">2
-                        Items</span>
+                    <span class="border flex items-center rounded-full px-3 text-ssm lg:text-sm border-primary">2 items</span>
                 </div>
                 <div class="cart-items-container mt-4">
                     {{-- cart item --}}
