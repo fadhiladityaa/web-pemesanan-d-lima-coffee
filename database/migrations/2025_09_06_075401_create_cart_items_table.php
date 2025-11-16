@@ -21,7 +21,8 @@ return new class extends Migration
                 table: 'daftar_menus',
                 indexName: 'cart_items_daftar_menu_id'
             );
-            
+            $table->integer('quantity')->default(1);
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite('resources/css/app.css')
+     @livewireStyles
     <title>{{ $title }}</title>
 </head>
 
@@ -41,5 +42,7 @@
             request()->is('dashboard/menu-management'))
         {{-- <x-footer></x-footer> --}}
     @endunless
+
+    @livewireScripts 
 </body>
 </html>

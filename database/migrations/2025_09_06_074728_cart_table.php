@@ -17,6 +17,7 @@ return new class extends Migration
                 table: 'users',
                 indexName: 'cart_user_id'
             );
+            $table->string('status');
             $table->timestamps();
         });
     }
