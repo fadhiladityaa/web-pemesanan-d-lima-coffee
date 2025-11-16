@@ -7,7 +7,7 @@ use App\Models\Order_item;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class order extends Model
+class Order extends Model
 {
     protected $guarded = ['id'];
 
