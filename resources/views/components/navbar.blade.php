@@ -1,5 +1,5 @@
 <nav class="bg-[#947257] w-full flex justify-between shadow-lg z-40 fixed">
-    <div class="font-[Sriracha] flex items-center justify-between mx-[16px] sm:mx-[32px] lg:mx-[55px] gap-2 py-3 w-full">
+    <div class="font-[Sriracha] flex items-center justify-between mx-[15px] sm:mx-[32px] lg:mx-[55px] gap-2 py-3 w-full">
         {{-- logo section --}}
         <div class="flex  justify-between w-full">
             <div class="flex gap-2 items-center">
