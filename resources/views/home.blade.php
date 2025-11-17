@@ -20,6 +20,12 @@
         </div>
     </section>
 
+    <div class="rounded-full p-5 bg-primary fixed right-3 bottom-24">
+        <div class="text-white font-poppins font-semibold rounded-full w-6 h-6 top-0 -left-1 flex items-center justify-center text-[0.650rem] absolute bg-red-600">1</div>
+        <img class="h-7" src="{{ asset('img/cart-arrow-down-svgrepo-com.svg') }}" alt="">
+    </div>
+
+
     {{-- Kategori Menu --}}
     <section>
         <div class="mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] lg:px-[64px] font-poppins">

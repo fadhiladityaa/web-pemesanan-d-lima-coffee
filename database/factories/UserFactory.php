@@ -24,7 +24,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'noHp' => fake()->phoneNumber('id-ID'),
+            'noHp' => '08' . fake()->numerify('##########'),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

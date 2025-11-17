@@ -1,10 +1,10 @@
 <div class="grid grid-cols-2 gap-2 lg:col-span-2">
     @foreach ($menus as $item)
-        <div class="flex font-poppins flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+    <div class="flex font-poppins flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
             <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
-                <img src="{{ asset('img/contoh-kopi.png') }}"
+                <img src="{{ asset('img/' . $item->gambar) }}"
                     class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500"
-                    alt="">
+                    alt="{{ $item->nama }}">
             </div>
             <span class="text-[14px] sm:text-[20px] text-slate-800 sm:mt-2 mt-1">{{ $item->nama_menu }}</span>
             <span class="text-primary text-[12px] sm:text-[17px] font-bold">Rp. {{ $item->harga }}</span>
