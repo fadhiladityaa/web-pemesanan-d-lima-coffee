@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class Products extends Component
 {
-    public function addToCart ($menu_id)
+    public function addToCart($menu_id)
     {
         $user_id = Auth::id();
         // dd($user_id);
 
         $cart = CartModel::firstOrCreate(
-            ['user_id' => $user_id, 'status'=> 'pending'],
+            ['user_id' => $user_id, 'status' => 'pending'],
             ['created_at' => now()],
         );
 
@@ -24,7 +24,7 @@ class Products extends Component
             ->where('daftar_menu_id', $menu_id)
             ->first();
 
-        if($item) {
+        if ($item) {
             $item->increment('quantity');
         } else {
             $menu = Daftar_menu::findOrfail($menu_id);
@@ -39,10 +39,20 @@ class Products extends Component
         $this->dispatch('cart_updated');
     }
 
+    public $search = '';
+
     public function render()
     {
+
+        $query = Daftar_menu::query();
+
+        if ($this->search) {
+            $query->where('nama_menu', 'like', '%' . $this->search . '%');
+        }
+
+
         return view('livewire.products', [
-            'menus' => Daftar_menu::all()
+            'menus' => $query->get()
         ]);
     }
 }

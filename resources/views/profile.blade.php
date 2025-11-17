@@ -1,7 +1,5 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-
-
     <div class="profile-container pt-16">
         <div class="hero-section flex flex-col w-full items-center p-6 bg-blue-200">
             <div class="avatar">

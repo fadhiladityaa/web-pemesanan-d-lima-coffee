@@ -7,15 +7,7 @@
             <div class="location-grup flex flex-col px-[16px] sm:px-[32px] lg:px-[64px] mt-4">
                 <span class="text-[18px] sm:text-[24px]">Location</span>
                 <span class="sm:text-[18px]">Jalan Delima, Parepare</span>
-                <div class="input-gorup flex items-center gap-2 mt-6">
-                    <fieldset class="fieldset">
-                        <input type="text" class="input w-[300px] sm:w-[400px]" placeholder="Type here" />
-                    </fieldset>
-                    <button class="bg-[#C67C4E] w-[54px] h-[45px] flex justify-center items-center rounded-md">
-                        <img src="{{ asset('img/settings2-svgrepo-com.svg') }}" class="w-7 h-7" alt="search icon" />
-                    </button>
-                </div>
-                <div class="kotak w-full h-40 sm:h-64 bg-white shadow-md rounded-[10px] border mt-10"></div>
+                <div class="kotak w-full h-40 sm:h-64 bg-white shadow-md rounded-[10px] border mt-[7rem]"></div>
             </div>
         </div>
     </section>
