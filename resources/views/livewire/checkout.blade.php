@@ -20,7 +20,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Metode Pembayaran</label>
-                    <select wire:model="metode_pembayaran" class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary">
+                    <select wire:model.live="metode_pembayaran" class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary">
                         <option value="">Pilih metode</option>
                         <option value="Cash">Cash</option>
                         <option value="Transfer Bank">Transfer Bank</option>
@@ -35,7 +35,7 @@
                 @if ($metode_pembayaran === 'Cash')
                     <div>
                         <label class="block text-sm font-medium text-slate-600">Uang Dibayarkan</label>
-                        <input type="number" wire:model="uang_dibayar" class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary" placeholder="Contoh: 100000">
+                        <input type="number" wire:model.live="uang_dibayar" class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary" placeholder="Contoh: 100000">
                         @error('uang_dibayar') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
 
