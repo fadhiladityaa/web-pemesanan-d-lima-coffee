@@ -10,8 +10,7 @@ use App\Models\Daftar_menu;
 // use Faker\Guesser\Name;
 // use App\Http\Controllers\Controller;
 use App\Http\Controllers\beritaController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\checkout;
+
 
 // route ke home
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
@@ -30,7 +29,7 @@ Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 // route untuk profile
 Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth'));
 
-Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');
+// Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');
 
 // Route ke halaman dashboard
 Route::get('/dashboard', function() {
@@ -40,22 +39,27 @@ Route::get('/dashboard', function() {
 });
 
 // Route untuk crud menu
-Route::get('/dashboard/menu-management', [menuController::class, 'index'])->name('menu.index');
-Route::get('/dashboard/{daftar_menu:nama_menu}/edit', [menuController::class, 'edit'])->name('menu.edit');
-Route::put('/dashboard/{daftar_menu}', [menuController::class, 'update'])->name('menu.update');
-Route::post('/tambah-menu', [menuController::class, 'store'])->name('menu.store');
-Route::delete('/menu/{daftar_menu}', [menuController::class, 'destroy'])->name('menu.destroy');
-Route::get('/dashboard/menu/create', [menuController::class, 'create'])->name('menu.create');
+// Route::get('/dashboard/menu-management', [menuController::class, 'index'])->name('menu.index');
+// Route::get('/dashboard/{daftar_menu:nama_menu}/edit', [menuController::class, 'edit'])->name('menu.edit');
+// Route::put('/dashboard/{daftar_menu}', [menuController::class, 'update'])->name('menu.update');
+// Route::post('/tambah-menu', [menuController::class, 'store'])->name('menu.store');
+// Route::delete('/menu/{daftar_menu}', [menuController::class, 'destroy'])->name('menu.destroy');
+// Route::get('/dashboard/menu/create', [menuController::class, 'create'])->name('menu.create');
 
 // Route untuk crud berita (kali)
 Route::get('/berita', [beritaController::class, 'index'])->name('halaman-berita');
 
-// route untuk halaman checkout
-Route::get('/checkout', [checkout::class, 'index'])->name('checkout');
-Route::post('/buat-pesanan', [checkout::class, 'store'])->name('checkout.store');
-
 // route untuk fitur add to cart
-Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.store');
+// Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.store');
 
 
-Route::get('/detail-menu', [menuController::class, 'show']);
+// Route::get('/detail-menu', [menuController::class, 'show']);
+
+Route::get('/checkout', function() {
+    return view('checkout-view', ['title' => 'Halaman Checkout']);
+})->name('checkout');
+
+
+Route::get('/checkout-succees', function() {
+    return view('checkout-succeed', ['title' => 'checkout-success']);
+})->name('checkout.success');

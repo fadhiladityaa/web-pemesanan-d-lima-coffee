@@ -3,13 +3,14 @@
         <h2 id="otw" class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
         <span
             class="flex items-center rounded-full px-4 py-1 text-sm bg-primary/10 text-primary font-medium border border-primary/20">
-            {{ $cart && $cart->items ? $cart->items->count() : 0 }} items
+            {{ optional($cart)->cart_items?->count() ?? 0 }} items
+
         </span>
     </div>
 
     <div class="cart-items-container mt-4">
-        @if($cart && $cart->items->count())
-            @foreach($cart->items as $item)
+        @if($cart && $cart->cart_items && $cart->cart_items->count())
+            @foreach($cart->cart_items as $item)
                 <div
                     class="items-container bg-primary/5 transition-all duration-150 hover:bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 lg:p-2 flex justify-between">
                     {{-- gambar produk --}}
@@ -48,7 +49,7 @@
                 <div class="subtotal-container sm:text-xl flex lg:text-[1.2rem] justify-between">
                     <span>Subtotal</span>
                     <span>
-                        Rp. {{ number_format($cart->items->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
+                        Rp. {{ number_format($cart->cart_items->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
                     </span>
                 </div>
 
@@ -61,14 +62,16 @@
                 <div class="total-container sm:text-2xl flex lg:text-[1.2rem] justify-between">
                     <span>Total</span>
                     <span class="text-primary font-bold">
-                        Rp. {{ number_format($cart->items->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
+                        Rp. {{ number_format($cart->cart_items->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
                     </span>
                 </div>
 
-                <button
-                    class="w-full bg-green-500 py-2 rounded-md text-white hover:bg-green-600 transition-all sm:text-2xl lg:text-[1.2rem] sm:mt-2 duration-300">
-                    Checkout
-                </button>
+                <a href="{{ route('checkout') }}">
+                    <button
+                        class="w-full bg-green-500 py-2 rounded-md text-white hover:bg-green-600 transition-all sm:text-2xl lg:text-[1.2rem] sm:mt-2 duration-300">
+                        Checkout
+                    </button>
+                </a>
             </div>
         @else
             <p class="text-gray-500">Keranjang masih kosong.</p>

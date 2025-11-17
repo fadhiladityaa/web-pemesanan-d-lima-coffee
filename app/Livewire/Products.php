@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Daftar_menu;
 use App\Models\Cart as CartModel;
-use App\Models\Cart_item;
+use App\Models\CartItem;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +20,7 @@ class Products extends Component
             ['created_at' => now()],
         );
 
-        $item = Cart_item::where('cart_id', $cart->id)
+        $item = CartItem::where('cart_id', $cart->id)
             ->where('daftar_menu_id', $menu_id)
             ->first();
 
@@ -29,7 +29,7 @@ class Products extends Component
         } else {
             $menu = Daftar_menu::findOrfail($menu_id);
 
-            Cart_item::create([
+            CartItem::create([
                 'cart_id' => $cart->id,
                 'daftar_menu_id' => $menu->id,
                 'quantity' => 1,

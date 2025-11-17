@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Attributes\On;
-use App\Models\Cart_item;
+use App\Models\CartItem;
 use Livewire\Component;
 
 class FloatingCart extends Component
@@ -13,7 +13,7 @@ class FloatingCart extends Component
     #[On('cart_updated')]
     public function mount()
     {
-        $this->itemCount = Cart_item::sum('quantity');
+        $this->itemCount = CartItem::sum('quantity');
     }
 
     public function render()

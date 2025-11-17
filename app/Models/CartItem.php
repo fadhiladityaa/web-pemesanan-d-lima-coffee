@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Cart;
 use App\Models\Daftar_menu;
 
-class Cart_item extends Model
+class CartItem extends Model
 {
     protected $guarded = ['id'];
 
