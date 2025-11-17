@@ -9,7 +9,7 @@
                 </a>
             </div>
 
-             <div class="links text-white sm:flex sm:gap-3 sm:text-[20px] items-center hidden font-poppins">
+             <div class="links text-white sm:flex sm:gap-3 lg:gap-7 sm:text-[20px] items-center hidden font-poppins">
                 <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : '' }}" href="/">Menu</a>
                 <a class="" href="/berita">Edukasi</a>
                 <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>

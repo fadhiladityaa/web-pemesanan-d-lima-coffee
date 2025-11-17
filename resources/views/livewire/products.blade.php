@@ -1,19 +1,20 @@
-<div>
+<div class="lg:mb-10">
     <div class="input-gorup flex items-center gap-2 mt-6 absolute top-[9.5rem]">
         <fieldset class="fieldset">
-            <input wire:model.live="search" type="text" class="input w-[300px] sm:w-[400px] text-slate-700" placeholder="Cari menu" />
+            <input wire:model.live="search" type="text" class="input w-[300px] sm:w-[400px] text-slate-700"
+                placeholder="Cari menu" />
         </fieldset>
         <button class="bg-[#C67C4E] w-[54px] h-[45px] flex justify-center items-center rounded-md">
             <img src="{{ asset('img/settings2-svgrepo-com.svg') }}" class="w-7 h-7" alt="search icon" />
         </button>
     </div>
 
-    <div class="grid grid-cols-2 gap-2 mt-4 lg:col-span-2">
-        @foreach ($menus as $item)
+    <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
+        @forelse ($menus as $item)
             <div
                 class="flex font-poppins flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
                 <div class="w-full relative rounded-lg overflow-hidden sm:h-48">
-                    <img src="{{ asset('img/' . $item->gambar) }}"
+                    <img src="{{ asset('img/contoh-kopi.png') }}"
                         class="w-full sm:rounded-lg sm:h-48 sm:object-cover hover:scale-110 transition-all duration-500"
                         alt="{{ $item->nama }}">
                 </div>
@@ -30,8 +31,14 @@
                         class="text-[12px] sm:text-[18px] text-white bg-primary w-full p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
                         Tambah
                     </button>
+
+               
                 </div>
             </div>
-        @endforeach
+             @empty
+                <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
+                    Menu tidak ditemukan.
+                </div>
+        @endforelse
     </div>
 </div>

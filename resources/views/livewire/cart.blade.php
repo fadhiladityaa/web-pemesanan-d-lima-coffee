@@ -1,4 +1,4 @@
-<div class="shadow-soft p-5 rounded-lg lg:max-h-[80vh] overflow-y-auto mb-20">
+<div class="shadow-soft p-5 rounded-lg mt-12 lg:max-h-[80vh] overflow-y-auto mb-20">
     <div class="flex justify-between">
         <h2 id="otw" class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
         <span
@@ -13,7 +13,7 @@
                 <div
                     class="items-container bg-primary/5 transition-all duration-150 hover:bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 lg:p-2 flex justify-between">
                     {{-- gambar produk --}}
-                    <img src="{{ $item->daftar_menu->gambar ?? asset('img/contoh-kopi-2.png') }}"
+                    <img src="{{ asset('img/contoh-kopi-2.png') }}"
                          class="sm:w-36 lg:w-24 lg:h-24"
                          alt="{{ $item->daftar_menu->nama }}">
 
