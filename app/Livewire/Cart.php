@@ -30,6 +30,7 @@ class Cart extends Component
         if($item) {
             $item->increment('quantity');
         }
+        $this->dispatch('cart_updated');
     }
 
     public function decrementQuantity($id)
@@ -42,11 +43,17 @@ class Cart extends Component
         } else {
             $item->decrement('quantity');
         }
+
+        $this->dispatch('cart_updated');
     }
 
     public function removeItem($id) 
     {
         $item = Cart_item::where('id', $id)->first();
         $item->delete();
+
+        $this->dispatch('cart_updated');
     }
+
+    
 }

@@ -35,7 +35,6 @@ class Products extends Component
                 'quantity' => 1,
                 'price' => $menu->harga,
             ]);
-
         };
         $this->dispatch('cart_updated');
     }

@@ -1,6 +1,6 @@
-<div class="shadow-soft p-5 rounded-lg lg:max-h-[80vh] overflow-y-auto">
+<div class="shadow-soft p-5 rounded-lg lg:max-h-[80vh] overflow-y-auto mb-20">
     <div class="flex justify-between">
-        <h2 class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
+        <h2 id="otw" class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
         <span
             class="flex items-center rounded-full px-4 py-1 text-sm bg-primary/10 text-primary font-medium border border-primary/20">
             {{ $cart && $cart->items ? $cart->items->count() : 0 }} items
