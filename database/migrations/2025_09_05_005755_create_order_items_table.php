@@ -13,23 +13,21 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-
-            // relasi ke table orders
-            $table->foreignId('order_id')->constrained(
-               table: 'order',
-               indexName: 'order_items_order_id' 
-            );
             $table->timestamps();
 
-            // relasi ke table menus
-            $table->foreignId('menu_id')->constrained(
+            $table->foreignId('order_id')->constrained(
+                table: 'orders',
+                indexName: 'order_items_order_id'
+            );
+
+            $table->foreignId('daftar_menu_id')->constrained(
                 table: 'daftar_menus',
-                indexName: 'order_items_menu_id'
+                indexName: 'order_items_daftar_menu_id'
             );
 
             $table->integer('quantity');
             $table->decimal('harga', 10, 2);
-            $table->decimal('subTotal', 10, 2);
+            $table->decimal('sub_total', 10, 2); // snake_case lebih konsisten
         });
     }
 

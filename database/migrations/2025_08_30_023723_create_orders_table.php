@@ -14,27 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('user_id')->constrained(
-                table: 'users',
-                indexName: 'orders_user_id'
-            );
-            $table->enum('payment_status', [
-                'pending',
-                'paid',
-                'failed',
-                'canceled',
-                'completed'
-            ])->default('pending');
-            $table->enum('order_status', [
-                'proses',
-                'siap',
-                'sedang diantar',
-                'completed',
-                'canceled'
-                ])->default('proses');
-                $table->string('metode_pembayaran');
-                $table->decimal('total', 12, 2);
-            });
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('alamat');
+            $table->string('no_hp');
+            $table->string('metode_pembayaran');
+            $table->enum('payment_status', ['pending', 'paid', 'failed', 'canceled', 'completed'])->default('pending');
+            $table->enum('order_status', ['proses', 'siap', 'sedang diantar', 'completed', 'canceled'])->default('proses');
+            $table->decimal('total', 12, 2);
+        });
     }
 
     /**
