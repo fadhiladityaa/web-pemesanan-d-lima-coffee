@@ -63,3 +63,9 @@ Route::get('/checkout', function() {
 Route::get('/checkout-succees', function() {
     return view('checkout-succeed', ['title' => 'checkout-success']);
 })->name('checkout.success');
+
+
+
+Route::get('/pesanan-masuk', function() {
+    return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk',]);
+})->name('pesanan.masuk');

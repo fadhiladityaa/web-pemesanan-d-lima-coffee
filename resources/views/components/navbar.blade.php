@@ -14,7 +14,7 @@
                 <a class="" href="/berita">Edukasi</a>
                 <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>
                 <a href="">Berita</a>
-                <a href="">Dashboard</a>
+                <a href="/dashboard">Dashboard</a>
 
                 <a href="/profile" class="btn btn-ghost btn-circle mr-0 avatar">
                     <div class="w-10 rounded-full">
