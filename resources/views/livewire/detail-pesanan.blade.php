@@ -28,7 +28,7 @@
             @if($order->order_status === 'selesai') bg-green-100 text-green-700
             @elseif($order->order_status === 'proses') bg-yellow-100 text-yellow-700
             @elseif($order->order_status === 'diantar') bg-blue-100 text-blue-700
-            @else bg-gray-100 text-gray-700 @endif">
+            @else bg-[#f3f4f6] text-[#374151] @endif">
             {{ ucfirst($order->order_status) }}
         </span>
     </div>
