@@ -44,8 +44,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="p-4 border-t border-gray-200">
+            {{-- <div class="p-4 border-t border-gray-200">
                 <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-900">Lihat semua reservasi →</a>
-            </div>
+            </div> --}}
         </div>
 </div>

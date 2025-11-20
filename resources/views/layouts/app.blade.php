@@ -22,7 +22,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
      @livewireStyles
-    {{-- <title>{{ $title }}</title> --}}
+    <title>{{ $title }}</title>
 </head>
 
 <body x-data="data">

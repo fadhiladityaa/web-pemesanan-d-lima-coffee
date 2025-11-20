@@ -2,11 +2,15 @@
 
 namespace App\Livewire;
 
+
 use App\Models\Order;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+
 
 #[Layout('layouts.app')]
+#[Title('Detail Pesanan')]
 class DetailPesanan extends Component
 {
     public $order;

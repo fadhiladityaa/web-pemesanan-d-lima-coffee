@@ -1,6 +1,8 @@
 <?php
 
+// livewire class
 use App\Livewire\DetailPesanan;
+use App\Livewire\PesananSaya;
 
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
@@ -73,5 +75,9 @@ Route::get('/checkout-succees', function() {
 
 
 Route::get('/pesanan-masuk', function() {
-    return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk',]);
+    return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk']);
 })->name('pesanan.masuk');
+
+
+
+Route::get('/pesanan-saya', PesananSaya::class)->middleware('auth')->name('user.pesanan');
