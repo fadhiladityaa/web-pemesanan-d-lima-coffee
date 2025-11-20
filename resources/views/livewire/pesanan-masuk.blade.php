@@ -1,7 +1,7 @@
 <div>
-     <div class="bg-white rounded-lg shadow mt-10 mb-6">
+     <div class="bg-white rounded-lg shadow lg:-mt-6 mt-10 mb-6">
             <div class="p-6 border-b border-gray-200">
-                <h2 class="text-lg font-semibold text-gray-800">Pesanan</h2>
+                <h2 class="text-lg font-semibold text-gray-800">Pesanan Masuk</h2>
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">

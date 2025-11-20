@@ -63,7 +63,7 @@
     </nav>
 </div>
 
-<section>
+<section class="lg:hidden">
     <div class="w-full p-5 bg-[#151C2B] top-0  fixed flex justify-between text-white">
         <h1 class="font-bold">DASHBOARD</h1>
         <div class="dropdown dropdown-end">
