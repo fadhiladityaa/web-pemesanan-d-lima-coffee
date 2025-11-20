@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\DetailPesanan;
+
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -47,7 +49,11 @@ Route::get('/dashboard', function() {
 // Route::get('/dashboard/menu/create', [menuController::class, 'create'])->name('menu.create');
 
 // Route untuk crud berita (kali)
-Route::get('/berita', [beritaController::class, 'index'])->name('halaman-berita');
+// Route::get('/detail-pesanan/{order}', [DetailPesanan::class])->name('detail.pesanan');
+// Route::get('/pesanan-masuk/detail-pesanan/{order}', function() { return view('detail-pesanan-view'); })->name('detail.pesanan');
+Route::get('/pesanan-masuk/detail-pesanan/{order}', \App\Livewire\DetailPesanan::class)
+    ->name('detail.pesanan');
+
 
 // route untuk fitur add to cart
 // Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.store');

@@ -91,7 +91,7 @@
                 </li>
 
                 <li class="">
-                    <a href="route{{ 'pesanan.masuk' }}">Pesanan masuk</a>
+                    <a href="{{ route('pesanan.masuk') }}">Pesanan masuk</a>
                 </li>
 
                 <li>
