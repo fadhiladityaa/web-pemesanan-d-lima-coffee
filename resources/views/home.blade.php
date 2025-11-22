@@ -7,7 +7,11 @@
             <div class="location-grup flex flex-col px-[16px] sm:px-[32px] lg:px-[64px] mt-4">
                 <span class="text-[18px] sm:text-[24px]">Location</span>
                 <span class="sm:text-[18px]">Jalan Delima, Parepare</span>
-                <div class="kotak w-full h-40 sm:h-64 bg-white shadow-md rounded-[10px] border mt-[7rem]"></div>
+                <div
+                    class="kotak w-full h-40 sm:h-64 bg-white rounded-xl shadow-lg border border-gray-200 mt-[7rem] overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    {{-- <img src="{{ asset('img/banner-dlima.png') }}" alt="Banner Lokasi" class="w-full h-full lg:h-20  object-cover"> --}}
+                </div>
+
             </div>
         </div>
     </section>
