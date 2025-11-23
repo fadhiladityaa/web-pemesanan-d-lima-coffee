@@ -14,7 +14,8 @@ use App\Models\Daftar_menu;
 // use Faker\Guesser\Name;
 // use App\Http\Controllers\Controller;
 use App\Http\Controllers\beritaController;
-
+use App\Livewire\CreateMenu;
+use App\Livewire\DashboardAdmin;
 
 // route ke home
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
@@ -36,11 +37,11 @@ Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth')
 // Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');
 
 // Route ke halaman dashboard
-Route::get('/dashboard', function() {
-    return view('dashboard.index', [
-        'title' => 'dasbor',
-    ]);
-});
+// Route::get('/dashboard', function() {
+//     return view('dashboard.index', [
+//         'title' => 'dasbor',
+//     ]);
+// });
 
 // Route untuk crud menu
 // Route::get('/dashboard/menu-management', [menuController::class, 'index'])->name('menu.index');
@@ -81,3 +82,7 @@ Route::get('/pesanan-masuk', function() {
 
 
 Route::get('/pesanan-saya', PesananSaya::class)->middleware('auth')->name('user.pesanan');
+
+
+Route::get('/create-menu', CreateMenu::class);
+Route::get('/dashboard-admin', DashboardAdmin::class);
