@@ -21,7 +21,7 @@
                 <span class="text-red-500 font-[poppins] ml-2 text-sm"></span>
     
 
-            <input wire:model="gambar" @change="changeImage($event)" name="gambar" type="file" class="file-input file-input-xs" />
+            <input accept="image/png, image/jpg, image/jpegs" wire:model="gambar" @change="changeImage($event)" name="gambar" type="file" class="file-input file-input-xs" />
                 <span class="text-red-500 font-[poppins] ml-2 text-sm"></span>
     
 
