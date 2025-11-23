@@ -16,6 +16,7 @@ use App\Models\Daftar_menu;
 use App\Http\Controllers\beritaController;
 use App\Livewire\CreateMenu;
 use App\Livewire\DashboardAdmin;
+use App\Livewire\PesananMasuk;
 
 // route ke home
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
@@ -75,10 +76,12 @@ Route::get('/checkout-succees', function() {
 
 
 
-Route::get('/pesanan-masuk', function() {
-    return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk']);
-})->name('pesanan.masuk');
+// Route::get('/pesanan-masuk', function() {
+//     return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk']);
+// })->name('pesanan.masuk');
 
+
+Route::get('/pesanan-masuk', PesananMasuk::class);
 
 
 Route::get('/pesanan-saya', PesananSaya::class)->middleware('auth')->name('user.pesanan');

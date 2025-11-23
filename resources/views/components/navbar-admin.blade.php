@@ -14,7 +14,7 @@
             </svg>
             Dashboard
         </a>
-        <a href="{{ route('pesanan.masuk') }}"
+        <a href="/pesanan-masuk"
             class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
             <img src="{{ asset('img/logo-pesanan-masuk.svg') }}" class="w-[.9rem] h-[.9rem] mr-4" alt="">
             Pesanan Masuk
@@ -91,7 +91,7 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ route('pesanan.masuk') }}">Pesanan masuk</a>
+                    <a href="/pesanan-masuk">Pesanan masuk</a>
                 </li>
 
                 <li>
