@@ -83,17 +83,15 @@ Route::get('/checkout-succees', function() {
 // })->name('pesanan.masuk');
 
 
-Route::get('/pesanan-masuk', PesananMasuk::class);
-
-
 Route::get('/pesanan-saya', PesananSaya::class)->middleware('auth')->name('user.pesanan');
 
 
 Route::get('/dashboard/create-menu', CreateMenu::class);
 Route::get('/dashboard-admin', DashboardAdmin::class);
 Route::get('/detail-menu', function(){
-     return view('detail-menu', ['title' => 'Detail Menu']);
-     });
+    return view('detail-menu', ['title' => 'Detail Menu']);
+});
 
 Route::get('/dashboard/menu-management', MenuManagement::class);
 Route::get('/dashboard/edit-menu', EditMenu::class);
+Route::get('/dashboard/pesanan-masuk', PesananMasuk::class);

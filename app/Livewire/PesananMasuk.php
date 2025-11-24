@@ -16,6 +16,6 @@ class PesananMasuk extends Component
     {
         $orders = Order::with('user', 'order_items')->latest()->get();
 
-        return view('livewire.pesanan-masuk', compact('orders')) ;
+        return view('livewire.dashboard.pesanan-masuk', compact('orders')) ;
     }
 }
