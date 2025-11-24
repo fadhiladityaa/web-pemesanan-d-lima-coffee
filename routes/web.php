@@ -16,6 +16,7 @@ use App\Models\Daftar_menu;
 use App\Http\Controllers\beritaController;
 use App\Livewire\CreateMenu;
 use App\Livewire\DashboardAdmin;
+use App\Livewire\MenuManagement;
 use App\Livewire\PesananMasuk;
 
 // route ke home
@@ -87,10 +88,10 @@ Route::get('/pesanan-masuk', PesananMasuk::class);
 Route::get('/pesanan-saya', PesananSaya::class)->middleware('auth')->name('user.pesanan');
 
 
-Route::get('/create-menu', CreateMenu::class);
+Route::get('/dashboard/create-menu', CreateMenu::class);
 Route::get('/dashboard-admin', DashboardAdmin::class);
-
-
 Route::get('/detail-menu', function(){
      return view('detail-menu', ['title' => 'Detail Menu']);
      });
+
+Route::get('/dashboard/menu-management', MenuManagement::class);
