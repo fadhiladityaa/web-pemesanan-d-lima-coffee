@@ -93,5 +93,5 @@ Route::get('/detail-menu', function(){
 });
 
 Route::get('/dashboard/menu-management', MenuManagement::class);
-Route::get('/dashboard/edit-menu', EditMenu::class);
+Route::get('/dashboard/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
 Route::get('/dashboard/pesanan-masuk', PesananMasuk::class);

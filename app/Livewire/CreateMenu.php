@@ -16,8 +16,7 @@ class CreateMenu extends Component
 
     #[Validate('required|string|min:3|unique:daftar_menus,nama_menu')]
     public $nama_menu = '';
-    
-    
+
     #[Validate('required|numeric|min:0')]
     public $harga = 0;
     

@@ -49,7 +49,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
 
                                 {{-- edit button --}}
-                                <a class="text-blue-500" href="/dashboard/edit-menu">Edit</a>
+                                <a class="text-blue-500" href="{{ route('dashboard.edit.menu', $m->id) }}">Edit</a>
                                 {{-- end edit button --}}
 
                                 {{-- delete button --}}
