@@ -23,7 +23,7 @@ class CreateMenu extends Component
     
     
     #[Validate('nullable|image|mimes:jpg,jpeg,png|max:2048')]
-    public $gambar = '';
+    public $gambar;
     
     
     #[Validate('nullable|string|max:500')]
@@ -35,6 +35,11 @@ class CreateMenu extends Component
     public function createNewMenu()
     {
         $validated = $this->validate();
+
+        if ($this->gambar) {
+            $validated['gambar'] = $this->gambar->store('gambar', 'public');
+        };
+    
         Daftar_menu::create($validated);
 
         $this->reset();

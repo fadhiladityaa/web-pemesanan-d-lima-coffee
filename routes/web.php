@@ -89,3 +89,8 @@ Route::get('/pesanan-saya', PesananSaya::class)->middleware('auth')->name('user.
 
 Route::get('/create-menu', CreateMenu::class);
 Route::get('/dashboard-admin', DashboardAdmin::class);
+
+
+Route::get('/detail-menu', function(){
+     return view('detail-menu', ['title' => 'Detail Menu']);
+     });

@@ -1,15 +1,7 @@
 <div>
-    <section class="max-w-3xl ml-10 p-3 pt-5">
-        <h1 class="font-[poppins] text-2xl my-5">Tambah Menu</h1>
-        <form wire:submit.prevent="createNewMenu" x-data="{
-            imgSrc: '',
-            changeImage(event) {
-                const file = event.target.files[0]
-                if (file) {
-                    this.imgSrc = URL.createObjectURL(file)
-                }
-            }
-        }" class="flex flex-col gap-2" action="" method="POST"
+    <section class="max-w-3xl lg:ml-10 px-[16px] pt-20">
+        <h1 class="font-[poppins] lg:text-2xl my-5">Tambah Menu</h1>
+        <form wire:submit.prevent="createNewMenu" class="flex flex-col gap-2" action="" method="POST"
             enctype="multipart/form-data">
 
             <input wire:model="nama_menu" type="text" name="nama_menu" required placeholder="Nama Menu"
@@ -21,8 +13,12 @@
                 <span class="text-red-500 font-[poppins] ml-2 text-sm"></span>
     
 
-            <input accept="image/png, image/jpg, image/jpegs" wire:model="gambar" @change="changeImage($event)" name="gambar" type="file" class="file-input file-input-xs" />
+            <input accept="image/png, image/jpg, image/jpegs" wire:model="gambar" name="gambar" type="file" class="file-input file-input-xs" />
                 <span class="text-red-500 font-[poppins] ml-2 text-sm"></span>
+
+            @if($gambar)
+                <img class="w-40 h-40" src="{{ $gambar->temporaryUrl() }}">
+            @endif
     
 
             <template x-if="imgSrc">

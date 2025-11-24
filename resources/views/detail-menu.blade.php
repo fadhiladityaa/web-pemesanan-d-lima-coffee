@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+{{-- <div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
         
         <!-- Header Section -->
@@ -161,5 +161,82 @@
         </div>
 
     </div>
+</div> --}}
+
+<div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+  <!-- Judul dan Gambar -->
+  <div class="flex flex-col md:flex-row items-center gap-6 mb-6">
+    <img src="https://via.placeholder.com/200x200" alt="Foto Menu" class="rounded-lg shadow-md w-48 h-48 object-cover">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">Nasi Ayam Geprek</h1>
+      <p class="text-lg text-gray-600">Rp25.000 / porsi</p>
+      <p class="text-sm text-gray-500 mt-2">Kategori: Makanan Utama</p>
+    </div>
+  </div>
+
+  <!-- Kotak-kotak Ringkasan -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="bg-pink-100 p-4 rounded-lg shadow-sm">
+      <div class="text-sm text-gray-600">Kalori</div>
+      <div class="text-2xl font-bold text-gray-800">620 kcal</div>
+    </div>
+    <div class="bg-green-100 p-4 rounded-lg shadow-sm">
+      <div class="text-sm text-gray-600">Protein</div>
+      <div class="text-2xl font-bold text-gray-800">25 g</div>
+    </div>
+    <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
+      <div class="text-sm text-gray-600">Karbohidrat</div>
+      <div class="text-2xl font-bold text-gray-800">80 g</div>
+    </div>
+  </div>
+
+  <!-- Tabel Informasi Gizi -->
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Detail Informasi Gizi</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-200 text-sm text-left text-gray-700">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-4 py-2 border-b">Komponen</th>
+            <th class="px-4 py-2 border-b">Jumlah</th>
+            <th class="px-4 py-2 border-b">Persen AKG*</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="px-4 py-2 border-b">Kalori</td>
+            <td class="px-4 py-2 border-b">620 kcal</td>
+            <td class="px-4 py-2 border-b">31%</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border-b">Protein</td>
+            <td class="px-4 py-2 border-b">25 g</td>
+            <td class="px-4 py-2 border-b">42%</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border-b">Karbohidrat</td>
+            <td class="px-4 py-2 border-b">80 g</td>
+            <td class="px-4 py-2 border-b">27%</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border-b">Lemak</td>
+            <td class="px-4 py-2 border-b">18 g</td>
+            <td class="px-4 py-2 border-b">28%</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-gray-500 mt-2">*AKG: Angka Kecukupan Gizi berdasarkan kebutuhan rata-rata harian orang dewasa.</p>
+    </div>
+  </div>
+
+  <!-- Catatan Edukatif -->
+  <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+    <p class="text-sm text-gray-700">
+      💡 <strong>Tips:</strong> Menu ini tinggi protein dan cocok untuk pemulihan energi setelah aktivitas fisik. Hindari konsumsi berlebihan jika sedang mengurangi asupan lemak.
+    </p>
+  </div>
 </div>
+
+
+
 @endsection
