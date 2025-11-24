@@ -13,7 +13,7 @@
         @endif
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-xl font-semibold text-gray-800">Daftar Menu</h2>
-            <a class="btn btn-primary" href="">Tambah menu</a>
+            <a class="btn btn-primary" href="/dashboard/create-menu">Tambah menu</a>
         </div>
 
         <!-- Tabel Menu -->
@@ -49,7 +49,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
 
                                 {{-- edit button --}}
-                                <a class="text-blue-500" href="">Edit</a>
+                                <a class="text-blue-500" href="/dashboard/edit-menu">Edit</a>
                                 {{-- end edit button --}}
 
                                 {{-- delete button --}}

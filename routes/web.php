@@ -16,6 +16,7 @@ use App\Models\Daftar_menu;
 use App\Http\Controllers\beritaController;
 use App\Livewire\CreateMenu;
 use App\Livewire\DashboardAdmin;
+use App\Livewire\EditMenu;
 use App\Livewire\MenuManagement;
 use App\Livewire\PesananMasuk;
 
@@ -95,3 +96,4 @@ Route::get('/detail-menu', function(){
      });
 
 Route::get('/dashboard/menu-management', MenuManagement::class);
+Route::get('/dashboard/edit-menu', EditMenu::class);
