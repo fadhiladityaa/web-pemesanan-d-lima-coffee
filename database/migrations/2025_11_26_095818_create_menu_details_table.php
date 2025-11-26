@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('menu_details', function (Blueprint $table) {
             $table->id('id_detail');
-            $table->unsignedBigInteger('id_menu');
+            $table->unsignedBigInteger('daftar_menu_id');
             $table->string('bahan_baku')->nullable();
             $table->integer('energi_total')->nullable(); // kkal
             $table->decimal('protein', 5, 2)->nullable(); // gram
@@ -25,9 +25,9 @@ return new class extends Migration
             $table->integer('kafein')->nullable(); // mg
             $table->text('batas_konsumsi')->nullable();
             $table->timestamps();
-
+            
             // Relasi ke menus
-            $table->foreign('id_menu')->references('id')->on('daftar_menus')->onDelete('cascade');
+            $table->foreign('daftar_menu_id')->references('id')->on('daftar_menu')->onDelete('cascade');
         });
     }
 
