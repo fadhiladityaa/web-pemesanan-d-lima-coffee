@@ -65,7 +65,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if ($order->metode_pembayaran != 'Cash')
+                    <button class="w-full bg-green-400 px-4 rounded-lg py-2 mt-8 text-white font-semibold">Bayar</button>
+                @endif
             </div>
+
 
         
         </div>
