@@ -30,7 +30,7 @@
 
         <!-- Main Content -->
         <div class="md:ml-64">
-            @yield('container')
+            {{ $slot }}
         </div>
     </div>
 </body>

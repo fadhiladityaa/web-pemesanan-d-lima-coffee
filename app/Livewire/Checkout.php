@@ -34,8 +34,7 @@ class Checkout extends Component
     public function getKembalianProperty()
     {
         return ($this->metode_pembayaran === 'Cash' && $this->uang_dibayar >= $this->total)
-            ? $this->uang_dibayar - $this->total
-            : 0;
+            ? $this->uang_dibayar - $this->total : 0;
     }
 
     public function submitCheckout()
@@ -80,13 +79,13 @@ class Checkout extends Component
 
         $cart->update(['status' => 'completed']);
 
-    return redirect()->route('user.pesanan');
+        return redirect()->route('user.pesanan');
     }
 
 
     public function render()
     {
-         $cart = Cart::with('cart_items')->where('user_id', Auth::id())->where('status', 'pending')->first();
+        $cart = Cart::with('cart_items')->where('user_id', Auth::id())->where('status', 'pending')->first();
 
         $this->total = $cart
             ? $cart->cart_items->sum(fn($item) => $item->quantity * $item->price)

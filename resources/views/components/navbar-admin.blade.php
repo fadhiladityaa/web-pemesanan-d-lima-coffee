@@ -1,10 +1,13 @@
 <div
     class="fixed inset-y-0 left-0 w-64 bg-gray-900 text-white transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-50">
-    <div class="flex items-center justify-center h-20 bg-black">
-        <span class="text-xl font-bold text-primary-400">DASHBOARD</span>
+    <div class="flex items-center justify-center h-20 bg-gray-950 gap-2">
+        <a class="flex items-center justify-center gap-2" href="/">
+            <img src="{{ asset('img/logo-warkop 1.svg') }}" class="w-10 rounded-full" alt="">
+            <span class="text-xl font-bold text-primary-400">D'Lima Coffee</span>
+        </a>
     </div>
     <nav class="mt-6">
-        <div class="px-6 py-3 bg-gray-800 bg-opacity-25 text-primary-400 font-medium">
+        <div class="px-6 py-3 bg-gray-900 text-primary-400 font-medium">
             <span>Menu Utama</span>
         </div>
         <a href="/dashboard" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
@@ -14,18 +17,18 @@
             </svg>
             Dashboard
         </a>
-        <a href="{{ route('pesanan.masuk') }}"
-            class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
+        <a href="/dashboard/pesanan-masuk"
+            class="flex items-center {{ Request()->is('dashboard/pesanan-masuk') ? 'bg-gray-800' : '' }} px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
             <img src="{{ asset('img/logo-pesanan-masuk.svg') }}" class="w-[.9rem] h-[.9rem] mr-4" alt="">
             Pesanan Masuk
         </a>
-        <a href="/dashboard/menu-management"
-            class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
+        <a href="{{ route('dashboard.menu.management') }}"
+            class="flex items-center px-6 py-3 text-gray-300 {{ Request()->is('dashboard/menu-management') ? 'bg-gray-800' : '' }} hover:bg-gray-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
-            Menu
+            Menu management
         </a>
         <a href="#" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +44,7 @@
             </svg>
             Berita
         </a>
-        <div class="px-6 py-3 mt-4 bg-gray-800 bg-opacity-25 text-primary-400 font-medium">
+        <div class="px-6 py-3 mt-4 bg-gray-900 bg-opacity-25 text-primary-400 font-medium">
             <span>Pengaturan</span>
         </div>
         <a href="#" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
@@ -63,7 +66,39 @@
     </nav>
 </div>
 
-<section>
+{{-- ✅ Tambah Topbar untuk Desktop --}}
+<header class="hidden md:flex fixed top-0 left-64 right-0 h-20 bg-gray-950 text-white items-center justify-between px-6 z-40">
+    <h1 class="text-lg font-bold">Dashboard Admin</h1>
+    <div class="flex items-center gap-4">
+        {{-- contoh tombol notifikasi --}}
+        <button class="relative">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+        </button>
+
+        {{-- contoh dropdown user --}}
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-sm btn-ghost rounded-full">
+                <img src="{{ asset('img/user-avatar.png') }}" class="w-8 h-8 rounded-full" alt="User">
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-40 p-2 text-slate-800 shadow">
+                <li><a href="#">Profil</a></li>
+                <li><a href="#">Pengaturan</a></li>
+                <li>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<section class="lg:hidden">
     <div class="w-full p-5 bg-[#151C2B] top-0  fixed flex justify-between text-white">
         <h1 class="font-bold">DASHBOARD</h1>
         <div class="dropdown dropdown-end">
@@ -83,7 +118,7 @@
                 </li>
 
                 <li class="sm:hidden">
-                    <a href="/tentang-kami">Menu Management</a>
+                    <a href="/dashboard/menu-management">Menu Management</a>
                 </li>
 
                 <li class="sm:hidden">
@@ -91,7 +126,7 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ route('pesanan.masuk') }}">Pesanan masuk</a>
+                    <a href="/pesanan-masuk">Pesanan masuk</a>
                 </li>
 
                 <li>

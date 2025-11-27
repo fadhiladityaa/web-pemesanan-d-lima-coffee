@@ -14,7 +14,12 @@ use App\Models\Daftar_menu;
 // use Faker\Guesser\Name;
 // use App\Http\Controllers\Controller;
 use App\Http\Controllers\beritaController;
-
+use App\Livewire\CreateMenu;
+use App\Livewire\DashboardAdmin;
+use App\Livewire\DetailMenu;
+use App\Livewire\EditMenu;
+use App\Livewire\MenuManagement;
+use App\Livewire\PesananMasuk;
 
 // route ke home
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
@@ -36,11 +41,11 @@ Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth')
 // Route::get('/menu', [menuController::class, 'index'])->name('menu.utama');
 
 // Route ke halaman dashboard
-Route::get('/dashboard', function() {
-    return view('dashboard.index', [
-        'title' => 'dasbor',
-    ]);
-});
+// Route::get('/dashboard', function() {
+//     return view('dashboard.index', [
+//         'title' => 'dasbor',
+//     ]);
+// });
 
 // Route untuk crud menu
 // Route::get('/dashboard/menu-management', [menuController::class, 'index'])->name('menu.index');
@@ -74,12 +79,24 @@ Route::get('/checkout-succees', function() {
 
 
 
-Route::get('/pesanan-masuk', function() {
-    return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk']);
-})->name('pesanan.masuk');
+// Route::get('/pesanan-masuk', function() {
+//     return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk']);
+// })->name('pesanan.masuk');
 
 Route::get('/profil-pengguna', function() {
     return view('profil-pengguna', ['title' => 'profil-pengguna']);
 })->name('profil-pengguna');
 
-Route::get('/pesanan-saya', PesananSaya::class)->middleware('auth')->name('user.pesanan');
+
+Route::get('/dashboard/create-menu', CreateMenu::class);
+Route::get('/dashboard-admin', DashboardAdmin::class);
+// Route::get('/detail-menu', function(){
+//     return view('detail-menu', ['title' => 'Detail Menu']);
+// });
+
+Route::get('/dashboard/menu-management', MenuManagement::class)->name('dashboard.menu.management');
+Route::get('/dashboard/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
+Route::get('/dashboard/pesanan-masuk', PesananMasuk::class);
+
+
+Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu');

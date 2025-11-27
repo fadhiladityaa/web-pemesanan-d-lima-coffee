@@ -13,8 +13,8 @@
                 <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : '' }}" href="/">Menu</a>
                 <a class="" href="/berita">Edukasi</a>
                 <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>
-                <a href="{{ route('user.pesanan') }}">Pesanan saya</a>
-                <a href="/dashboard">Dashboard</a>
+                <a href="/pesanan-saya">Pesanan saya</a>
+                <a href="/dashboard-admin">Dashboard</a>
 
                 <a href="/profile" class="btn btn-ghost btn-circle mr-0 avatar">
                     <div class="w-10 rounded-full">

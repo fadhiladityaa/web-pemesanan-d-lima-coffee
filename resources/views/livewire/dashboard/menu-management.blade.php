@@ -1,9 +1,8 @@
-@extends('layouts.admin')
-@section('container')
+<div>
     <div x-data="{ test: 'fadhil aditya', formData: {} }" class="p-6 bg-white rounded-lg shadow pt-28">
         <!-- Header Tabel dan Tombol Tambah -->
         @if (session()->has('success'))
-            <div role="alert" class="alert alert-success mb-5">
+            <div role="alert" class="alert alert-success text-white mb-5">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     class="h-6 w-6 shrink-0 stroke-current">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -14,7 +13,7 @@
         @endif
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-xl font-semibold text-gray-800">Daftar Menu</h2>
-            <a class="btn btn-primary" href="{{ route('menu.create') }}">Tambah menu</a>
+            <a class="btn btn-primary" href="/dashboard/create-menu">Tambah menu</a>
         </div>
 
         <!-- Tabel Menu -->
@@ -50,11 +49,11 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
 
                                 {{-- edit button --}}
-                                <a class="text-blue-500" href="{{ route('menu.edit', $m) }}">Edit</a>
+                                <a class="text-blue-500" href="{{ route('dashboard.edit.menu', $m->id) }}">Edit</a>
                                 {{-- end edit button --}}
 
                                 {{-- delete button --}}
-                                <form action="{{ route('menu.destroy', $m) }}" method="POST" class="inline">
+                                <form action="" method="POST" class="inline">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" onclick="return confirm('Yakin ingin menghapus?')"
@@ -68,4 +67,4 @@
             </table>
         </div>
     </div>
-@endsection
+</div>

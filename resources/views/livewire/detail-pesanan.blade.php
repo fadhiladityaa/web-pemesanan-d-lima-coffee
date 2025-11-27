@@ -10,13 +10,14 @@
     </div>
 
     {{-- Informasi User --}}
-    <div class="grid grid-cols-2 gap-6 mb-6">
+    <div class="flex flex-col gap-6 mb-6">
         <div>
             <p class="text-gray-600">Pelanggan</p>
             <p class="text-lg font-semibold">{{ $order->user->name }}</p>
         </div>
         <div>
-            <p class="text-lg font-semibold">{{ $order->user->email }}</p>
+            <p class="text-gray-600">Metode Pembayaran</p>
+            <p class="text-sm text-white text-center px-3 py-1 w-20 bg-green-500 rounded-xl">{{ $order->metode_pembayaran }}</p>
         </div>
     </div>
 
@@ -27,7 +28,7 @@
             @if($order->order_status === 'selesai') bg-green-100 text-green-700
             @elseif($order->order_status === 'proses') bg-yellow-100 text-yellow-700
             @elseif($order->order_status === 'diantar') bg-blue-100 text-blue-700
-            @else bg-gray-100 text-gray-700 @endif">
+            @else bg-[#f3f4f6] text-[#374151] @endif">
             {{ ucfirst($order->order_status) }}
         </span>
     </div>
@@ -49,7 +50,7 @@
                         <td class="p-3">{{ $item->daftar_menu->nama_menu }}</td>
                         <td class="p-3 text-center">{{ $item->quantity }}</td>
                         <td class="p-3 text-right">
-                            Rp{{ $item->harga }}
+                            Rp. {{ number_format($item->harga, 0, ',', '.') }}
                         </td>
                     </tr>
                 @endforeach
@@ -62,7 +63,7 @@
         <div class="text-right">
             <p class="text-gray-600">Total Pembayaran</p>
             <p class="text-2xl font-bold text-gray-800">
-                Rp{{ number_format($order->total, 0, ',', '.') }}
+                Rp. {{ number_format($order->total, 0, ',', '.') }}
             </p>
         </div>
     </div>
@@ -73,11 +74,11 @@
                 class="px-5 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">
             Tandai Proses
         </button>
-        <button wire:click="updateStatus('diantar')" 
+        <button wire:click="updateStatus('sedang diantar')" 
                 class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
             Tandai Diantar
         </button>
-        <button wire:click="updateStatus('selesai')" 
+        <button wire:click="updateStatus('completed')" 
                 class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
             Tandai Selesai
         </button>
