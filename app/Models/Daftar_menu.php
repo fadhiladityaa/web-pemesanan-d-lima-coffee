@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\CartItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\MenuDetail;
+use App\Models\KandunganMenu;
 
 class Daftar_menu extends Model
 {
@@ -18,8 +18,8 @@ class Daftar_menu extends Model
         return $this->hasMany(CartItem::class);
     }
 
-    public function details()
+    public function kandungan()
     {
-        return $this->hasMany(MenuDetail::class, 'menu_id');
+        return $this->hasOne(KandunganMenu::class);
     }
 }
