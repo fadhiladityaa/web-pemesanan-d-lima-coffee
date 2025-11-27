@@ -93,7 +93,7 @@ Route::get('/dashboard-admin', DashboardAdmin::class);
 //     return view('detail-menu', ['title' => 'Detail Menu']);
 // });
 
-Route::get('/dashboard/menu-management', MenuManagement::class);
+Route::get('/dashboard/menu-management', MenuManagement::class)->name('dashboard.menu.management');
 Route::get('/dashboard/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
 Route::get('/dashboard/pesanan-masuk', PesananMasuk::class);
 

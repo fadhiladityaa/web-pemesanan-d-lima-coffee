@@ -1,35 +1,77 @@
 <div>
     <section class="max-w-3xl lg:ml-10 px-[16px] pt-20">
         <h1 class="font-[poppins] lg:text-2xl my-5">Tambah Menu</h1>
-        <form wire:submit.prevent="createNewMenu" class="flex flex-col gap-2" action="" method="POST"
-            enctype="multipart/form-data">
 
-            <input wire:model="nama_menu" type="text" name="nama_menu" required placeholder="Nama Menu"
+        <form wire:submit.prevent="createNewMenu" class="flex flex-col gap-2" enctype="multipart/form-data">
+
+            {{-- Menu Utama --}}
+            <input wire:model="nama_menu" type="text" placeholder="Nama Menu"
                 class="input border border-slate-600" />
-                <span class="text-red-500 font-[poppins] ml-2 text-sm"></span>
-    
+            @error('nama_menu') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
-            <input wire:model="harga" type="text" name="harga" required placeholder="Harga" class="input border-slate-600" />
-                <span class="text-red-500 font-[poppins] ml-2 text-sm"></span>
-    
+            <input wire:model="harga" type="number" placeholder="Harga"
+                class="input border border-slate-600" />
+            @error('harga') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
-            <input accept="image/png, image/jpg, image/jpegs" wire:model="gambar" name="gambar" type="file" class="file-input file-input-xs" />
-                <span class="text-red-500 font-[poppins] ml-2 text-sm"></span>
+            <input accept="image/png, image/jpg, image/jpeg"
+                wire:model="gambar" type="file" class="file-input file-input-xs" />
+            @error('gambar') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
             @if($gambar)
                 <img class="w-40 h-40" src="{{ $gambar->temporaryUrl() }}">
             @endif
-    
 
-            <template x-if="imgSrc">
-                <img class="w-40" :src="imgSrc" alt="">
-            </template>
+            <textarea wire:model="deskripsi" placeholder="Deskripsi"
+                class="textarea textarea-xl border-slate-600"></textarea>
+            @error('deskripsi') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
-            <textarea wire:model="deskripsi" name="deskripsi" placeholder="Deskripsi" class="textarea textarea-xl border-slate-600"></textarea>
-                <span class="text-red-500 font-[poppins] ml-2 text-sm"></span>
-    
-            <button class="btn btn-primary" type="submit">Add &plus;</button>
+            {{-- Kandungan Gizi --}}
+            <h2 class="font-[poppins] text-lg mt-6">Kandungan Gizi</h2>
+
+            <input wire:model="energi_total" type="number" placeholder="Energi Total (kkal)" class="input border-slate-600" />
+            @error('energi_total') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+
+            <input wire:model="takaran_saji" type="number" placeholder="Takaran Saji (gr/ml)" class="input border-slate-600" />
+            @error('takaran_saji') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+
+            <input wire:model="protein" type="number" step="0.1" placeholder="Protein (g)" class="input border-slate-600" />
+            <input wire:model="lemak_total" type="number" step="0.1" placeholder="Lemak Total (g)" class="input border-slate-600" />
+            <input wire:model="lemak_jenuh" type="number" step="0.1" placeholder="Lemak Jenuh (g)" class="input border-slate-600" />
+            <input wire:model="karbohidrat" type="number" step="0.1" placeholder="Karbohidrat (g)" class="input border-slate-600" />
+            <input wire:model="gula" type="number" step="0.1" placeholder="Gula (g)" class="input border-slate-600" />
+            <input wire:model="garam_natrium" type="number" placeholder="Garam/Natrium (mg)" class="input border-slate-600" />
+            <input wire:model="kafein" type="number" placeholder="Kafein (mg)" class="input border-slate-600" />
+
+            <textarea wire:model="batas_konsumsi" placeholder="Batas Konsumsi"
+                class="textarea border-slate-600"></textarea>
+
+            {{-- Bahan Baku Dinamis --}}
+            <h2 class="font-[poppins] text-lg mt-6">Bahan Baku</h2>
+
+            @foreach($bahanBaku as $index => $bahan)
+                <div class="flex gap-2 mb-2">
+                    <input wire:model="bahanBaku.{{ $index }}.nama_bahan" type="text"
+                        placeholder="Nama Bahan" class="input border-slate-600" />
+                    <input wire:model="bahanBaku.{{ $index }}.takaran" type="text"
+                        placeholder="Takaran" class="input border-slate-600" />
+                    <button type="button" wire:click="removeBahanBaku({{ $index }})"
+                        class="btn btn-error btn-sm">Hapus</button>
+                </div>
+                @error('bahanBaku.'.$index.'.nama_bahan')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            @endforeach
+
+            <button type="button" wire:click="addBahanBaku" class="btn btn-secondary btn-sm">+ Tambah Bahan</button>
+
+            {{-- Submit --}}
+            <button class="btn btn-primary mt-4" type="submit">Simpan Menu</button>
         </form>
-        <a class="text-md block  my-2 mx-2 font-[poppins]" href="">&laquo; Back</a>
+
+        @if(session()->has('success'))
+            <div class="text-green-600 mt-3">{{ session('success') }}</div>
+        @endif
+
+        <a class="text-md block my-2 mx-2 font-[poppins]" href="">&laquo; Back</a>
     </section>
 </div>

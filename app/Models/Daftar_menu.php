@@ -22,4 +22,9 @@ class Daftar_menu extends Model
     {
         return $this->hasOne(KandunganMenu::class);
     }
+
+    public function bahanBaku()
+    {
+        return $this->hasMany(BahanBakuMenu::class);
+    }
 }

@@ -2,7 +2,7 @@
     <div x-data="{ test: 'fadhil aditya', formData: {} }" class="p-6 bg-white rounded-lg shadow pt-28">
         <!-- Header Tabel dan Tombol Tambah -->
         @if (session()->has('success'))
-            <div role="alert" class="alert alert-success mb-5">
+            <div role="alert" class="alert alert-success text-white mb-5">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     class="h-6 w-6 shrink-0 stroke-current">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
