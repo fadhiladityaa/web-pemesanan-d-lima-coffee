@@ -1,5 +1,5 @@
 <div>
-    <section class="max-w-3xl ml-10 p-3 pt-28">
+    <section class="max-w-3xl lg:ml-10 p-3 pt-28">
         <h1 class="font-[poppins] text-2xl my-5">Edit Menu</h1>
 
         <form wire:submit.prevent="edit" class="flex flex-col gap-4" enctype="multipart/form-data">
@@ -39,15 +39,24 @@
 
             {{-- Kandungan Gizi --}}
             <h2 class="font-[poppins] text-lg mt-6">Kandungan Gizi</h2>
-            <div class="grid grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 gap-2">
+                <span>Energi total</span>
                 <input wire:model="energi_total" type="number" placeholder="Energi Total (kkal)" class="input border-slate-600" />
+                <span>Takaran saji</span>
                 <input wire:model="takaran_saji" type="number" placeholder="Takaran Saji (gr/ml)" class="input border-slate-600" />
+                <span>Protein</span>
                 <input wire:model="protein" type="number" step="0.1" placeholder="Protein (g)" class="input border-slate-600" />
+                <span>Lemak total</span>
                 <input wire:model="lemak_total" type="number" step="0.1" placeholder="Lemak Total (g)" class="input border-slate-600" />
+                <span>Lemak jenuh</span>
                 <input wire:model="lemak_jenuh" type="number" step="0.1" placeholder="Lemak Jenuh (g)" class="input border-slate-600" />
+                <span>Karbohidrat</span>
                 <input wire:model="karbohidrat" type="number" step="0.1" placeholder="Karbohidrat (g)" class="input border-slate-600" />
+                <span>Gula</span>
                 <input wire:model="gula" type="number" step="0.1" placeholder="Gula (g)" class="input border-slate-600" />
+                <span>Garam natrium</span>
                 <input wire:model="garam_natrium" type="number" placeholder="Garam/Natrium (mg)" class="input border-slate-600" />
+                <span>Kafein</span>
                 <input wire:model="kafein" type="number" placeholder="Kafein (mg)" class="input border-slate-600" />
             </div>
             <textarea wire:model="batas_konsumsi" placeholder="Batas Konsumsi"

@@ -26,22 +26,32 @@
             @error('deskripsi') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
             {{-- Kandungan Gizi --}}
-            <h2 class="font-[poppins] text-lg mt-6">Kandungan Gizi</h2>
+            <h2 class="font-[poppins] text-lg my-6">Kandungan Gizi</h2>
 
+            <span>Energi total</span>
             <input wire:model="energi_total" type="number" placeholder="Energi Total (kkal)" class="input border-slate-600" />
             @error('energi_total') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-
+            
+            <span>Takaran saji</span>
             <input wire:model="takaran_saji" type="number" placeholder="Takaran Saji (gr/ml)" class="input border-slate-600" />
             @error('takaran_saji') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-
+            
+            <span>Protein</span>
             <input wire:model="protein" type="number" step="0.1" placeholder="Protein (g)" class="input border-slate-600" />
+            <span>Lemak total</span>
             <input wire:model="lemak_total" type="number" step="0.1" placeholder="Lemak Total (g)" class="input border-slate-600" />
+            <span>Lemak jenuh</span>
             <input wire:model="lemak_jenuh" type="number" step="0.1" placeholder="Lemak Jenuh (g)" class="input border-slate-600" />
+            <span>Karbohidrat</span>
             <input wire:model="karbohidrat" type="number" step="0.1" placeholder="Karbohidrat (g)" class="input border-slate-600" />
+            <span>Gula</span>
             <input wire:model="gula" type="number" step="0.1" placeholder="Gula (g)" class="input border-slate-600" />
+            <span>Garam natrium</span>
             <input wire:model="garam_natrium" type="number" placeholder="Garam/Natrium (mg)" class="input border-slate-600" />
+            <span>Kafein</span>
             <input wire:model="kafein" type="number" placeholder="Kafein (mg)" class="input border-slate-600" />
-
+            
+            <span>Batas konsumsi</span>
             <textarea wire:model="batas_konsumsi" placeholder="Batas Konsumsi"
                 class="textarea border-slate-600"></textarea>
 
@@ -55,7 +65,7 @@
                     <input wire:model="bahanBaku.{{ $index }}.takaran" type="text"
                         placeholder="Takaran" class="input border-slate-600" />
                     <button type="button" wire:click="removeBahanBaku({{ $index }})"
-                        class="btn btn-error btn-sm">Hapus</button>
+                        class="btn btn-error text-white btn-sm">Hapus</button>
                 </div>
                 @error('bahanBaku.'.$index.'.nama_bahan')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
