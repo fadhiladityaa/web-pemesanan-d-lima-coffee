@@ -78,6 +78,8 @@ Route::get('/pesanan-masuk', function() {
     return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk']);
 })->name('pesanan.masuk');
 
-
+Route::get('/profil-pengguna', function() {
+    return view('profil-pengguna', ['title' => 'profil-pengguna']);
+})->name('profil-pengguna');
 
 Route::get('/pesanan-saya', PesananSaya::class)->middleware('auth')->name('user.pesanan');
