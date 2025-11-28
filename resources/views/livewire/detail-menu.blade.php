@@ -13,7 +13,7 @@
 
                 <h3 class="mt-4 font-semibold">Detail Kandungan:</h3>
                 <ul class="list-disc list-inside text-sm">
-                    @foreach ($menu->details as $detail)
+                    @foreach ($menu->bahanbaku as $detail)
                         <li>
                             <strong>{{ $detail->bahan_baku }}</strong>  
                             ({{ $detail->energi_total }} kkal, {{ $detail->kafein }} mg kafein)

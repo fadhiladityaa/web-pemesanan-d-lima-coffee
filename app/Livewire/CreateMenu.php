@@ -33,7 +33,7 @@ class CreateMenu extends Component
     public $energi_total;
 
     #[Validate('required|numeric|min:0')]
-    public $takaran_saji;   // ✅ field baru
+    public $takaran_saji;  
 
     #[Validate('nullable|numeric|min:0')]
     public $protein;

@@ -16,7 +16,7 @@ class DetailMenu extends Component
     public function mount(Daftar_menu $daftar_menus)
     {
         // Route model binding otomatis ambil data berdasarkan ID dari URL
-        $this->menu = $daftar_menus->load('details');
+        $this->menu = $daftar_menus->load('bahanbaku', 'kandungan');
     }
 
     public function render()
