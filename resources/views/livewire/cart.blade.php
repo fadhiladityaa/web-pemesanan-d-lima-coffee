@@ -19,7 +19,7 @@
                          alt="{{ $item->daftar_menu->nama }}">
 
                     {{-- detail harga --}}
-                    <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 lg:gap-1 gap-1">
+                    <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 lg:gap-1 gap-3">
                         <span class="text-[.9rem] sm:text-[1.4rem] lg:text-[1rem]">
                             {{ $item->daftar_menu->nama_menu }}
                         </span>
