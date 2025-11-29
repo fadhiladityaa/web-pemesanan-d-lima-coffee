@@ -12,18 +12,18 @@
         @if($cart && $cart->cart_items && $cart->cart_items->count())
             @foreach($cart->cart_items as $item)
                 <div
-                    class="items-container bg-primary/5 transition-all duration-150 hover:bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 lg:p-2 flex justify-between">
+                    class="items-container bg-primary/5 transition-all duration-150 hover:bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 lg:p-3 flex">
                     {{-- gambar produk --}}
                     <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
-                         class="sm:w-36 rounded-lg lg:w-20 lg:h-20"
+                         class="w-24 h-24 mr-3 sm:w-36 rounded-lg lg:w-20 lg:h-20"
                          alt="{{ $item->daftar_menu->nama }}">
 
                     {{-- detail harga --}}
-                    <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 lg:gap-1 gap-2">
-                        <span class="text-[18px] sm:text-[1.4rem] lg:text-[1rem]">
+                    <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 relative lg:gap-1 gap-1">
+                        <span class="text-[.9rem] sm:text-[1.4rem] lg:text-[1rem]">
                             {{ $item->daftar_menu->nama_menu }}
                         </span>
-                        <span class="text-[14px] sm:text-[1.3rem] lg:text-[.8rem]">
+                        <span class="text-[.7rem] text-slate-600 sm:text-[1.3rem] lg:text-[.8rem]">
                             {{ number_format($item->price, 0, ',', '.') }} x {{ $item->quantity }} =
                             <span class="text-primary font-bold">
                                 Rp. {{ number_format($item->price * $item->quantity, 0, ',', '.') }}
@@ -32,14 +32,17 @@
 
                         {{-- counter --}}
                         <div class="counter-container flex gap-3 mt-2">
-                            <span wire:click="decrementQuantity({{ $item->id }})" class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg lg:px-3 rounded-[4px] cursor-pointer bg-[#CACACA]">-</span>
+                            <span class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg lg:px-0 lg:h-5 lg:w-5 lg:text-center  lg:py-0 rounded-[4px] cursor-pointer bg-[#CACACA]">-</span>
+                            <div wire:click="decrementQuantity({{ $item->id }})" class="lg:">
+                                -
+                            </div>
                             <span class="sm:text-lg">{{ $item->quantity }}</span>
                             <span wire:click="incrementQuantity({{ $item->id }})" class="px-3 sm:px-5 sm:py-[0.1rem] lg:px-3 cursor-pointer sm:text-lg rounded-[4px] bg-[#CACACA]">+</span>
                         </div>
                     </div>
 
                     {{-- tombol hapus --}}
-                    <span wire:click="removeItem({{ $item->id }})" class="text-red-500 sm:text-3xl cursor-pointer">×</span>
+                    <span wire:click="removeItem({{ $item->id }})" class="text-red-500 sm:text-3xl text-xl ml-1 absolute right-11 top-98 lg:right-14 cursor-pointer">×</span>
                 </div>
             @endforeach
 
