@@ -100,3 +100,5 @@ Route::get('/dashboard/pesanan-masuk', PesananMasuk::class);
 
 
 Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu');
+
+Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');

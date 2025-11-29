@@ -14,13 +14,13 @@
                 <div
                     class="items-container bg-primary/5 transition-all duration-150 hover:bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 lg:p-2 flex justify-between">
                     {{-- gambar produk --}}
-                    <img src="{{ asset('img/contoh-kopi-2.png') }}"
-                         class="sm:w-36 lg:w-24 lg:h-24"
+                    <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
+                         class="sm:w-36 rounded-lg lg:w-20 lg:h-20"
                          alt="{{ $item->daftar_menu->nama }}">
 
                     {{-- detail harga --}}
                     <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 lg:gap-1 gap-2">
-                        <span class="text-[18px] sm:text-[1.4rem] lg:text-[1.2rem]">
+                        <span class="text-[18px] sm:text-[1.4rem] lg:text-[1rem]">
                             {{ $item->daftar_menu->nama_menu }}
                         </span>
                         <span class="text-[14px] sm:text-[1.3rem] lg:text-[.8rem]">

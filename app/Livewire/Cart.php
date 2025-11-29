@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Cart as CartModel;
 use App\Models\CartItem;
+use App\Models\Daftar_menu;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 
@@ -18,7 +19,6 @@ class Cart extends Component
             ->where('status', 'pending')
             ->with('cart_items.daftar_menu') // ✅ relasi yang benar
             ->first();
-
 
         return view('livewire.cart', [
             'cart' => $cart
