@@ -19,7 +19,7 @@
                          alt="{{ $item->daftar_menu->nama }}">
 
                     {{-- detail harga --}}
-                    <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 relative lg:gap-1 gap-1">
+                    <div class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 lg:gap-1 gap-1">
                         <span class="text-[.9rem] sm:text-[1.4rem] lg:text-[1rem]">
                             {{ $item->daftar_menu->nama_menu }}
                         </span>
@@ -32,17 +32,11 @@
 
                         {{-- counter --}}
                         <div class="counter-container flex gap-3 mt-2">
-                            <span class="px-3 sm:px-5 sm:py-[0.1rem] sm:text-lg lg:px-0 lg:h-5 lg:w-5 lg:text-center  lg:py-0 rounded-[4px] cursor-pointer bg-[#CACACA]">-</span>
-                            <div wire:click="decrementQuantity({{ $item->id }})" class="lg:">
-                                -
-                            </div>
+                            <span wire:click="decrementQuantity({{ $item->id }})" class="px-3 sm:px-5 sm:py-[0.1rem] lg:px-3 cursor-pointer sm:text-lg rounded-[4px] bg-[#CACACA]">-</span>
                             <span class="sm:text-lg">{{ $item->quantity }}</span>
                             <span wire:click="incrementQuantity({{ $item->id }})" class="px-3 sm:px-5 sm:py-[0.1rem] lg:px-3 cursor-pointer sm:text-lg rounded-[4px] bg-[#CACACA]">+</span>
                         </div>
                     </div>
-
-                    {{-- tombol hapus --}}
-                    <span wire:click="removeItem({{ $item->id }})" class="text-red-500 sm:text-3xl text-xl ml-1 absolute right-11 top-98 lg:right-14 cursor-pointer">×</span>
                 </div>
             @endforeach
 
