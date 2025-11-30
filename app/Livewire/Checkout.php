@@ -79,7 +79,7 @@ class Checkout extends Component
 
         $cart->update(['status' => 'completed']);
 
-        return redirect()->route('user.pesanan');
+        return redirect()->route('pesanan.saya');
     }
 
 

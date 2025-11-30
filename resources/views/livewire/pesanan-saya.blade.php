@@ -10,8 +10,9 @@
                     <p class="text-lg font-semibold text-gray-800">#{{ $order->id }}</p>
                 </div>
                 <div>
-                    <span class="px-4 py-1 text-sm font-medium rounded-full
-                        @if($order->order_status === 'selesai') bg-green-100 text-green-700
+                    <span
+                        class="px-4 py-1 text-sm font-medium rounded-full
+                        @if ($order->order_status === 'selesai') bg-green-100 text-green-700
                         @elseif($order->order_status === 'proses') bg-yellow-100 text-yellow-700
                         @elseif($order->order_status === 'pending') bg-gray-100 text-gray-700
                         @else bg-blue-100 text-blue-700 @endif">
@@ -30,8 +31,14 @@
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 mb-1">Metode Pembayaran</p>
-                    <p class="text-sm py-1 px-3 bg-green-500 w-16 text-center text-white rounded-xl text-gray-800">
+                    <p class="text-sm py-1 px-3 bg-green-100 w-16 text-center text-green-700 font-semibold border-green-400 border rounded-full">
                         {{ $order->metode_pembayaran }}
+                    </p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 mb-1">Status pembayaran</p>
+                    <p class="text-sm py-1 px-3 capitalize {{ $order->payment_status === 'pending' ? 'bg-yellow-100 text-yellow-700 w-24 border-yellow-400' : 'bg-green-100 text-green-700 w-16 border-green-400'}} border text-center font-semibold rounded-xl">
+                        {{ $order->payment_status }}
                     </p>
                 </div>
                 <div>
@@ -65,20 +72,58 @@
                         @endforeach
                     </tbody>
                 </table>
-                @if ($order->metode_pembayaran != 'Cash')
-                    <button class="w-full bg-green-400 px-4 rounded-lg py-2 mt-8 text-white font-semibold">Bayar</button>
+                @if ($order->metode_pembayaran != 'Cash' && $order->payment_status == 'pending')
+                    <button wire:click="bayar({{ $order->id }})"
+                        class="w-full bg-green-400 px-4 hover:bg-green-600 transition-all duration-150 rounded-lg py-2 mt-8 text-white font-semibold">
+                        Bayar
+                    </button>
                 @endif
             </div>
 
 
-        
+
         </div>
     @empty
         <div class="text-center py-16">
             <p class="text-gray-400 text-lg">Belum ada pesanan.</p>
-            <a href="/" class="mt-4 inline-block px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+            <a href="/"
+                class="mt-4 inline-block px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
                 Mulai Belanja
             </a>
         </div>
     @endforelse
+
+
+
+
+    @push('scripts')
+        <script>
+            Livewire.on('openPayment', data => {
+                window.snap.pay(data.snapToken, {
+                    onSuccess: function(result) {
+                        Livewire.dispatch('updateOrderStatus', {
+                            status: 'selesai',
+                            result
+                        });
+                    },
+                    onPending: function(result) {
+                        Livewire.dispatch('updateOrderStatus', {
+                            status: 'pending',
+                            result
+                        });
+                    },
+                    onError: function(result) {
+                        Livewire.dispatch('updateOrderStatus', {
+                            status: 'gagal',
+                            result
+                        });
+                    },
+                    onClose: function() {
+                        alert('Popup ditutup tanpa pembayaran');
+                    }
+                });
+            });
+        </script>
+    @endpush
+
 </div>
