@@ -8,6 +8,8 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\On;
 use Midtrans\Snap;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+
 
 #[Layout('layouts.app')]
 #[Title('Pesanan Saya')]
@@ -19,7 +21,7 @@ class PesananSaya extends Component
     public function mount()
     {
         // Ambil semua pesanan milik user yang login
-        $this->orders = auth()->user()
+        $this->orders = Auth::user()
             ->orders()
             ->with('order_items.daftar_menu')
             ->latest()
@@ -47,8 +49,7 @@ class PesananSaya extends Component
             ];
 
             $this->snapToken = Snap::getSnapToken($params);
-            // dd($this->snapToken);
-            // kirim event ke frontend untuk trigger Snap JS
+
             $this->dispatch('openPayment', snapToken: $this->snapToken);
         } catch (\Exception $e) {
             $this->addError('payment', 'Gagal generate token pembayaran: ' . $e->getMessage());
@@ -56,22 +57,14 @@ class PesananSaya extends Component
         }
     }
 
-    /**
-     * Update status order setelah transaksi Snap
-     */
     #[On('updateOrderStatus')]
     public function updateOrderStatus($status, $result)
     {
-        //  dd($status, $result);
-        // $order = Order::find($result['order_id']);
-
-        // $realId = explode('-', $result['order_id'])[0];
         $realId = strtok($result['order_id'], '-');
 
 
         $order = Order::find($realId);
         if ($order) {
-
             // Mapping status Midtrans ke payment_status internal
             $paymentStatus = match ($status) {
                 'selesai', 'completed', 'settlement' => 'paid',
@@ -88,7 +81,7 @@ class PesananSaya extends Component
         }
 
         // refresh daftar orders
-        $this->orders = auth()->user()
+        $this->orders = Auth::user()
             ->orders()
             ->with('order_items.daftar_menu')
             ->latest()
