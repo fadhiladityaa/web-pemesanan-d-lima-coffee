@@ -1,5 +1,5 @@
 <div>
-    <div x-data="{ test: 'fadhil aditya', formData: {} }" class="p-6 bg-white rounded-lg shadow pt-28">
+    <div class="p-6 bg-white rounded-lg shadow pt-28">
         <!-- Header Tabel dan Tombol Tambah -->
         @if (session()->has('success'))
             <div role="alert" class="alert alert-success text-white mb-5">
@@ -9,6 +9,17 @@
                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <span>{{ session('success') }}</span>
+            </div>
+        @endif
+
+        @if (session()->has('message'))
+            <div role="alert" class="alert alert-success text-white mb-5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="h-6 w-6 shrink-0 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>{{ session('message') }}</span>
             </div>
         @endif
         <div class="flex justify-between items-center mb-6">
@@ -53,12 +64,12 @@
                                 {{-- end edit button --}}
 
                                 {{-- delete button --}}
-                                <form action="" method="POST" class="inline">
-                                    @method('DELETE')
-                                    @csrf
+
+                                <form wire:click.prevent="delete({{$m->id}})" action="">
                                     <button type="submit" onclick="return confirm('Yakin ingin menghapus?')"
                                         class="text-red-500">Delete</button>
                                 </form>
+                            
                                 {{-- end delete button --}}
                             </td>
                         </tr>
