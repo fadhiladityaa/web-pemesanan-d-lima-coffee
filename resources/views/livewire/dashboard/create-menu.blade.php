@@ -25,6 +25,14 @@
                 class="textarea textarea-xl border-slate-600"></textarea>
             @error('deskripsi') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
+            <Label for="warning">Small Warning</Label>
+
+            <select wire:model="smallWarning" class="border border-black py-3 w-5/12 px-1 rounded-md" name="warning" id="warning">
+                <option value="">pilih pesan yang akan ditampilkan</option>
+                <option value="Ringan & ramah">Ringan & ramah</option>
+                <option value="Ringan & ramah">Kuat & pahit</option>
+            </select>
+
             {{-- Kandungan Gizi --}}
             <h2 class="font-[poppins] text-lg my-6">Kandungan Gizi</h2>
 

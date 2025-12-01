@@ -10,6 +10,7 @@ use Livewire\WithFileUploads;
 use App\Models\Daftar_menu;
 use App\Models\KandunganMenu;
 use App\Models\BahanBakuMenu;
+use App\Models\SmallWarning;
 
 class CreateMenu extends Component
 {
@@ -58,6 +59,8 @@ class CreateMenu extends Component
 
     #[Validate('nullable|string|max:500')]
     public $batas_konsumsi;
+
+    public $smallWarning = '';
 
     // --- Bahan Baku (array dinamis) ---
     public $bahanBaku = [
@@ -111,6 +114,12 @@ class CreateMenu extends Component
             'batas_konsumsi' => $this->batas_konsumsi,
         ]);
 
+        // small warning 
+        SmallWarning::create([
+            'daftar_menu_id' => $menu->id,
+            'pesan' => $this->smallWarning,
+        ]);
+        
         // Simpan bahan baku
         foreach ($this->bahanBaku as $bahan) {
             BahanBakuMenu::create([
