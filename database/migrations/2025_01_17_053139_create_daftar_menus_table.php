@@ -17,6 +17,10 @@ return new class extends Migration
             $table->integer('harga');
             $table->string('gambar')->nullable();
             $table->text('deskripsi');
+            $table->foreignId('small_warning_id')->constrained(
+                table: 'small_warnings',
+                indexName: 'warning_menu_id'
+            );
             $table->timestamps();
         });
     }

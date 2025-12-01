@@ -11,6 +11,8 @@
 
     <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
         @forelse ($menus as $item)
+
+        {{-- {{dd($item->warning)}} --}}
             <div
                 class="flex font-poppins flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
                 <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
@@ -19,7 +21,7 @@
                         alt="{{ $item->nama }}">
                 </div>
 
-                <span class="w-full py-1 text-[.6rem] rounded-sm bg-green-200 text-center border border-green-500 flex items-center justify-center text-slate-600 gap-1">Ringan & ramah<img src="{{ asset('img/check-circle-svgrepo-com.svg') }}" class="w-4 h-4" alt=""></span>
+                <span class="w-full py-1 text-[.6rem] rounded-sm bg-green-200 text-center border border-green-500 flex items-center justify-center text-slate-600 gap-1">{{ $item->warning->pesan }}<img src="{{ asset('img/check-circle-svgrepo-com.svg') }}" class="w-4 h-4" alt=""></span>
 
                 <span class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
                 <span class="text-primary text-[12px] sm:text-[17px] font-bold">Rp
