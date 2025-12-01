@@ -97,6 +97,7 @@ class CreateMenu extends Component
             'harga' => $this->harga,
             'gambar' => $this->gambar ? $this->gambar->store('gambar', 'public') : null,
             'deskripsi' => $this->deskripsi,
+            // pesan
         ]);
 
         // Simpan kandungan total (termasuk takaran_saji)
@@ -114,12 +115,6 @@ class CreateMenu extends Component
             'batas_konsumsi' => $this->batas_konsumsi,
         ]);
 
-        // small warning 
-        SmallWarning::create([
-            'daftar_menu_id' => $menu->id,
-            'pesan' => $this->smallWarning,
-        ]);
-        
         // Simpan bahan baku
         foreach ($this->bahanBaku as $bahan) {
             BahanBakuMenu::create([
