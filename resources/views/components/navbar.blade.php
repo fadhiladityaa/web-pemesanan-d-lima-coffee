@@ -4,7 +4,7 @@
         <div class="flex  justify-between w-full">
             <div class="flex gap-2 items-center">
                 <img src="{{ asset('img/logo-warkop 1.svg') }}" alt="logo-warkop" class="w-10 sm:w-11 lg:w-12 mt-1">
-                <a href="#beranda" class="text-xl sm:text-2xl lg:text-2xl text-white">
+                <a href="/" class="text-xl sm:text-2xl lg:text-2xl text-white">
                     D'Lima Coffee.</span>
                 </a>
             </div>
