@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('small_warnings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('daftar_menu_id')->constrained(
+                table: 'daftar_menus',
+                indexName: 'menu_warning_id'
+            );
+            $table->string('pesan');
             $table->timestamps();
         });
     }
