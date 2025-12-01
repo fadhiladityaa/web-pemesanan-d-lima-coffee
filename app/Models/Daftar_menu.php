@@ -28,7 +28,4 @@ class Daftar_menu extends Model
         return $this->hasMany(BahanBakuMenu::class);
     }
 
-    public function warning() {
-        return $this->belongsTo(SmallWarning::class);
-    }
 }

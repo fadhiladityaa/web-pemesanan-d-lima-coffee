@@ -60,7 +60,7 @@ class CreateMenu extends Component
     #[Validate('nullable|string|max:500')]
     public $batas_konsumsi;
 
-    public $smallWarning = '';
+    public $pesan = '';
 
     // --- Bahan Baku (array dinamis) ---
     public $bahanBaku = [
@@ -97,7 +97,7 @@ class CreateMenu extends Component
             'harga' => $this->harga,
             'gambar' => $this->gambar ? $this->gambar->store('gambar', 'public') : null,
             'deskripsi' => $this->deskripsi,
-            // pesan
+            'pesan' => $this->pesan,
         ]);
 
         // Simpan kandungan total (termasuk takaran_saji)

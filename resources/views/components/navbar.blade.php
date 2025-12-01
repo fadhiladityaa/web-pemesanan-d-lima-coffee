@@ -51,7 +51,7 @@
                 </li>
 
                 <li class="">
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="{{route('dashboard.menu.management')}}">Dashboard</a>
                 </li>
 
                 <li>
