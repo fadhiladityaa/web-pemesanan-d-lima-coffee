@@ -1,83 +1,139 @@
-@extends('layouts.main')
-    <div class="main-container w-full h-screen flex justify-center items-center" style="background-image: url('/img/bg1.jpeg'); background-repeat: no-repeat; background-size: cover; filter: brightness(85%)">
-      <div class="form-container  w-4/5  p-5 rounded-lg flex flex-col items-center sm:w-2/3 md:w-2/5  backdrop-blur-lg border border-cyan-100">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - D'Lima Coffee</title>
 
-        @if (session()->has('success'))
-        <div role="alert" class="alert alert-info">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="h-6 w-6 shrink-0 stroke-current">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span>{{ session('success') }}</span>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #b97a53;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Lingkaran besar background */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: rgba(255, 255, 255, 0.20);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+         body::after {
+            content: "";
+            position: absolute;
+            width: 980px;
+            height: 980px;
+            background: rgba(255, 255, 255, 0.20);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .logo img {
+            width: 90px;
+            margin-bottom: 5px;
+        }
+
+        .login-box {
+            background: #f7e7d9;
+            width: 420px;
+            padding: 35px 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+            margin-top: 10px;
+        }
+
+        .login-box h2 {
+            margin: 0 0 5px 0;
+            font-size: 26px;
+            font-weight: bold;
+            color: #3b2416;
+        }
+
+        .login-box p {
+            margin: 0 0 25px 0;
+            color: #6e4b31;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            outline: none;
+            background: #fff;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .forgot {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+
+        .forgot a {
+            font-size: 12px;
+            color: #3b2416;
+            text-decoration: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #8a532b;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #6d4223;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">
+            <img src="img/Logo-Dlima-Coffe.png" alt="Logo D'Lima Coffee">
+            <h3 style="color:#2a1a10; margin-top:0;">D'Lima Coffee</h3>
         </div>
-        @endif
 
-        @if (session()->has('LoginError'))
-        <div role="alert" class="alert alert-error">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="h-6 w-6 shrink-0 stroke-current">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span>{{ session('LoginError') }}</span>
+        <div class="login-box">
+            <h2>Welcome Back</h2>
+            <p>Log in to access your account.</p>
+
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+
+            <div class="forgot">
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button>Login</button>
         </div>
-        @endif
-
-        <form autocomplete="on" action="/login" method="POST" class="flex relative flex-col items-center gap-4">
-          @csrf
-          <div>
-            <img src="/img/logo.png" class="w-20" alt="">
-          </div>
-          <h2 class="text-2xl text-white lg:text-3xl">Login</h2>
-          <div class="w-3/4">
-            <p class="font-normal text-md text-center text-gray-400 lg:text-lg">Sudah membuat akun? Login sekarang!</p>
-          </div>
-  
-          <input
-          required
-          value="{{ old('noHp') }}"
-          name="noHp"
-          type="tel"
-          placeholder="No Handphone"
-          class="input input-bordered input-sm w-full max-w-xs" />
-          
-          @error('noHp')          
-          <div class="w-full font-normal text-red-400 flex items-start pl-5 text-sm">
-            <p class="">{{ $message }}</p>
-          </div>
-          @enderror
-  
-          
-          <input
-          required
-          name="password"
-          type="password"
-          placeholder="Password"
-          class="input input-bordered input-sm w-full max-w-xs" />
-  
-          @error('password')          
-          <div class="w-full font-normal text-red-400 flex items-start pl-5 text-sm">
-            <p class="">{{ $message }}</p>
-          </div>
-          @enderror
-  
-  
-          <button class="btn btn-sm btn-info block w-full  max-w-xs text-white">Login</button>
-        </form>
-          <p class="text-sm text-gray-400 font-normal mt-2">Belum memiliki akun? <a class="text-blue-400" href="/register">Register.</a></p>
-      </div>
     </div>
-  
+
+</body>
+</html>

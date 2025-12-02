@@ -101,7 +101,7 @@
             padding: 20px;
             border-radius: 10px;
             width: 50%;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
 
         .card-title {
@@ -160,11 +160,18 @@
             border: none;
             cursor: pointer;
             background: #313131;
+            color: rgba(255, 255, 255, 1)
         }
 
         .hapus {
             background: #D77A7A;
             color: white;
+        }
+
+         /* hapus akun */
+        .settings button.hapus {
+            background-color: #d42b2bff;
+            color: #ffffffff;
         }
 
     </style>

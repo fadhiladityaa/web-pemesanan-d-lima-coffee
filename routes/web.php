@@ -87,6 +87,10 @@ Route::get('/profil-pengguna', function() {
     return view('profil-pengguna', ['title' => 'profil-pengguna']);
 })->name('profil-pengguna');
 
+Route::get('/Login', function() {
+    return view('Login', ['title' => 'Login']);
+})->name('Login');
+
 
 Route::get('/dashboard/create-menu', CreateMenu::class);
 Route::get('/dashboard-admin', DashboardAdmin::class);
