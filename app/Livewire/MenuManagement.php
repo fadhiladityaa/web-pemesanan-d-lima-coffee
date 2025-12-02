@@ -10,7 +10,11 @@ use Livewire\Attributes\Layout;
 class MenuManagement extends Component
 {
 
-
+    public function delete($id)
+    {
+        Daftar_menu::find($id)->delete();
+        session()->flash('message', 'Menu berhasil dihapus.');
+    }
     #[Title('Menu Management')]
     #[Layout('layouts.admin')]
     public function render()

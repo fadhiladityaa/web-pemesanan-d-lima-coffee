@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Cart as CartModel;
 use App\Models\CartItem;
-use App\Models\Daftar_menu;
+// use App\Models\Daftar_menu;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 
@@ -39,8 +39,6 @@ class Cart extends Component
     {
         $item = CartItem::where('id', $id)->first();
         if ($item->quantity < 2) {
-            // $item->decrement('quantity');
-            // dd('yakin ingin hapus?');
             $item->delete();
         } else {
             $item->decrement('quantity');

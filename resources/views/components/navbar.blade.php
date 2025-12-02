@@ -4,14 +4,14 @@
         <div class="flex  justify-between w-full">
             <div class="flex gap-2 items-center">
                 <img src="{{ asset('img/logo-warkop 1.svg') }}" alt="logo-warkop" class="w-10 sm:w-11 lg:w-12 mt-1">
-                <a href="#beranda" class="text-xl sm:text-2xl lg:text-2xl text-white">
+                <a href="/" class="text-xl sm:text-2xl lg:text-2xl text-white">
                     D'Lima Coffee.</span>
                 </a>
             </div>
 
              <div class="links text-white sm:flex sm:gap-3 lg:gap-7 sm:text-[20px] items-center hidden font-poppins">
                 <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : '' }}" href="/">Menu</a>
-                <a class="" href="/berita">Edukasi</a>
+                <a class="" href="{{route('edukasi')}}">Edukasi</a>
                 <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>
                 <a href="{{ route('pesanan.saya') }}">Pesanan saya</a>
                 <a href="/dashboard-admin">Dashboard</a>
@@ -47,11 +47,11 @@
                 </li>
 
                 <li class="sm:hidden">
-                    <a href="">Edukasi</a>
+                    <a href="{{ route('edukasi') }}">Edukasi</a>
                 </li>
 
                 <li class="">
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="{{route('dashboard.menu.management')}}">Dashboard</a>
                 </li>
 
                 <li>

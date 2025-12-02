@@ -10,6 +10,7 @@ use Livewire\WithFileUploads;
 use App\Models\Daftar_menu;
 use App\Models\KandunganMenu;
 use App\Models\BahanBakuMenu;
+use App\Models\SmallWarning;
 
 class CreateMenu extends Component
 {
@@ -59,6 +60,8 @@ class CreateMenu extends Component
     #[Validate('nullable|string|max:500')]
     public $batas_konsumsi;
 
+    public $pesan = '';
+
     // --- Bahan Baku (array dinamis) ---
     public $bahanBaku = [
         ['nama_bahan' => '', 'takaran' => '']
@@ -94,6 +97,7 @@ class CreateMenu extends Component
             'harga' => $this->harga,
             'gambar' => $this->gambar ? $this->gambar->store('gambar', 'public') : null,
             'deskripsi' => $this->deskripsi,
+            'pesan' => $this->pesan,
         ]);
 
         // Simpan kandungan total (termasuk takaran_saji)

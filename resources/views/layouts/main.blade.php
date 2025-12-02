@@ -26,7 +26,7 @@
     <title>{{ $title }}</title>
 </head>
 
-<body x-data="data">
+<body>
 
     @unless (request()->is('login') || request()->is('register'))
         <x-navbar></x-navbar>

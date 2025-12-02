@@ -22,7 +22,7 @@
     <title>{{ $title }}</title>
 </head>
 
-<body x-data="data">
+<body>
 
     <div class="min-h-screen bg-gray-100">
         <!-- Sidebar -->

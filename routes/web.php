@@ -20,6 +20,7 @@ use App\Livewire\DetailMenu;
 use App\Livewire\EditMenu;
 use App\Livewire\MenuManagement;
 use App\Livewire\PesananMasuk;
+use App\Livewire\Edukasi;
 
 // route ke home
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
@@ -106,3 +107,6 @@ Route::get('/dashboard/pesanan-masuk', PesananMasuk::class);
 Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu');
 
 Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
+
+
+Route::get('/edukasi', Edukasi::class)->name('edukasi');

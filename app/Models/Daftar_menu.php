@@ -27,4 +27,5 @@ class Daftar_menu extends Model
     {
         return $this->hasMany(BahanBakuMenu::class);
     }
+
 }

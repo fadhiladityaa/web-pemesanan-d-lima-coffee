@@ -19,7 +19,16 @@ return new class extends Migration
             $table->string('no_hp');
             $table->string('metode_pembayaran');
             $table->enum('payment_status', ['pending', 'paid', 'failed', 'canceled', 'completed'])->default('pending');
-            $table->enum('order_status', ['proses', 'siap', 'sedang diantar', 'completed', 'canceled'])->default('proses');
+            $table->enum('order_status', [
+                'proses',
+                'siap',
+                'sedang diantar',
+                'completed',
+                'canceled',
+                'selesai',
+                'gagal'
+            ])->default('proses');
+
             $table->decimal('total', 12, 2);
             $table->decimal('uang_dibayar', 12, 2)->nullable();
             $table->decimal('kembalian', 12, 2)->nullable();
