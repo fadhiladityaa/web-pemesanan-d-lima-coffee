@@ -1,19 +1,41 @@
 <?php
+
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
-use App\Models\Edukasi as EdukasiModel; // <-- TAMBAHKAN ALIAS
+use App\Models\Edukasi as EdukasiModel;
+use Illuminate\Support\Facades\Storage;
 
 class Edukasi extends Component
 {
-    public $judul, $konten, $selectedId;
+    use WithFileUploads;
+    
+    // Properti form
+    public $judul = '';
+    public $konten = '';
+    public $image = null;
+    public $kategori = '';
+    public $ringkasan = '';
+    public $selectedId = null;
+    
+    // Data list
     public $dataEdukasi = [];
+    
+    // Kategori options
+    public $kategoriOptions = [
+        'Nutrisi' => 'Nutrisi',
+        'Kesehatan' => 'Kesehatan', 
+        'Hidup Sehat' => 'Hidup Sehat',
+        'Resep' => 'Resep',
+        'Tips' => 'Tips'
+    ];
 
-
-    #[Layout('layouts.app')]
-    #[Title('HalamanEdukasi')]
+    #[Layout('layouts.admin')]
+    #[Title('Manajemen Edukasi')]
+    
     public function mount()
     {
         $this->loadData();
@@ -21,67 +43,180 @@ class Edukasi extends Component
 
     public function loadData()
     {
-        $this->dataEdukasi = EdukasiModel::latest()->get()->toArray(); // <-- GANTI dengan alias
+        $this->dataEdukasi = EdukasiModel::latest()->get();
     }
 
     public function resetForm()
     { 
-        $this->judul = ''; 
-        $this->konten = ''; 
-        $this->selectedId = null; 
+        $this->reset([
+            'judul', 'konten', 'image', 'kategori', 'ringkasan', 'selectedId'
+        ]);
+        $this->resetValidation();
+        $this->image = null;
     }
 
+    public function rules()
+    {
+        return [
+            'judul' => 'required|min:3|max:255',
+            'konten' => 'required|min:10',
+            'ringkasan' => 'required|min:20|max:200',
+            'kategori' => 'required',
+            'image' => 'nullable|image|max:2048',
+        ];
+    }
+
+    /**
+     * Simpan gambar - PATH BENAR
+     */
+    private function saveImage($imageFile)
+    {
+        if (!$imageFile) {
+            return null;
+        }
+        
+        try {
+            // Buat nama file unik
+            $fileName = 'edukasi_' . time() . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
+            
+            // Simpan dengan path yang PASTI BENAR
+            $imageFile->storeAs('edukasi', $fileName, 'public');
+            
+            // Return path yang benar
+            return 'edukasi/' . $fileName;
+            
+        } catch (\Exception $e) {
+            throw new \Exception('Gagal menyimpan gambar: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Hapus gambar lama
+     */
+    private function deleteOldImage($edukasiId)
+    {
+        try {
+            $oldData = EdukasiModel::find($edukasiId);
+            if ($oldData && $oldData->image) {
+                // Normalize path - hapus double slash jika ada
+                $path = str_replace('//', '/', $oldData->image);
+                Storage::disk('public')->delete($path);
+            }
+        } catch (\Exception $e) {
+            // Tidak throw error
+        }
+    }
+
+    /**
+     * Simpan data
+     */
     public function save()
     {
-        $this->validate([
-            'judul' => 'required',
-            'konten' => 'required'
-        ]);
-
-        EdukasiModel::create([ // <-- GANTI dengan alias
-            'judul' => $this->judul,
-            'konten' => $this->konten
-        ]);
+        // Validasi
+        $this->validate();
         
-        $this->resetForm(); 
-        $this->loadData();
-        session()->flash('success', 'Data disimpan.');
+        try {
+            // Data dasar
+            $data = [
+                'judul' => $this->judul,
+                'konten' => $this->konten,
+                'kategori' => $this->kategori,
+                'ringkasan' => $this->ringkasan,
+            ];
+
+            // Handle upload gambar jika ada
+            if ($this->image) {
+                // Hapus gambar lama jika edit
+                if ($this->selectedId) {
+                    $this->deleteOldImage($this->selectedId);
+                }
+                
+                // Simpan gambar baru
+                $imagePath = $this->saveImage($this->image);
+                $data['image'] = $imagePath;
+            }
+
+            // CREATE atau UPDATE
+            if ($this->selectedId) {
+                EdukasiModel::where('id', $this->selectedId)->update($data);
+                $message = '✅ Data edukasi berhasil diperbarui.';
+            } else {
+                EdukasiModel::create($data);
+                $message = '✅ Data edukasi berhasil disimpan.';
+            }
+            
+            // Reset & reload
+            $this->resetForm(); 
+            $this->loadData();
+            
+            // Success message
+            session()->flash('success', $message);
+            
+        } catch (\Exception $e) {
+            session()->flash('error', '❌ ' . $e->getMessage());
+        }
     }
 
+    /**
+     * Edit data
+     */
     public function edit($id)
     { 
-        $d = EdukasiModel::findOrFail($id); // <-- GANTI dengan alias
-        $this->selectedId = $id; 
-        $this->judul = $d->judul; 
-        $this->konten = $d->konten; 
+        try {
+            $edukasi = EdukasiModel::findOrFail($id);
+            
+            $this->selectedId = $id; 
+            $this->judul = $edukasi->judul; 
+            $this->konten = $edukasi->konten;
+            $this->kategori = $edukasi->kategori;
+            $this->ringkasan = $edukasi->ringkasan;
+            $this->image = null;
+            
+        } catch (\Exception $e) {
+            session()->flash('error', '❌ Data tidak ditemukan.');
+        }
     }
 
-    public function update()
-    { 
-        $this->validate([
-            'judul' => 'required',
-            'konten' => 'required'
-        ]); 
-        
-        EdukasiModel::where('id', $this->selectedId)->update([ // <-- GANTI dengan alias
-            'judul' => $this->judul,
-            'konten' => $this->konten
-        ]); 
-        
-        $this->resetForm(); 
-        $this->loadData();
-        session()->flash('success', 'Data diperbarui.'); 
-    }
-
+    /**
+     * Hapus data - FIX confirm()
+     */
     public function delete($id)
     { 
-        EdukasiModel::destroy($id); // <-- GANTI dengan alias
-        $this->loadData();
-        session()->flash('success', 'Data dihapus.'); 
+        // FIX: Gunakan JavaScript confirm di view, bukan di PHP
+        // Konfirmasi sudah dilakukan di view via onclick
+        try {
+            $edukasi = EdukasiModel::findOrFail($id);
+            
+            // Hapus gambar
+            $this->deleteOldImage($id);
+            
+            // Hapus data
+            $edukasi->delete();
+            
+            $this->loadData();
+            session()->flash('success', '✅ Data berhasil dihapus.');
+            
+        } catch (\Exception $e) {
+            session()->flash('error', '❌ Gagal menghapus: ' . $e->getMessage());
+        }
     }
 
+    /**
+     * Batal edit
+     */
+    public function cancelEdit()
+    {
+        $this->resetForm();
+    }
+
+    /**
+     * Render component
+     */
     public function render()
-    { 
-        return view('livewire.edukasi');
+    {
+        return view('livewire.edukasi', [
+            'dataEdukasi' => $this->dataEdukasi,
+            'totalEdukasi' => count($this->dataEdukasi),
+        ]);
     }
 }

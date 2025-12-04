@@ -88,6 +88,10 @@ Route::get('/profil-pengguna', function() {
     return view('profil-pengguna', ['title' => 'profil-pengguna']);
 })->name('profil-pengguna');
 
+Route::get('/Login', function() {
+    return view('Login', ['title' => 'Login']);
+})->name('Login');
+
 
 Route::get('/dashboard/create-menu', CreateMenu::class);
 Route::get('/dashboard-admin', DashboardAdmin::class);
@@ -105,4 +109,16 @@ Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.
 Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
 
 
-Route::get('/edukasi', Edukasi::class)->name('edukasi');
+// ... route lainnya tetap
+
+//  EDUKASI UNTUK PELANGGAN - gunakan component yang sudah ada
+Route::get('/edukasi', \App\Livewire\EdukasiPelanggan::class)->name('edukasi');
+
+//  EDUKASI MANAGEMENT UNTUK ADMIN (tidak berubah)
+Route::get('/dashboard/edukasi-management', \App\Livewire\Edukasi::class)->name('dashboard.edukasi.management');
+
+//  Route untuk tombol "Lihat Halaman Pelanggan" di admin
+Route::get('/edukasi-pelanggan', function() {
+    return redirect()->route('edukasi');
+})->name('edukasi.pelanggan');
+// 
