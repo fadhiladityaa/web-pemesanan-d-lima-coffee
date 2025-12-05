@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - D'Lima Coffee</title>
-
+    
+    <!-- CSRF Token untuk AJAX (optional) -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <style>
         body {
             margin: 0;
@@ -82,6 +85,7 @@
             background: #fff;
             border-radius: 20px;
             font-size: 14px;
+            box-sizing: border-box;
         }
 
         .forgot {
@@ -110,28 +114,53 @@
         button:hover {
             background: #6d4223;
         }
+        
+        /* Tambahan untuk error message */
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #f8d7da;
+            border-radius: 5px;
+            display: none; /* Sembunyikan dulu */
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="logo">
-            <img src="img/Logo-Dlima-Coffe.png" alt="Logo D'Lima Coffee">
+            <img src="{{ asset('img/Logo-Dlima-Coffe.png') }}" alt="Logo D'Lima Coffee">
             <h3 style="color:#2a1a10; margin-top:0;">D'Lima Coffee</h3>
         </div>
 
         <div class="login-box">
             <h2>Welcome Back</h2>
             <p>Log in to access your account.</p>
+            
+            <!-- Error Message -->
+            @if(session('LoginError'))
+                <div class="error-message" style="display: block;">
+                    {{ session('LoginError') }}
+                </div>
+            @endif
+            
+            <!-- FORM YANG DIPERBAIKI -->
+            <form method="POST" action="{{ route('login') }}">
+                @csrf <!-- INI WAJIB! -->
+                
+                <!-- Perhatikan: Controller mengharapkan 'noHp', bukan 'email' -->
+                <input type="text" name="noHp" placeholder="Nomor HP" required>
+                
+                <input type="password" name="password" placeholder="Password" required>
 
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
+                <div class="forgot">
+                    <a href="#">Forgot Password?</a>
+                </div>
 
-            <div class="forgot">
-                <a href="#">Forgot Password?</a>
-            </div>
-
-            <button>Login</button>
+                <button type="submit">Login</button>
+            </form>
         </div>
     </div>
 
