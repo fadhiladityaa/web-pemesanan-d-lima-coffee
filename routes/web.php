@@ -59,7 +59,7 @@ Route::get('/dashboard/create-menu', CreateMenu::class);
 Route::get('/dashboard-admin', DashboardAdmin::class);
 Route::get('/dashboard/menu-management', MenuManagement::class)->name('dashboard.menu.management');
 Route::get('/dashboard/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
-Route::get('/dashboard/pesanan-masuk', PesananMasuk::class);
+Route::get('/dashboard/pesanan-masuk', PesananMasuk::class)->name('dashboard.pesanan.masuk');
 Route::get('/dashboard/edukasi-management', Edukasi::class)->name('dashboard.edukasi.management');
 
 
