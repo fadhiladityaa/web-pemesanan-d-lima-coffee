@@ -3,9 +3,9 @@
 @section('container')
     {{-- Location Section --}}
     <section>
-        <div class="w-full h-[340px] sm:h-[390px] bg-[#2C2C2C] pt-20 font-poppins text-white">
+        <div x-data="{info: 'Location'}" class="w-full h-[340px] sm:h-[390px] bg-[#2C2C2C] pt-20 font-poppins text-white">
             <div class="location-grup flex flex-col px-[16px] sm:px-[32px] lg:px-[64px] mt-4">
-                <span class="text-[18px] sm:text-[24px]">Location</span>
+                <span x-text="info" class="text-[18px] sm:text-[24px]"></span>
                 <span class="sm:text-[18px]">Jalan Delima, Parepare</span>
                 <div
                     class="kotak w-full h-40 sm:h-64 bg-white rounded-xl shadow-lg border border-gray-200 mt-[7rem] overflow-hidden hover:shadow-2xl transition-shadow duration-300">

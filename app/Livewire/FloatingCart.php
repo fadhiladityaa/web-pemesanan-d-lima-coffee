@@ -13,7 +13,6 @@ class FloatingCart extends Component
     public $itemCount = 0;
 
     #[On('cart_updated')]
-    #[On('cart_updated')]
     public function mount()
     {
         $this->itemCount = CartItem::where('user_id', Auth::id())
