@@ -37,30 +37,32 @@ Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth')
 Route::get('/pesanan-masuk/detail-pesanan/{order}', DetailPesanan::class)
     ->name('detail.pesanan');
 
-Route::get('/checkout', function() {
+Route::get('/checkout', function () {
     return view('checkout-view', ['title' => 'Halaman Checkout']);
 })->name('checkout');
 
 
-Route::get('/checkout-succees', function() {
+Route::get('/checkout-succees', function () {
     return view('checkout-succeed', ['title' => 'checkout-success']);
 })->name('checkout.success');
 
-Route::get('/profil-pengguna', function() {
+Route::get('/profil-pengguna', function () {
     return view('profil-pengguna', ['title' => 'profil-pengguna']);
 })->name('profil-pengguna');
 
-// Route::get('/Login', function() {
-//     return view('Login', ['title' => 'Login']);
-// })->name('Login');
+Route::get('/Login', function () {
+    return view('Login', ['title' => 'Login']);
+})->name('Login');
 
 
-Route::get('/dashboard/create-menu', CreateMenu::class);
-Route::get('/dashboard-admin', DashboardAdmin::class);
-Route::get('/dashboard/menu-management', MenuManagement::class)->name('dashboard.menu.management');
-Route::get('/dashboard/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
-Route::get('/dashboard/pesanan-masuk', PesananMasuk::class)->name('dashboard.pesanan.masuk');
-Route::get('/dashboard/edukasi-management', Edukasi::class)->name('dashboard.edukasi.management');
+Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
+    Route::get('/create-menu', CreateMenu::class)->name('dashboard.create.menu');
+    Route::get('/admin', DashboardAdmin::class)->name('dashboard.admin');
+    Route::get('/menu-management', MenuManagement::class)->name('dashboard.menu.management');
+    Route::get('/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
+    Route::get('/pesanan-masuk', PesananMasuk::class)->name('dashboard.pesanan.masuk');
+    Route::get('/edukasi-management', Edukasi::class)->name('dashboard.edukasi.management');
+});
 
 
 Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu');
@@ -75,7 +77,7 @@ Route::get('/edukasi', \App\Livewire\EdukasiPelanggan::class)->name('edukasi');
 //  EDUKASI MANAGEMENT UNTUK ADMIN (tidak berubah)
 
 //  Route untuk tombol "Lihat Halaman Pelanggan" di admin
-Route::get('/edukasi-pelanggan', function() {
+Route::get('/edukasi-pelanggan', function () {
     return redirect()->route('edukasi');
 })->name('edukasi.pelanggan');
 // 

@@ -9,12 +9,14 @@
                 </a>
             </div>
 
-             <div class="links text-white sm:flex sm:gap-3 lg:gap-7 sm:text-[20px] items-center hidden font-poppins">
+            <div class="links text-white sm:flex sm:gap-3 lg:gap-7 sm:text-[20px] items-center hidden font-poppins">
                 <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : '' }}" href="/">Menu</a>
-                <a class="" href="{{route('edukasi')}}">Edukasi</a>
+                <a class="" href="{{ route('edukasi') }}">Edukasi</a>
                 <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>
                 <a href="{{ route('pesanan.saya') }}">Pesanan saya</a>
-                <a href="{{ route('dashboard.pesanan.masuk') }}">Dashboard</a>
+                @if (auth()->user()->isAdmin())
+                    <a href="{{ route('dashboard.pesanan.masuk') }}">Dashboard Admin</a>
+                @endif
 
                 <a href="/profile" class="btn btn-ghost btn-circle mr-0 avatar">
                     <div class="w-10 rounded-full">
@@ -51,7 +53,7 @@
                 </li>
 
                 <li class="">
-                    <a href="{{route('dashboard.menu.management')}}">Dashboard</a>
+                    <a href="{{ route('dashboard.menu.management') }}">Dashboard</a>
                 </li>
 
                 <li>
