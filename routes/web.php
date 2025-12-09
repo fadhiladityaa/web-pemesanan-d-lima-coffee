@@ -46,23 +46,9 @@ Route::get('/checkout-succees', function() {
     return view('checkout-succeed', ['title' => 'checkout-success']);
 })->name('checkout.success');
 
-<<<<<<< HEAD
-// Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-//     Route::resource('promo', \App\Http\Controllers\Admin\PromoController::class);
-// });
-
-// Route::get('/pesanan-masuk', function() {
-//     return view('dashboard.pesanan-masuk-view',['title' => 'Pesanan Masuk']);
-// })->name('pesanan.masuk');
-
-// Route::get('/profil-pengguna', function() {
-//     return view('profil-pengguna', ['title' => 'profil-pengguna']);
-// })->name('profil-pengguna');
-=======
 Route::get('/profil-pengguna', function() {
     return view('profil-pengguna', ['title' => 'profil-pengguna']);
 })->name('profil-pengguna');
->>>>>>> de8cb2b788d802261ac0cb018ec6d866602d00fe
 
 // Route::get('/Login', function() {
 //     return view('Login', ['title' => 'Login']);
