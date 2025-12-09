@@ -1,6 +1,4 @@
-<div class="max-w-6xl mx-auto px-6 py-10 font-[Poppins]">
-    <h2 class="text-3xl font-bold mb-8 text-gray-800">Pesanan Saya</h2>
-
+<div class="max-w-6xl mx-auto px-6 pt-24 font-[Poppins]">
     @forelse ($orders as $order)
         <div class="bg-white rounded-xl shadow-lg mb-8 overflow-hidden border border-gray-100">
             {{-- Header Pesanan --}}
@@ -23,12 +21,6 @@
 
             {{-- Body Pesanan --}}
             <div class="px-6 py-6 flex flex-col gap-3">
-                <div>
-                    <p class="text-sm text-gray-500 mb-1">Total Pembayaran</p>
-                    <p class="text-2xl font-bold text-gray-800">
-                        Rp. {{ number_format($order->total, 0, ',', '.') }}
-                    </p>
-                </div>
                 <div>
                     <p class="text-sm text-gray-500 mb-1">Metode Pembayaran</p>
                     <p class="text-sm py-1 px-3 bg-green-100 w-16 text-center text-green-700 font-semibold border-green-400 border rounded-full">
@@ -72,9 +64,16 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                 <div class="my-5">
+                    <p class="text-sm text-gray-500">Total Pembayaran</p>
+                    <p class="text-2xl font-bold text-gray-800">
+                        Rp. {{ number_format($order->total, 0, ',', '.') }}
+                    </p>
+                </div>
                 @if ($order->metode_pembayaran != 'Cash' && $order->payment_status == 'pending')
                     <button wire:click="bayar({{ $order->id }})"
-                        class="w-full bg-green-400 px-4 hover:bg-green-600 transition-all duration-150 rounded-lg py-2 mt-8 text-white font-semibold">
+                        class="w-full bg-green-400 px-4 hover:bg-green-600 transition-all duration-150 rounded-lg py-2  text-white font-semibold">
                         Bayar
                     </button>
                 @endif

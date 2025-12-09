@@ -1,7 +1,7 @@
 <div class="lg:mb-10">
     <div class="input-gorup flex items-center gap-2 mt-6 absolute top-[9.5rem]">
         <fieldset class="fieldset">
-            <input wire:model.live="search" type="text" class="input w-[300px] sm:w-[400px] text-slate-700"
+            <input wire:model.live="search" type="text" class="input w-[265px] sm:w-[400px] text-slate-700"
                 placeholder="Cari menu" />
         </fieldset>
         <button class="bg-[#C67C4E] w-[54px] h-[45px] flex justify-center items-center rounded-md">

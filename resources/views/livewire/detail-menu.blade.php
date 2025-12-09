@@ -168,7 +168,7 @@
                      Tambah ke Keranjang
                     </button>
                     <button class="px-8 border-2 border-[#A0826D] text-[#A0826D] hover:bg-[#A0826D] hover:text-white py-3 rounded-lg font-semibold transition">
-                       &laquo; Kembali
+                       &laquo; <a href="/">Kembali</a>
                     </button>
                 </div>
 

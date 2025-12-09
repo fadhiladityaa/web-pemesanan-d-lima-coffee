@@ -3,9 +3,9 @@
 @section('container')
     {{-- Location Section --}}
     <section>
-        <div class="w-full h-[340px] sm:h-[390px] bg-[#2C2C2C] pt-20 font-poppins text-white">
+        <div x-data="{info: 'Location'}" class="w-full h-[340px] sm:h-[390px] bg-[#2C2C2C] pt-20 font-poppins text-white">
             <div class="location-grup flex flex-col px-[16px] sm:px-[32px] lg:px-[64px] mt-4">
-                <span class="text-[18px] sm:text-[24px]">Location</span>
+                <span x-text="info" class="text-[18px] sm:text-[24px]"></span>
                 <span class="sm:text-[18px]">Jalan Delima, Parepare</span>
                 <div
                     class="kotak w-full h-40 sm:h-64 bg-white rounded-xl shadow-lg border border-gray-200 mt-[7rem] overflow-hidden hover:shadow-2xl transition-shadow duration-300">
@@ -23,7 +23,7 @@
     <section>
         <div class="mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] lg:px-[64px] font-poppins">
             <div class="category-section text-black flex gap-5 text-ssm sm:text-lg mt-6">
-                <div class="semua-menu bg-primary px-4 py-1 rounded-[10px] shadow-soft text-white">semua menu</div>
+                <div class="semua-menu bg-primary px-4 py-1 text-[.7rem] rounded-[10px] shadow-soft text-white">semua menu</div>
                 <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">makanan</div>
                 <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">minuman</div>
             </div>
