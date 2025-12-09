@@ -15,7 +15,7 @@
                 <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>
                 <a href="{{ route('pesanan.saya') }}">Pesanan saya</a>
                 @if (auth()->user()->isAdmin())
-                    <a href="{{ route('dashboard.pesanan.masuk') }}">Dashboard</a>
+                    <a href="{{ route('dashboard.pesanan.masuk') }}">Dashboard Admin</a>
                 @endif
 
                 <a href="/profile" class="btn btn-ghost btn-circle mr-0 avatar">
