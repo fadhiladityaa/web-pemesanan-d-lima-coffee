@@ -21,7 +21,7 @@
                         alt="{{ $item->nama }}">
                 </div>
 
-                <span class="w-full py-1 text-[.6rem] rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}" class="w-4 h-4" alt=""></span>
+                <span class="w-full py-1 text-[.6rem] sm:text-[1rem] sm:py-2 rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}" class="w-4 h-4 sm:w-6 sm:h-6" alt=""></span>
 
                 <span class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
                 <span class="text-primary text-[12px] sm:text-[17px] font-bold">Rp
