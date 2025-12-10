@@ -30,7 +30,7 @@
 
         {{-- hamburger section --}}
         <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="lg:hidden sm:hidden">
+            <div tabindex="0" role="button" class="lg:hidden">
                 <div class="w-7 rounded-full">
                     <img alt="hamburger icon" src="{{ asset('img/burger-menu.svg') }}" />
 
