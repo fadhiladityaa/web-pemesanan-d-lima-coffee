@@ -14,10 +14,10 @@
 
         {{-- {{dd($item->warning)}} --}}
             <div
-                class="flex font-poppins flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
                 <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
-                    <img src="{{ asset('img/kopi-susu.jpg') }}"
-                        class="w-full h-full object-cover -translate-y-4 hover:scale-110 transition-all duration-500"
+                    <img src="{{ Storage::url($item->gambar) }}"
+                        class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
                         alt="{{ $item->nama }}">
                 </div>
 
