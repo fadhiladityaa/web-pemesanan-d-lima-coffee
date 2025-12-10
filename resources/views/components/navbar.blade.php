@@ -44,11 +44,11 @@
                 </li>
                 <li><a>Menu</a></li>
 
-                <li class="sm:hidden">
-                    <a href="/tentang-kami">About</a>
+                <li class="">
+                    <a href="{{ route('pesanan.saya') }}">Pesanan saya</a>
                 </li>
 
-                <li class="sm:hidden">
+                <li class="">
                     <a href="{{ route('edukasi') }}">Edukasi</a>
                 </li>
 
