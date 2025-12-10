@@ -36,7 +36,7 @@
                         </button>
                     </a>
                     <button wire:click="addToCart({{ $item->id }})"
-                        class="text-[12px] sm:text-[18px] text-white bg-primary w-full p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                        class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
                         Tambah
                     </button>
 
