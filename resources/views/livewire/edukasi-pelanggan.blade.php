@@ -8,7 +8,7 @@
         </p>
     </div>
 
-    <!-- Search Bar di Tengah -->
+    <!-- Search Bar di Tengah - DIPERBAIKI: Icon pada tempatnya -->
     <div class="max-w-md mx-auto mb-8">
         <div class="relative">
             <input 
@@ -17,10 +17,11 @@
                 placeholder="Cari artikel edukasi..."
                 class="w-full px-6 py-4 pl-14 pr-12 rounded-2xl border border-gray-300 bg-white shadow-sm focus:ring-2 focus:border-transparent text-lg"
                 style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
+                id="searchInput"
             >
-            <!-- Icon Search -->
-            <div class="absolute left-5 top-1/2 transform -translate-y-1/2">
-                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- Icon Search - DIPERBAIKI: Posisi tepat di tengah vertikal -->
+            <div class="absolute left-5 top-1/2 transform -translate-y-1/2 flex items-center justify-center h-full">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="vertical-align: middle;">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
             </div>
@@ -40,35 +41,48 @@
         </div>
     </div>
     
-    <!-- Kategori Filter di Tengah -->
+    <!-- Kategori Filter di Tengah - DIPERBAIKI: Filter terlihat saat dipilih -->
     <div class="flex flex-wrap justify-center gap-3 mb-8">
         <button 
             wire:click="$set('kategoriFilter', '')"
-            class="px-6 py-3 rounded-full text-lg font-medium {{ !$kategoriFilter ? 'bg-brown-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
+            class="px-6 py-3 rounded-full text-lg font-medium {{ !$kategoriFilter ? 'bg-brown-600 text-white shadow-lg ring-2 ring-brown-300' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
             style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
+            id="filterSemua"
         >
             Semua
+            @if(!$kategoriFilter)
+                <span class="ml-2">✓</span>
+            @endif
         </button>
         @if($kategoriList && $kategoriList->count() > 0)
             @foreach($kategoriList as $kategori)
                 <button 
                     wire:click="$set('kategoriFilter', '{{ $kategori }}')"
-                    class="px-6 py-3 rounded-full text-lg font-medium {{ $kategoriFilter == $kategori ? 'bg-brown-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
+                    class="px-6 py-3 rounded-full text-lg font-medium {{ $kategoriFilter == $kategori ? 'bg-brown-600 text-white shadow-lg ring-2 ring-brown-300' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
                     style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
+                    id="filter{{ $kategori }}"
                 >
                     {{ $kategori }}
+                    @if($kategoriFilter == $kategori)
+                        <span class="ml-2">✓</span>
+                    @endif
                 </button>
             @endforeach
         @endif
     </div>
 
-    <!-- Info Stats di Tengah -->
+    <!-- Info Stats di Tengah - DIPERBAIKI: Tampilkan filter aktif -->
     <div class="text-center mb-8">
         <p class="text-gray-600 text-lg">
             <span class="font-semibold text-brown-600">{{ $totalEdukasi ?? 0 }}</span> artikel tersedia
             @if($search)
                 <span class="ml-3 inline-block text-sm bg-brown-50 text-brown-700 px-4 py-2 rounded-full">
                     Pencarian: "{{ $search }}"
+                </span>
+            @endif
+            @if($kategoriFilter && !$search)
+                <span class="ml-3 inline-block text-sm bg-brown-100 text-brown-800 px-4 py-2 rounded-full font-medium">
+                    Filter: {{ $kategoriFilter }}
                 </span>
             @endif
         </p>
@@ -95,6 +109,7 @@
                     wire:click="closeDetail"
                     class="mb-6 flex items-center font-medium group mx-auto justify-center"
                     style="color: #8a532b; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
+                    id="backButton"
                 >
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -130,7 +145,7 @@
                         {{ $selectedEdukasi->judul }}
                     </h2>
                     
-                    <div class="mb-8 p-8 rounded-2xl text-center" style="background-color: #fdf8f3; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+                    <div class="mb-8 p-8 rounded-2xl text-center" style="background-color: #ddd9d4ff; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
                         <p class="text-gray-700 text-xl italic">"{{ $selectedEdukasi->ringkasan }}"</p>
                     </div>
                     
@@ -147,15 +162,15 @@
     <!-- Grid Artikel (jika tidak sedang melihat detail) -->
     @if(!$selectedEdukasi)
         @if($edukasiList && $edukasiList->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto" id="articlesGrid">
                 @foreach($edukasiList as $edukasi)
-                    <div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 group" style="transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+                    <div class="article-card bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 group" style="transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);" data-article-id="{{ $edukasi->id }}">
                         @if($edukasi->image)
-                            <div class="h-64 overflow-hidden rounded-t-3xl">
+                            <div class="h-64 overflow-hidden rounded-t-3xl article-image-container">
                                 <img 
                                     src="{{ Storage::url($edukasi->image) }}" 
                                     alt="{{ $edukasi->judul }}"
-                                    class="w-full h-full object-cover"
+                                    class="w-full h-full object-cover article-image"
                                     style="transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);"
                                 >
                             </div>
@@ -231,100 +246,183 @@
             </div>
         @endif
     @endif
-    
-    <!-- JavaScript untuk efek hover -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Efek hover untuk tombol kategori
-        const categoryButtons = document.querySelectorAll('button[wire\\:click*="kategoriFilter"]');
-        categoryButtons.forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
-                this.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.3)';
-            });
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-                this.style.boxShadow = 'none';
-            });
-        });
-        
-        // Efek hover untuk kartu artikel
-        const cards = document.querySelectorAll('.bg-white.rounded-3xl.shadow-md');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-                this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
-                
-                // Efek gambar zoom
-                const img = this.querySelector('img');
-                if(img) img.style.transform = 'scale(1.1)';
-                
-                // Efek teks berubah warna
-                const title = this.querySelector('h3');
-                if(title) title.style.color = '#8a532b';
-                
-                // Efek badge scale
-                const badge = this.querySelector('span[style*="background-color: #f5e9dd"]');
-                if(badge) badge.style.transform = 'scale(1.1)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
-                
-                // Reset gambar
-                const img = this.querySelector('img');
-                if(img) img.style.transform = 'scale(1)';
-                
-                // Reset teks
-                const title = this.querySelector('h3');
-                if(title) title.style.color = '#1f2937';
-                
-                // Reset badge
-                const badge = this.querySelector('span[style*="background-color: #f5e9dd"]');
-                if(badge) badge.style.transform = 'scale(1)';
-            });
-        });
-        
-        // Efek hover untuk tombol baca selengkapnya
-        const readButtons = document.querySelectorAll('button[wire\\:click*="showDetail"]');
-        readButtons.forEach(btn => {
-            const arrow = btn.querySelector('svg');
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
-                if(arrow) arrow.style.transform = 'translateX(10px)';
-            });
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-                if(arrow) arrow.style.transform = 'translateX(0)';
-            });
-        });
-        
-        // Efek hover untuk tombol reset
-        const resetBtn = document.querySelector('button[wire\\:click*="resetFilters"]');
-        if(resetBtn) {
-            resetBtn.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
-                this.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.3)';
-            });
-            resetBtn.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-                this.style.boxShadow = 'none';
-            });
-        }
-        
-        // Efek hover untuk input search
-        const searchInput = document.querySelector('input[wire\\:model*="search"]');
-        if(searchInput) {
-            searchInput.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1)';
-            });
-            searchInput.addEventListener('mouseleave', function() {
-                if(document.activeElement !== this) {
-                    this.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1)';
-                }
-            });
-        }
-    });
-    </script>
 </div>
+
+<!-- JavaScript untuk efek hover dan zoom - DIPERBAIKI: Sederhana & Konsisten -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Inisialisasi semua efek
+    initAllEffects();
+    
+    // Setup Livewire listeners untuk efek yang konsisten
+    if (typeof Livewire !== 'undefined') {
+        // Reset efek setelah setiap update Livewire
+        Livewire.hook('message.processed', () => {
+            setTimeout(initAllEffects, 50);
+        });
+    }
+});
+
+// Fungsi utama untuk inisialisasi semua efek
+function initAllEffects() {
+    initZoomEffect();
+    initFilterHover();
+    initCardHover();
+    initButtonHover();
+    initSearchHover();
+}
+
+// 1. ZOOM EFFECT - Sederhana dan konsisten
+function initZoomEffect() {
+    const images = document.querySelectorAll('.article-image');
+    
+    images.forEach(img => {
+        // Hapus event listeners lama
+        const parent = img.closest('.h-64, .article-card');
+        if (!parent) return;
+        
+        parent.removeEventListener('mouseenter', zoomIn);
+        parent.removeEventListener('mouseleave', zoomOut);
+        
+        // Tambah event listeners baru
+        parent.addEventListener('mouseenter', zoomIn);
+        parent.addEventListener('mouseleave', zoomOut);
+    });
+    
+    function zoomIn(e) {
+        const img = e.currentTarget.querySelector('.article-image');
+        if (img) {
+            img.style.transform = 'scale(1.1)';
+            img.style.transition = 'transform 0.3s ease';
+        }
+    }
+    
+    function zoomOut(e) {
+        const img = e.currentTarget.querySelector('.article-image');
+        if (img) {
+            img.style.transform = 'scale(1)';
+        }
+    }
+}
+
+// 2. FILTER HOVER EFFECT
+function initFilterHover() {
+    const filterButtons = document.querySelectorAll('button[wire\\:click*="kategoriFilter"]');
+    
+    filterButtons.forEach(btn => {
+        // Hapus listeners lama
+        btn.removeEventListener('mouseenter', filterHoverIn);
+        btn.removeEventListener('mouseleave', filterHoverOut);
+        
+        // Tambah listeners baru
+        btn.addEventListener('mouseenter', filterHoverIn);
+        btn.addEventListener('mouseleave', filterHoverOut);
+    });
+    
+    function filterHoverIn(e) {
+        const btn = e.currentTarget;
+        if (!btn.classList.contains('bg-brown-600')) {
+            btn.style.transform = 'scale(1.05)';
+            btn.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.3)';
+        }
+    }
+    
+    function filterHoverOut(e) {
+        const btn = e.currentTarget;
+        if (!btn.classList.contains('bg-brown-600')) {
+            btn.style.transform = 'scale(1)';
+            btn.style.boxShadow = '';
+        }
+    }
+}
+
+// 3. CARD HOVER EFFECT
+function initCardHover() {
+    const cards = document.querySelectorAll('.bg-white.rounded-3xl.shadow-md');
+    
+    cards.forEach(card => {
+        // Hapus listeners lama
+        card.removeEventListener('mouseenter', cardHoverIn);
+        card.removeEventListener('mouseleave', cardHoverOut);
+        
+        // Tambah listeners baru
+        card.addEventListener('mouseenter', cardHoverIn);
+        card.addEventListener('mouseleave', cardHoverOut);
+    });
+    
+    function cardHoverIn(e) {
+        const card = e.currentTarget;
+        card.style.transform = 'translateY(-10px)';
+        card.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+        
+        const title = card.querySelector('h3');
+        if (title) title.style.color = '#8a532b';
+        
+        const badge = card.querySelector('span[style*="background-color: #f5e9dd"]');
+        if (badge) badge.style.transform = 'scale(1.1)';
+    }
+    
+    function cardHoverOut(e) {
+        const card = e.currentTarget;
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+        
+        const title = card.querySelector('h3');
+        if (title) title.style.color = '#1f2937';
+        
+        const badge = card.querySelector('span[style*="background-color: #f5e9dd"]');
+        if (badge) badge.style.transform = 'scale(1)';
+    }
+}
+
+// 4. BUTTON HOVER EFFECT
+function initButtonHover() {
+    const buttons = document.querySelectorAll('button[wire\\:click*="showDetail"]');
+    
+    buttons.forEach(btn => {
+        const arrow = btn.querySelector('svg');
+        
+        // Hapus listeners lama
+        btn.removeEventListener('mouseenter', buttonHoverIn);
+        btn.removeEventListener('mouseleave', buttonHoverOut);
+        
+        // Tambah listeners baru
+        btn.addEventListener('mouseenter', () => buttonHoverIn(btn, arrow));
+        btn.addEventListener('mouseleave', () => buttonHoverOut(btn, arrow));
+    });
+    
+    function buttonHoverIn(btn, arrow) {
+        btn.style.transform = 'scale(1.05)';
+        if (arrow) arrow.style.transform = 'translateX(10px)';
+    }
+    
+    function buttonHoverOut(btn, arrow) {
+        btn.style.transform = 'scale(1)';
+        if (arrow) arrow.style.transform = 'translateX(0)';
+    }
+}
+
+// 5. SEARCH HOVER EFFECT
+function initSearchHover() {
+    const searchInput = document.querySelector('input[wire\\:model*="search"]');
+    if (!searchInput) return;
+    
+    // Hapus listeners lama
+    searchInput.removeEventListener('mouseenter', searchHoverIn);
+    searchInput.removeEventListener('mouseleave', searchHoverOut);
+    
+    // Tambah listeners baru
+    searchInput.addEventListener('mouseenter', searchHoverIn);
+    searchInput.addEventListener('mouseleave', searchHoverOut);
+    
+    function searchHoverIn(e) {
+        e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1)';
+    }
+    
+    function searchHoverOut(e) {
+        if (document.activeElement !== e.currentTarget) {
+            e.currentTarget.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1)';
+        }
+    }
+}
+</script>

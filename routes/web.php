@@ -20,6 +20,12 @@ use App\Livewire\Edukasi;
 // route ke home
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
 
+Route::middleware(['auth', 'pelanggan'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\PelangganDashboardController::class, 'index'])
+        ->name('dashboard.pelanggan');
+});
+
+
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
@@ -32,7 +38,7 @@ Route::post('/login', [loginController::class, 'authenticate']);
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
 // route untuk profile
-Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth'));
+Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware(('auth'));
 
 Route::get('/pesanan-masuk/detail-pesanan/{order}', DetailPesanan::class)
     ->name('detail.pesanan');
