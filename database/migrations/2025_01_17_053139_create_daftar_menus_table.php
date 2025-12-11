@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('gambar')->nullable();
             $table->text('deskripsi');
             $table->string('pesan');
+            $table->foreignId('category_id')->constrained(
+                table: 'menu_categories',
+                indexName: 'menu_category_id'
+            );
             $table->timestamps();
         });
     }

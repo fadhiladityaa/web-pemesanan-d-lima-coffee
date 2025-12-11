@@ -9,7 +9,7 @@
                 </a>
             </div>
 
-            <div class="links text-white sm:flex sm:gap-3 lg:gap-7 sm:text-[20px] items-center hidden font-poppins">
+            <div class="links text-white lg:flex sm:gap-3 lg:gap-7 sm:text-[20px] items-center sm:hidden hidden font-poppins">
                 <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : '' }}" href="/">Menu</a>
                 <a class="" href="{{ route('edukasi') }}">Edukasi</a>
                 <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>
@@ -30,7 +30,7 @@
 
         {{-- hamburger section --}}
         <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="lg:hidden sm:hidden">
+            <div tabindex="0" role="button" class="lg:hidden">
                 <div class="w-7 rounded-full">
                     <img alt="hamburger icon" src="{{ asset('img/burger-menu.svg') }}" />
 
@@ -44,11 +44,11 @@
                 </li>
                 <li><a>Menu</a></li>
 
-                <li class="sm:hidden">
-                    <a href="/tentang-kami">About</a>
+                <li class="">
+                    <a href="{{ route('pesanan.saya') }}">Pesanan saya</a>
                 </li>
 
-                <li class="sm:hidden">
+                <li class="">
                     <a href="{{ route('edukasi') }}">Edukasi</a>
                 </li>
 

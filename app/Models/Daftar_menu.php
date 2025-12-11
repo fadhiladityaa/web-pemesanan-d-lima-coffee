@@ -28,4 +28,9 @@ class Daftar_menu extends Model
         return $this->hasMany(BahanBakuMenu::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(MenuCategory::class);
+    }
+
 }

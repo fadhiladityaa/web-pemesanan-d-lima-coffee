@@ -14,14 +14,14 @@
 
         {{-- {{dd($item->warning)}} --}}
             <div
-                class="flex font-poppins flex-col items-start rounded-lg shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
                 <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
-                    <img src="{{ asset('img/kopi-susu.jpg') }}"
-                        class="w-full h-full object-cover -translate-y-4 hover:scale-110 transition-all duration-500"
+                    <img src="{{ Storage::url($item->gambar) }}"
+                        class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
                         alt="{{ $item->nama }}">
                 </div>
 
-                <span class="w-full py-1 text-[.6rem] rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}" class="w-4 h-4" alt=""></span>
+                <span class="w-full py-1 text-[.6rem] sm:text-[1rem] sm:py-2 rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}" class="w-4 h-4 sm:w-6 sm:h-6" alt=""></span>
 
                 <span class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
                 <span class="text-primary text-[12px] sm:text-[17px] font-bold">Rp
@@ -36,7 +36,7 @@
                         </button>
                     </a>
                     <button wire:click="addToCart({{ $item->id }})"
-                        class="text-[12px] sm:text-[18px] text-white bg-primary w-full p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                        class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
                         Tambah
                     </button>
 

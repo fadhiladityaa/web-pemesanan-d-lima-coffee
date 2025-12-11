@@ -13,7 +13,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        User::insert(
+        $users = [
             [
                 'name' => 'Fadhil Aditya',
                 'noHp' => '085756956684',
@@ -32,6 +32,10 @@ class AdminSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'role' => 'admin'
             ]
-        );
+        ];
+
+        foreach ($users as $userData) {
+            User::create($userData);
+        }
     }
 }
