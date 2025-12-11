@@ -4,6 +4,8 @@
 use App\Livewire\DetailPesanan;
 use App\Livewire\PesananSaya;
 
+
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -14,16 +16,20 @@ use App\Livewire\DashboardAdmin;
 use App\Livewire\DetailMenu;
 use App\Livewire\EditMenu;
 use App\Livewire\MenuManagement;
+use App\Livewire\PromoManagement;
 use App\Livewire\PesananMasuk;
 use App\Livewire\Edukasi;
 
 // route ke home
-Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
+// Route::middleware(['auth', 'user'])->group(function () {
+//     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index']);
+// });
 
-Route::middleware(['auth', 'pelanggan'])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\PelangganDashboardController::class, 'index'])
-        ->name('dashboard.pelanggan');
-});
+Route::get('/', [DashboardController::Class, 'index']);
+
+
+Route::get('/menu', [HomeController::class, 'index'])->middleware('auth')->name('menu');
+
 
 
 // route fitur register
@@ -68,6 +74,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
     Route::get('/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
     Route::get('/pesanan-masuk', PesananMasuk::class)->name('dashboard.pesanan.masuk');
     Route::get('/edukasi-management', Edukasi::class)->name('dashboard.edukasi.management');
+    Route::get('/promo-management', PromoManagement::class)->name('dashboard.promo.management');
 });
 
 

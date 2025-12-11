@@ -1,36 +1,32 @@
-<div class="p-4 pt-24">
-    <!-- Header Sederhana di Tengah -->
+<div class="p-4 pt-24 min-h-screen bg-[#fdfbf7]">
     <div class="text-center mb-10">
-        <!-- JUDUL UTAMA SAJA (tanpa logo) -->
-        <h2 class="text-4xl font-bold text-gray-800 mb-4">Edukasi Kesehatan & Nutrisi</h2>
-        <p class="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+        <h2 class="text-4xl font-bold text-[#3e2b22] mb-4 font-serif">Edukasi Kesehatan & Nutrisi</h2>
+        <div class="h-1 w-24 bg-[#8a532b] mx-auto rounded-full mb-6"></div>
+        <p class="text-[#8d6e63] text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
             Temukan informasi berguna tentang kesehatan, nutrisi, dan gaya hidup sehat dari para ahli D'Lima Coffee.
         </p>
     </div>
 
-    <!-- Search Bar di Tengah - DIPERBAIKI: Icon pada tempatnya -->
     <div class="max-w-md mx-auto mb-8">
-        <div class="relative">
+        <div class="relative group">
             <input 
                 type="text" 
                 wire:model.live.debounce.300ms="search"
                 placeholder="Cari artikel edukasi..."
-                class="w-full px-6 py-4 pl-14 pr-12 rounded-2xl border border-gray-300 bg-white shadow-sm focus:ring-2 focus:border-transparent text-lg"
+                class="w-full px-6 py-4 pl-14 pr-12 rounded-2xl border border-[#eaddcf] bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#8a532b] focus:border-transparent text-lg text-[#3e2b22] placeholder-[#9c8273]"
                 style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
                 id="searchInput"
             >
-            <!-- Icon Search - DIPERBAIKI: Posisi tepat di tengah vertikal -->
             <div class="absolute left-5 top-1/2 transform -translate-y-1/2 flex items-center justify-center h-full">
-                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="vertical-align: middle;">
+                <svg class="w-6 h-6 text-[#947257]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
             </div>
             
-            <!-- Clear Button -->
             @if($search)
             <button 
                 wire:click="$set('search', '')"
-                class="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                class="absolute right-5 top-1/2 transform -translate-y-1/2 text-[#9c8273] hover:text-[#3e2b22]"
                 style="transition: transform 0.2s ease;"
             >
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,11 +37,15 @@
         </div>
     </div>
     
-    <!-- Kategori Filter di Tengah - DIPERBAIKI: Filter terlihat saat dipilih -->
     <div class="flex flex-wrap justify-center gap-3 mb-8">
+        {{-- FIX: Menggunakan Hex Color #8a532b agar terlihat --}}
         <button 
             wire:click="$set('kategoriFilter', '')"
-            class="px-6 py-3 rounded-full text-lg font-medium {{ !$kategoriFilter ? 'bg-brown-600 text-white shadow-lg ring-2 ring-brown-300' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
+            class="px-6 py-3 rounded-full text-lg font-medium border-2 
+            {{ !$kategoriFilter 
+                ? 'bg-[#8a532b] border-[#8a532b] text-white shadow-lg' 
+                : 'bg-transparent border-[#eaddcf] text-[#8d6e63] hover:border-[#8a532b] hover:text-[#8a532b]' 
+            }}"
             style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
             id="filterSemua"
         >
@@ -54,11 +54,16 @@
                 <span class="ml-2">✓</span>
             @endif
         </button>
+
         @if($kategoriList && $kategoriList->count() > 0)
             @foreach($kategoriList as $kategori)
                 <button 
                     wire:click="$set('kategoriFilter', '{{ $kategori }}')"
-                    class="px-6 py-3 rounded-full text-lg font-medium {{ $kategoriFilter == $kategori ? 'bg-brown-600 text-white shadow-lg ring-2 ring-brown-300' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
+                    class="px-6 py-3 rounded-full text-lg font-medium border-2
+                    {{ $kategoriFilter == $kategori 
+                        ? 'bg-[#8a532b] border-[#8a532b] text-white shadow-lg' 
+                        : 'bg-transparent border-[#eaddcf] text-[#8d6e63] hover:border-[#8a532b] hover:text-[#8a532b]' 
+                    }}"
                     style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
                     id="filter{{ $kategori }}"
                 >
@@ -71,17 +76,17 @@
         @endif
     </div>
 
-    <!-- Info Stats di Tengah - DIPERBAIKI: Tampilkan filter aktif -->
     <div class="text-center mb-8">
-        <p class="text-gray-600 text-lg">
-            <span class="font-semibold text-brown-600">{{ $totalEdukasi ?? 0 }}</span> artikel tersedia
+        <p class="text-[#8d6e63] text-lg">
+            <span class="font-bold text-[#8a532b]">{{ $totalEdukasi ?? 0 }}</span> artikel tersedia
+            
             @if($search)
-                <span class="ml-3 inline-block text-sm bg-brown-50 text-brown-700 px-4 py-2 rounded-full">
+                <span class="ml-3 inline-block text-sm bg-[#fffaf5] text-[#8a532b] px-4 py-2 rounded-full border border-[#eaddcf]">
                     Pencarian: "{{ $search }}"
                 </span>
             @endif
             @if($kategoriFilter && !$search)
-                <span class="ml-3 inline-block text-sm bg-brown-100 text-brown-800 px-4 py-2 rounded-full font-medium">
+                <span class="ml-3 inline-block text-sm bg-[#fffaf5] text-[#8a532b] px-4 py-2 rounded-full border border-[#eaddcf] font-medium">
                     Filter: {{ $kategoriFilter }}
                 </span>
             @endif
@@ -90,7 +95,7 @@
         @if($search || $kategoriFilter)
             <button 
                 wire:click="resetFilters"
-                class="mt-4 px-5 py-2 text-brown-600 hover:text-brown-800 font-medium flex items-center mx-auto"
+                class="mt-4 px-5 py-2 text-[#8a532b] hover:text-[#5e391f] font-medium flex items-center mx-auto hover:underline decoration-2 underline-offset-4"
                 style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
             >
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,17 +106,16 @@
         @endif
     </div>
 
-    <!-- Jika ada selected edukasi (detail view) -->
     @if($selectedEdukasi)
-        <div class="max-w-4xl mx-auto mb-8 bg-white rounded-3xl shadow-lg overflow-hidden" style="transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-            <div class="p-8">
+        <div class="max-w-4xl mx-auto mb-8 bg-white rounded-[2rem] shadow-xl border border-[#eaddcf] overflow-hidden" style="transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+            <div class="p-8 md:p-12">
                 <button 
                     wire:click="closeDetail"
-                    class="mb-6 flex items-center font-medium group mx-auto justify-center"
-                    style="color: #8a532b; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
+                    class="mb-6 flex items-center font-medium group mx-auto justify-center text-[#8a532b] hover:text-[#5e391f]"
+                    style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
                     id="backButton"
                 >
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                    <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
                     Kembali ke Daftar Artikel
@@ -119,37 +123,33 @@
                 
                 <div class="mb-6">
                     <div class="flex flex-wrap items-center justify-center gap-4 mb-6">
-                        <span class="inline-block text-sm font-semibold px-5 py-2 rounded-full" style="background-color: #f5e9dd; color: #8a532b; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <span class="inline-block text-sm font-semibold px-5 py-2 rounded-full" style="background-color: #f5e9dd; color: #8a532b;">
                             {{ $selectedEdukasi->kategori }}
                         </span>
-                        <span class="text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
+                        <span class="text-[#9c8273] font-medium">
                             {{ $selectedEdukasi->created_at->format('d F Y') }}
                         </span>
                     </div>
                     
                     @if($selectedEdukasi->image)
-                        <div class="mb-8 overflow-hidden rounded-2xl">
+                        <div class="mb-8 overflow-hidden rounded-2xl shadow-lg">
                             <img 
                                 src="{{ Storage::url($selectedEdukasi->image) }}" 
                                 alt="{{ $selectedEdukasi->judul }}"
-                                class="w-full h-96 object-cover"
-                                style="transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);"
+                                class="w-full h-96 object-cover hover:scale-105 transition-transform duration-700"
                             >
                         </div>
                     @endif
                     
-                    <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center" style="transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                    <h2 class="text-4xl font-bold text-[#3e2b22] mb-6 text-center font-serif leading-tight">
                         {{ $selectedEdukasi->judul }}
                     </h2>
                     
-                    <div class="mb-8 p-8 rounded-2xl text-center" style="background-color: #ddd9d4ff; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                        <p class="text-gray-700 text-xl italic">"{{ $selectedEdukasi->ringkasan }}"</p>
+                    <div class="mb-8 p-8 rounded-2xl text-center border-l-4 border-[#8a532b]" style="background-color: #fffaf5;">
+                        <p class="text-[#5e4033] text-xl italic font-serif">"{{ $selectedEdukasi->ringkasan }}"</p>
                     </div>
                     
-                    <div class="prose max-w-none text-gray-700 leading-relaxed text-lg mx-auto">
+                    <div class="prose prose-lg max-w-none text-[#5e4033] leading-loose text-lg mx-auto">
                         <div class="whitespace-pre-line">
                             {!! nl2br(e($selectedEdukasi->konten)) !!}
                         </div>
@@ -159,50 +159,56 @@
         </div>
     @endif
 
-    <!-- Grid Artikel (jika tidak sedang melihat detail) -->
     @if(!$selectedEdukasi)
         @if($edukasiList && $edukasiList->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto" id="articlesGrid">
                 @foreach($edukasiList as $edukasi)
-                    <div class="article-card bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 group" style="transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);" data-article-id="{{ $edukasi->id }}">
+                    <div class="article-card bg-white rounded-3xl shadow-sm hover:shadow-xl overflow-hidden border border-[#eaddcf] group cursor-pointer" 
+                         style="transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);" 
+                         data-article-id="{{ $edukasi->id }}">
+                        
                         @if($edukasi->image)
-                            <div class="h-64 overflow-hidden rounded-t-3xl article-image-container">
+                            <div class="h-64 overflow-hidden article-image-container relative">
                                 <img 
                                     src="{{ Storage::url($edukasi->image) }}" 
                                     alt="{{ $edukasi->judul }}"
                                     class="w-full h-full object-cover article-image"
-                                    style="transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);"
+                                    style="transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);"
                                 >
+                                <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+                        @else
+                            <div class="h-64 bg-[#fffaf5] flex items-center justify-center text-[#d7ccc8]">
+                                <span class="font-serif italic">No Image</span>
                             </div>
                         @endif
                         
                         <div class="p-8">
-                            <div class="mb-6">
-                                <span class="inline-block text-sm font-semibold px-4 py-2 rounded-full mb-4" style="background-color: #f5e9dd; color: #8a532b; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                            <div class="mb-4">
+                                {{-- Badge Kategori --}}
+                                <span class="inline-block text-xs font-bold px-3 py-1 rounded-lg uppercase tracking-wider mb-3" style="background-color: #f5e9dd; color: #8a532b;">
                                     {{ $edukasi->kategori }}
                                 </span>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-4 line-clamp-2 min-h-[72px]" style="transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                                
+                                <h3 class="text-2xl font-bold text-[#3e2b22] mb-3 line-clamp-2 min-h-[64px] font-serif group-hover:text-[#8a532b] transition-colors">
                                     {{ $edukasi->judul }}
                                 </h3>
-                                <p class="text-gray-600 mb-6 line-clamp-3 text-lg">
+                                
+                                <p class="text-[#8d6e63] mb-6 line-clamp-3 text-sm leading-relaxed">
                                     {{ $edukasi->ringkasan }}
                                 </p>
                             </div>
                             
-                            <div class="flex justify-between items-center pt-6 border-t border-gray-100">
-                                <span class="text-gray-500 text-sm flex items-center">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
+                            <div class="flex justify-between items-center pt-6 border-t border-[#f0ebe5]">
+                                <span class="text-[#9c8273] text-xs font-bold uppercase tracking-wide">
                                     {{ $edukasi->created_at->format('d M Y') }}
                                 </span>
                                 <button 
                                     wire:click="showDetail({{ $edukasi->id }})"
-                                    class="text-brown-600 hover:text-brown-800 font-medium text-lg flex items-center group/btn"
-                                    style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
+                                    class="text-[#8a532b] hover:text-[#5e391f] font-bold text-sm flex items-center group/btn uppercase tracking-wider"
                                 >
-                                    Baca Selengkapnya
-                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                                    Baca
+                                    <svg class="w-4 h-4 ml-1 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                     </svg>
                                 </button>
@@ -212,35 +218,33 @@
                 @endforeach
             </div>
 
-            <!-- Pagination di Tengah -->
-            <div class="mt-12 flex justify-center">
+            <div class="mt-16 flex justify-center">
                 {{ $edukasiList->links() }}
             </div>
         @else
-            <!-- Empty State di Tengah -->
-            <div class="text-center py-20 bg-white rounded-3xl shadow-sm max-w-4xl mx-auto">
-                <div class="mb-8" style="transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <svg class="w-32 h-32 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            <div class="text-center py-20 bg-white rounded-3xl shadow-sm border border-dashed border-[#d7ccc8] max-w-4xl mx-auto">
+                <div class="w-20 h-20 bg-[#fffaf5] rounded-full flex items-center justify-center mx-auto mb-6 text-[#d7ccc8]">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                     </svg>
                 </div>
-                <h3 class="text-3xl font-semibold text-gray-700 mb-4" style="transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
-                    Belum ada artikel edukasi
+                <h3 class="text-2xl font-bold text-[#3e2b22] mb-3 font-serif">
+                    Belum ada artikel
                 </h3>
-                <p class="text-gray-500 text-lg max-w-md mx-auto mb-10">
+                <p class="text-[#8d6e63] text-lg max-w-md mx-auto mb-10">
                     @if($search)
-                        Tidak ditemukan artikel dengan kata kunci "{{ $search }}"
+                        Tidak ditemukan hasil untuk "{{ $search }}"
                     @else
-                        Admin belum menambahkan konten edukasi. Silakan check kembali nanti.
+                        Admin belum menambahkan konten edukasi.
                     @endif
                 </p>
                 @if($search || $kategoriFilter)
                     <button 
                         wire:click="resetFilters"
-                        class="px-8 py-4 font-medium rounded-xl text-lg"
-                        style="background-color: #8a532b; color: white; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);"
+                        class="px-8 py-3 font-bold rounded-full text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                        style="background-color: #8a532b; transition: all 0.3s;"
                     >
-                        Reset Pencarian
+                        Reset Filter
                     </button>
                 @endif
             </div>
@@ -248,22 +252,16 @@
     @endif
 </div>
 
-<!-- JavaScript untuk efek hover dan zoom - DIPERBAIKI: Sederhana & Konsisten -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Inisialisasi semua efek
     initAllEffects();
-    
-    // Setup Livewire listeners untuk efek yang konsisten
     if (typeof Livewire !== 'undefined') {
-        // Reset efek setelah setiap update Livewire
         Livewire.hook('message.processed', () => {
             setTimeout(initAllEffects, 50);
         });
     }
 });
 
-// Fungsi utama untuk inisialisasi semua efek
 function initAllEffects() {
     initZoomEffect();
     initFilterHover();
@@ -272,157 +270,119 @@ function initAllEffects() {
     initSearchHover();
 }
 
-// 1. ZOOM EFFECT - Sederhana dan konsisten
 function initZoomEffect() {
     const images = document.querySelectorAll('.article-image');
-    
     images.forEach(img => {
-        // Hapus event listeners lama
         const parent = img.closest('.h-64, .article-card');
         if (!parent) return;
-        
         parent.removeEventListener('mouseenter', zoomIn);
         parent.removeEventListener('mouseleave', zoomOut);
-        
-        // Tambah event listeners baru
         parent.addEventListener('mouseenter', zoomIn);
         parent.addEventListener('mouseleave', zoomOut);
     });
-    
     function zoomIn(e) {
         const img = e.currentTarget.querySelector('.article-image');
-        if (img) {
-            img.style.transform = 'scale(1.1)';
-            img.style.transition = 'transform 0.3s ease';
-        }
+        // Efek Zoom Gambar
+        if (img) { img.style.transform = 'scale(1.1)'; img.style.transition = 'transform 0.5s ease'; }
     }
-    
     function zoomOut(e) {
         const img = e.currentTarget.querySelector('.article-image');
-        if (img) {
-            img.style.transform = 'scale(1)';
-        }
+        if (img) { img.style.transform = 'scale(1)'; }
     }
 }
 
-// 2. FILTER HOVER EFFECT
 function initFilterHover() {
     const filterButtons = document.querySelectorAll('button[wire\\:click*="kategoriFilter"]');
-    
     filterButtons.forEach(btn => {
-        // Hapus listeners lama
         btn.removeEventListener('mouseenter', filterHoverIn);
         btn.removeEventListener('mouseleave', filterHoverOut);
-        
-        // Tambah listeners baru
         btn.addEventListener('mouseenter', filterHoverIn);
         btn.addEventListener('mouseleave', filterHoverOut);
     });
-    
     function filterHoverIn(e) {
         const btn = e.currentTarget;
-        if (!btn.classList.contains('bg-brown-600')) {
+        // FIX: Cek warna Hex, bukan class name
+        if (!btn.classList.contains('bg-[#8a532b]')) {
             btn.style.transform = 'scale(1.05)';
             btn.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.3)';
+            btn.style.borderColor = '#8a532b';
+            btn.style.color = '#8a532b';
         }
     }
-    
     function filterHoverOut(e) {
         const btn = e.currentTarget;
-        if (!btn.classList.contains('bg-brown-600')) {
+        if (!btn.classList.contains('bg-[#8a532b]')) {
             btn.style.transform = 'scale(1)';
             btn.style.boxShadow = '';
+            btn.style.borderColor = '#eaddcf'; // Kembali ke border asal
+            btn.style.color = '#8d6e63'; // Kembali ke text asal
         }
     }
 }
 
-// 3. CARD HOVER EFFECT
 function initCardHover() {
-    const cards = document.querySelectorAll('.bg-white.rounded-3xl.shadow-md');
-    
+    const cards = document.querySelectorAll('.article-card'); // Sesuaikan selector
     cards.forEach(card => {
-        // Hapus listeners lama
         card.removeEventListener('mouseenter', cardHoverIn);
         card.removeEventListener('mouseleave', cardHoverOut);
-        
-        // Tambah listeners baru
         card.addEventListener('mouseenter', cardHoverIn);
         card.addEventListener('mouseleave', cardHoverOut);
     });
-    
     function cardHoverIn(e) {
         const card = e.currentTarget;
         card.style.transform = 'translateY(-10px)';
-        card.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+        card.style.boxShadow = '0 20px 40px -12px rgba(138, 83, 43, 0.15)';
         
         const title = card.querySelector('h3');
         if (title) title.style.color = '#8a532b';
         
+        // EFEK ZOOM ICON/BADGE KATEGORI (Action Zoom yang diminta)
         const badge = card.querySelector('span[style*="background-color: #f5e9dd"]');
-        if (badge) badge.style.transform = 'scale(1.1)';
+        if (badge) {
+            badge.style.transform = 'scale(1.1)';
+            badge.style.transition = 'transform 0.3s ease';
+        }
     }
-    
     function cardHoverOut(e) {
         const card = e.currentTarget;
         card.style.transform = 'translateY(0)';
-        card.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+        card.style.boxShadow = '';
         
         const title = card.querySelector('h3');
-        if (title) title.style.color = '#1f2937';
+        if (title) title.style.color = '#3e2b22';
         
         const badge = card.querySelector('span[style*="background-color: #f5e9dd"]');
         if (badge) badge.style.transform = 'scale(1)';
     }
 }
 
-// 4. BUTTON HOVER EFFECT
 function initButtonHover() {
     const buttons = document.querySelectorAll('button[wire\\:click*="showDetail"]');
-    
     buttons.forEach(btn => {
         const arrow = btn.querySelector('svg');
-        
-        // Hapus listeners lama
         btn.removeEventListener('mouseenter', buttonHoverIn);
         btn.removeEventListener('mouseleave', buttonHoverOut);
-        
-        // Tambah listeners baru
         btn.addEventListener('mouseenter', () => buttonHoverIn(btn, arrow));
         btn.addEventListener('mouseleave', () => buttonHoverOut(btn, arrow));
     });
-    
     function buttonHoverIn(btn, arrow) {
-        btn.style.transform = 'scale(1.05)';
-        if (arrow) arrow.style.transform = 'translateX(10px)';
+        // btn.style.transform = 'scale(1.05)'; // Opsional
+        if (arrow) arrow.style.transform = 'translateX(5px)';
     }
-    
     function buttonHoverOut(btn, arrow) {
-        btn.style.transform = 'scale(1)';
+        // btn.style.transform = 'scale(1)';
         if (arrow) arrow.style.transform = 'translateX(0)';
     }
 }
 
-// 5. SEARCH HOVER EFFECT
 function initSearchHover() {
     const searchInput = document.querySelector('input[wire\\:model*="search"]');
     if (!searchInput) return;
-    
-    // Hapus listeners lama
     searchInput.removeEventListener('mouseenter', searchHoverIn);
     searchInput.removeEventListener('mouseleave', searchHoverOut);
-    
-    // Tambah listeners baru
     searchInput.addEventListener('mouseenter', searchHoverIn);
     searchInput.addEventListener('mouseleave', searchHoverOut);
-    
-    function searchHoverIn(e) {
-        e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1)';
-    }
-    
-    function searchHoverOut(e) {
-        if (document.activeElement !== e.currentTarget) {
-            e.currentTarget.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1)';
-        }
-    }
+    function searchHoverIn(e) { e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.1)'; }
+    function searchHoverOut(e) { if (document.activeElement !== e.currentTarget) { e.currentTarget.style.boxShadow = ''; } }
 }
 </script>

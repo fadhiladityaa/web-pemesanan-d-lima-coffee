@@ -1,75 +1,142 @@
-<nav class="bg-[#947257] w-full flex justify-between shadow-lg z-40 fixed">
-    <div class="font-[Sriracha] flex items-center justify-between mx-[15px] sm:mx-[32px] lg:mx-[55px] gap-2 py-3 w-full">
-        {{-- logo section --}}
-        <div class="flex  justify-between w-full">
-            <div class="flex gap-2 items-center">
-                <img src="{{ asset('img/logo-warkop 1.svg') }}" alt="logo-warkop" class="w-10 sm:w-11 lg:w-12 mt-1">
-                <a href="/" class="text-xl sm:text-2xl lg:text-2xl text-white">
-                    D'Lima Coffee.</span>
+<nav class="bg-[#947257] w-full flex justify-between shadow-xl z-50 fixed transition-all duration-300">
+    <div class="font-[Sriracha] flex items-center justify-between mx-[15px] sm:mx-[32px] lg:mx-[55px] gap-2 py-4 w-full">
+        
+        {{-- LOGO SECTION --}}
+        <div class="flex justify-between w-full items-center">
+            <div class="flex gap-3 items-center group cursor-pointer">
+                <img src="{{ asset('img/logo-warkop 1.svg') }}" alt="logo-warkop" 
+                     class="w-10 sm:w-11 lg:w-12 drop-shadow-md group-hover:scale-105 transition duration-300">
+                <a href="{{ url('/') }}" class="text-xl sm:text-2xl lg:text-2xl text-white group-hover:opacity-90 transition tracking-wide">
+                    D'Lima Coffee.
                 </a>
             </div>
 
-            <div class="links text-white lg:flex sm:gap-3 lg:gap-7 sm:text-[20px] items-center sm:hidden hidden font-poppins">
-                <a class="{{ Request()->is('/#beranda') ? 'text-primary font-bold' : '' }}" href="/">Menu</a>
-                <a class="" href="{{ route('edukasi') }}">Edukasi</a>
-                <a class="{{ Request()->is('/#menu') ? 'text-primary font-bold' : '' }}" href="#menu">About</a>
-                <a href="{{ route('pesanan.saya') }}">Pesanan saya</a>
-                @if (auth()->user()->isAdmin())
-                    <a href="{{ route('dashboard.pesanan.masuk') }}">Dashboard Admin</a>
-                @endif
+            {{-- DESKTOP LINKS --}}
+            <div class="links text-white lg:flex sm:gap-6 lg:gap-10 sm:text-[16px] lg:text-[18px] items-center sm:hidden hidden font-poppins font-medium">
+                
+                {{-- 1. BERANDA (Sebelumnya Dashboard Saya) --}}
+                {{-- Kita taruh paling kiri karena biasanya 'Home' itu pertama --}}
+                @auth
+                    @if (!auth()->user()->isAdmin())
+                        <a href="{{ url('/') }}" 
+                           class="relative py-1 transition-all duration-300
+                           {{ Request::is('/') 
+                                ? 'text-white font-bold border-b-2 border-white' 
+                                : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
+                            Beranda
+                        </a>
+                    @endif
+                @endauth
+                
+                {{-- 2. MENU --}}
+                <a href="{{ route('menu') }}" 
+                   class="relative py-1 transition-all duration-300 
+                   {{ Request::routeIs('menu') 
+                        ? 'text-white font-bold border-b-2 border-white' 
+                        : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
+                   Menu
+                </a>
+                
+                {{-- 3. EDUKASI --}}
+                <a href="{{ url('/edukasi') }}" 
+                   class="relative py-1 transition-all duration-300
+                   {{ Request::is('edukasi*') 
+                        ? 'text-white font-bold border-b-2 border-white' 
+                        : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
+                   Edukasi
+                </a>
 
-                <a href="/profile" class="btn btn-ghost btn-circle mr-0 avatar">
-                    <div class="w-10 rounded-full">
-                        <img alt="Tailwind CSS Navbar component"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                @auth
+                    @if (auth()->user()->isAdmin())
+                        {{-- KHUSUS ADMIN: Tampilkan Dashboard Admin --}}
+                        <a href="{{ route('dashboard.pesanan.masuk') }}" 
+                           class="relative py-1 transition-all duration-300
+                           {{ Request::is('dashboard*') 
+                                ? 'text-white font-bold border-b-2 border-white' 
+                                : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
+                            Dashboard Admin
+                        </a>
+                    @endif
+                @endauth
+
+                {{-- Avatar Profile --}}
+                <a href="{{ url('/profile') }}" class="btn btn-ghost btn-circle mr-0 avatar transition hover:scale-105 {{ Request::is('profile*') ? 'ring-2 ring-white ring-offset-2 ring-offset-[#947257]' : '' }}">
+                    <div class="w-10 rounded-full border border-white/30">
+                        <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                     </div>
                 </a>
-
             </div>
         </div>
 
-        {{-- hamburger section --}}
+        {{-- HAMBURGER MENU (MOBILE) --}}
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="lg:hidden">
-                <div class="w-7 rounded-full">
-                    <img alt="hamburger icon" src="{{ asset('img/burger-menu.svg') }}" />
-
+                <div class="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition text-white">
+                    <img alt="hamburger icon" src="{{ asset('img/burger-menu.svg') }}" class="w-5" />
                 </div>
             </div>
-            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                <li>
-                    <a href="/profile" class="justify-between">
-                        Profile
+            
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-white rounded-xl z-[1] mt-4 w-56 p-3 shadow-2xl text-[#947257] font-poppins">
+                
+                {{-- Profile Mobile --}}
+                <li class="mb-1">
+                    <a href="{{ url('/profile') }}" class="{{ Request::is('profile*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                        👤 Profile Saya
                     </a>
                 </li>
-                <li><a>Menu</a></li>
+                
+                <div class="divider my-0"></div>
 
-                <li class="">
-                    <a href="{{ route('pesanan.saya') }}">Pesanan saya</a>
+                @auth
+                    @if(!auth()->user()->isAdmin())
+                        {{-- BERANDA (Mobile) --}}
+                        <li>
+                            <a href="{{ url('/') }}" class="{{ Request::is('/') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                                🏠 Beranda
+                            </a>
+                        </li>
+                    @endif
+                @endauth
+
+                {{-- Menu Mobile --}}
+                <li>
+                    <a href="{{ route('menu') }}" class="{{ Request::routeIs('menu') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                        ☕ Menu
+                    </a>
+                </li>
+                
+                {{-- Edukasi Mobile --}}
+                <li>
+                    <a href="{{ url('/edukasi') }}" class="{{ Request::is('edukasi*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                        📚 Edukasi
+                    </a>
                 </li>
 
-                <li class="">
-                    <a href="{{ route('edukasi') }}">Edukasi</a>
-                </li>
+                @auth
+                    @if(auth()->user()->isAdmin())
+                        <li>
+                            <a href="{{ route('dashboard.pesanan.masuk') }}" class="{{ Request::is('dashboard*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                                🛠️ Dashboard Admin
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{ url('/pesanan-saya') }}" class="{{ Request::routeIs('pesanan.saya') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                                📦 Pesanan Saya
+                            </a>
+                        </li>
+                    @endif
+                @endauth
 
-                <li class="">
-                    <a href="{{ route('dashboard.menu.management') }}">Dashboard</a>
-                </li>
+                <div class="divider my-0"></div>
 
                 <li>
-                    <form action="/logout" method="POST">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit">Logout</button>
+                        <button type="submit" class="text-red-600 font-semibold hover:bg-red-50">🚪 Logout</button>
                     </form>
                 </li>
-
             </ul>
         </div>
-    </div>
-    </div>
-
-
-
-    </div>
     </div>
 </nav>
