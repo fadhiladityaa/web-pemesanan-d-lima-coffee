@@ -59,9 +59,11 @@ class CreateMenu extends Component
 
     #[Validate('nullable|string|max:500')]
     public $batas_konsumsi;
-
+    
+    #[Validate('required|string|max:500')]
     public $pesan = '';
-
+    
+    #[Validate('required|string|max:500')]
     public $category_id = '';
 
     // --- Bahan Baku (array dinamis) ---

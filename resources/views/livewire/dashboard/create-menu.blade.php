@@ -10,13 +10,16 @@
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
 
+            <span>Pilih Kategori</span>
             <select wire:model="category_id" class="border border-black py-3 w-5/12 px-1 rounded-md" name="warning"
                 id="warning">
-                <option value="Coffee">Pilih Kategori Menu</option>
                 @foreach ($categories as $c)
                     <option value="{{ $c->id }}">{{ $c->name }}</option>
                 @endforeach
             </select>
+            @error('category_id')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             <input wire:model="harga" type="number" placeholder="Harga" class="input border border-slate-600" />
             @error('harga')
@@ -40,12 +43,14 @@
 
             <Label for="pesan">Small Warning</Label>
 
-            <select wire:model="pesan" class="border border-black py-3 w-5/12 px-1 rounded-md" name="warning"
+            <select name="pesan" wire:model="pesan" class="border border-black py-3 w-5/12 px-1 rounded-md" name="warning"
                 id="warning">
-                <option value="">pilih pesan yang akan ditampilkan</option>
                 <option value="Ringan & ramah">Ringan & ramah</option>
                 <option value="Pahit & kuat">Kuat & pahit</option>
             </select>
+            @error('pesan')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             {{-- Kandungan Gizi --}}
             <h2 class="font-[poppins] text-lg my-6">Kandungan Gizi</h2>
@@ -93,8 +98,8 @@
 
             @foreach ($bahanBaku as $index => $bahan)
                 <div class="flex gap-2 mb-2">
-                    <input wire:model="bahanBaku.{{ $index }}.nama_bahan" type="text" placeholder="Nama Bahan"
-                        class="input border-slate-600" />
+                    <input wire:model="bahanBaku.{{ $index }}.nama_bahan" type="text"
+                        placeholder="Nama Bahan" class="input border-slate-600" />
                     <input wire:model="bahanBaku.{{ $index }}.takaran" type="text" placeholder="Takaran"
                         class="input border-slate-600" />
                     <button type="button" wire:click="removeBahanBaku({{ $index }})"
