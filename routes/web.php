@@ -18,9 +18,10 @@ use App\Livewire\PesananMasuk;
 use App\Livewire\Edukasi;
 
 // route ke home
-Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
 
 // route fitur register
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
