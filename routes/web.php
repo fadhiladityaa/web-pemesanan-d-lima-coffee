@@ -20,17 +20,18 @@ use App\Livewire\PromoManagement;
 use App\Livewire\PesananMasuk;
 use App\Livewire\Edukasi;
 
+
 // route ke home
 Route::get('/', [DashboardController::class, 'index']);
 
 
-Route::get('/menu', [HomeController::class, 'index'])->middleware('auth')->name('menu');
+// Route::get('/menu', [HomeController::class, 'index'])->middleware('auth')->name('menu');
 
 
 
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('all.about.home');
+Route::get('/menu', [HomeController::class, 'index'])->middleware('auth');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
