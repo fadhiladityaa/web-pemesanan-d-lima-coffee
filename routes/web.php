@@ -4,6 +4,8 @@
 use App\Livewire\DetailPesanan;
 use App\Livewire\PesananSaya;
 
+
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -14,10 +16,17 @@ use App\Livewire\DashboardAdmin;
 use App\Livewire\DetailMenu;
 use App\Livewire\EditMenu;
 use App\Livewire\MenuManagement;
+use App\Livewire\PromoManagement;
 use App\Livewire\PesananMasuk;
 use App\Livewire\Edukasi;
 
 // route ke home
+Route::get('/', [DashboardController::class, 'index']);
+
+
+Route::get('/menu', [HomeController::class, 'index'])->middleware('auth')->name('menu');
+
+
 
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
@@ -33,7 +42,7 @@ Route::post('/login', [loginController::class, 'authenticate']);
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
 // route untuk profile
-Route::get('/profile', [ProfileController::class, 'index'])->middleware(('auth'));
+Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware(('auth'));
 
 Route::get('/pesanan-masuk/detail-pesanan/{order}', DetailPesanan::class)
     ->name('detail.pesanan');
@@ -63,6 +72,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
     Route::get('/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
     Route::get('/pesanan-masuk', PesananMasuk::class)->name('dashboard.pesanan.masuk');
     Route::get('/edukasi-management', Edukasi::class)->name('dashboard.edukasi.management');
+    Route::get('/promo-management', PromoManagement::class)->name('dashboard.promo.management');
 });
 
 

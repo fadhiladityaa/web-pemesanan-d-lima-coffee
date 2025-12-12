@@ -62,13 +62,11 @@ class Edukasi extends Component
             'konten' => 'required|min:10',
             'ringkasan' => 'required|min:20|max:200',
             'kategori' => 'required',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'required|image|max:20048',
         ];
     }
 
-    /**
-     * Simpan gambar - PATH BENAR
-     */
+ 
     private function saveImage($imageFile)
     {
         if (!$imageFile) {
@@ -90,9 +88,7 @@ class Edukasi extends Component
         }
     }
 
-    /**
-     * Hapus gambar lama
-     */
+ 
     private function deleteOldImage($edukasiId)
     {
         try {
@@ -107,9 +103,6 @@ class Edukasi extends Component
         }
     }
 
-    /**
-     * Simpan data
-     */
     public function save()
     {
         // Validasi
@@ -157,9 +150,6 @@ class Edukasi extends Component
         }
     }
 
-    /**
-     * Edit data
-     */
     public function edit($id)
     { 
         try {
@@ -177,41 +167,27 @@ class Edukasi extends Component
         }
     }
 
-    /**
-     * Hapus data - FIX confirm()
-     */
-    public function delete($id)
+        public function delete($id)
     { 
-        // FIX: Gunakan JavaScript confirm di view, bukan di PHP
-        // Konfirmasi sudah dilakukan di view via onclick
         try {
             $edukasi = EdukasiModel::findOrFail($id);
             
-            // Hapus gambar
             $this->deleteOldImage($id);
-            
-            // Hapus data
             $edukasi->delete();
-            
             $this->loadData();
             session()->flash('success', '✅ Data berhasil dihapus.');
             
         } catch (\Exception $e) {
             session()->flash('error', '❌ Gagal menghapus: ' . $e->getMessage());
         }
-    }
+    }   
 
-    /**
-     * Batal edit
-     */
     public function cancelEdit()
     {
         $this->resetForm();
     }
 
-    /**
-     * Render component
-     */
+
     public function render()
     {
         return view('livewire.edukasi', [

@@ -117,7 +117,7 @@
                         @endif
                     @endif
                     
-                    <input type="file" wire:model="image" accept="image/*"
+                    <input require type="file" wire:model="image" accept="image/*"
                         class="w-full px-3 py-2 border border-gray-300 rounded-lg">
                     @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     <p class="text-xs text-gray-500 mt-1">Max 2MB. Format: JPG, PNG, GIF</p>
@@ -220,12 +220,19 @@
                                                     class="px-3 py-1 text-sm bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 disabled:opacity-50">
                                                     Edit
                                                 </button>
-                                                <button wire:click="delete({{ $item->id }})" 
-                                                    onclick="return window.confirm('Yakin hapus artikel ini?')"
-                                                    wire:loading.attr="disabled"
-                                                    class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 disabled:opacity-50">
+                                                <button onclick="confirmDelete({{ $item->id }})"
+                                                    class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200">
                                                     Hapus
                                                 </button>
+                                                <script>
+                                                    function confirmDelete(id) {
+                                                        if (confirm('Yakin ingin menghapus artikel ini?')) {
+                                                            // Hanya panggil Livewire jika user klik OK
+                                                            @this.call('delete', id);
+                                                        }
+                                                        // Jika klik Cancel, tidak terjadi apa-apa
+                                                    }
+                                                    </script>
                                             </div>
                                         </td>
                                     </tr>

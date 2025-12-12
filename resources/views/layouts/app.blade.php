@@ -22,7 +22,10 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-    <title>{{ $title }}</title>
+    
+    {{-- PERBAIKAN 1: Judul Default --}}
+    {{-- Jika $title tidak dikirim dari controller, pakai "D'Lima Coffee" --}}
+    <title>{{ $title ?? "D'Lima Coffee" }}</title>
 
 </head>
 
@@ -33,8 +36,13 @@
         <x-navbar></x-navbar>
     @endunless
 
-    <div>
-        {{ $slot }}
+    {{-- PERBAIKAN 2: Hybrid Content --}}
+    <div class="min-h-screen">
+        {{-- Jika ada $slot (gaya komponen), tampilkan. Jika tidak, abaikan. --}}
+        {{ $slot ?? '' }}
+
+        {{-- Jika ada @section('content') (gaya extends), tampilkan di sini. --}}
+        @yield('content')
     </div>
 
     @unless (request()->is('login') ||
