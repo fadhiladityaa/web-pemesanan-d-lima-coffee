@@ -31,7 +31,7 @@ Route::get('/', [DashboardController::class, 'index']);
 
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::get('/menu', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/menu', [HomeController::class, 'index'])->name('menu');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
