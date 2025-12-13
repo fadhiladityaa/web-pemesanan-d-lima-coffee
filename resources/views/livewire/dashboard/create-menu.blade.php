@@ -13,6 +13,7 @@
             <span>Pilih Kategori</span>
             <select wire:model="category_id" class="border border-black py-3 w-5/12 px-1 rounded-md" name="warning"
                 id="warning">
+                <option value="">Pilih kategori</option>
                 @foreach ($categories as $c)
                     <option value="{{ $c->id }}">{{ $c->name }}</option>
                 @endforeach
@@ -45,6 +46,7 @@
 
             <select name="pesan" wire:model="pesan" class="border border-black py-3 w-5/12 px-1 rounded-md" name="warning"
                 id="warning">
+                <option value="">Pilih pesan yang akan ditampilkan</option>
                 <option value="Ringan & ramah">Ringan & ramah</option>
                 <option value="Pahit & kuat">Kuat & pahit</option>
             </select>
