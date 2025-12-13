@@ -36,6 +36,15 @@
                         : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
                    Menu
                 </a>
+
+                {{-- 3. PESANAN SAYA --}}
+                <a href="{{ route('pesanan.saya') }}" 
+                   class="relative py-1 transition-all duration-300 
+                   {{ Request::routeIs('pesanan.saya') 
+                        ? 'text-white font-bold border-b-2 border-white' 
+                        : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
+                   Pesanan Saya
+                </a>
                 
                 {{-- 3. EDUKASI --}}
                 <a href="{{ url('/edukasi') }}" 

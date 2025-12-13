@@ -6,7 +6,7 @@ export default defineConfig({
     //     'host': '0.0.0.0',
     //     hmr: {
     //         // *** PENTING: Ganti dengan IP Lokal Anda ***
-    //         host: '192.168.1.10', 
+    //         host: '192.168.1.9', 
     //     },
     // },
     plugins: [
