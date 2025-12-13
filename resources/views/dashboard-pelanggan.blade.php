@@ -1,12 +1,8 @@
-{{-- 
-    DASHBOARD PELANGGAN (FIXED)
-    - Perbaikan: Menghapus komentar // di dalam tag blade yang menyebabkan ParseError.
---}}
 @extends('layouts.app')
 
 @section('content')
 
-    <div class="min-h-screen bg-[#f8f4e9] py-20">
+    <div class="min-h-screen bg-[#f8f4e9] py-28">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 px-4 space-y-10">
 
             {{-- HEADER JUDUL --}}
