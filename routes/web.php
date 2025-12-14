@@ -22,7 +22,7 @@ use App\Livewire\Edukasi;
 
 
 // route ke home
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
 
 // Route::get('/menu', [HomeController::class, 'index'])->middleware('auth')->name('menu');
@@ -43,23 +43,20 @@ Route::post('/login', [loginController::class, 'authenticate']);
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
 // route untuk profile
-Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware(('auth'));
+Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware('auth');
 
 Route::get('/pesanan-masuk/detail-pesanan/{order}', DetailPesanan::class)
-    ->name('detail.pesanan');
+    ->name('detail.pesanan')->middleware('auth');
 
 Route::get('/checkout', function () {
     return view('checkout-view', ['title' => 'Halaman Checkout']);
-})->name('checkout');
+})->name('checkout')->middleware('auth');
 
 
 Route::get('/checkout-succees', function () {
     return view('checkout-succeed', ['title' => 'checkout-success']);
-})->name('checkout.success');
+})->name('checkout.success')->middleware('auth');
 
-Route::get('/profil-pengguna', function () {
-    return view('profil-pengguna', ['title' => 'profil-pengguna']);
-})->name('profil-pengguna');
 
 Route::get('/Login', function () {
     return view('Login', ['title' => 'Login']);
@@ -81,10 +78,9 @@ Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.
 Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
 
 
-// ... route lainnya tetap
 
 //  EDUKASI UNTUK PELANGGAN - gunakan component yang sudah ada
-Route::get('/edukasi', \App\Livewire\EdukasiPelanggan::class)->name('edukasi');
+Route::get('/edukasi', \App\Livewire\EdukasiPelanggan::class)->name('edukasi')->middleware('auth');
 
 //  EDUKASI MANAGEMENT UNTUK ADMIN (tidak berubah)
 
