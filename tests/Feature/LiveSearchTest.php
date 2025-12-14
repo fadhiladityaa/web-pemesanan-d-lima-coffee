@@ -6,19 +6,22 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Daftar_menu;
+use App\Models\MenuCategory;
+use Livewire\Livewire;
+use App\Livewire\Products;
+
 
 class LiveSearchTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
-    public function test_search_with_valid_keyword_shows_results(): void
+
+    public function test_search_with_valid_keyword(): void
     {
-        Daftar_menu::factory()->create(['name' => 'Latte']);
+        $category = MenuCategory::factory()->create(['name' => 'Coffee']);
+        Daftar_menu::factory()->create(['nama_menu' => 'Latte', 'pesan' => 'test pesan', 'category_id' => $category->id]);
 
-        $response = $this->get('/search?query=Latte');
-
-        $response->assertSee('Latte');
+        Livewire::test(Products::class)
+            ->set('search', 'Latte')
+            ->assertSee('Latte');
     }
 }
