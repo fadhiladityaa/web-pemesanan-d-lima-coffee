@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Daftar_menu;
 use App\Models\Cart as CartModel;
 use App\Models\CartItem;
+use App\Models\MenuCategory;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,7 +53,8 @@ class Products extends Component
 
 
         return view('livewire.products', [
-            'menus' => $query->get()
+            'menus' => $query->get(),
+            'categories' => MenuCategory::all(),
         ]);
     }
 }
