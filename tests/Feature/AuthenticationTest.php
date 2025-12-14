@@ -61,7 +61,7 @@ class AuthenticationTest extends TestCase
         $response = $this->post('/login', [
             'noHp' => '085756956684',
             'password' => 'wrongpass',
-        ]);
+        ], ['HTTP_REFERER' => '/login']);
 
         $response->assertRedirect('/login');
         $this->assertGuest();
@@ -70,6 +70,17 @@ class AuthenticationTest extends TestCase
     public function test_guest_cannot_access_dashboard(): void
     {
         $response = $this->get('/dashboard/admin');
+
+        $response->assertRedirect('/login');
+        $this->assertGuest();
+    }
+
+    public function test_user_can_logout(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->post('/logout');
 
         $response->assertRedirect('/login');
         $this->assertGuest();
