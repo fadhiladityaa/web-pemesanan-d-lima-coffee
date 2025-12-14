@@ -15,6 +15,7 @@ class MenuManagement extends Component
         Daftar_menu::find($id)->delete();
         session()->flash('message', 'Menu berhasil dihapus.');
     }
+    
     #[Title('Menu Management')]
     #[Layout('layouts.admin')]
     public function render()

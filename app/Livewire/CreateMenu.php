@@ -21,7 +21,7 @@ class CreateMenu extends Component
     public $nama_menu = '';
 
     #[Validate('required|numeric|min:0')]
-    public $harga = 0;
+    public $harga = null;
 
     #[Validate('nullable|image|mimes:jpg,jpeg,png|max:2048')]
     public $gambar;
@@ -34,7 +34,7 @@ class CreateMenu extends Component
     public $energi_total;
 
     #[Validate('required|numeric|min:0')]
-    public $takaran_saji;  
+    public $takaran_saji;
 
     #[Validate('nullable|numeric|min:0')]
     public $protein;
@@ -59,12 +59,13 @@ class CreateMenu extends Component
 
     #[Validate('nullable|string|max:500')]
     public $batas_konsumsi;
-    
+
     #[Validate('required|string|max:500')]
     public $pesan = '';
-    
-    #[Validate('required|string|max:500')]
-    public $category_id = '';
+
+    #[Validate('required|integer')]
+    public $category_id;
+
 
     // --- Bahan Baku (array dinamis) ---
     public $bahanBaku = [

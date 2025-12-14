@@ -17,7 +17,7 @@ class LiveSearchTest extends TestCase
 
     public function test_search_with_valid_keyword(): void
     {
-        $category = MenuCategory::factory()->create(['name' => 'Coffee']);
+        $category = MenuCategory::factory()->create();
         Daftar_menu::factory()->create(['nama_menu' => 'Latte', 'pesan' => 'test pesan', 'category_id' => $category->id]);
 
         Livewire::test(Products::class)
@@ -34,7 +34,7 @@ class LiveSearchTest extends TestCase
 
     public function test_search_is_case_insensitive(): void
     {
-        $category = MenuCategory::factory()->create(['name' => 'Coffee']);
+        $category = MenuCategory::factory()->create();
         Daftar_menu::factory()->create(['nama_menu' => 'Espresso', 'pesan' => 'test pesan', 'category_id' => $category->id]);
 
         Livewire::test(Products::class)
