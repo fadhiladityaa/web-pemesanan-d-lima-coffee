@@ -33,11 +33,11 @@ Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::get('/menu', [HomeController::class, 'index'])->name('menu');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');;
 
 // route untuk login 
 Route::get('/login', [loginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [loginController::class, 'authenticate']);
+Route::post('/login', [loginController::class, 'authenticate'])->middleware('gust');
 
 // route  untuk logout
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
@@ -56,11 +56,6 @@ Route::get('/checkout', function () {
 Route::get('/checkout-succees', function () {
     return view('checkout-succeed', ['title' => 'checkout-success']);
 })->name('checkout.success')->middleware('auth');
-
-
-Route::get('/Login', function () {
-    return view('Login', ['title' => 'Login']);
-})->name('Login');
 
 
 Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {

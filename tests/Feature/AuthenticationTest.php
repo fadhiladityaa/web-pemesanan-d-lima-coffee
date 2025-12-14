@@ -63,13 +63,13 @@ class AuthenticationTest extends TestCase
             'password' => 'wrongpass',
         ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/login');
         $this->assertGuest();
     }
 
     public function test_guest_cannot_access_dashboard(): void
     {
-        $response = $this->get('/dashboard');
+        $response = $this->get('/dashboard/admin');
 
         $response->assertRedirect('/login');
         $this->assertGuest();
