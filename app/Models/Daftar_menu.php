@@ -33,4 +33,9 @@ class Daftar_menu extends Model
         return $this->belongsTo(MenuCategory::class);
     }
 
+    public function promos()
+    {
+        return $this->belongsToMany(Promo::class, 'menu_promo', 'menu_id', 'promo_id');
+    }
+
 }

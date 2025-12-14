@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('menu_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->unique(); 
+            $table->string('name', 50)->unique()->default('coffee'); 
             $table->timestamps();
         });
     }

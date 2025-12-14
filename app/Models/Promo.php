@@ -21,6 +21,12 @@ class Promo extends Model
         'status',
     ];
 
+    protected $guarded = [];
+
+        public function menus()
+    {
+        return $this->belongsToMany(Daftar_menu::class, 'menu_promo', 'menu_id', 'promo_id');
+    }
     // Mengubah format tanggal agar otomatis jadi objek Carbon (Mudah diolah)
     protected $casts = [
         'tanggal_mulai' => 'date',

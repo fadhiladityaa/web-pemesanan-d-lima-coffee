@@ -1,13 +1,9 @@
-{{-- 
-    DASHBOARD PELANGGAN (FIXED)
-    - Perbaikan: Menghapus komentar // di dalam tag blade yang menyebabkan ParseError.
---}}
 @extends('layouts.app')
 
 @section('content')
 
     <div class="min-h-screen bg-[#f8f4e9] py-20">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 px-4 space-y-10">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 px-4 space-y-20">
 
             {{-- HEADER JUDUL --}}
             <div class="text-center">
@@ -42,7 +38,6 @@
                             <p class="text-[#8d6e63] text-sm uppercase tracking-widest font-semibold">Kode Pesanan</p>
                             <p class="text-[#5c4033] font-serif font-bold text-2xl tracking-wide">#{{ $lastOrder->kode_pesanan ?? $lastOrder->id }}</p>
                             <div class="mt-2">
-                                {{-- PERBAIKAN DI SINI: Komentar // dihapus --}}
                                 <span class="px-4 py-1.5 rounded-full text-sm font-bold shadow-sm
                                     {{ $lastOrder->status == 'selesai' 
                                         ? 'bg-[#e8f5e9] text-[#2e7d32] border border-[#c8e6c9]'
@@ -94,7 +89,7 @@
                                 <h3 class="font-serif font-bold text-xl text-[#5c4033] mb-2 line-clamp-1 group-hover:text-[#8d6e63] transition">{{ $product->name }}</h3>
                                 <p class="text-[#8d6e63] text-sm mb-6 line-clamp-2 flex-grow">{{ $product->deskripsi }}</p>
                                 <div class="flex items-center justify-between mt-auto pt-4 border-t border-[#f0e6e0]">
-                                    <p class="font-serif font-bold text-2xl text-[#6d4c41]">Isi: Rp {{ number_format($product->harga, 0, ',', '.') }}</p>
+                                    <p class="font-serif font-bold text-2xl text-[#6d4c41]">Rp {{ number_format($product->harga, 0, ',', '.') }}</p>
                                     <button class="w-12 h-12 rounded-full bg-[#6d4c41] text-amber-50 flex items-center justify-center shadow-md hover:bg-[#5c4033] hover:scale-110 transition duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -134,8 +129,8 @@
                     @endif
                 </div>
 
-                {{-- Promo Card --}}
-                <div class="bg-white p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-[#e8dfd8] relative overflow-hidden">
+                {{-- Promo Card (BAGIAN YANG DIUPDATE) --}}
+                <div class="bg-white p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-[#e8dfd8] relative overflow-hidden flex flex-col h-full">
                     <h2 class="font-serif text-3xl font-bold mb-8 text-[#5c4033] text-center italic relative z-10" style="font-family: 'Playfair Display', serif;">
                         Penawaran Spesial
                     </h2>
@@ -143,23 +138,59 @@
                     <div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] z-0"></div>
 
                     @if(isset($promos) && count($promos) > 0)
-                        <div class="space-y-6 relative z-10">
+                        <div class="space-y-6 relative z-10 flex-grow">
                             @foreach($promos as $promo)
-                                <div class="group flex flex-col sm:flex-row items-center gap-6 bg-gradient-to-r from-[#fffaf5] to-[#fffdfa] p-5 rounded-[1.5rem] border border-[#f0e6e0] shadow-sm hover:shadow-md transition-all duration-300">
-                                    <div class="flex-1 text-center sm:text-left">
-                                        <h3 class="font-serif font-bold text-lg text-[#5c4033] group-hover:text-[#8d6e63] transition">{{ $promo->judul }}</h3>
-                                        <div class="inline-block mt-2 px-3 py-1 bg-amber-100 border border-amber-200 rounded-lg">
-                                            <p class="text-amber-900 text-xs font-bold tracking-wider uppercase">Kode: {{ $promo->kode_promo }}</p>
+                                <div class="group flex flex-col sm:flex-row items-center gap-6 bg-gradient-to-r from-[#fffaf5] to-[#fffdfa] p-5 rounded-[1.5rem] border border-[#f0e6e0] shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                                    
+                                    {{-- Hiasan Pita Diskon --}}
+                                    @if(isset($promo->persentase_diskon))
+                                        <div class="absolute top-0 right-0 w-16 h-16 bg-red-500 transform rotate-45 translate-x-8 -translate-y-8 z-0 opacity-10 group-hover:opacity-100 transition duration-500"></div>
+                                    @endif
+
+                                    <div class="flex-1 text-center sm:text-left z-10">
+                                        <div class="flex items-center justify-center sm:justify-start gap-2 mb-1">
+                                            <h3 class="font-serif font-bold text-lg text-[#5c4033] group-hover:text-[#8d6e63] transition">{{ $promo->judul }}</h3>
+                                            
+                                            {{-- Badge Persentase Diskon --}}
+                                            @if(isset($promo->persentase_diskon))
+                                                <span class="bg-red-100 text-red-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-red-200">
+                                                    -{{ $promo->persentase_diskon }}%
+                                                </span>
+                                            @endif
+                                        </div>
+                                        
+                                        <div class="inline-block mt-2 px-3 py-1 bg-amber-100 border border-amber-200 rounded-lg group-hover:bg-amber-200 transition">
+                                            <p class="text-amber-900 text-xs font-bold tracking-wider uppercase flex items-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3">
+                                                    <path fill-rule="evenodd" d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm2.25 8.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" clip-rule="evenodd" />
+                                                </svg>
+                                                KODE: {{ $promo->kode_promo }}
+                                            </p>
                                         </div>
                                     </div>
-                                    <a href="#" class="px-6 py-2.5 bg-[#6d4c41] text-amber-50 text-sm font-bold rounded-full shadow hover:bg-[#5c4033] hover:shadow-md active:scale-95 transition-all">
-                                        Cek Sekarang!
+
+                                    {{-- TOMBOL INTEGRASI (KE MENU DENGAN ID PROMO) --}}
+                                    <a href="{{ route('menu', ['promo_id' => $promo->id]) }}" 
+                                       class="z-10 px-6 py-2.5 bg-[#6d4c41] text-amber-50 text-sm font-bold rounded-full shadow hover:bg-[#5c4033] hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-2">
+                                        Lihat Menu
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                        </svg>
                                     </a>
                                 </div>
                             @endforeach
                         </div>
+                        
+                        <div class="mt-6 text-center relative z-10">
+                            <p class="text-xs text-[#9c8273] italic">*Syarat & ketentuan berlaku.</p>
+                        </div>
                     @else
-                        <p class="text-[#8d6e63] text-center py-6 relative z-10">Tidak ada promo saat ini.</p>
+                        <div class="flex flex-col items-center justify-center h-64 text-[#8d6e63] relative z-10">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mb-3 opacity-50">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12" />
+                              </svg>
+                            <p>Nantikan promo menarik lainnya!</p>
+                        </div>
                     @endif
                 </div>
             </div>

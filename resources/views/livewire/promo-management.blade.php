@@ -25,6 +25,7 @@
                     {{ $isEditMode ? 'Edit Promo' : 'Buat Promo Baru' }}
                 </h3>
                 
+                {{-- Tambahkan wire:loading.attr="disabled" agar tombol mati saat upload --}}
                 <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}" enctype="multipart/form-data">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         
@@ -71,6 +72,28 @@
                             <input type="date" wire:model="tanggal_berakhir" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block w-full mt-1">
                             @error('tanggal_berakhir') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
+                        
+                        {{-- Pilih Menu (Code Tambahan Sebelumnya) --}}
+                        <div class="col-span-1 md:col-span-2 mt-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Pilih Menu yang Didiskon:
+                            </label>
+                            <div class="bg-gray-50 border border-gray-300 rounded-lg p-4 h-48 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-3">
+                                @if(isset($allMenus) && $allMenus->count() > 0)
+                                    @foreach($allMenus as $menu)
+                                        <label class="flex items-center space-x-3 p-2 bg-white rounded border border-gray-100 shadow-sm hover:bg-gray-50 cursor-pointer">
+                                            <input type="checkbox" wire:model="selectedMenus" value="{{ $menu->id }}" class="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            <div class="flex flex-col">
+                                                <span class="text-sm font-semibold text-gray-800">{{ $menu->nama_menu }}</span>
+                                                <span class="text-xs text-gray-500">Rp {{ number_format($menu->harga, 0, ',', '.') }}</span>
+                                            </div>
+                                        </label>
+                                    @endforeach
+                                @else
+                                    <p class="text-gray-500 text-sm italic col-span-2">Belum ada data menu.</p>
+                                @endif
+                            </div>
+                        </div>
 
                         {{-- Deskripsi --}}
                         <div class="md:col-span-2">
@@ -78,10 +101,11 @@
                             <textarea wire:model="deskripsi" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block w-full mt-1" rows="3"></textarea>
                         </div>
 
-                        {{-- Upload Gambar --}}
+                        {{-- Upload Gambar (UPDATED) --}}
                         <div class="md:col-span-2">
                             <label class="block font-medium text-sm text-gray-700 mb-2">Banner Promo</label>
                             
+                            {{-- Preview Area --}}
                             @if ($gambar)
                                 <div class="mb-2">
                                     <p class="text-xs text-green-600 mb-1">Preview Gambar Baru:</p>
@@ -94,7 +118,17 @@
                                 </div>
                             @endif
 
+                            {{-- Input File --}}
                             <input type="file" wire:model="gambar" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            
+                            {{-- Informasi Limit 10MB --}}
+                            <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG. Maksimal ukuran: <span class="font-bold">10MB</span>.</p>
+                            
+                            {{-- Loading State --}}
+                            <div wire:loading wire:target="gambar" class="text-sm text-blue-600 mt-1">
+                                Sedang mengupload gambar...
+                            </div>
+
                             @error('gambar') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
 
@@ -104,7 +138,9 @@
                         <button type="button" wire:click="cancel" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow-md transition">
                             Batal
                         </button>
-                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded shadow-md transition">
+                        
+                        {{-- Disable tombol saat sedang upload gambar agar tidak error --}}
+                        <button type="submit" wire:loading.attr="disabled" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded shadow-md transition disabled:opacity-50">
                             {{ $isEditMode ? 'Simpan Perubahan' : 'Simpan Promo' }}
                         </button>
                     </div>
