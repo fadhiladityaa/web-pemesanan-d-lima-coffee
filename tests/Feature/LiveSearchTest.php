@@ -25,7 +25,7 @@ class LiveSearchTest extends TestCase
             ->assertSee('Latte');
     }
 
-    public function test_search_with_invalid_keyword_shows_message(): void
+    public function test_search_with_invalid_keyword(): void
     {
         Livewire::test(Products::class)
             ->set('search', 'Teh Hijau')
