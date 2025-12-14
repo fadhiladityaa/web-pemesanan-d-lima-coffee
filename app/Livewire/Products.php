@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\Daftar_menu;
 use App\Models\Cart as CartModel;
 use App\Models\CartItem;
-use App\Models\Promo; // [BARU] Jangan lupa import Promo
+use App\Models\Promo; 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,14 +14,14 @@ class Products extends Component
     // Variabel yang sudah ada
     public $search = '';
 
-    // [BARU] Variabel untuk filter
+    // Variabel untuk filter
     public $promo_id = null; 
     public $kategoriFilter = ''; 
 
-    // [BARU] Agar parameter ?promo_id=... di URL bisa dibaca
+    // Agar parameter ?promo_id=... di URL bisa dibaca
     protected $queryString = ['search', 'promo_id', 'kategoriFilter'];
 
-    // [BARU] Menangkap ID promo saat halaman dimuat
+    // Menangkap ID promo saat halaman dimuat
     public function mount()
     {
         if(request()->has('promo_id')){
@@ -29,12 +29,12 @@ class Products extends Component
         }
     }
 
-    // --- FITUR ADD TO CART (TIDAK SAYA UBAH, TETAP SAMA) ---
+    // --- FITUR ADD TO CART (SUDAH DIPERBAIKI LOGIKANYA) ---
     public function addToCart($menu_id)
     {
         $user_id = Auth::id();
         
-        // Cek login (Opsional: Jika user belum login, arahkan ke login)
+        // Cek login
         if(!$user_id) {
             return redirect()->route('login');
         }
@@ -53,11 +53,29 @@ class Products extends Component
         } else {
             $menu = Daftar_menu::findOrfail($menu_id);
 
+            // ==========================================
+            // [LOGIKA BARU] Hitung Harga Diskon Dulu
+            // ==========================================
+            $finalPrice = $menu->harga; // Default harga normal
+
+            // Cek apakah user sedang membuka halaman lewat link promo?
+            if ($this->promo_id) {
+                $promo = Promo::find($this->promo_id);
+
+                // Validasi: Pastikan promo ada & Menu ini BENAR-BENAR terdaftar di promo tersebut
+                if ($promo && $menu->promos()->where('promos.id', $this->promo_id)->exists()) {
+                    // Rumus hitung diskon
+                    $diskon = $menu->harga * ($promo->persentase_diskon / 100);
+                    $finalPrice = $menu->harga - $diskon;
+                }
+            }
+            // ==========================================
+
             CartItem::create([
                 'cart_id' => $cart->id,
                 'daftar_menu_id' => $menu->id,
                 'quantity' => 1,
-                'price' => $menu->harga,
+                'price' => $finalPrice, // <--- PENTING: Pakai harga yang sudah dihitung
             ]);
         };
         $this->dispatch('cart_updated');
@@ -67,17 +85,17 @@ class Products extends Component
     {
         $query = Daftar_menu::query();
 
-        // 1. Filter Pencarian (Code Lama)
+        // 1. Filter Pencarian
         if ($this->search) {
             $query->where('nama_menu', 'like', '%' . $this->search . '%');
         }
 
-        // 2. [BARU] Filter Kategori (Jika ada tombol kategori di view)
+        // 2. Filter Kategori
         if ($this->kategoriFilter) {
             $query->where('kategori', $this->kategoriFilter);
         }
 
-        // 3. [BARU] Filter Promo
+        // 3. Filter Promo
         $activePromo = null;
         if ($this->promo_id) {
             // Filter menu yang punya relasi dengan promo ini
@@ -91,11 +109,11 @@ class Products extends Component
 
         return view('livewire.products', [
             'menus' => $query->get(),
-            'activePromo' => $activePromo // Kirim data promo ke view
+            'activePromo' => $activePromo 
         ]);
     }
 
-    // [BARU] Fungsi Reset Filter (Opsional, untuk tombol 'Lihat Semua Menu')
+    // Fungsi Reset Filter
     public function resetFilters()
     {
         $this->search = '';
