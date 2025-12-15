@@ -5,7 +5,9 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads; // Wajib untuk upload gambar
 use App\Models\Promo;
+use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Layout;
 
 class PromoManagement extends Component
 {
@@ -14,7 +16,7 @@ class PromoManagement extends Component
     // Variabel Form
     public $judul, $deskripsi, $kode_promo, $persentase_diskon, $gambar, $status = 'aktif';
     public $tanggal_mulai, $tanggal_berakhir;
-    
+
     // Variabel System
     public $promo_id;
     public $isEditMode = false;
@@ -32,14 +34,15 @@ class PromoManagement extends Component
         'gambar' => 'nullable|image|max:2048', // Max 2MB
     ];
 
+    #[Title('Promo Management')]
+    #[Layout('layouts.admin')]
     public function render()
     {
         // Ambil data promo terbaru
         $promos = Promo::latest()->get();
-        
         return view('livewire.promo-management', [
-            'promos' => $promos
-        ])->layout('layouts.app'); // Pastikan pakai layout admin jika ada, atau app biasa
+            'promos' => $promos,
+        ]);
     }
 
     // Reset Form
@@ -102,7 +105,7 @@ class PromoManagement extends Component
         $this->tanggal_berakhir = $promo->tanggal_berakhir->format('Y-m-d');
         $this->status = $promo->status;
         $this->gambar_lama = $promo->gambar;
-        
+
         $this->isEditMode = true;
         $this->showForm = true;
     }
@@ -120,11 +123,11 @@ class PromoManagement extends Component
         ]);
 
         $promo = Promo::find($this->promo_id);
-        
+
         $imagePath = $promo->gambar; // Default pakai gambar lama
         if ($this->gambar) {
             // Hapus gambar lama jika ada dan upload baru
-            if($promo->gambar) {
+            if ($promo->gambar) {
                 Storage::disk('public')->delete($promo->gambar);
             }
             $imagePath = $this->gambar->store('promos', 'public');
@@ -149,7 +152,7 @@ class PromoManagement extends Component
     public function delete($id)
     {
         $promo = Promo::find($id);
-        if($promo->gambar) {
+        if ($promo->gambar) {
             Storage::disk('public')->delete($promo->gambar);
         }
         $promo->delete();
