@@ -4,19 +4,42 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Daftar_menu;
+use App\Models\KandunganMenu;
+use App\Models\MenuCategory;
 
 class MenuSeeder extends Seeder
 {
     public function run(): void
     {
-        // Menu 1
-        $menu = [
-            [
-                'nama_menu' => 'Kopi Susu D’Lima',
-                'harga' => 12000,
-                'gambar' => 'kopi-susu.jpg',
-                'deskripsi' => 'Kopi susu khas D’Lima dengan rasa creamy dan sedikit pahit, cocok untuk pagi hari.'
-            ],
-        ];
+        // Pastikan kategori ada
+        $coffeeCategory = MenuCategory::firstOrCreate(['name' => 'Coffee']);
+
+        // Contoh menu Latte
+        $menu = Daftar_menu::create([
+            'nama_menu'     => 'Latte',
+            'category_id'   => $coffeeCategory->id,
+            'harga'         => 25000,
+            'gambar'        => 'latte.jpg', // bisa diganti sesuai storage
+            'deskripsi'     => 'Kopi susu lembut',
+            'pesan'         => 'Best seller',
+        ]);
+
+        KandunganMenu::create([
+            'energi_total'  => 100,
+            'takaran_saji'  => 200,
+            'protein'       => 5,
+            'lemak_total'   => 2,
+            'lemak_jenuh'   => 1,
+            'karbohidrat'   => 10,
+            'gula'          => 3,
+            'garam_natrium' => 1,
+            'kafein'        => 0,
+            'batas_konsumsi' => 'Aman dikonsumsi',
+        ]);
+
+        $menu->bahanBaku()->createMany([
+            ['nama_bahan' => 'Kopi Arabica', 'takaran' => '50gr'],
+            ['nama_bahan' => 'Susu Full Cream', 'takaran' => '100ml'],
+        ]);
     }
 }
