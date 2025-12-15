@@ -85,7 +85,7 @@
     @empty
         <div class="text-center py-16">
             <p class="text-gray-400 text-lg">Belum ada pesanan.</p>
-            <a href="/"
+            <a href="{{ route('menu') }}"
                 class="mt-4 inline-block px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
                 Mulai Belanja
             </a>
