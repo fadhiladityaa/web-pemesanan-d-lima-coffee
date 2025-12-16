@@ -9,25 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+        public function up(): void
     {
         Schema::create('promos', function (Blueprint $table) {
-            $table->id(); // ID Unik (Otomatis)
-            
-            // --- KOLOM YANG KITA TAMBAHKAN ---
-            $table->string('judul');                // Nama Promo
-            $table->text('deskripsi')->nullable();  // Penjelasan (Boleh kosong)
-            $table->string('kode_promo')->unique(); // Kode Voucher (Harus beda satu sama lain)
-            $table->integer('persentase_diskon');   // Besar diskon (misal: 10, 20, 50)
-            $table->string('gambar')->nullable();   // Link foto banner (Boleh kosong)
-            
-            $table->date('tanggal_mulai');          // Kapan promo dimulai
-            $table->date('tanggal_berakhir');       // Kapan promo berakhir
-            
-            $table->enum('status', ['aktif', 'tidak_aktif'])->default('aktif'); // Status on/off
-            // ---------------------------------
-
-            $table->timestamps(); // Created_at & Updated_at
+            $table->id();
+            // Pastikan nama kolom ini 'judul', bukan 'title' atau 'name'
+            $table->string('judul'); 
+            $table->text('deskripsi')->nullable();
+            $table->string('kode_promo')->unique();
+            $table->integer('persentase_diskon');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_berakhir');
+            $table->string('status')->default('aktif'); // aktif / tidak_aktif
+            $table->string('gambar')->nullable();
+            $table->timestamps();
         });
     }
 

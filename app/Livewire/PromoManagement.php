@@ -3,10 +3,11 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\WithFileUploads; // Wajib untuk upload gambar
+use Livewire\WithFileUploads;
 use App\Models\Promo;
-use Livewire\Attributes\Title;
+use App\Models\Daftar_menu; // Pastikan model ini benar sesuai codinganmu
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
 class PromoManagement extends Component
@@ -21,7 +22,10 @@ class PromoManagement extends Component
     public $promo_id;
     public $isEditMode = false;
     public $showForm = false;
-    public $gambar_lama; // Untuk menyimpan path gambar saat edit
+    public $gambar_lama; 
+
+    // [BARU] Variabel untuk menampung Menu yang dipilih
+    public $selectedMenus = []; 
 
     // Validasi
     protected $rules = [
@@ -31,7 +35,7 @@ class PromoManagement extends Component
         'tanggal_mulai' => 'required|date',
         'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
         'status' => 'required',
-        'gambar' => 'nullable|image|max:2048', // Max 2MB
+        'gambar' => 'nullable|image|max:2048', 
     ];
 
     #[Title('Promo Management')]
@@ -40,9 +44,14 @@ class PromoManagement extends Component
     {
         // Ambil data promo terbaru
         $promos = Promo::latest()->get();
+        
+        // [BARU] Ambil semua menu untuk ditampilkan di checkbox
+        $allMenus = Daftar_menu::all(); 
+        
         return view('livewire.promo-management', [
             'promos' => $promos,
-        ]);
+            'allMenus' => $allMenus // Kirim data menu ke view
+        ]); 
     }
 
     // Reset Form
@@ -59,6 +68,9 @@ class PromoManagement extends Component
         $this->status = 'aktif';
         $this->promo_id = null;
         $this->isEditMode = false;
+        
+        // [BARU] Reset pilihan menu
+        $this->selectedMenus = []; 
     }
 
     public function create()
@@ -69,7 +81,6 @@ class PromoManagement extends Component
 
     public function store()
     {
-        // Validasi khusus create (gambar wajib jika mau strict, tapi nullable oke)
         $this->validate();
 
         $imagePath = null;
@@ -77,7 +88,8 @@ class PromoManagement extends Component
             $imagePath = $this->gambar->store('promos', 'public');
         }
 
-        Promo::create([
+        // Simpan Data Promo
+        $promo = Promo::create([
             'judul' => $this->judul,
             'deskripsi' => $this->deskripsi,
             'kode_promo' => $this->kode_promo,
@@ -87,6 +99,10 @@ class PromoManagement extends Component
             'status' => $this->status,
             'gambar' => $imagePath,
         ]);
+
+        // [BARU] Simpan Relasi Menu yang dipilih ke tabel pivot
+        // Pastikan Model Promo punya fungsi menus()
+        $promo->menus()->sync($this->selectedMenus);
 
         session()->flash('message', 'Promo berhasil dibuat!');
         $this->resetInputFields();
@@ -106,16 +122,19 @@ class PromoManagement extends Component
         $this->status = $promo->status;
         $this->gambar_lama = $promo->gambar;
 
+        // [BARU] Ambil menu yang sudah tercentang sebelumnya
+        // pluck('id') mengambil hanya ID-nya saja untuk dimasukkan ke array
+        $this->selectedMenus = $promo->menus->pluck('id')->toArray();
+        
         $this->isEditMode = true;
         $this->showForm = true;
     }
 
     public function update()
     {
-        // Validasi update (ignore unique kode_promo untuk id ini)
         $this->validate([
             'kode_promo' => 'required|string|max:20|unique:promos,kode_promo,' . $this->promo_id,
-            'gambar' => 'nullable|image|max:2048',
+            'gambar' => 'nullable|image|max:10240',
             'judul' => 'required',
             'persentase_diskon' => 'required|integer',
             'tanggal_mulai' => 'required|date',
@@ -123,11 +142,10 @@ class PromoManagement extends Component
         ]);
 
         $promo = Promo::find($this->promo_id);
-
-        $imagePath = $promo->gambar; // Default pakai gambar lama
+        
+        $imagePath = $promo->gambar; 
         if ($this->gambar) {
-            // Hapus gambar lama jika ada dan upload baru
-            if ($promo->gambar) {
+            if($promo->gambar) {
                 Storage::disk('public')->delete($promo->gambar);
             }
             $imagePath = $this->gambar->store('promos', 'public');
@@ -144,6 +162,9 @@ class PromoManagement extends Component
             'gambar' => $imagePath,
         ]);
 
+        // [BARU] Update Relasi Menu
+        $promo->menus()->sync($this->selectedMenus);
+
         session()->flash('message', 'Promo berhasil diperbarui!');
         $this->resetInputFields();
         $this->showForm = false;
@@ -155,6 +176,10 @@ class PromoManagement extends Component
         if ($promo->gambar) {
             Storage::disk('public')->delete($promo->gambar);
         }
+        
+        // [BARU] Hapus relasi menu (opsional, tapi biasanya otomatis jika pakai cascade di migrasi)
+        $promo->menus()->detach();
+        
         $promo->delete();
         session()->flash('message', 'Promo berhasil dihapus.');
     }
