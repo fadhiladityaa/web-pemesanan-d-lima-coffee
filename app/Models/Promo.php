@@ -25,7 +25,7 @@ class Promo extends Model
 
         public function menus()
     {
-        return $this->belongsToMany(Daftar_menu::class, 'menu_promo', 'daftar_menu_id', 'promo_id');
+        return $this->belongsToMany(Daftar_menu::class, 'menu_promo',  'promo_id', 'daftar_menu_id');
     }
     // Mengubah format tanggal agar otomatis jadi objek Carbon (Mudah diolah)
     protected $casts = [
