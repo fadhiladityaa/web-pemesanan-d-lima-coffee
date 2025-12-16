@@ -6,7 +6,7 @@ use App\Models\Daftar_menu;
 use App\Models\Cart as CartModel;
 use App\Models\CartItem;
 use App\Models\MenuCategory;
-use App\Models\Promo; 
+use App\Models\Promo;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,8 +16,8 @@ class Products extends Component
     public $search = '';
 
     // Variabel untuk filter
-    public $promo_id = null; 
-    public $kategoriFilter = ''; 
+    public $promo_id = null;
+    public $kategoriFilter = '';
 
     // Agar parameter ?promo_id=... di URL bisa dibaca
     protected $queryString = ['search', 'promo_id', 'kategoriFilter'];
@@ -25,7 +25,7 @@ class Products extends Component
     // Menangkap ID promo saat halaman dimuat
     public function mount()
     {
-        if(request()->has('promo_id')){
+        if (request()->has('promo_id')) {
             $this->promo_id = request()->query('promo_id');
         }
     }
@@ -34,9 +34,9 @@ class Products extends Component
     public function addToCart($menu_id)
     {
         $user_id = Auth::id();
-        
+
         // Cek login
-        if(!$user_id) {
+        if (!$user_id) {
             return redirect()->route('login');
         }
 
@@ -100,28 +100,32 @@ class Products extends Component
         $activePromo = null;
         if ($this->promo_id) {
             // Filter menu yang punya relasi dengan promo ini
-            $query->whereHas('promos', function($q) {
+            $query->whereHas('promos', function ($q) {
                 $q->where('promos.id', $this->promo_id);
             });
-            
+
             // Ambil data promo untuk judul banner
             $activePromo = Promo::find($this->promo_id);
         }
 
-        $coffee = MenuCategory::where('name', 'Coffee')->first();
-        $non_coffee = MenuCategory::where('name', 'Non Coffee')->first();
-        $moctail = MenuCategory::where('name', 'Moctail')->first();
-        $makanan_ringan = MenuCategory::where('name', 'Makanan Ringan')->first();
-        $makanan_berat = MenuCategory::where('name', 'Makanan Berat')->first();
+        $categories = MenuCategory::whereIn('name', [
+            'Coffee',
+            'Non Coffee',
+            'Moctail',
+            'Makanan Ringan',
+            'Makanan Berat'
+        ])->with('daftar_menus')
+            ->get()
+            ->keyBy('name');
 
         return view('livewire.products', [
             'menus' => $query->get(),
-            'coffee' => $coffee->daftar_menus,
-            'non_coffee' => $non_coffee->daftar_menus,
-            'moctail' => $moctail->daftar_menus,
-            'makanan_ringan' => $makanan_ringan->daftar_menus,
-            'makanan_berat' => $makanan_berat->daftar_menus,
-            'activePromo' => $activePromo 
+            'coffee' => $categories['Coffee']->daftar_menus ?? collect(),
+            'non_coffee' => $categories['Non Coffee']->daftar_menus ?? collect(),
+            'moctail' => $categories['Moctail']->daftar_menus ?? collect(),
+            'makanan_ringan' => $categories['Makanan Ringan']->daftar_menus ?? collect(),
+            'makanan_berat' => $categories['Makanan Berat']->daftar_menus ?? collect(),
+            'activePromo' => $activePromo
         ]);
     }
 
