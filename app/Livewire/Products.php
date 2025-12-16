@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Daftar_menu;
 use App\Models\Cart as CartModel;
 use App\Models\CartItem;
+use App\Models\MenuCategory;
 use App\Models\Promo; 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -107,8 +108,19 @@ class Products extends Component
             $activePromo = Promo::find($this->promo_id);
         }
 
+        $coffee = MenuCategory::where('name', 'Coffee')->first();
+        $non_coffee = MenuCategory::where('name', 'Non Coffee')->first();
+        $moctail = MenuCategory::where('name', 'Moctail')->first();
+        $makanan_ringan = MenuCategory::where('name', 'Makanan Ringan')->first();
+        $makanan_berat = MenuCategory::where('name', 'Makanan Berat')->first();
+
         return view('livewire.products', [
             'menus' => $query->get(),
+            'coffee' => $coffee->daftar_menus,
+            'non_coffee' => $non_coffee->daftar_menus,
+            'moctail' => $moctail->daftar_menus,
+            'makanan_ringan' => $makanan_ringan->daftar_menus,
+            'makanan_berat' => $makanan_berat->daftar_menus,
             'activePromo' => $activePromo 
         ]);
     }

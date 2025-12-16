@@ -1,23 +1,28 @@
 <div class="lg:mb-10">
-    {{-- {{ dd($activePromo) }} --}}
 
     {{-- [BARU] SECTION BANNER PROMO (Hanya muncul jika ada promo aktif) --}}
-    @if(isset($activePromo) && $activePromo)
-        <div class="relative top-12 overflow-hidden rounded-xl bg-gradient-to-r from-[#fff8e1] to-[#fff3e0] border border-amber-200 shadow-sm p-4 sm:p-6 mb-16 mt-24 sm:mt-0 animate-fade-in-down">
+    @if (isset($activePromo) && $activePromo)
+        <div
+            class="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#fff8e1] to-[#fff3e0] border border-amber-200 shadow-sm p-4 sm:p-6 mb-8 mt-36 sm:mt-0 animate-fade-in-down">
             {{-- Hiasan Background --}}
-            <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-amber-300 rounded-full opacity-20 blur-2xl"></div>
+            <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-amber-300 rounded-full opacity-20 blur-2xl">
+            </div>
 
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 {{-- Info Promo --}}
                 <div class="flex items-start gap-4">
                     <div class="p-3 bg-amber-100 text-amber-600 rounded-full shadow-inner shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 sm:w-8 sm:h-8">
-                            <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="w-6 h-6 sm:w-8 sm:h-8">
+                            <path fill-rule="evenodd"
+                                d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                                clip-rule="evenodd" />
                         </svg>
                     </div>
                     <div>
                         <div class="flex flex-wrap items-center gap-2 mb-1">
-                            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white bg-red-500 rounded-md">
+                            <span
+                                class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white bg-red-500 rounded-md">
                                 SEDANG AKTIF
                             </span>
                             <h3 class="font-serif text-lg sm:text-xl font-bold text-[#5c4033]">
@@ -32,10 +37,11 @@
 
                 {{-- Tombol Reset (Kembali ke Normal) --}}
                 <div class="shrink-0 w-full md:w-auto">
-                    <button wire:click="resetFilters" 
-                            class="w-full md:w-auto group flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-amber-200 text-[#5c4033] text-sm font-bold rounded-full shadow-sm hover:shadow-md hover:border-amber-400 transition-all duration-300">
+                    <button wire:click="resetFilters"
+                        class="w-full md:w-auto group flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-amber-200 text-[#5c4033] text-sm font-bold rounded-full shadow-sm hover:shadow-md hover:border-amber-400 transition-all duration-300">
                         <span>Lihat Semua Menu</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 group-hover:rotate-180 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-4 h-4 group-hover:rotate-180 transition-transform">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -58,37 +64,44 @@
     </div>
 
     {{-- GRID MENU (CODE ASLI DENGAN PENAMBAHAN LOGIKA HARGA) --}}
+    <h1>Coffee</h1>
     <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
-        @forelse ($menus as $item)
-            <div
-                class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+        @forelse ($coffee as $item)
+            <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
                 <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                     <img src="{{ Storage::url($item->gambar) }}"
                         class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
                         alt="{{ $item->nama }}">
-                    
+
                     {{-- [BARU] Badge Diskon (Jika ada promo aktif) --}}
-                    @if(isset($activePromo) && $activePromo)
-                        <div class="absolute top-2 right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-md shadow-md animate-pulse">
+                    @if (isset($activePromo) && $activePromo)
+                        <div
+                            class="absolute top-2 right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-md shadow-md animate-pulse">
                             -{{ $activePromo->persentase_diskon }}%
                         </div>
                     @endif
                 </div>
 
-                <span class="w-full py-1 text-[.6rem] sm:text-[1rem] sm:py-2 rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}" class="w-4 h-4 sm:w-6 sm:h-6" alt=""></span>
+                <span
+                    class="w-full py-1 text-[.6rem] sm:text-[1rem] sm:py-2 rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img
+                        src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}"
+                        class="w-4 h-4 sm:w-6 sm:h-6" alt=""></span>
 
-                <span class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
-                
+                <span
+                    class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
+
                 {{-- [MODIFIKASI] Bagian Harga (Menangani Diskon) --}}
-                @if(isset($activePromo) && $activePromo)
+                @if (isset($activePromo) && $activePromo)
                     <div class="flex flex-col items-start">
                         {{-- Harga Asli (Coret) --}}
-                        <span class="text-gray-400 text-[10px] sm:text-[14px] line-through decoration-red-500 decoration-1">
+                        <span
+                            class="text-gray-400 text-[10px] sm:text-[14px] line-through decoration-red-500 decoration-1">
                             Rp {{ number_format($item->harga, 0, ',', '.') }}
                         </span>
                         {{-- Harga Diskon --}}
                         <span class="text-red-600 text-[12px] sm:text-[17px] font-bold">
-                            Rp {{ number_format($item->harga - ($item->harga * $activePromo->persentase_diskon / 100), 0, ',', '.') }}
+                            Rp
+                            {{ number_format($item->harga - ($item->harga * $activePromo->persentase_diskon) / 100, 0, ',', '.') }}
                         </span>
                     </div>
                 @else
@@ -117,12 +130,15 @@
             <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
                 {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
                 <p>Menu tidak ditemukan.</p>
-                @if(isset($activePromo))
-                    <button wire:click="resetFilters" class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
+                @if (isset($activePromo))
+                    <button wire:click="resetFilters"
+                        class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
                         Kembali ke Semua Menu
                     </button>
                 @endif
             </div>
         @endforelse
     </div>
+
+
 </div>

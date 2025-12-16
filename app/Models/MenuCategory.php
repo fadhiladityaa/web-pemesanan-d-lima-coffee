@@ -13,6 +13,6 @@ class MenuCategory extends Model
 
     public function daftar_menus()
     {
-        return $this->hasMany(Daftar_menu::class);
+        return $this->hasMany(Daftar_menu::class, 'category_id');
     }
 }

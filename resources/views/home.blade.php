@@ -30,13 +30,6 @@
         </div>
     </section>
 
-    {{-- Judul Section --}}
-    <section class="px-[16px] sm:px-[32px] font-poppins lg:px-[64px]">
-        <div class="category-makanan text-black mt-10">
-            <h2 class="text-2xl sm:text-3xl text-slate-800">makanan</h2>
-        </div>
-    </section>
-
     {{-- Grid Produk dan Keranjang --}}
     <div class="container-asli lg:grid lg:grid-cols-3 gap-2">
         {{-- Produk --}}
