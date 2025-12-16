@@ -7,6 +7,8 @@ use Livewire\WithFileUploads;
 use App\Models\Promo;
 use App\Models\Daftar_menu; // Pastikan model ini benar sesuai codinganmu
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 
 class PromoManagement extends Component
 {
@@ -36,6 +38,8 @@ class PromoManagement extends Component
         'gambar' => 'nullable|image|max:2048', 
     ];
 
+    #[Title('Promo Management')]
+    #[Layout('layouts.admin')]
     public function render()
     {
         // Ambil data promo terbaru
@@ -47,7 +51,7 @@ class PromoManagement extends Component
         return view('livewire.promo-management', [
             'promos' => $promos,
             'allMenus' => $allMenus // Kirim data menu ke view
-        ])->layout('layouts.app'); 
+        ]); 
     }
 
     // Reset Form
