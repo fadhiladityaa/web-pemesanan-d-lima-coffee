@@ -1,67 +1,69 @@
 <nav class="bg-[#947257] w-full flex justify-between shadow-xl z-50 fixed transition-all duration-300">
     <div class="font-[Sriracha] flex items-center justify-between mx-[15px] sm:mx-[32px] lg:mx-[55px] gap-2 py-4 w-full">
-        
+
         {{-- LOGO SECTION --}}
         <div class="flex justify-between w-full items-center">
             <div class="flex gap-3 items-center group cursor-pointer">
-                <img src="{{ asset('img/logo-warkop 1.svg') }}" alt="logo-warkop" 
-                     class="w-10 sm:w-11 lg:w-12 drop-shadow-md group-hover:scale-105 transition duration-300">
-                <a href="{{ url('/') }}" class="text-xl sm:text-2xl lg:text-2xl text-white group-hover:opacity-90 transition tracking-wide">
+                <img src="{{ asset('img/logo-warkop 1.svg') }}" alt="logo-warkop"
+                    class="w-10 sm:w-11 lg:w-12 drop-shadow-md group-hover:scale-105 transition duration-300">
+                <a href="{{ url('/') }}"
+                    class="text-xl sm:text-2xl lg:text-2xl text-white group-hover:opacity-90 transition tracking-wide">
                     D'Lima Coffee.
                 </a>
             </div>
 
             {{-- DESKTOP LINKS --}}
-            <div class="links text-white lg:flex sm:gap-6 lg:gap-10 sm:text-[16px] lg:text-[18px] items-center sm:hidden hidden font-poppins font-medium">
-                
+            <div
+                class="links text-white lg:flex sm:gap-6 lg:gap-10 sm:text-[16px] lg:text-[18px] items-center sm:hidden hidden font-poppins font-medium">
+
                 {{-- 1. BERANDA (Sebelumnya Dashboard Saya) --}}
                 {{-- Kita taruh paling kiri karena biasanya 'Home' itu pertama --}}
                 @auth
                     @if (!auth()->user()->isAdmin())
-                        <a href="{{ url('/') }}" 
-                           class="relative py-1 transition-all duration-300
-                           {{ Request::is('/') 
-                                ? 'text-white font-bold border-b-2 border-white' 
-                                : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
+                        <a href="{{ url('/') }}"
+                            class="relative py-1 transition-all duration-300
+                        {{ Request::is('/')
+                            ? 'text-white font-bold border-b-2 border-white'
+                            : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
                             Beranda
                         </a>
                     @endif
                 @endauth
-                
+
                 {{-- 2. MENU --}}
-                <a href="{{ route('menu') }}" 
-                   class="relative py-1 transition-all duration-300 
-                   {{ Request::routeIs('menu') 
-                        ? 'text-white font-bold border-b-2 border-white' 
+                <a href="{{ route('menu') }}"
+                    class="relative py-1 transition-all duration-300 
+                    {{ Request::routeIs('menu')
+                        ? 'text-white font-bold border-b-2 border-white'
                         : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
-                   Menu
+                    Menu
                 </a>
 
                 {{-- 3. PESANAN SAYA --}}
-                <a href="{{ route('pesanan.saya') }}" 
-                   class="relative py-1 transition-all duration-300 
-                   {{ Request::routeIs('pesanan.saya') 
-                        ? 'text-white font-bold border-b-2 border-white' 
+                <a href="{{ route('pesanan.saya') }}"
+                    class="relative py-1 transition-all duration-300 
+                    {{ Request::routeIs('pesanan.saya')
+                        ? 'text-white font-bold border-b-2 border-white'
                         : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
-                   Pesanan Saya
+                    Pesanan Saya
                 </a>
-                
+
                 {{-- 3. EDUKASI --}}
-                <a href="{{ url('/edukasi') }}" 
-                   class="relative py-1 transition-all duration-300
-                   {{ Request::is('edukasi*') 
-                        ? 'text-white font-bold border-b-2 border-white' 
+                <a href="{{ url('/edukasi') }}"
+                    class="relative py-1 transition-all duration-300
+                    {{ Request::is('edukasi*')
+                        ? 'text-white font-bold border-b-2 border-white'
                         : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
-                   Edukasi
+                    Edukasi
                 </a>
 
                 @auth
                     @if (auth()->user()->isAdmin())
                         {{-- KHUSUS ADMIN: Tampilkan Dashboard Admin --}}
-                        <a href="{{ route('dashboard.pesanan.masuk') }}" 
-                           class="relative py-1 transition-all duration-300
-                           {{ Request::is('dashboard*') 
-                                ? 'text-white font-bold border-b-2 border-white' 
+                        <a href="{{ route('dashboard.pesanan.masuk') }}"
+                            class="relative py-1 transition-all duration-300
+                            {{ Request::is('dashboard*')
+                                ? 'text-white font-bold border-b-2 border-white'
                                 : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
                             Dashboard Admin
                         </a>
@@ -69,9 +71,11 @@
                 @endauth
 
                 {{-- Avatar Profile --}}
-                <a href="{{ url('/profile') }}" class="btn btn-ghost btn-circle mr-0 avatar transition hover:scale-105 {{ Request::is('profile*') ? 'ring-2 ring-white ring-offset-2 ring-offset-[#947257]' : '' }}">
+                <a href="{{ url('/profile') }}"
+                    class="btn btn-ghost btn-circle mr-0 avatar transition hover:scale-105 {{ Request::is('profile*') ? 'ring-2 ring-white ring-offset-2 ring-offset-[#947257]' : '' }}">
                     <div class="w-10 rounded-full border border-white/30">
-                        <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        <img alt="User Avatar"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                     </div>
                 </a>
             </div>
@@ -80,27 +84,31 @@
         {{-- HAMBURGER MENU (MOBILE) --}}
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="lg:hidden">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition text-white">
+                <div
+                    class="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition text-white">
                     <img alt="hamburger icon" src="{{ asset('img/burger-menu.svg') }}" class="w-5" />
                 </div>
             </div>
-            
-            <ul tabindex="0" class="menu menu-sm dropdown-content bg-white rounded-xl z-[1] mt-4 w-56 p-3 shadow-2xl text-[#947257] font-poppins">
-                
+
+            <ul tabindex="0"
+                class="menu menu-sm dropdown-content bg-white rounded-xl z-[1] mt-4 w-56 p-3 shadow-2xl text-[#947257] font-poppins">
+
                 {{-- Profile Mobile --}}
                 <li class="mb-1">
-                    <a href="{{ url('/profile') }}" class="{{ Request::is('profile*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                    <a href="{{ url('/profile') }}"
+                        class="{{ Request::is('profile*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
                         👤 Profile Saya
                     </a>
                 </li>
-                
+
                 <div class="divider my-0"></div>
 
                 @auth
-                    @if(!auth()->user()->isAdmin())
+                    @if (!auth()->user()->isAdmin())
                         {{-- BERANDA (Mobile) --}}
                         <li>
-                            <a href="{{ url('/') }}" class="{{ Request::is('/') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                            <a href="{{ url('/') }}"
+                                class="{{ Request::is('/') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
                                 🏠 Beranda
                             </a>
                         </li>
@@ -109,28 +117,32 @@
 
                 {{-- Menu Mobile --}}
                 <li>
-                    <a href="{{ route('menu') }}" class="{{ Request::routeIs('menu') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                    <a href="{{ route('menu') }}"
+                        class="{{ Request::routeIs('menu') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
                         ☕ Menu
                     </a>
                 </li>
-                
+
                 {{-- Edukasi Mobile --}}
                 <li>
-                    <a href="{{ url('/edukasi') }}" class="{{ Request::is('edukasi*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                    <a href="{{ url('/edukasi') }}"
+                        class="{{ Request::is('edukasi*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
                         📚 Edukasi
                     </a>
                 </li>
 
                 @auth
-                    @if(auth()->user()->isAdmin())
+                    @if (auth()->user()->isAdmin())
                         <li>
-                            <a href="{{ route('dashboard.pesanan.masuk') }}" class="{{ Request::is('dashboard*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                            <a href="{{ route('dashboard.pesanan.masuk') }}"
+                                class="{{ Request::is('dashboard*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
                                 🛠️ Dashboard Admin
                             </a>
                         </li>
                     @else
                         <li>
-                            <a href="{{ url('/pesanan-saya') }}" class="{{ Request::routeIs('pesanan.saya') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                            <a href="{{ url('/pesanan-saya') }}"
+                                class="{{ Request::routeIs('pesanan.saya') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
                                 📦 Pesanan Saya
                             </a>
                         </li>
