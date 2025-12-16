@@ -1,5 +1,4 @@
 <div class="lg:mb-10">
-    {{-- {{ dd($activePromo) }} --}}
 
     {{-- [BARU] SECTION BANNER PROMO (Hanya muncul jika ada promo aktif) --}}
     @if(isset($activePromo) && $activePromo)
