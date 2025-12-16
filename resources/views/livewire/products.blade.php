@@ -64,9 +64,343 @@
     </div>
 
     {{-- GRID MENU (CODE ASLI DENGAN PENAMBAHAN LOGIKA HARGA) --}}
-    <h1>Coffee</h1>
+
+    {{-- Judul Section --}}
+    <section class="px-[16px] sm:px-[32px] font-poppins lg:px-[64px]">
+        <div class="category-makanan text-black mt-10">
+            <h2 class="text-2xl sm:text-3xl text-slate-800">Coffee</h2>
+        </div>
+    </section>
+
     <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
         @forelse ($coffee as $item)
+            <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
+                    <img src="{{ Storage::url($item->gambar) }}"
+                        class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
+                        alt="{{ $item->nama }}">
+
+                    {{-- [BARU] Badge Diskon (Jika ada promo aktif) --}}
+                    @if (isset($activePromo) && $activePromo)
+                        <div
+                            class="absolute top-2 right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-md shadow-md animate-pulse">
+                            -{{ $activePromo->persentase_diskon }}%
+                        </div>
+                    @endif
+                </div>
+
+                <span
+                    class="w-full py-1 text-[.6rem] sm:text-[1rem] sm:py-2 rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img
+                        src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}"
+                        class="w-4 h-4 sm:w-6 sm:h-6" alt=""></span>
+
+                <span
+                    class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
+
+                {{-- [MODIFIKASI] Bagian Harga (Menangani Diskon) --}}
+                @if (isset($activePromo) && $activePromo)
+                    <div class="flex flex-col items-start">
+                        {{-- Harga Asli (Coret) --}}
+                        <span
+                            class="text-gray-400 text-[10px] sm:text-[14px] line-through decoration-red-500 decoration-1">
+                            Rp {{ number_format($item->harga, 0, ',', '.') }}
+                        </span>
+                        {{-- Harga Diskon --}}
+                        <span class="text-red-600 text-[12px] sm:text-[17px] font-bold">
+                            Rp
+                            {{ number_format($item->harga - ($item->harga * $activePromo->persentase_diskon) / 100, 0, ',', '.') }}
+                        </span>
+                    </div>
+                @else
+                    {{-- Harga Normal (Code Asli) --}}
+                    <span class="text-primary text-[12px] sm:text-[17px] font-bold">
+                        Rp {{ number_format($item->harga, 0, ',', '.') }}
+                    </span>
+                @endif
+
+                <span class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
+
+                <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
+                    <a href="{{ route('detail.menu', $item->id) }}">
+                        <button
+                            class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
+                            Lihat detail menu
+                        </button>
+                    </a>
+                    <button wire:click="addToCart({{ $item->id }})"
+                        class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                        Tambah
+                    </button>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
+                {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
+                <p>Menu tidak ditemukan.</p>
+                @if (isset($activePromo))
+                    <button wire:click="resetFilters"
+                        class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
+                        Kembali ke Semua Menu
+                    </button>
+                @endif
+            </div>
+        @endforelse
+    </div>
+
+    {{-- Non Coffee --}}
+    <section class="px-[16px] sm:px-[32px] font-poppins lg:px-[64px]">
+        <div class="category-makanan text-black mt-10">
+            <h2 class="text-2xl sm:text-3xl text-slate-800">Non Coffee</h2>
+        </div>
+    </section>
+    <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
+        @forelse ($non_coffee as $item)
+            <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
+                    <img src="{{ Storage::url($item->gambar) }}"
+                        class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
+                        alt="{{ $item->nama }}">
+
+                    {{-- [BARU] Badge Diskon (Jika ada promo aktif) --}}
+                    @if (isset($activePromo) && $activePromo)
+                        <div
+                            class="absolute top-2 right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-md shadow-md animate-pulse">
+                            -{{ $activePromo->persentase_diskon }}%
+                        </div>
+                    @endif
+                </div>
+
+                <span
+                    class="w-full py-1 text-[.6rem] sm:text-[1rem] sm:py-2 rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img
+                        src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}"
+                        class="w-4 h-4 sm:w-6 sm:h-6" alt=""></span>
+
+                <span
+                    class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
+
+                {{-- [MODIFIKASI] Bagian Harga (Menangani Diskon) --}}
+                @if (isset($activePromo) && $activePromo)
+                    <div class="flex flex-col items-start">
+                        {{-- Harga Asli (Coret) --}}
+                        <span
+                            class="text-gray-400 text-[10px] sm:text-[14px] line-through decoration-red-500 decoration-1">
+                            Rp {{ number_format($item->harga, 0, ',', '.') }}
+                        </span>
+                        {{-- Harga Diskon --}}
+                        <span class="text-red-600 text-[12px] sm:text-[17px] font-bold">
+                            Rp
+                            {{ number_format($item->harga - ($item->harga * $activePromo->persentase_diskon) / 100, 0, ',', '.') }}
+                        </span>
+                    </div>
+                @else
+                    {{-- Harga Normal (Code Asli) --}}
+                    <span class="text-primary text-[12px] sm:text-[17px] font-bold">
+                        Rp {{ number_format($item->harga, 0, ',', '.') }}
+                    </span>
+                @endif
+
+                <span class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
+
+                <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
+                    <a href="{{ route('detail.menu', $item->id) }}">
+                        <button
+                            class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
+                            Lihat detail menu
+                        </button>
+                    </a>
+                    <button wire:click="addToCart({{ $item->id }})"
+                        class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                        Tambah
+                    </button>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
+                {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
+                <p>Menu tidak ditemukan.</p>
+                @if (isset($activePromo))
+                    <button wire:click="resetFilters"
+                        class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
+                        Kembali ke Semua Menu
+                    </button>
+                @endif
+            </div>
+        @endforelse
+    </div>
+
+
+    {{-- Moctail --}}
+    <section class="px-[16px] sm:px-[32px] font-poppins lg:px-[64px]">
+        <div class="category-makanan text-black mt-10">
+            <h2 class="text-2xl sm:text-3xl text-slate-800">Moctail</h2>
+        </div>
+    </section>
+    <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
+        @forelse ($moctail as $item)
+            <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
+                    <img src="{{ Storage::url($item->gambar) }}"
+                        class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
+                        alt="{{ $item->nama }}">
+
+                    {{-- [BARU] Badge Diskon (Jika ada promo aktif) --}}
+                    @if (isset($activePromo) && $activePromo)
+                        <div
+                            class="absolute top-2 right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-md shadow-md animate-pulse">
+                            -{{ $activePromo->persentase_diskon }}%
+                        </div>
+                    @endif
+                </div>
+
+                <span
+                    class="w-full py-1 text-[.6rem] sm:text-[1rem] sm:py-2 rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img
+                        src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}"
+                        class="w-4 h-4 sm:w-6 sm:h-6" alt=""></span>
+
+                <span
+                    class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
+
+                {{-- [MODIFIKASI] Bagian Harga (Menangani Diskon) --}}
+                @if (isset($activePromo) && $activePromo)
+                    <div class="flex flex-col items-start">
+                        {{-- Harga Asli (Coret) --}}
+                        <span
+                            class="text-gray-400 text-[10px] sm:text-[14px] line-through decoration-red-500 decoration-1">
+                            Rp {{ number_format($item->harga, 0, ',', '.') }}
+                        </span>
+                        {{-- Harga Diskon --}}
+                        <span class="text-red-600 text-[12px] sm:text-[17px] font-bold">
+                            Rp
+                            {{ number_format($item->harga - ($item->harga * $activePromo->persentase_diskon) / 100, 0, ',', '.') }}
+                        </span>
+                    </div>
+                @else
+                    {{-- Harga Normal (Code Asli) --}}
+                    <span class="text-primary text-[12px] sm:text-[17px] font-bold">
+                        Rp {{ number_format($item->harga, 0, ',', '.') }}
+                    </span>
+                @endif
+
+                <span class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
+
+                <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
+                    <a href="{{ route('detail.menu', $item->id) }}">
+                        <button
+                            class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
+                            Lihat detail menu
+                        </button>
+                    </a>
+                    <button wire:click="addToCart({{ $item->id }})"
+                        class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                        Tambah
+                    </button>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
+                {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
+                <p>Menu tidak ditemukan.</p>
+                @if (isset($activePromo))
+                    <button wire:click="resetFilters"
+                        class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
+                        Kembali ke Semua Menu
+                    </button>
+                @endif
+            </div>
+        @endforelse
+    </div>
+
+
+    {{-- Makanan Ringan --}}
+    <section class="px-[16px] sm:px-[32px] font-poppins lg:px-[64px]">
+        <div class="category-makanan text-black mt-10">
+            <h2 class="text-2xl sm:text-3xl text-slate-800">Makanan Ringan</h2>
+        </div>
+    </section>
+    <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
+        @forelse ($makanan_ringan as $item)
+            <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
+                    <img src="{{ Storage::url($item->gambar) }}"
+                        class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
+                        alt="{{ $item->nama }}">
+
+                    {{-- [BARU] Badge Diskon (Jika ada promo aktif) --}}
+                    @if (isset($activePromo) && $activePromo)
+                        <div
+                            class="absolute top-2 right-2 bg-red-600 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-md shadow-md animate-pulse">
+                            -{{ $activePromo->persentase_diskon }}%
+                        </div>
+                    @endif
+                </div>
+
+                <span
+                    class="w-full py-1 text-[.6rem] sm:text-[1rem] sm:py-2 rounded-sm text-center {{ $item->pesan == 'Ringan & ramah' ? 'border border-green-500 bg-green-200' : 'border border-yellow-300 bg-yellow-50' }} flex items-center justify-center text-slate-600 gap-1">{{ $item->pesan }}<img
+                        src="{{ $item->pesan == 'Ringan & ramah' ? asset('img/check-circle-svgrepo-com.svg') : asset('img/warning-circle-svgrepo-com.svg') }}"
+                        class="w-4 h-4 sm:w-6 sm:h-6" alt=""></span>
+
+                <span
+                    class="text-[14px] sm:text-[20px] text-gray-600 sm:mt-2 mt-1 font-semibold">{{ $item->nama_menu }}</span>
+
+                {{-- [MODIFIKASI] Bagian Harga (Menangani Diskon) --}}
+                @if (isset($activePromo) && $activePromo)
+                    <div class="flex flex-col items-start">
+                        {{-- Harga Asli (Coret) --}}
+                        <span
+                            class="text-gray-400 text-[10px] sm:text-[14px] line-through decoration-red-500 decoration-1">
+                            Rp {{ number_format($item->harga, 0, ',', '.') }}
+                        </span>
+                        {{-- Harga Diskon --}}
+                        <span class="text-red-600 text-[12px] sm:text-[17px] font-bold">
+                            Rp
+                            {{ number_format($item->harga - ($item->harga * $activePromo->persentase_diskon) / 100, 0, ',', '.') }}
+                        </span>
+                    </div>
+                @else
+                    {{-- Harga Normal (Code Asli) --}}
+                    <span class="text-primary text-[12px] sm:text-[17px] font-bold">
+                        Rp {{ number_format($item->harga, 0, ',', '.') }}
+                    </span>
+                @endif
+
+                <span class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
+
+                <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
+                    <a href="{{ route('detail.menu', $item->id) }}">
+                        <button
+                            class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
+                            Lihat detail menu
+                        </button>
+                    </a>
+                    <button wire:click="addToCart({{ $item->id }})"
+                        class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                        Tambah
+                    </button>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
+                {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
+                <p>Menu tidak ditemukan.</p>
+                @if (isset($activePromo))
+                    <button wire:click="resetFilters"
+                        class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
+                        Kembali ke Semua Menu
+                    </button>
+                @endif
+            </div>
+        @endforelse
+    </div>
+
+
+    {{-- Makanan Berat --}}
+    <section class="px-[16px] sm:px-[32px] font-poppins lg:px-[64px]">
+        <div class="category-makanan text-black mt-10">
+            <h2 class="text-2xl sm:text-3xl text-slate-800">Makanan Berat</h2>
+        </div>
+    </section>
+    <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
+        @forelse ($makanan_berat as $item)
             <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
                 <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                     <img src="{{ Storage::url($item->gambar) }}"
