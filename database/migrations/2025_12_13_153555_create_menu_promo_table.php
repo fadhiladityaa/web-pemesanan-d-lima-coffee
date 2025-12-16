@@ -13,7 +13,7 @@ return new class extends Migration
     {
     Schema::create('menu_promo', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('menu_id')->constrained('daftar_menus')->onDelete('cascade');
+        $table->foreignId('daftar_menu_id')->constrained('daftar_menus')->onDelete('cascade');
         $table->foreignId('promo_id')->constrained('promos')->onDelete('cascade');
         $table->timestamps();
     });
