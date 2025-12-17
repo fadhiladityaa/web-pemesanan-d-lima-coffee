@@ -138,7 +138,8 @@ class Products extends Component
             'makanan_ringan' => $filteredCategories['makanan_ringan'],
             'makanan_berat' => $filteredCategories['makanan_berat'],
             'activePromo' => $activePromo,
-            'search' => $this->search // Kirim juga variabel search ke view
+            'search' => $this->search, // Kirim juga variabel search ke view
+            'category' => MenuCategory::all(),
         ]);
     }
 

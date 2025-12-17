@@ -1,5 +1,17 @@
 <div class="lg:mb-10">
 
+    {{-- Kategori Menu --}}
+    <section>
+        <div class="mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] lg:px-[64px] font-poppins">
+            <div class="category-section text-black flex gap-5 text-ssm sm:text-lg mt-6">
+                <div class="semua-menu bg-primary px-4 py-1 text-[.7rem] rounded-[10px] shadow-soft text-white">semua
+                    menu</div>
+                <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">makanan</div>
+                <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">minuman</div>
+            </div>
+        </div>
+    </section>
+
     {{-- [BARU] SECTION BANNER PROMO (Hanya muncul jika ada promo aktif) --}}
     @if (isset($activePromo) && $activePromo)
         <div
@@ -65,12 +77,15 @@
 
     {{-- HASIL PENCARIAN (Jika ada) --}}
     @if ($search)
-        <section class="border-l-[5px] border-primary mt-20 pl-5 rounded-[.130rem] shadow-sm w-[16rem] lg:w-[20rem] font-poppins">
+        <section
+            class="border-l-[5px] border-primary mt-20 pl-5 rounded-[.130rem] shadow-sm w-[16rem] lg:w-[20rem] font-poppins">
             <div class="category-makanan text-black">
                 <h2 class="text-md sm:text-3xl flex flex-col text-slate-800 py-3">
                     Cari: "{{ $search }}"
                     @if ($menus->count())
-                        <span class="text-ssm italic flex items-center gap-1 text-gray-500">{{ $menus->count() }} hasil ditemukan <img class="w-4 h-4" src="{{ asset('img/check-circle-svgrepo-com.svg') }}" alt=""></span>
+                        <span class="text-ssm italic flex items-center gap-1 text-gray-500">{{ $menus->count() }} hasil
+                            ditemukan <img class="w-4 h-4" src="{{ asset('img/check-circle-svgrepo-com.svg') }}"
+                                alt=""></span>
                     @endif
                 </h2>
             </div>
