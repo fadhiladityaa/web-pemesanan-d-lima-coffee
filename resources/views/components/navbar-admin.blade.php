@@ -121,7 +121,9 @@
 {{-- Mobile Header --}}
 <section class="lg:hidden">
     <div class="w-full p-5 bg-[#151C2B] top-0  fixed flex justify-between text-white">
-        <h1 class="font-bold">DASHBOARD</h1>
+        <a href="{{ route('menu') }}">
+            <h1 class="font-bold">DASHBOARD</h1>
+        </a>
         <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="lg:hidden sm:hidden">
                     <div class="w-7 rounded-full">

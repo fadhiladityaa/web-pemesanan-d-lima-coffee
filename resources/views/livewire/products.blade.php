@@ -2,12 +2,21 @@
 
     {{-- Kategori Menu --}}
     <section>
-        <div class="mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] lg:px-[64px] font-poppins">
-            <div class="category-section w-[20rem] text-black overflow-y-scroll scrollbar-hide flex gap-5 text-ssm sm:text-lg mt-6">
-                @foreach ($category as $item)
-                    <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">{{ $item->name }}</div>
-                @endforeach
-            </div>
+        <div
+            class="category-section mt-32 lg:mt-52 scrollbar-hide flex gap-3 sm:gap-4 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            {{-- Tombol Semua Menu --}}
+            <button wire:click="resetCategoryFilter"
+                class="category-item flex-shrink-0 px-5 py-3 bg-primary text-white rounded-lg border border-primary hover:bg-primary/90 transition-all duration-300 font-medium shadow-sm">
+                Semua Menu
+            </button>
+
+            @foreach ($category as $item)
+                <button wire:click="filterByCategory('{{ $item->name }}')"
+                    class="category-item flex-shrink-0 px-5 py-3 bg-white rounded-lg border border-gray-200 hover:border-primary hover:bg-primary/5 hover:text-primary transition-all duration-300 text-slate-700 font-medium shadow-sm">
+                    {{ $item->name }}
+                </button>
+            @endforeach
+
         </div>
     </section>
 
@@ -172,7 +181,7 @@
     {{-- TAMPILAN NORMAL PER KATEGORI (Hanya muncul jika tidak ada pencarian) --}}
     @if (!$search)
         {{-- Coffee --}}
-        <section class="border-l-[5px] border-primary mt-20 pl-5 rounded-[.130rem] shadow-sm w-[16rem] font-poppins">
+        <section class="border-l-[5px] border-primary mt-10 pl-5 rounded-[.130rem] shadow-sm w-[16rem] font-poppins">
             <div class="category-makanan text-black mt-10">
                 <h2 class="text-2xl sm:text-3xl text-slate-800 py-3">Coffee</h2>
             </div>

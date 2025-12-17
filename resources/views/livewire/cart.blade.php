@@ -1,4 +1,4 @@
-<div class="shadow-soft p-5 rounded-lg mt-12 lg:max-h-[80vh] overflow-y-auto mb-20">
+<div class="shadow-soft p-5 rounded-lg mt-12 lg:mt-[20rem] lg:max-h-[80vh] overflow-y-auto mb-20">
     <div class="flex justify-between">
         <h2 id="otw" class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
         <span
