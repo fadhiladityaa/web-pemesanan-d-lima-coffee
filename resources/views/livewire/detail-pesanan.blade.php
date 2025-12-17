@@ -1,6 +1,6 @@
-<div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg font-[Poppins]">
+<div class="max-w-4xl mx-auto p-8 mt-28  bg-white shadow-lg rounded-lg font-[Poppins]">
     {{-- Header --}}
-    <div class="flex items-center justify-between border-b pb-4 mt-20 mb-6">
+    <div class="flex items-center justify-between border-b pb-4  mb-6">
         <h2 class="text-3xl font-bold text-gray-800">
             Detail Pesanan #{{ $order->id }}
         </h2>

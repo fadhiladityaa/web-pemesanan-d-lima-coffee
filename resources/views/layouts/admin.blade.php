@@ -24,7 +24,7 @@
 
 <body>
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen">
         <!-- Sidebar -->
         <x-navbar-admin></x-navbar-admin>
 
