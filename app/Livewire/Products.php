@@ -9,7 +9,7 @@ use App\Models\MenuCategory;
 use App\Models\Promo;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Database\Eloquent\Builder;
 
 class Products extends Component
 {
@@ -131,7 +131,7 @@ class Products extends Component
 
         // 4. RETURN VIEW
         return view('livewire.products', [
-            'menus' => $allMenus, // Semua menu hasil pencarian
+            'menus' => $allMenus, 
             'coffee' => $filteredCategories['coffee'],
             'non_coffee' => $filteredCategories['non_coffee'],
             'moctail' => $filteredCategories['moctail'],
