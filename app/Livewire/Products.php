@@ -87,28 +87,28 @@ class Products extends Component
     {
         $categoryNames = ['Coffee', 'Non Coffee', 'Moctail', 'Makanan Ringan', 'Makanan Berat'];
 
-        // 1. AMBIL DATA PROMO AKTIF (PERBAIKAN: Inisialisasi dan Ambil data Promo)
+        // 1. AMBIL DATA PROMO AKTIF
         $activePromo = $this->promo_id ? Promo::find($this->promo_id) : null;
 
-        // 2. EAGER LOADING KATEGORI DAN RELASI MENU & PROMO
+        // 2. EAGER LOADING dengan relasi category
         $categories = MenuCategory::whereIn('name', $categoryNames)
-            ->with(['daftar_menus', 'daftar_menus.promos'])
+            ->with(['daftar_menus' => function ($query) {
+                $query->with('category'); // Tambahkan eager loading untuk kategori
+            }, 'daftar_menus.promos'])
             ->get()
             ->keyBy('name');
 
-        // 3. MENGAPLIKASIKAN FILTER PADA KOLEKSI (PHP)
+        // 3. MENGAPLIKASIKAN FILTER PADA KOLEKSI
         $filteredCategories = [];
+        $allMenus = collect(); // Koleksi untuk semua menu hasil pencarian
         $search = $this->search;
         $promo_id = $this->promo_id;
 
-        // Looping tetap menggunakan $categoryNames
         foreach ($categoryNames as $name) {
             $menus = $categories[$name]->daftar_menus ?? collect();
 
-            // Terapkan filter pada koleksi menu
             $menus = $menus->filter(function ($menu) use ($search, $promo_id) {
-
-                // FILTER PENCARIAN (Live Search)
+                // FILTER PENCARIAN
                 if ($search && !str_contains(strtolower($menu->nama_menu), strtolower($search))) {
                     return false;
                 }
@@ -121,22 +121,24 @@ class Products extends Component
                 return true;
             });
 
-            // Simpan hasil filter
+            // Tambahkan ke koleksi semua menu untuk pencarian
+            if ($search) {
+                $allMenus = $allMenus->merge($menus);
+            }
+
             $filteredCategories[strtolower(str_replace(' ', '_', $name))] = $menus;
         }
 
-        // 4. RETURN VIEW - MENGGUNAKAN HASIL FILTERING KOLEKSI
+        // 4. RETURN VIEW
         return view('livewire.products', [
-            // Semua menu yang sudah difilter (untuk tampilan umum/header)
-            'menus' => collect($filteredCategories)->flatten(),
-
-            // Menu per kategori (untuk tampilan berpisah per kategori)
+            'menus' => $allMenus, // Semua menu hasil pencarian
             'coffee' => $filteredCategories['coffee'],
             'non_coffee' => $filteredCategories['non_coffee'],
             'moctail' => $filteredCategories['moctail'],
             'makanan_ringan' => $filteredCategories['makanan_ringan'],
             'makanan_berat' => $filteredCategories['makanan_berat'],
-            'activePromo' => $activePromo // Sekarang $activePromo sudah pasti terdefinisi
+            'activePromo' => $activePromo,
+            'search' => $this->search // Kirim juga variabel search ke view
         ]);
     }
 
