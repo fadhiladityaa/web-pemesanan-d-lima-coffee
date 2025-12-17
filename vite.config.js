@@ -3,10 +3,10 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     server: {
-        'host': '0.0.0.0',
+        host: '0.0.0.0',
         hmr: {
-            // *** PENTING: Ganti dengan IP Lokal Anda ***
-            host: '192.168.1.9', 
+            host: '10.197.213.11', // GANTI DENGAN IP LOKAL KAMU!
+            protocol: 'ws'
         },
     },
     plugins: [

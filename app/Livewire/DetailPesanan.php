@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 
 
-#[Layout('layouts.app')]
+#[Layout('layouts.admin')]
 #[Title('Detail Pesanan')]
 class DetailPesanan extends Component
 {
