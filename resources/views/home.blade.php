@@ -19,17 +19,6 @@
     @livewire('floating-cart')
 
 
-    {{-- Kategori Menu --}}
-    <section>
-        <div class="mt-28 sm:mt-44 w-full px-[16px] sm:px-[32px] lg:px-[64px] font-poppins">
-            <div class="category-section text-black flex gap-5 text-ssm sm:text-lg mt-6">
-                <div class="semua-menu bg-primary px-4 py-1 text-[.7rem] rounded-[10px] shadow-soft text-white">semua menu</div>
-                <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">makanan</div>
-                <div class="semua-menu px-4 py-1 rounded-[10px] text-slate-700 shadow-soft">minuman</div>
-            </div>
-        </div>
-    </section>
-
 
     {{-- Grid Produk dan Keranjang --}}
     <div class="container-asli lg:grid lg:grid-cols-3 gap-2">
