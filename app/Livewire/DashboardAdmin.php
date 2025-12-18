@@ -11,7 +11,7 @@ class DashboardAdmin extends Component
 {
 
     #[Layout('layouts.admin')]
-    #[Title('create menu')]
+    #[Title('Dashboard')]
     public function render()
     {
         return view('livewire.dashboard-admin');

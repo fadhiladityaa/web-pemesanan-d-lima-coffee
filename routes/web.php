@@ -77,7 +77,6 @@ Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
 //  EDUKASI UNTUK PELANGGAN - gunakan component yang sudah ada
 Route::get('/edukasi', \App\Livewire\EdukasiPelanggan::class)->name('edukasi')->middleware('auth');
 
-//  EDUKASI MANAGEMENT UNTUK ADMIN (tidak berubah)
 
 //  Route untuk tombol "Lihat Halaman Pelanggan" di admin
 Route::get('/edukasi-pelanggan', function () {
