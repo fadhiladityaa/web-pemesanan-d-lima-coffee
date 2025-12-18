@@ -5,7 +5,7 @@
             <h2 id="otw" class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
             <span
                 class="flex items-center rounded-full px-4 py-1 text-sm bg-primary/10 text-primary font-medium border border-primary/20">
-                {{ optional($cart)->cart_items?->count() ?? 0 }} items
+                {{ optional($cart)->cart_items?->sum('quantity') ?? 0 }} items
 
             </span>
         </div>

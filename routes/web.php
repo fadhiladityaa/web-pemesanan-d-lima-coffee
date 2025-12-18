@@ -43,7 +43,7 @@ Route::post('/login', [loginController::class, 'authenticate'])->middleware('gue
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
 // route untuk profile
-Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware('auth');
+Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware('auth')->name('profile-pengguna');
 
 Route::get('/pesanan-masuk/detail-pesanan/{order}', DetailPesanan::class)
     ->name('detail.pesanan')->middleware('auth');
