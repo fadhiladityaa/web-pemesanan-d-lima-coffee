@@ -1,10 +1,6 @@
 <?php
 
 // livewire class
-use App\Livewire\DetailPesanan;
-use App\Livewire\PesananSaya;
-
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +11,8 @@ use App\Livewire\CreateMenu;
 use App\Livewire\DashboardAdmin;
 use App\Livewire\DetailMenu;
 use App\Livewire\EditMenu;
+use App\Livewire\DetailPesanan;
+use App\Livewire\PesananSaya;
 use App\Livewire\MenuManagement;
 use App\Livewire\PromoManagement;
 use App\Livewire\PesananMasuk;

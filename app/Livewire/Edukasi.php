@@ -30,6 +30,9 @@ class Edukasi extends Component
         'Kesehatan' => 'Kesehatan', 
         'Hidup Sehat' => 'Hidup Sehat',
         'Resep' => 'Resep',
+        'Sains & Kesehatan' => 'Sains & Kesehatan',
+        'Pengetahuan' => 'Pengetahuan',
+        'Tren' => 'Tren',
         'Tips' => 'Tips'
     ];
 
