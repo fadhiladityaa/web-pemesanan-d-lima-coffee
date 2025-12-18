@@ -55,9 +55,7 @@ class Products extends Component
         } else {
             $menu = Daftar_menu::findOrfail($menu_id);
 
-            // ==========================================
-            // [LOGIKA BARU] Hitung Harga Diskon Dulu
-            // ==========================================
+    
             $finalPrice = $menu->harga; // Default harga normal
 
             // Cek apakah user sedang membuka halaman lewat link promo?
