@@ -174,6 +174,10 @@
             color: #ffffffff;
         }
 
+        form {
+            display: inline;
+        }
+
     </style>
 </head>
 
@@ -262,7 +266,10 @@
             <h3><strong>Pengaturan Akun</strong></h3>
             <button>Ganti Password</button>
             <button>Kelola Notifikasi</button>
-            <button class="hapus">Hapus Akun</button>
+            <form method="post" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="hapus">Logout</button>
+            </form>
         </div>
 
     </div>

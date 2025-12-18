@@ -71,7 +71,7 @@
                 @endauth
 
                 {{-- Avatar Profile --}}
-                <a href="{{ url('/profile') }}"
+                <a href="{{ route('profile-pengguna') }}"
                     class="btn btn-ghost btn-circle mr-0 avatar transition hover:scale-105 {{ Request::is('profile*') ? 'ring-2 ring-white ring-offset-2 ring-offset-[#947257]' : '' }}">
                     <div class="w-10 rounded-full border border-white/30">
                         <img alt="User Avatar"
