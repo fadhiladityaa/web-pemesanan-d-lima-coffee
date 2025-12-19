@@ -6,15 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('daftar_menus', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_menu')->unique;
+            $table->string('nama_menu')->unique(); 
             $table->integer('harga');
+            $table->boolean('is_featured')->default(false); 
             $table->string('gambar')->nullable();
             $table->text('deskripsi');
             $table->string('pesan');
@@ -22,6 +20,7 @@ return new class extends Migration
                 table: 'menu_categories',
                 indexName: 'menu_category_id'
             );
+            
             $table->timestamps();
         });
     }

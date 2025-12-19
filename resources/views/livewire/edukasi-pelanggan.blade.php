@@ -252,16 +252,24 @@
     @endif
 </div>
 
+{{-- SCRIPT YANG DIPERBAIKI UNTUK LIVEWIRE 3 --}}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('livewire:init', function() {
+    // 1. Jalankan efek saat halaman pertama kali dibuka
     initAllEffects();
-    if (typeof Livewire !== 'undefined') {
-        Livewire.hook('message.processed', () => {
-            setTimeout(initAllEffects, 50);
-        });
-    }
+
+    // 2. Jalankan efek setiap kali Livewire selesai update (Search/Filter/Page)
+    Livewire.hook('commit', ({ component, commit, respond, succeed, fail }) => {
+        succeed(({ snapshot, effect }) => {
+            // Beri sedikit jeda agar DOM benar-benar sudah dirender ulang
+            setTimeout(() => {
+                initAllEffects();
+            }, 50);
+        })
+    })
 });
 
+// Fungsi inisialisasi semua efek
 function initAllEffects() {
     initZoomEffect();
     initFilterHover();
@@ -275,114 +283,110 @@ function initZoomEffect() {
     images.forEach(img => {
         const parent = img.closest('.h-64, .article-card');
         if (!parent) return;
-        parent.removeEventListener('mouseenter', zoomIn);
-        parent.removeEventListener('mouseleave', zoomOut);
-        parent.addEventListener('mouseenter', zoomIn);
-        parent.addEventListener('mouseleave', zoomOut);
+        
+        // Hapus listener lama agar tidak double (penting saat re-init)
+        parent.onmouseenter = null;
+        parent.onmouseleave = null;
+
+        parent.onmouseenter = function() {
+            const img = this.querySelector('.article-image');
+            if (img) { img.style.transform = 'scale(1.1)'; img.style.transition = 'transform 0.5s ease'; }
+        };
+        parent.onmouseleave = function() {
+            const img = this.querySelector('.article-image');
+            if (img) { img.style.transform = 'scale(1)'; }
+        };
     });
-    function zoomIn(e) {
-        const img = e.currentTarget.querySelector('.article-image');
-        // Efek Zoom Gambar
-        if (img) { img.style.transform = 'scale(1.1)'; img.style.transition = 'transform 0.5s ease'; }
-    }
-    function zoomOut(e) {
-        const img = e.currentTarget.querySelector('.article-image');
-        if (img) { img.style.transform = 'scale(1)'; }
-    }
 }
 
 function initFilterHover() {
     const filterButtons = document.querySelectorAll('button[wire\\:click*="kategoriFilter"]');
     filterButtons.forEach(btn => {
-        btn.removeEventListener('mouseenter', filterHoverIn);
-        btn.removeEventListener('mouseleave', filterHoverOut);
-        btn.addEventListener('mouseenter', filterHoverIn);
-        btn.addEventListener('mouseleave', filterHoverOut);
+        btn.onmouseenter = null; 
+        btn.onmouseleave = null;
+
+        btn.onmouseenter = function() {
+            if (!this.classList.contains('bg-[#8a532b]')) {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.3)';
+                this.style.borderColor = '#8a532b';
+                this.style.color = '#8a532b';
+            }
+        };
+        btn.onmouseleave = function() {
+            if (!this.classList.contains('bg-[#8a532b]')) {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '';
+                this.style.borderColor = '#eaddcf';
+                this.style.color = '#8d6e63';
+            }
+        };
     });
-    function filterHoverIn(e) {
-        const btn = e.currentTarget;
-        // FIX: Cek warna Hex, bukan class name
-        if (!btn.classList.contains('bg-[#8a532b]')) {
-            btn.style.transform = 'scale(1.05)';
-            btn.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.3)';
-            btn.style.borderColor = '#8a532b';
-            btn.style.color = '#8a532b';
-        }
-    }
-    function filterHoverOut(e) {
-        const btn = e.currentTarget;
-        if (!btn.classList.contains('bg-[#8a532b]')) {
-            btn.style.transform = 'scale(1)';
-            btn.style.boxShadow = '';
-            btn.style.borderColor = '#eaddcf'; // Kembali ke border asal
-            btn.style.color = '#8d6e63'; // Kembali ke text asal
-        }
-    }
 }
 
 function initCardHover() {
-    const cards = document.querySelectorAll('.article-card'); // Sesuaikan selector
+    const cards = document.querySelectorAll('.article-card');
     cards.forEach(card => {
-        card.removeEventListener('mouseenter', cardHoverIn);
-        card.removeEventListener('mouseleave', cardHoverOut);
-        card.addEventListener('mouseenter', cardHoverIn);
-        card.addEventListener('mouseleave', cardHoverOut);
+        card.onmouseenter = null;
+        card.onmouseleave = null;
+
+        card.onmouseenter = function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 20px 40px -12px rgba(138, 83, 43, 0.15)';
+            
+            const title = this.querySelector('h3');
+            if (title) title.style.color = '#8a532b';
+            
+            const badge = this.querySelector('span[style*="background-color: #f5e9dd"]');
+            if (badge) {
+                badge.style.transform = 'scale(1.1)';
+                badge.style.transition = 'transform 0.3s ease';
+            }
+        };
+        card.onmouseleave = function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '';
+            
+            const title = this.querySelector('h3');
+            if (title) title.style.color = '#3e2b22';
+            
+            const badge = this.querySelector('span[style*="background-color: #f5e9dd"]');
+            if (badge) badge.style.transform = 'scale(1)';
+        };
     });
-    function cardHoverIn(e) {
-        const card = e.currentTarget;
-        card.style.transform = 'translateY(-10px)';
-        card.style.boxShadow = '0 20px 40px -12px rgba(138, 83, 43, 0.15)';
-        
-        const title = card.querySelector('h3');
-        if (title) title.style.color = '#8a532b';
-        
-        // EFEK ZOOM ICON/BADGE KATEGORI (Action Zoom yang diminta)
-        const badge = card.querySelector('span[style*="background-color: #f5e9dd"]');
-        if (badge) {
-            badge.style.transform = 'scale(1.1)';
-            badge.style.transition = 'transform 0.3s ease';
-        }
-    }
-    function cardHoverOut(e) {
-        const card = e.currentTarget;
-        card.style.transform = 'translateY(0)';
-        card.style.boxShadow = '';
-        
-        const title = card.querySelector('h3');
-        if (title) title.style.color = '#3e2b22';
-        
-        const badge = card.querySelector('span[style*="background-color: #f5e9dd"]');
-        if (badge) badge.style.transform = 'scale(1)';
-    }
 }
 
 function initButtonHover() {
     const buttons = document.querySelectorAll('button[wire\\:click*="showDetail"]');
     buttons.forEach(btn => {
-        const arrow = btn.querySelector('svg');
-        btn.removeEventListener('mouseenter', buttonHoverIn);
-        btn.removeEventListener('mouseleave', buttonHoverOut);
-        btn.addEventListener('mouseenter', () => buttonHoverIn(btn, arrow));
-        btn.addEventListener('mouseleave', () => buttonHoverOut(btn, arrow));
+        btn.onmouseenter = null;
+        btn.onmouseleave = null;
+
+        btn.onmouseenter = function() {
+            const arrow = this.querySelector('svg');
+            if (arrow) arrow.style.transform = 'translateX(5px)';
+        };
+        btn.onmouseleave = function() {
+            const arrow = this.querySelector('svg');
+            if (arrow) arrow.style.transform = 'translateX(0)';
+        };
     });
-    function buttonHoverIn(btn, arrow) {
-        // btn.style.transform = 'scale(1.05)'; // Opsional
-        if (arrow) arrow.style.transform = 'translateX(5px)';
-    }
-    function buttonHoverOut(btn, arrow) {
-        // btn.style.transform = 'scale(1)';
-        if (arrow) arrow.style.transform = 'translateX(0)';
-    }
 }
 
 function initSearchHover() {
     const searchInput = document.querySelector('input[wire\\:model*="search"]');
     if (!searchInput) return;
-    searchInput.removeEventListener('mouseenter', searchHoverIn);
-    searchInput.removeEventListener('mouseleave', searchHoverOut);
-    searchInput.addEventListener('mouseenter', searchHoverIn);
-    searchInput.addEventListener('mouseleave', searchHoverOut);
-    function searchHoverIn(e) { e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.1)'; }
-    function searchHoverOut(e) { if (document.activeElement !== e.currentTarget) { e.currentTarget.style.boxShadow = ''; } }
+    
+    searchInput.onmouseenter = null;
+    searchInput.onmouseleave = null;
+
+    searchInput.onmouseenter = function() {
+        this.style.boxShadow = '0 10px 25px -5px rgba(138, 83, 43, 0.1)';
+    };
+    searchInput.onmouseleave = function() {
+        if (document.activeElement !== this) {
+            this.style.boxShadow = '';
+        }
+    };
 }
 </script>

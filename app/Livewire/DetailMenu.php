@@ -13,10 +13,12 @@ class DetailMenu extends Component
 
     #[Title('Detail Menu')]
     #[Layout('layouts.app')]
-    public function mount(Daftar_menu $daftar_menus)
+    public function mount($id)
     {
-        // Route model binding otomatis ambil data berdasarkan ID dari URL
-        $this->menu = $daftar_menus->load('bahanbaku', 'kandungan');
+        // 1. Cari menu berdasarkan ID
+        // 2. 'with' kita pakai supaya data 'kandungan' & 'bahanbaku' langsung terambil (biar tidak error di view)
+        // 3. 'findOrFail' artinya: Cari sampai dapat, kalau tidak ada tampilkan Error 404 (Halaman Tidak Ditemukan)
+        $this->menu = Daftar_menu::with(['kandungan', 'bahanbaku'])->findOrFail($id);
     }
 
     public function render()

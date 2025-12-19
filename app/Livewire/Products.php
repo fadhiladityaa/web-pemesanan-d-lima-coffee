@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Products extends Component
 {
-    // Variabel yang sudah ada
     public $search = '';
 
-    // Variabel untuk filter
     public $promo_id = null;
     public $kategoriFilter = '';
 
@@ -54,12 +52,7 @@ class Products extends Component
             $item->increment('quantity');
         } else {
             $menu = Daftar_menu::findOrfail($menu_id);
-
-            // ==========================================
-            // [LOGIKA BARU] Hitung Harga Diskon Dulu
-            // ==========================================
             $finalPrice = $menu->harga; // Default harga normal
-
             // Cek apakah user sedang membuka halaman lewat link promo?
             if ($this->promo_id) {
                 $promo = Promo::find($this->promo_id);

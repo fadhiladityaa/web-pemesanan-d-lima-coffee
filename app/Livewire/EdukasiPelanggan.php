@@ -12,11 +12,16 @@ class EdukasiPelanggan extends Component
 {
     use WithPagination;
     
-    #[Layout('layouts.app')] // PASTIKAN LAYOUT ADA
-    #[Title('Edukasi Kesehatan & Nutrisi - D\'Lima Coffee')] // TITLE LENGKAP
+    #[Layout('layouts.app')] 
+    #[Title('Edukasi Kesehatan & Nutrisi - D\'Lima Coffee')] 
     
+    // Variabel Search
     public $search = '';
+    
+    // Variabel Filter Kategori
     public $kategoriFilter = '';
+    
+    // Variabel Detail
     public $selectedEdukasi = null;
     
     protected $queryString = [
@@ -24,12 +29,16 @@ class EdukasiPelanggan extends Component
         'kategoriFilter' => ['except' => ''],
     ];
 
-    public function updatingSearch()
+    /**
+     * PENTING: Fungsi ini berjalan otomatis setiap kali Anda mengetik di kolom pencarian.
+     * Ini yang membuat fitur pencarian menjadi responsif dan tidak error saat pindah halaman.
+     */
+    public function updatedSearch()
     {
-        $this->resetPage();
+        $this->resetPage(); // Kembali ke halaman 1 setiap kali mengetik
     }
 
-    public function updatingKategoriFilter()
+    public function updatedKategoriFilter()
     {
         $this->resetPage();
     }
@@ -53,20 +62,24 @@ class EdukasiPelanggan extends Component
 
     public function render()
     {
-        $edukasiList = Edukasi::query()
-            ->when($this->search, function ($query) {
-                return $query->where(function($q) {
-                    $q->where('judul', 'like', '%' . $this->search . '%')
-                      ->orWhere('konten', 'like', '%' . $this->search . '%')
-                      ->orWhere('ringkasan', 'like', '%' . $this->search . '%');
-                });
-            })
-            ->when($this->kategoriFilter, function ($query) {
-                return $query->where('kategori', $this->kategoriFilter);
-            })
-            ->latest()
-            ->paginate(9);
+        // Query Dasar
+        $query = Edukasi::query();
 
+        // 1. FILTER PENCARIAN (KHUSUS JUDUL)
+        if ($this->search) {
+            // Kita hanya mencari di kolom 'judul' sesuai permintaan
+            $query->where('judul', 'like', '%' . $this->search . '%');
+        }
+
+        // 2. FILTER KATEGORI
+        if ($this->kategoriFilter) {
+            $query->where('kategori', $this->kategoriFilter);
+        }
+
+        // Ambil data terbaru dan pagination
+        $edukasiList = $query->latest()->paginate(9);
+
+        // Ambil daftar kategori untuk tombol filter
         $kategoriList = Edukasi::distinct('kategori')
             ->whereNotNull('kategori')
             ->pluck('kategori');

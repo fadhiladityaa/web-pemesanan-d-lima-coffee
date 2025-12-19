@@ -150,7 +150,8 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        <a href="{{ route('detail.menu', $item->id) }}">
+                        {{-- PERBAIKAN ROUTE 1 (Pencarian) --}}
+                        <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
                                 Lihat detail menu
@@ -233,7 +234,8 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        <a href="{{ route('detail.menu', $item->id) }}">
+                        {{-- PERBAIKAN ROUTE 2 (Coffee) --}}
+                        <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
                                 Lihat detail menu
@@ -317,7 +319,8 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        <a href="{{ route('detail.menu', $item->id) }}">
+                        {{-- PERBAIKAN ROUTE 3 (Non Coffee) --}}
+                        <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
                                 Lihat detail menu
@@ -402,7 +405,8 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        <a href="{{ route('detail.menu', $item->id) }}">
+                        {{-- PERBAIKAN ROUTE 4 (Moctail) --}}
+                        <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
                                 Lihat detail menu
@@ -488,7 +492,8 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        <a href="{{ route('detail.menu', $item->id) }}">
+                        {{-- PERBAIKAN ROUTE 5 (Makanan Ringan) --}}
+                        <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
                                 Lihat detail menu
@@ -573,7 +578,8 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        <a href="{{ route('detail.menu', $item->id) }}">
+                        {{-- PERBAIKAN ROUTE 6 (Makanan Berat) --}}
+                        <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
                                 Lihat detail menu

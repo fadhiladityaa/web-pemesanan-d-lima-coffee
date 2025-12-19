@@ -22,11 +22,6 @@ use App\Livewire\Edukasi;
 // route ke home
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
-
-// Route::get('/menu', [HomeController::class, 'index'])->middleware('auth')->name('menu');
-
-
-
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::get('/menu', [HomeController::class, 'index'])->name('menu');
@@ -41,7 +36,7 @@ Route::post('/login', [loginController::class, 'authenticate'])->middleware('gue
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
 // route untuk profile
-Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware('auth');
+Route::get('/profile-anda', [ProfileController::class, 'index'])->name('profile')->middleware('auth');
 
 Route::get('/pesanan-masuk/detail-pesanan/{order}', DetailPesanan::class)
     ->name('detail.pesanan')->middleware('auth');
@@ -67,15 +62,12 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
 });
 
 
-Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu');
+//Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu');
+Route::get('/menu/detail-menu/{id}', DetailMenu::class)->name('menu.show');
 Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
-
-
 
 //  EDUKASI UNTUK PELANGGAN - gunakan component yang sudah ada
 Route::get('/edukasi', \App\Livewire\EdukasiPelanggan::class)->name('edukasi')->middleware('auth');
-
-//  EDUKASI MANAGEMENT UNTUK ADMIN (tidak berubah)
 
 //  Route untuk tombol "Lihat Halaman Pelanggan" di admin
 Route::get('/edukasi-pelanggan', function () {
