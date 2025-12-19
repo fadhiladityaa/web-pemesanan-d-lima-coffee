@@ -70,14 +70,40 @@
                     @endif
                 @endauth
 
-                {{-- Avatar Profile --}}
-                <a href="{{ route('profile-pengguna') }}"
-                    class="btn btn-ghost btn-circle mr-0 avatar transition hover:scale-105 {{ Request::is('profile*') ? 'ring-2 ring-white ring-offset-2 ring-offset-[#947257]' : '' }}">
-                    <div class="w-10 rounded-full border border-white/30">
-                        <img alt="User Avatar"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                </a>
+                {{-- Avatar Profile Desktop --}}
+                <div class="flex items-center gap-3">
+                    @auth
+                        <div class="text-right hidden sm:block">
+                            <p class="text-white text-sm font-medium">{{ auth()->user()->name }}</p>
+                            <p class="text-white/70 text-xs">
+                                @if (auth()->user()->isAdmin())
+                                    <span class="bg-white/20 px-2 py-0.5 rounded-full">Admin</span>
+                                @else
+                                    <span class="bg-white/20 px-2 py-0.5 rounded-full">Customer</span>
+                                @endif
+                            </p>
+                        </div>
+                    @endauth
+
+                    <a href="{{ route('profile-pengguna') }}"
+                        class="btn btn-ghost btn-circle avatar transition hover:scale-105 {{ Request::is('profile*') ? 'ring-2 ring-white ring-offset-2 ring-offset-[#947257]' : '' }}">
+                        <div class="w-10 h-10 rounded-full text-center py-3 border border-white/30 bg-slate-700/60
+                            @auth
+                                @if (auth()->user()->profile_picture && file_exists(public_path('storage/' . auth()->user()->profile_picture)))
+                                    <img alt="User Avatar" src="{{ asset('storage/' . auth()->user()->profile_picture) }}"
+                                        class="w-full h-full object-cover rounded-full" />
+                                @else
+                                    {{-- Tampilkan inisial nama --}}
+                                    <span class="text-white font-bold text-lg">
+                                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                    </span>
+                                @endif
+                            @else
+                                <span class="text-white font-bold text-lg">?</span>
+                            @endauth
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -94,10 +120,28 @@
                 class="menu menu-sm dropdown-content bg-white rounded-xl z-[1] mt-4 w-56 p-3 shadow-2xl text-[#947257] font-poppins">
 
                 {{-- Profile Mobile --}}
-                <li class="mb-1">
-                    <a href="{{ url('/profile') }}"
-                        class="{{ Request::is('profile*') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
-                        👤 Profile Saya
+                <li class="mb-1 border py-1 border-primary rounded-md">
+                    <a href="{{ route('profile-pengguna') }}"
+                        class="flex items-center gap-3 {{ Request::is('profile*') ? 'bg-[#947257] text- white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                        <div class="avatar">
+                            <div class="w-8 rounded-full bg-gradient-to-br from-[#947257] to-[#7a5c44]">
+                                @auth
+                                    @if (auth()->user()->profile_picture)
+                                        <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}"
+                                            alt="{{ auth()->user()->name }}" />
+                                    @else
+                                        <div class="w-full h-full flex items-center justify-center text-white font-bold">
+                                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                        </div>
+                                    @endif
+                                @endauth
+                            </div>
+                        </div>
+                        <div>
+                            @auth
+                                <p class="text-xs text-gray-500 text-end">{{ auth()->user()->name }}</p>
+                            @endauth
+                        </div>
                     </a>
                 </li>
 
