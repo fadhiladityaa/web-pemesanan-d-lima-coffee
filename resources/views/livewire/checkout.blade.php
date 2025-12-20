@@ -6,11 +6,7 @@
             <h1 class="text-2xl sm:text-3xl font-bold text-slate-800 py-3 mx-auto text-center">Checkout</h1>
             <h2 class="text-xl font-semibold text-slate-700">Data Pembeli</h2>
             <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">Nomor Telepon</label>
-                    <input type="text" wire:model="no_hp" class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary" placeholder="08xxxxxxxxxx">
-                    @error('no_hp') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                </div>
+                
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Alamat Pengiriman</label>

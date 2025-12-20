@@ -1,4 +1,10 @@
 <div class="max-w-6xl mx-auto px-6 pt-24 font-[Poppins]">
+    @if ($errors->has('payment'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">{{ $errors->first('payment') }}</span>
+        </div>
+    @endif
     @forelse ($orders as $order)
         <div class="bg-white rounded-xl shadow-lg mb-8 overflow-hidden border border-gray-100">
             {{-- Header Pesanan --}}
@@ -85,7 +91,7 @@
     @empty
         <div class="text-center py-16">
             <p class="text-gray-400 text-lg">Belum ada pesanan.</p>
-            <a href="{{ route('menu') }}"
+            <a href="{{ route('landing.menu') }}"
                 class="mt-4 inline-block px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
                 Mulai Belanja
             </a>

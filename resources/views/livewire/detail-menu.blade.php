@@ -7,7 +7,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                <a href="{{ route('menu') }}">Kembali ke Menu</a> 
+                <a href="{{ route('landing.menu') }}">Kembali ke Menu</a> 
             </button>
         </div>
         
@@ -165,7 +165,7 @@
                 <!-- Tombol Aksi -->
                 <div class="mt-8 pt-6 w-full">
                     <button class="px-8 border-2 w-full border-[#A0826D] text-[#A0826D] hover:bg-[#A0826D] hover:text-white py-3 rounded-lg font-semibold transition">
-                       &laquo; <a href="{{ route('menu') }}">Kembali</a>
+                       &laquo; <a href="{{ route('landing.menu') }}">Kembali</a>
                     </button>
                 </div>
 
