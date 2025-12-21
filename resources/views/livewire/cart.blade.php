@@ -1,6 +1,6 @@
 <div class="">
     {{-- Cart untuk desktop --}}
-    <div class="shadow-soft p-5 rounded-lg hidden md:block lg:max-h-[80vh] overflow-y-auto bg-white border border-gray-100">
+    <div class="shadow-soft p-5 rounded-lg hidden lg:mt-[20rem] md:block lg:max-h-[80vh] overflow-y-auto bg-white border border-gray-100">
         <div class="flex justify-between">
             <h2 id="otw" class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
             <span

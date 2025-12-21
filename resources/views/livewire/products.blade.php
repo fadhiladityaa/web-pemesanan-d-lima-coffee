@@ -1,5 +1,4 @@
 <div class="lg:mb-10">
-
     {{-- Kategori Menu --}}
     <section>
         <div
@@ -19,7 +18,7 @@
     {{-- [BARU] SECTION BANNER PROMO (Hanya muncul jika ada promo aktif) --}}
     @if (isset($activePromo) && $activePromo)
         <div
-            class="relative top-12 overflow-hidden rounded-xl bg-gradient-to-r from-[#fff8e1] to-[#fff3e0] border border-amber-200 shadow-sm p-4 sm:p-6 mb-20 mt-36 sm:mt-0 animate-fade-in-down">
+            class="relative top-5 overflow-hidden rounded-xl bg-gradient-to-r from-[#fff8e1] to-[#fff3e0] border border-amber-200 shadow-sm p-4 sm:p-6 mb-20 mt-36 sm:mt-0 animate-fade-in-down">
             {{-- Hiasan Background --}}
             <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-amber-300 rounded-full opacity-20 blur-2xl">
             </div>

@@ -22,6 +22,7 @@ use App\Livewire\Edukasi;
 
 
 use App\Http\Controllers\LandingController;
+use App\Livewire\Products;
 
 // route ke home
 Route::get('/', [LandingController::class, 'index']);
@@ -34,7 +35,9 @@ Route::get('/', [LandingController::class, 'index']);
 // route fitur register
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest')->name('register');
-Route::get('/menu', [LandingController::class, 'allMenu'])->name('landing.menu');
+// Route::get('/menu', [LandingController::class, 'allMenu'])->name('landing.menu');
+
+Route::get('/menu', [HomeController::class, 'index'])->name('menu')->middleware('auth');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
 // route untuk dashboard user

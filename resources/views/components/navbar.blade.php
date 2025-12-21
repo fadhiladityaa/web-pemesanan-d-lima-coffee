@@ -32,7 +32,7 @@
                 @endauth
 
                 {{-- 2. MENU --}}
-                <a href="{{ route('landing.menu') }}"
+                <a href="{{ route('menu') }}"
                     class="relative py-1 transition-all duration-300 
                     {{ Request::routeIs('menu')
                         ? 'text-white font-bold border-b-2 border-white'
@@ -152,7 +152,7 @@
 
                 {{-- Menu Mobile --}}
                 <li>
-                    <a href="{{ route('landing.menu') }}"
+                    <a href="{{ route('menu') }}"
                         class="{{ Request::routeIs('menu') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
                         ☕ Menu
                     </a>

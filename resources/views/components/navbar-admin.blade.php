@@ -1,7 +1,7 @@
 <div
     class="fixed inset-y-0 left-0 w-64 bg-gray-900 text-white transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-50">
     <div class="flex items-center justify-center h-20 bg-gray-950 gap-2">
-        <a class="flex items-center justify-center gap-2" href="{{ route('landing.menu') }}">
+        <a class="flex items-center justify-center gap-2" href="{{ route('menu') }}">
             <img src="{{ asset('img/logo-warkop 1.svg') }}" class="w-10 rounded-full" alt="">
             <span class="text-xl font-bold text-primary-400">D'Lima Coffee</span>
         </a>
@@ -99,7 +99,7 @@
 {{-- Mobile Header --}}
 <section class="lg:hidden">
     <div class="w-full p-5 bg-[#151C2B] top-0  fixed flex justify-between text-white">
-        <a href="{{ route('landing.menu') }}">
+        <a href="{{ route('menu') }}">
             <h1 class="font-bold">DASHBOARD</h1>
         </a>
         <div class="dropdown dropdown-end">
