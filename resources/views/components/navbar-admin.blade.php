@@ -1,6 +1,6 @@
 <div
-    class="fixed inset-y-0 left-0 w-64 bg-gray-900 text-white transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-50">
-    <div class="flex items-center justify-center h-20 bg-gray-950 gap-2">
+    class="fixed inset-y-0 left-0 w-64 bg-[#A98E79] text-white transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-50">
+    <div class="flex items-center justify-center h-20 bg-[#947257] gap-2">
         <a class="flex items-center justify-center gap-2" href="{{ route('menu') }}">
             <img src="{{ asset('img/logo-warkop 1.svg') }}" class="w-10 rounded-full" alt="">
             <span class="text-xl font-bold text-primary-400">D'Lima Coffee</span>
@@ -10,7 +10,7 @@
         
         
         {{-- Dashboard --}}
-        <a href="{{ route('dashboard.admin') }}" class="flex {{ Request()->is('dashboard/admin') ? 'bg-gray-800' : '' }} items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
+        <a href="{{ route('dashboard.admin') }}" class="flex {{ Request()->is('dashboard/admin') ? 'bg-yellow-900/80' : '' }} items-center px-6 py-3 text-white hover:bg-yellow-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -20,14 +20,14 @@
 
         {{-- Pesanan Masuk --}}
         <a href="/dashboard/pesanan-masuk"
-            class="flex items-center {{ Request()->is('dashboard/pesanan-masuk') ? 'bg-gray-800' : '' }} px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
+            class="flex items-center {{ Request()->is('dashboard/pesanan-masuk') ? 'bg-yellow-900/80' : '' }} px-6 py-3 text-white hover:bg-yellow-800 hover:text-white">
             <img src="{{ asset('img/logo-pesanan-masuk.svg') }}" class="w-[.9rem] h-[.9rem] mr-4" alt="">
             Pesanan Masuk
         </a>
 
         {{-- Menu Management --}}
         <a href="{{ route('dashboard.menu.management') }}"
-            class="flex items-center px-6 py-3 text-gray-300 {{ Request()->is('dashboard/menu-management') ? 'bg-gray-800' : '' }} hover:bg-gray-800 hover:text-white">
+            class="flex items-center px-6 py-3 text-white {{ Request()->is('dashboard/menu-management') ? 'bg-yellow-900/80' : '' }} hover:bg-yellow-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -37,7 +37,7 @@
 
         {{-- [BARU] Promo Management --}}
         <a href="{{ route('dashboard.promo.management') }}"
-            class="flex items-center px-6 py-3 text-gray-300 {{ Request()->routeIs('dashboard.promo.management') ? 'bg-gray-800 text-white' : '' }} hover:bg-gray-800 hover:text-white">
+            class="flex items-center px-6 py-3 text-white {{ Request()->routeIs('dashboard.promo.management') ? 'bg-yellow-900/80' : '' }} hover:bg-yellow-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
@@ -47,7 +47,7 @@
 
         {{-- [BARU] User Management --}}
         <a href="{{ route('dashboard.user.management') }}"
-            class="flex items-center px-6 py-3 text-gray-300 {{ Request()->routeIs('dashboard.user.management') ? 'bg-gray-800 text-white' : '' }} hover:bg-gray-800 hover:text-white">
+            class="flex items-center px-6 py-3 text-white {{ Request()->routeIs('dashboard.user.management') ? 'bg-yellow-900/85' : '' }} hover:bg-yellow-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
@@ -56,7 +56,7 @@
 
         {{-- Edukasi Management --}}
         <a href="{{ route('dashboard.edukasi.management') }}"
-            class="flex items-center px-6 py-3 text-gray-300 {{ Request()->is('dashboard/edukasi-management') ? 'bg-gray-800' : '' }} hover:bg-gray-800 hover:text-white">
+            class="flex items-center px-6 py-3 text-white {{ Request()->is('dashboard/edukasi-management') ? 'bg-gray-800' : '' }} hover:bg-yellow-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -68,7 +68,7 @@
 </div>
 
 {{-- Topbar Desktop --}}
-<header class="hidden md:flex fixed top-0 left-64 right-0 h-20 bg-gray-950 text-white items-center justify-between px-6 z-40">
+<header class="hidden md:flex fixed top-0 left-64 right-0 h-20 bg-[#947257] text-white items-center justify-between px-6 z-40">
     <h1 class="text-lg font-bold">Dashboard Admin</h1>
     <div class="flex items-center gap-4">
         <button class="relative">
