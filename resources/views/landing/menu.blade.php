@@ -14,23 +14,30 @@
 <body class="antialiased bg-gray-50 text-gray-800">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-white shadow-md border-b border-gray-100" id="navbar">
+    @auth
+        <x-navbar></x-navbar>
+    @endauth
+
+    @guest
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-[#947257] shadow-xl border-b border-[#947257]" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Branding -->
                 <div class="flex-shrink-0 flex items-center gap-3">
                     <a href="{{ url('/') }}" class="flex items-center gap-3">
                         <img class="h-10 w-auto" src="{{ asset('img/Logo-DLima-Coffe.png') }}" alt="Logo">
-                        <span class="font-bold text-2xl text-primary tracking-wide">D'Lima Coffee</span>
+                        <span class="font-bold text-2xl text-black tracking-wide">D'Lima Coffee</span>
                     </a>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ url('/') }}#home" class="text-sm font-medium text-gray-700 hover:text-primary transition-colors">Beranda</a>
-                    <a href="{{ url('/') }}#about" class="text-sm font-medium text-gray-700 hover:text-primary transition-colors">Tentang</a>
-                    <a href="{{ route('landing.menu') }}" class="text-sm font-bold text-primary transition-colors">Menu</a>
-                    <a href="{{ url('/') }}#contact" class="text-sm font-medium text-gray-700 hover:text-primary transition-colors">Kontak</a>
+                    @guest
+                        <a href="{{ url('/') }}#home" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Beranda</a>
+                    @endguest
+                    <a href="{{ url('/') }}#about" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Tentang</a>
+                    <a href="{{ route('landing.menu') }}" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white font-bold border-b-2 border-white">Menu</a>
+                    <a href="{{ url('/') }}#contact" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Kontak</a>
                     
                     <div class="h-6 w-px bg-gray-300 mx-4"></div>
 
@@ -39,7 +46,7 @@
                             <a href="{{ url('/dashboard') }}" class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all">Dashboard</a>
                         @else
                             <div class="flex items-center gap-4">
-                                <a href="{{ route('login') }}" class="text-sm font-semibold text-gray-700 hover:text-primary transition-colors">Login</a>
+                                <a href="{{ route('login') }}" class="text-sm font-semibold text-white hover:text-primary transition-colors">Login</a>
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}" class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all transform hover:scale-105">Register</a>
                                 @endif
@@ -60,7 +67,9 @@
         <!-- Mobile Menu Dropdown -->
         <div class="hidden mobile-menu md:hidden bg-white border-t">
             <div class="px-4 pt-2 pb-4 space-y-1">
-                <a href="{{ url('/') }}#home" class="block py-3 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Beranda</a>
+                @guest
+                    <a href="{{ url('/') }}#home" class="block py-3 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Beranda</a>
+                @endguest
                 <a href="{{ url('/') }}#about" class="block py-3 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Tentang</a>
                 <a href="{{ route('landing.menu') }}" class="block py-3 px-3 text-base font-bold text-primary bg-primary/5 rounded-lg">Menu</a>
                  @if (Route::has('login'))
@@ -78,6 +87,7 @@
             </div>
         </div>
     </nav>
+    @endguest
 
     <!-- Page Header -->
     <div class="pt-48 pb-10 bg-gray-50 text-center">
