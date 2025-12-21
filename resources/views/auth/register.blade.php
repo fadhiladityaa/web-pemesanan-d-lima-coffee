@@ -69,7 +69,8 @@
                               <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                             </svg>
                         </div>
-                        <input type="tel" name="noHp" placeholder="08xxxxxxxxxx" required
+                        <input type="tel" name="noHp" placeholder="08xxxxxxxxxx" required maxlength="13"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value.length > 13) this.value = this.value.slice(0, 13);"
                             value="{{ old('noHp') }}"
                             class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-100 focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all duration-300 outline-none text-gray-800 placeholder-gray-400 bg-gray-50 focus:bg-white @error('noHp') border-red-500 ring-2 ring-red-100 @enderror">
                     </div>
