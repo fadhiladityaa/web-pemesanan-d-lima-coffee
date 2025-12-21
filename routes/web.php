@@ -23,6 +23,7 @@ use App\Livewire\Edukasi;
 
 use App\Http\Controllers\LandingController;
 use App\Livewire\Products;
+use GuzzleHttp\Middleware;
 
 // route ke home
 Route::get('/', [LandingController::class, 'index']);
@@ -84,7 +85,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
 });
 
 
-Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu');
+Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu')->Middleware('auth');
 Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
 
 

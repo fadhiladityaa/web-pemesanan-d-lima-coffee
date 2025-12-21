@@ -6,6 +6,7 @@
     <title>D'Lima Coffee - Experience the Best</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         body { font-family: 'Poppins', sans-serif; }
@@ -20,8 +21,8 @@
             <div class="flex justify-between items-center h-20">
                 <!-- Branding -->
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <img class="h-10 w-auto" src="{{ asset('img/Logo-DLima-Coffe.png') }}" alt="Logo">
-                    <span class="font-bold text-2xl text-black tracking-wide">D'Lima Coffee</span>
+                    <img class="h-10 w-auto rounded-full" src="{{ asset('img/Logo-DLima-Coffe.png') }}" alt="Logo">
+                    <span class="font-bold text-2xl text-white font-[Sriracha] tracking-wide">D'Lima Coffee</span>
                 </div>
 
                 <!-- Desktop Menu -->
@@ -29,7 +30,7 @@
                     @guest
                         <a href="#home" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Beranda</a>
                     @endguest
-                    <a href="{{ auth()->check() ? route('landing.menu') : '#menu' }}" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Menu</a>
+                    <a href="{{ auth()->check() ? route('menu') : '#menu' }}" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Menu</a>
                     <a href="#about" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Tentang</a>
                     <a href="#contact" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Kontak</a>
                     
@@ -65,7 +66,7 @@
                     <a href="#home" class="block py-3 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Beranda</a>
                 @endguest
                 <a href="#about" class="block py-3 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Tentang</a>
-                <a href="{{ auth()->check() ? route('landing.menu') : '#menu' }}" class="block py-3 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Menu</a>
+                <a href="{{ auth()->check() ? route('menu') : '#menu' }}" class="block py-3 px-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Menu</a>
                  @if (Route::has('login'))
                     @auth
                         <a href="{{ url('/dashboard') }}" class="block w-full text-center mt-4 px-5 py-3 rounded-lg bg-primary text-white font-bold shadow">Dashboard</a>
@@ -166,7 +167,7 @@
             </div>
             
             <div class="text-center mt-16">
-                 <a href="{{ route('landing.menu') }}" class="inline-block px-10 py-3 rounded-full bg-gray-900 text-white font-bold hover:bg-gray-800 transition-transform transform hover:scale-105 shadow-lg">
+                 <a href="{{ route('menu') }}" class="inline-block px-10 py-3 rounded-full bg-gray-900 text-white font-bold hover:bg-gray-800 transition-transform transform hover:scale-105 shadow-lg">
                     Lihat Semua Menu
                 </a>
             </div>
