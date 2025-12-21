@@ -36,7 +36,7 @@ class RegisterController extends Controller
         {
             $validated = $request->validate([
                 'name' => 'required|string|max:255|unique:users',
-                'noHp' => 'required|string|min:6|max:15|unique:users',
+                'noHp' => 'required|string|min:8|max:13|unique:users',
                 'password' => 'required|string'
             ]);
         
