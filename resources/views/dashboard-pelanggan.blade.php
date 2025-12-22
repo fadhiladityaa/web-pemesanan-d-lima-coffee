@@ -158,8 +158,9 @@
                                 </p>
                                 
                                 {{-- Tombol Lihat Detail --}}
-                               <a href="{{ route('menu.show', $product->id) }}" class="flex items-center justify-center w-full py-3 rounded-xl border border-[#D4B595] text-[#4A3B32] font-bold text-sm hover:bg-[#D4B595] hover:text-[#2C241B] transition-colors duration-300">
-                                        Lihat Detail
+                               <a href="{{ route('menu') }}#menu-{{ $product->id }}" 
+                                class="flex items-center justify-center w-full py-3 rounded-xl border border-[#D4B595] text-[#4A3B32] font-bold text-sm hover:bg-[#D4B595] hover:text-[#2C241B] transition-colors duration-300">
+                                    Lihat di Menu
                                 </a>
                             </div>
                         </div>

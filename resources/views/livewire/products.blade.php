@@ -97,7 +97,8 @@
 
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($menus as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] Menambahkan ID untuk target scroll dan scroll-mt-40 untuk margin atas --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -150,7 +151,6 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        {{-- PERBAIKAN ROUTE 1 (Pencarian) --}}
                         <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
@@ -186,7 +186,8 @@
 
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($coffee as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Coffee --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -234,7 +235,6 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        {{-- PERBAIKAN ROUTE 2 (Coffee) --}}
                         <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
@@ -271,7 +271,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($non_coffee as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Non Coffee --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -319,7 +320,6 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        {{-- PERBAIKAN ROUTE 3 (Non Coffee) --}}
                         <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
@@ -357,7 +357,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($moctail as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Moctail --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -405,7 +406,6 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        {{-- PERBAIKAN ROUTE 4 (Moctail) --}}
                         <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
@@ -444,7 +444,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($makanan_ringan as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Makanan Ringan --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -492,7 +493,6 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        {{-- PERBAIKAN ROUTE 5 (Makanan Ringan) --}}
                         <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
@@ -530,7 +530,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($makanan_berat as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Makanan Berat --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -578,7 +579,6 @@
                         class="text-[12px] sm:text-[18px] text-black/70">{{ Str::limit($item->deskripsi, 40) }}</span>
 
                     <div class="button flex flex-col sm:gap-[10px] gap-[5px] w-full mt-2">
-                        {{-- PERBAIKAN ROUTE 6 (Makanan Berat) --}}
                         <a href="{{ route('menu.show', $item->id) }}">
                             <button
                                 class="text-[12px] sm:text-[18px] border sm:border-2 border-[#CE8F69]/50 w-full p-[5px] hover:bg-primary text-slate-800 font-light hover:text-white transition-all duration-500 rounded-[4px]">
