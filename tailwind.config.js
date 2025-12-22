@@ -1,4 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
+import daisyui from 'daisyui';
+import tailwindScrollbarHide from 'tailwind-scrollbar-hide';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -16,7 +18,7 @@ export default {
                 fancy: ['Charm', 'cursive'],
                 poppins: ['Poppins', 'serif']
             },
-            fontSize : {
+            fontSize: {
                 ssm: '0.750rem',
                 mmd: '1.1001rem'
             },
@@ -30,15 +32,15 @@ export default {
             },
             boxShadow: {
                 soft: '2px 2px 4px rgba(0, 0, 0, .12), -2px -2px 12px rgba(0, 0, 0, .098)',
-                medium:  '0 5px 9px rgba(0, 0, 0, .12), 0 -3px 9px rgba(0, 0, 0, .08)',
+                medium: '0 5px 9px rgba(0, 0, 0, .12), 0 -3px 9px rgba(0, 0, 0, .08)',
                 cust: '10px 10px 0px rgba(0, 0, 0, 10), -10px -10px 0px rgba(0, 0, 0, 10),'
-,
+                ,
             }
         },
     },
     plugins: [
-        require("daisyui"),
-        require("tailwind-scrollbar-hide"),
+        daisyui,
+        tailwindScrollbarHide,
     ],
     daisyui: {
         themes: ["light"],

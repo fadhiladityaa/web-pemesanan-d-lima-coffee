@@ -7,12 +7,10 @@
         </a>
     </div>
     <nav class="mt-6">
-        <div class="px-6 py-3 bg-gray-900 text-primary-400 font-medium">
-            <span>Menu Utama</span>
-        </div>
+        
         
         {{-- Dashboard --}}
-        <a href="{{ route('dashboard.admin') }}" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
+        <a href="{{ route('dashboard.admin') }}" class="flex {{ Request()->is('dashboard/admin') ? 'bg-gray-800' : '' }} items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -34,7 +32,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
-            Menu Management
+            Kelola Menu
         </a>
 
         {{-- [BARU] Promo Management --}}
@@ -44,16 +42,16 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
             </svg>
-            Promo Management
+            Kelola Promo
         </a>
 
-        {{-- Reservasi --}}
-        <a href="#" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
+        {{-- [BARU] User Management --}}
+        <a href="{{ route('dashboard.user.management') }}"
+            class="flex items-center px-6 py-3 text-gray-300 {{ Request()->routeIs('dashboard.user.management') ? 'bg-gray-800 text-white' : '' }} hover:bg-gray-800 hover:text-white">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
-            Reservasi
+            Kelola Pengguna
         </a>
 
         {{-- Edukasi Management --}}
@@ -63,28 +61,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
-            Edukasi Management
+            Kelola Edukasi
         </a>
 
-        <div class="px-6 py-3 mt-4 bg-gray-900 bg-opacity-25 text-primary-400 font-medium">
-            <span>Pengaturan</span>
-        </div>
-        <a href="#" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
-            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            Pengguna
-        </a>
-        <a href="#" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-800 hover:text-white">
-            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-            Keluar
-        </a>
     </nav>
 </div>
 
@@ -105,8 +84,7 @@
                 <img src="{{ asset('img/user-avatar.png') }}" class="w-8 h-8 rounded-full" alt="User">
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-40 p-2 text-slate-800 shadow">
-                <li><a href="#">Profil</a></li>
-                <li><a href="#">Pengaturan</a></li>
+                <li><a href="{{ route('dashboard.profile') }}">Profil</a></li>
                 <li>
                     <form action="/logout" method="POST">
                         @csrf
@@ -150,6 +128,10 @@
                 </li>
 
                 <li class="sm:hidden">
+                    <a href="{{ route('dashboard.user.management') }}">User Management</a>
+                </li>
+
+                <li class="sm:hidden">
                     <a href="{{ route('dashboard.edukasi.management') }}">Edukasi Management</a>
                 </li>
 
@@ -158,7 +140,7 @@
                 </li>
 
                 <li>
-                    <form action="/logout" method="POST">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit">Logout</button>
                     </form>

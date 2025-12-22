@@ -17,6 +17,11 @@ class Checkout extends Component
     public $total = 0;
     public $kembalian = 0;
 
+    public function mount()
+    {
+        $this->no_hp = Auth::user()->noHp;
+    }
+
     protected $rules = [
         'alamat' => 'required|string',
         'no_hp' => 'required|string',

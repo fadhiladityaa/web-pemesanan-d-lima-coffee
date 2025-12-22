@@ -38,7 +38,6 @@
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
             <a href="{{ route('detail.pesanan', $order->id) }}" class="text-blue-600 hover:text-blue-900">Detail</a>
-            <a href="{{ route('detail.pesanan', $order->id) }}" class="text-red-600 hover:text-blue-900">Hapus</a>
         </td>
         </tr>
         @endforeach

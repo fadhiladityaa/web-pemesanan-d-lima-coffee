@@ -9,6 +9,8 @@ use App\Models\MenuCategory;
 use App\Models\Promo;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 // use Illuminate\Database\Eloquent\Builder;
 
 class Products extends Component
@@ -52,6 +54,8 @@ class Products extends Component
             $item->increment('quantity');
         } else {
             $menu = Daftar_menu::findOrfail($menu_id);
+
+    
             $finalPrice = $menu->harga; // Default harga normal
             // Cek apakah user sedang membuka halaman lewat link promo?
             if ($this->promo_id) {
@@ -76,6 +80,9 @@ class Products extends Component
         $this->dispatch('cart_updated');
     }
 
+
+    #[Layout('layouts.main')]
+    #[Title('Daftar Menu')]
     public function render()
     {
         $categoryNames = ['Coffee', 'Non Coffee', 'Moctail', 'Makanan Ringan', 'Makanan Berat'];

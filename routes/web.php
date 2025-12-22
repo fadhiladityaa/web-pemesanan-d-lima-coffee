@@ -1,6 +1,10 @@
 <?php
 
 // livewire class
+use App\Livewire\DetailPesanan;
+use App\Livewire\PesananSaya;
+
+
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
@@ -11,22 +15,29 @@ use App\Livewire\CreateMenu;
 use App\Livewire\DashboardAdmin;
 use App\Livewire\DetailMenu;
 use App\Livewire\EditMenu;
-use App\Livewire\DetailPesanan;
-use App\Livewire\PesananSaya;
 use App\Livewire\MenuManagement;
 use App\Livewire\PromoManagement;
 use App\Livewire\PesananMasuk;
 use App\Livewire\Edukasi;
 
 
+use App\Http\Controllers\LandingController;
+use App\Livewire\Products;
+use GuzzleHttp\Middleware;
+
 // route ke home
-Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/', [LandingController::class, 'index']);
 
 // route fitur register
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::get('/menu', [HomeController::class, 'index'])->name('menu');
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');;
+// route fitur register
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest')->name('register');
+// Route::get('/menu', [LandingController::class, 'allMenu'])->name('landing.menu');
+
+Route::get('/menu', [HomeController::class, 'index'])->name('menu')->middleware('auth');
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+
+// route untuk dashboard user
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // route untuk login 
 Route::get('/login', [loginController::class, 'index'])->name('login')->middleware('guest');
@@ -36,7 +47,9 @@ Route::post('/login', [loginController::class, 'authenticate'])->middleware('gue
 Route::post('/logout', [loginController::class, 'logout'])->name('logout');
 
 // route untuk profile
-Route::get('/profile-anda', [ProfileController::class, 'index'])->name('profile')->middleware('auth');
+Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware('auth')->name('profile-pengguna');
+Route::put('/profil-pengguna', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
+Route::put('/profil-pengguna/password', [ProfileController::class, 'updatePassword'])->middleware('auth')->name('profile.password');
 
 Route::get('/pesanan-masuk/detail-pesanan/{order}', DetailPesanan::class)
     ->name('detail.pesanan')->middleware('auth');
@@ -45,6 +58,9 @@ Route::get('/checkout', function () {
     return view('checkout-view', ['title' => 'Halaman Checkout']);
 })->name('checkout')->middleware('auth');
 
+Route::get('/buy-now/{id}', [\App\Http\Controllers\CartController::class, 'buyNow'])->name('cart.buyNow')->middleware('auth');
+Route::post('/midtrans/callback', [\App\Http\Controllers\MidtransController::class, 'callback']);
+
 
 Route::get('/checkout-succees', function () {
     return view('checkout-succeed', ['title' => 'checkout-success']);
@@ -52,9 +68,11 @@ Route::get('/checkout-succees', function () {
 
 
 Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
+    Route::get('/profile', \App\Livewire\AdminProfile::class)->name('dashboard.profile');
     Route::get('/create-menu', CreateMenu::class)->name('dashboard.create.menu');
     Route::get('/admin', DashboardAdmin::class)->name('dashboard.admin');
     Route::get('/menu-management', MenuManagement::class)->name('dashboard.menu.management');
+    Route::get('/user-management', \App\Livewire\UserManagement::class)->name('dashboard.user.management');
     Route::get('/{id}/edit', EditMenu::class)->name('dashboard.edit.menu');
     Route::get('/pesanan-masuk', PesananMasuk::class)->name('dashboard.pesanan.masuk');
     Route::get('/edukasi-management', Edukasi::class)->name('dashboard.edukasi.management');
@@ -62,8 +80,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
 });
 
 
-//Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu');
-Route::get('/menu/detail-menu/{id}', DetailMenu::class)->name('menu.show');
+Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu')->Middleware('auth');
 Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
 
 //  EDUKASI UNTUK PELANGGAN - gunakan component yang sudah ada
