@@ -80,7 +80,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
 });
 
 
-Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu')->Middleware('auth');
+Route::get('/menu/detail-menu/{id}', DetailMenu::class)->name('detail.menu')->Middleware('auth');
 Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
 
 //  EDUKASI UNTUK PELANGGAN - gunakan component yang sudah ada
