@@ -70,88 +70,105 @@
                 </div>
 
                 {{-- KANAN: Promo Card --}}
-                {{-- KANAN: Promo Card (VERSI FINAL FIX SCROLL) --}}
-                <div class="space-y-6">
-                    <h2 class="font-serif text-2xl font-bold text-[#2C241B]">Promo Spesial</h2>
+                <div class="space-y-4 overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-serif text-2xl font-bold text-[#2C241B]">Promo Spesial</h2>
+                        
+                        {{-- Indikator Geser (Visual Cue) --}}
+                        @if(isset($promos) && count($promos) > 1)
+                            <span class="text-xs text-[#8C7B70] animate-pulse hidden md:block">Geser untuk lihat lainnya &rarr;</span>
+                        @endif
+                    </div>
 
                     @if (isset($promos) && count($promos) > 0)
-                        @foreach ($promos->take(1) as $promo)
-                            <div class="relative rounded-[2rem] overflow-hidden shadow-xl min-h-[300px] flex flex-col justify-end group transition-transform duration-300 hover:scale-[1.02]">
+                        {{-- Container Scroll --}}
+                        <div class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
+                            
+                            @foreach ($promos as $promo)
+                                {{-- Card Item (Fixed Width) --}}
+                                <div class="relative flex-shrink-0 w-[85%] md:w-[350px] snap-center rounded-[2rem] overflow-hidden shadow-xl min-h-[300px] flex flex-col justify-end group transition-transform duration-300 hover:scale-[1.01]">
 
-                                {{-- Background Image --}}
-                                <div class="absolute inset-0">
-                                    @if ($promo->gambar)
-                                        <img src="{{ asset('storage/' . $promo->gambar) }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                                    @else
-                                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                                    @endif
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                                </div>
-
-                                {{-- Content --}}
-                                <div class="relative z-10 p-8 text-white">
-                                    <div class="flex items-center gap-2 mb-3">
-                                        <span class="bg-[#D4B595] text-[#2C241B] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                                            Limited Offer
-                                        </span>
-                                        <span class="text-xs font-mono opacity-80 border border-white/30 px-2 py-0.5 rounded">
-                                            {{ $promo->kode_promo }}
-                                        </span>
+                                    {{-- Background Image --}}
+                                    <div class="absolute inset-0">
+                                        @if ($promo->gambar)
+                                            <img src="{{ asset('storage/' . $promo->gambar) }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                                        @else
+                                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                                        @endif
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                                     </div>
 
-                                    <h3 class="font-serif text-3xl font-bold mb-2 leading-tight">{{ $promo->judul }}</h3>
-                                    <p class="text-white/80 text-sm mb-6 line-clamp-2 leading-relaxed">{{ $promo->deskripsi }}</p>
+                                    {{-- Content --}}
+                                    <div class="relative z-10 p-6 md:p-8 text-white">
+                                        <div class="flex flex-wrap items-center gap-2 mb-3">
+                                            <span class="bg-[#D4B595] text-[#2C241B] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                                                -{{ $promo->persentase_diskon }}%
+                                            </span>
+                                            <span class="text-xs font-mono opacity-80 border border-white/30 px-2 py-0.5 rounded">
+                                                {{ $promo->kode_promo }}
+                                            </span>
+                                        </div>
 
-                                    {{-- [LOGIKA PERBAIKAN: Ambil ID Menu] --}}
-                                    @php
-                                        // Kita ambil satu menu terkait untuk dijadikan target scroll
-                                        // Pastikan di Model Promo.php ada fungsi: public function menus() { ... }
-                                        $targetId = null;
-                                        
-                                        // Cek apakah relasi menus ada isinya
-                                        if ($promo->menus && $promo->menus->isNotEmpty()) {
-                                            $targetId = $promo->menus->first()->id;
-                                        }
-                                    @endphp
+                                        <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2 leading-tight line-clamp-2">{{ $promo->judul }}</h3>
+                                        <p class="text-white/80 text-sm mb-6 line-clamp-2 leading-relaxed">{{ $promo->deskripsi }}</p>
 
-                                    <a href="{{ route('menu', ['promo_id' => $promo->id]) }}{{ $targetId ? '#menu-' . $targetId : '' }}" 
-                                       class="flex items-center justify-center w-full py-4 bg-white text-[#2C241B] rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#D4B595] hover:shadow-lg hover:shadow-amber-900/20 transition-all duration-300 group-hover:translate-y-[-2px]">
-                                        <span>Pakai Promo Sekarang</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
-                                    </a>
+                                        {{-- LOGIKA ID MENU (Tetap Dipertahankan) --}}
+                                        @php
+                                            $targetId = null;
+                                            if ($promo->menus && $promo->menus->isNotEmpty()) {
+                                                $targetId = $promo->menus->first()->id;
+                                            }
+                                        @endphp
+
+                                        <a href="{{ route('menu', ['promo_id' => $promo->id]) }}{{ $targetId ? '#menu-' . $targetId : '' }}" 
+                                           class="flex items-center justify-center w-full py-3 md:py-4 bg-white text-[#2C241B] rounded-xl font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-[#D4B595] hover:shadow-lg transition-all duration-300">
+                                            <span>Pakai Promo</span>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+
+                        </div>
                     @else
+                        {{-- State Kosong --}}
                         <div class="bg-[#EBE5DE] rounded-[2rem] p-8 text-center h-[250px] flex flex-col items-center justify-center border border-dashed border-[#D1C7BD]">
-                            <p class="text-[#8C7B70] font-medium">Nantikan promo menarik berikutnya!</p>
+                            <p class="text-[#8C7B70] font-medium">Belum ada promo aktif saat ini.</p>
                         </div>
                     @endif
                 </div>
             </div>
 
+         {{-- ================================================== --}}
+            {{-- SECTION 3: REKOMENDASI MENU (MODIFIKASI: SLIDER) --}}
             {{-- ================================================== --}}
-            {{-- SECTION 3: REKOMENDASI MENU --}}
-            {{-- ================================================== --}}
-            <div>
-                <div class="flex items-end justify-between mb-8">
+            <div class="overflow-hidden">
+                <div class="flex items-end justify-between mb-6">
                     <div>
                         <h2 class="font-serif text-3xl font-bold text-[#2C241B]">Rekomendasi Menu</h2>
                         <p class="text-[#8C7B70] mt-1 text-sm">Pilihan spesial rekomendasi barista kami.</p>
                     </div>
-                    <a href="{{ url('/menu') }}" class="hidden md:flex items-center gap-2 text-sm font-bold text-[#4A3B32] hover:text-[#D4B595] transition">
-                        Lihat Semua →
-                    </a>
+                    
+                    {{-- Navigasi / Link --}}
+                    <div class="flex items-center gap-4">
+                        {{-- Indikator Geser (Hanya muncul jika item banyak) --}}
+                        @if($featuredProducts->count() > 3)
+                            <span class="text-xs text-[#8C7B70] animate-pulse hidden md:block">Geser &rarr;</span>
+                        @endif
+                        <a href="{{ url('/menu') }}" class="hidden md:flex items-center gap-2 text-sm font-bold text-[#4A3B32] hover:text-[#D4B595] transition">
+                            Lihat Semua →
+                        </a>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {{-- CONTAINER SLIDER (Ganti Grid jadi Flex) --}}
+                <div class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    
                     @forelse($featuredProducts as $product)
-                        <div class="group bg-white rounded-[2rem] border border-[#F0EAE0] overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col h-full">
+                        {{-- CARD ITEM (Fixed Width) --}}
+                        <div class="relative flex-shrink-0 w-[85%] md:w-[300px] snap-center group bg-white rounded-[2rem] border border-[#F0EAE0] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                             
                             {{-- GAMBAR PRODUK --}}
-                            <div class="h-64 overflow-hidden relative bg-[#F4F1EA]">
+                            <div class="h-56 overflow-hidden relative bg-[#F4F1EA]">
                                 @if ($product->gambar)
                                     <img src="{{ asset('storage/' . $product->gambar) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                                 @else
@@ -162,7 +179,7 @@
                                     </div>
                                 @endif
 
-                                {{-- HARGA --}}
+                                {{-- Badge Harga --}}
                                 <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-[#2C241B] px-3 py-1 rounded-lg text-sm font-bold shadow-sm">
                                     Rp {{ number_format($product->harga, 0, ',', '.') }}
                                 </div>
@@ -170,29 +187,30 @@
 
                             {{-- KONTEN --}}
                             <div class="p-6 flex flex-col flex-grow">
-                                <h3 class="font-serif text-xl font-bold text-[#2C241B] mb-2 line-clamp-1">
+                                <h3 class="font-serif text-xl font-bold text-[#2C241B] mb-2 line-clamp-1" title="{{ $product->nama_menu }}">
                                     {{ $product->nama_menu }}
                                 </h3>
-                                <p class="text-[#8C7B70] text-sm mb-6 line-clamp-2 h-10 flex-grow">
+                                <p class="text-[#8C7B70] text-sm mb-6 line-clamp-2 h-10 flex-grow leading-relaxed">
                                     {{ $product->deskripsi }}
                                 </p>
 
-                                {{-- TOMBOL AKSI --}}
+                                {{-- TOMBOL AKSI (Tetap Scroll Otomatis) --}}
                                 <a href="{{ route('menu') }}#menu-{{ $product->id }}" 
-                                   class="flex items-center justify-center w-full py-3 rounded-xl border border-[#D4B595] text-[#4A3B32] font-bold text-sm hover:bg-[#D4B595] hover:text-[#2C241B] transition-colors duration-300 mt-auto">
+                                   class="flex items-center justify-center w-full py-3 rounded-xl border border-[#D4B595] text-[#4A3B32] font-bold text-sm hover:bg-[#D4B595] hover:text-[#2C241B] transition-colors duration-300 mt-auto group-hover:shadow-md">
                                     Lihat di Menu
                                 </a>
                             </div>
                         </div>
                     @empty
-                        <div class="col-span-3 py-12 text-center rounded-[2rem] border border-dashed border-[#D1C7BD] bg-[#FDFBF7]">
+                        {{-- State Kosong --}}
+                        <div class="w-full py-12 text-center rounded-[2rem] border border-dashed border-[#D1C7BD] bg-[#FDFBF7]">
                             <p class="text-[#8C7B70] font-medium">Belum ada rekomendasi menu saat ini.</p>
                             <a href="{{ url('/menu') }}" class="text-[#4A3B32] text-sm font-bold hover:underline mt-2 inline-block">Cek Daftar Menu Lengkap</a>
                         </div>
                     @endforelse
                 </div>
             </div>
-
+            
             {{-- ================================================== --}}
             {{-- SECTION 4: EDUKASI (LINK LIVEWIRE AKTIF) --}}
             {{-- ================================================== --}}

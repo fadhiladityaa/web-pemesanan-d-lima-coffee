@@ -36,14 +36,14 @@ class DashboardController extends Controller
 
         // Produk unggulan: 3 item
         $featuredProducts = Daftar_menu::where('is_featured', 1)
-            ->take(3)
+            ->take(10)
             ->get();
 
         // Cuplikan edukasi: 1 artikel terbaru
         $edukasi = Edukasi::latest()->first();
 
         // 3 promo terbaru
-        $promos = Promo::latest()->take(3)->get();
+        $promos = Promo::latest()->take(4)->get();
         $title = 'Dashboard Pelanggan';
         return view('dashboard-pelanggan', compact(
             'user',
