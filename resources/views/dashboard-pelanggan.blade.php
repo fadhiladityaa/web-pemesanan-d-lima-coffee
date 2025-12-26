@@ -70,12 +70,15 @@
                 </div>
 
                 {{-- KANAN: Promo Card --}}
+                {{-- KANAN: Promo Card (VERSI FINAL FIX SCROLL) --}}
                 <div class="space-y-6">
                     <h2 class="font-serif text-2xl font-bold text-[#2C241B]">Promo Spesial</h2>
 
                     @if (isset($promos) && count($promos) > 0)
                         @foreach ($promos->take(1) as $promo)
-                            <div class="relative rounded-[2rem] overflow-hidden shadow-xl min-h-[250px] flex flex-col justify-end group">
+                            <div class="relative rounded-[2rem] overflow-hidden shadow-xl min-h-[300px] flex flex-col justify-end group transition-transform duration-300 hover:scale-[1.02]">
+
+                                {{-- Background Image --}}
                                 <div class="absolute inset-0">
                                     @if ($promo->gambar)
                                         <img src="{{ asset('storage/' . $promo->gambar) }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
@@ -85,24 +88,45 @@
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                                 </div>
 
-                                <div class="relative z-10 p-6 text-white">
-                                    <span class="bg-[#D4B595] text-[#2C241B] px-3 py-1 rounded-full text-[10px] font-bold uppercase mb-2 inline-block">Limited Offer</span>
-                                    <h3 class="font-serif text-2xl font-bold mb-1">{{ $promo->judul }}</h3>
-                                    <p class="text-white/80 text-sm mb-4 line-clamp-2">{{ $promo->deskripsi }}</p>
-
-                                    <div class="flex items-center justify-between bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3">
-                                        <div>
-                                            <p class="text-[10px] opacity-70 uppercase">Kode Voucher</p>
-                                            <p class="font-mono text-lg font-bold tracking-widest">{{ $promo->kode_promo }}</p>
-                                        </div>
-                                        <a href="{{ route('menu', ['promo_id' => $promo->id]) }}" class="bg-white text-[#2C241B] px-4 py-2 rounded-lg text-xs font-bold hover:bg-[#D4B595] transition">Pakai</a>
+                                {{-- Content --}}
+                                <div class="relative z-10 p-8 text-white">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="bg-[#D4B595] text-[#2C241B] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                                            Limited Offer
+                                        </span>
+                                        <span class="text-xs font-mono opacity-80 border border-white/30 px-2 py-0.5 rounded">
+                                            {{ $promo->kode_promo }}
+                                        </span>
                                     </div>
+
+                                    <h3 class="font-serif text-3xl font-bold mb-2 leading-tight">{{ $promo->judul }}</h3>
+                                    <p class="text-white/80 text-sm mb-6 line-clamp-2 leading-relaxed">{{ $promo->deskripsi }}</p>
+
+                                    {{-- [LOGIKA PERBAIKAN: Ambil ID Menu] --}}
+                                    @php
+                                        // Kita ambil satu menu terkait untuk dijadikan target scroll
+                                        // Pastikan di Model Promo.php ada fungsi: public function menus() { ... }
+                                        $targetId = null;
+                                        
+                                        // Cek apakah relasi menus ada isinya
+                                        if ($promo->menus && $promo->menus->isNotEmpty()) {
+                                            $targetId = $promo->menus->first()->id;
+                                        }
+                                    @endphp
+
+                                    <a href="{{ route('menu', ['promo_id' => $promo->id]) }}{{ $targetId ? '#menu-' . $targetId : '' }}" 
+                                       class="flex items-center justify-center w-full py-4 bg-white text-[#2C241B] rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#D4B595] hover:shadow-lg hover:shadow-amber-900/20 transition-all duration-300 group-hover:translate-y-[-2px]">
+                                        <span>Pakai Promo Sekarang</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
                     @else
-                        <div class="bg-[#EBE5DE] rounded-[2rem] p-8 text-center h-[250px] flex flex-col items-center justify-center">
-                            <p class="text-[#8C7B70]">Nantikan promo menarik berikutnya!</p>
+                        <div class="bg-[#EBE5DE] rounded-[2rem] p-8 text-center h-[250px] flex flex-col items-center justify-center border border-dashed border-[#D1C7BD]">
+                            <p class="text-[#8C7B70] font-medium">Nantikan promo menarik berikutnya!</p>
                         </div>
                     @endif
                 </div>
