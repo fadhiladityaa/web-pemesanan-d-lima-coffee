@@ -10,7 +10,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Alamat Pengiriman</label>
-                    <textarea wire:model="alamat" class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary" rows="3"
+                    <textarea wire:model="alamat" class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:border-none focus:outline-none focus:ring-primary" rows="3"
                         placeholder="Masukkan alamat lengkap"></textarea>
                     @error('alamat')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -20,7 +20,7 @@
                 <div class="text-poppins">
                     <label class="block text-sm font-medium text-slate-600">Tipe pesanan</label>
                     <select wire:model.live="tipe_pesanan"
-                        class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary">
+                        class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary text-slate-500">
                         <option value="">Pilih tipe pesanan anda</option>
                         <option value="Take away">Take away</option>
                         <option value="Dine in">Dine in</option>
@@ -33,7 +33,7 @@
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Metode Pembayaran</label>
                     <select wire:model.live="metode_pembayaran"
-                        class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary">
+                        class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary text-slate-500">
                         <option value="">Pilih metode</option>
                         <option value="Cash">Cash</option>
                         <option value="Transfer Bank">Transfer Bank</option>
