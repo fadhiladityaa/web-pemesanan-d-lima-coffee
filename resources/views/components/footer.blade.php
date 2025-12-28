@@ -1,4 +1,4 @@
-<footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+<footer class="bg-gray-900 text-white pt-16 mt-14 pb-8 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             <!-- Brand & Description -->
@@ -77,23 +77,7 @@
                             class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-white transition-all">
                             <div class="w-5 h-5">
                                 <!-- Instagram Logo - Ganti dengan gambar Anda -->
-                                <img src="{{ asset('img/instagram-icon.png') }}" alt="Instagram" class="w-full h-full">
-                            </div>
-                        </a>
-
-                        <a href="https://facebook.com/dlimacoffee" target="_blank"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-white transition-all">
-                            <div class="w-5 h-5">
-                                <!-- Facebook Logo - Ganti dengan gambar Anda -->
-                                <img src="{{ asset('img/facebook-icon.png') }}" alt="Facebook" class="w-full h-full">
-                            </div>
-                        </a>
-
-                        <a href="https://tiktok.com/@dlimacoffee" target="_blank"
-                            class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-white transition-all">
-                            <div class="w-5 h-5">
-                                <!-- TikTok Logo - Ganti dengan gambar Anda -->
-                                <img src="{{ asset('img/tiktok-icon.png') }}" alt="TikTok" class="w-full h-full">
+                                <img src="{{ asset('img/instagram-167-svgrepo-com.svg') }}" alt="Instagram" class="w-full h-full">
                             </div>
                         </a>
                     </div>
