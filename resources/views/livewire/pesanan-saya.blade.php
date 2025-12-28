@@ -29,13 +29,22 @@
             <div class="px-6 py-6 flex flex-col gap-3">
                 <div>
                     <p class="text-sm text-gray-500 mb-1">Metode Pembayaran</p>
-                    <p class="text-sm py-1 px-3 bg-green-100 w-16 text-center text-green-700 font-semibold border-green-400 border rounded-full">
+                    <p
+                        class="text-sm py-1 px-3 bg-green-100 w-16 text-center text-green-700 font-semibold border-green-400 border rounded-full">
                         {{ $order->metode_pembayaran }}
                     </p>
                 </div>
                 <div>
+                    <p class="text-sm text-gray-500 mb-1">Tipe pesanan</p>
+                    <p
+                        class="text-sm py-1 px-3 bg-blue-100  {{ $order->tipe_pesanan === 'Take away' ? 'w-28' : 'w-20' }} text-center text-blue-700 font-semibold border-blue-400 border rounded-full">
+                        {{ $order->tipe_pesanan }}
+                    </p>
+                </div>
+                <div>
                     <p class="text-sm text-gray-500 mb-1">Status pembayaran</p>
-                    <p class="text-sm py-1 px-3 capitalize {{ $order->payment_status === 'pending' ? 'bg-yellow-100 text-yellow-700 w-24 border-yellow-400' : 'bg-green-100 text-green-700 w-16 border-green-400'}} border text-center font-semibold rounded-xl">
+                    <p
+                        class="text-sm py-1 px-3 capitalize {{ $order->payment_status === 'pending' ? 'bg-yellow-100 text-yellow-700 w-24 border-yellow-400' : 'bg-green-100 text-green-700 w-16 border-green-400' }} border text-center font-semibold rounded-full">
                         {{ $order->payment_status }}
                     </p>
                 </div>
@@ -71,7 +80,7 @@
                     </tbody>
                 </table>
 
-                 <div class="my-5">
+                <div class="my-5">
                     <p class="text-sm text-gray-500">Total Pembayaran</p>
                     <p class="text-2xl font-bold text-gray-800">
                         Rp. {{ number_format($order->total, 0, ',', '.') }}
