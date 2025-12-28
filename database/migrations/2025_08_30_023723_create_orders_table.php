@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('alamat');
             $table->string('no_hp');
+            $table->enum('tipe_pesanan', ['Take away', 'Dine in']);
             $table->string('metode_pembayaran');
             $table->enum('payment_status', ['pending', 'paid', 'failed', 'canceled', 'completed'])->default('pending');
             $table->enum('order_status', [
@@ -28,7 +29,6 @@ return new class extends Migration
                 'selesai',
                 'gagal'
             ])->default('proses');
-
             $table->decimal('total', 12, 2);
             $table->decimal('uang_dibayar', 12, 2)->nullable();
             $table->decimal('kembalian', 12, 2)->nullable();
