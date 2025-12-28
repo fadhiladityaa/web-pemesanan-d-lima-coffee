@@ -61,6 +61,8 @@
     @endif
 
     @stack('scripts')
+
+    <x-footer></x-footer>
 </body>
 
 </html>
