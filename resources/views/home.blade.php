@@ -3,7 +3,7 @@
 @section('container')
     {{-- Location Section --}}
     <section>
-        <div x-data="{info: 'Location'}" class="w-full h-[340px] sm:h-[390px] bg-[#2C2C2C] pt-20 font-poppins text-white">
+        <div x-data="{ info: 'Location' }" class="w-full h-[340px] sm:h-[390px] bg-[#2C2C2C] pt-20 font-poppins text-white">
             <div class="location-grup flex flex-col px-[16px] sm:px-[32px] lg:px-[64px] mt-4">
                 <span x-text="info" class="text-[18px] sm:text-[24px]"></span>
                 <span class="sm:text-[18px]">Jalan Delima, Parepare</span>
@@ -16,7 +16,6 @@
         </div>
     </section>
 
-    @livewire('floating-cart')
 
 
 
@@ -28,10 +27,15 @@
         </section>
 
         {{-- Keranjang --}}
-        <section>
-            <div class="w-full sm:px-[32px] lg:px-0 lg:pr-[64px] mt-9 lg:mt-5 font-poppins lg:sticky top-24">
-                <livewire:cart />
-            </div>
-        </section>
+
+        @auth
+            @if (!auth()->user()->isAdmin())
+                <section>
+                    <div class="w-full sm:px-[32px] lg:px-0 lg:pr-[64px] mt-9 lg:mt-5 font-poppins lg:sticky top-24">
+                        <livewire:cart />
+                    </div>
+                </section>
+            @endif
+        @endauth
     </div>
 @endsection
