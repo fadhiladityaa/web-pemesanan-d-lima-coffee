@@ -27,7 +27,7 @@ class DashboardController extends Controller
         }
         // -----------------------------------------------------------
 
-        // --- KODE ASLI DASHBOARD PELANGGAN KAMU (TIDAK BERUBAH) ---
+        // KODE ASLI DASHBOARD PELANGGAN KAMU (TIDAK BERUBAH) ---
         
         // Ambil pesanan terakhir
         $lastOrder = Order::where('user_id', $user->id)
