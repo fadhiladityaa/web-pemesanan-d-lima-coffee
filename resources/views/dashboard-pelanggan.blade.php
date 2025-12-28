@@ -103,10 +103,10 @@
                                         <div class="flex flex-wrap items-center gap-2 mb-3">
                                             <span class="bg-[#D4B595] text-[#2C241B] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
                                                 -{{ $promo->persentase_diskon }}%
-                                            </span>
-                                            <span class="text-xs font-mono opacity-80 border border-white/30 px-2 py-0.5 rounded">
+                                            <!-- </span> -->
+                                            <!-- <span class="text-xs font-mono opacity-80 border border-white/30 px-2 py-0.5 rounded">
                                                 {{ $promo->kode_promo }}
-                                            </span>
+                                            </span> -->
                                         </div>
 
                                         <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2 leading-tight line-clamp-2">{{ $promo->judul }}</h3>
@@ -138,8 +138,8 @@
                 </div>
             </div>
 
-         {{-- ================================================== --}}
-            {{-- SECTION 3: REKOMENDASI MENU (MODIFIKASI: SLIDER) --}}
+            {{-- ================================================== --}}
+            {{-- SECTION 3: REKOMENDASI MENU (SLIDER) --}}
             {{-- ================================================== --}}
             <div class="overflow-hidden">
                 <div class="flex items-end justify-between mb-6">
@@ -160,7 +160,7 @@
                     </div>
                 </div>
 
-                {{-- CONTAINER SLIDER (Ganti Grid jadi Flex) --}}
+                {{-- CONTAINER SLIDER (Flex) --}}
                 <div class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
                     
                     @forelse($featuredProducts as $product)
@@ -262,4 +262,158 @@
 
         </div>
     </div>
+
+   {{-- ================================================== --}}
+    {{-- POP-UP CAROUSEL (REVISI: GAMBAR AMAN & LIMIT BANYAK) --}}
+    {{-- ================================================== --}}
+    
+    @php
+        // Logika Penyelamat: Pastikan data berbentuk Collection
+        $finalPromos = collect([]);
+        
+        if(isset($popupPromos) && $popupPromos->count() > 0) {
+            $finalPromos = $popupPromos;
+        } elseif(isset($popupPromo) && $popupPromo) {
+            $finalPromos = collect([$popupPromo]);
+        }
+    @endphp
+
+    @if($finalPromos->count() > 0)
+        <div x-data="{ 
+                show: false, 
+                activeSlide: 0, 
+                total: {{ $finalPromos->count() }},
+                next() { 
+                    this.activeSlide = (this.activeSlide === this.total - 1) ? 0 : this.activeSlide + 1 
+                },
+                prev() { 
+                    this.activeSlide = (this.activeSlide === 0) ? this.total - 1 : this.activeSlide - 1 
+                }
+             }" 
+             {{-- Timer muncul otomatis (tanpa anti-spam dulu biar enak testing) --}}
+             x-init="setTimeout(() => show = true, 500)"
+             x-show="show"
+             style="display: none;"
+             class="fixed inset-0 z-[999] flex items-center justify-center px-4 font-sans">
+
+            {{-- 1. Backdrop Blur --}}
+            <div x-show="show"
+                 class="absolute inset-0 bg-[#1a1510]/80 backdrop-blur-sm"
+                 @click="show = false">
+            </div>
+
+            {{-- 2. Modal Card --}}
+            <div x-show="show"
+                 x-transition:enter="transition ease-out duration-700 delay-100"
+                 x-transition:enter-start="opacity-0 translate-y-8 scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                 class="relative w-full max-w-lg bg-[#FDFBF7] rounded-[2rem] shadow-2xl overflow-hidden border border-[#D4B595]/30">
+
+                {{-- Tombol Close --}}
+                <div class="absolute top-0 right-0 z-30 p-4">
+                    <button @click="show = false" 
+                            class="group bg-white/20 backdrop-blur-md border border-white/40 rounded-full p-2 hover:bg-[#2C241B] hover:border-[#2C241B] transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white group-hover:text-[#D4B595]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                {{-- LOOPING SLIDES --}}
+                @foreach($finalPromos as $index => $promo)
+                    <div x-show="activeSlide === {{ $index }}" class="flex flex-col h-full">
+
+                        {{-- AREA GAMBAR (YANG DIMINTA DIUBAH) --}}
+                        <div class="relative h-72 sm:h-80 overflow-hidden bg-[#2C241B]">
+                            
+                            {{-- LOGIKA GAMBAR: Hanya tampilkan jika file ASLI ada di storage --}}
+                            @if ($promo->gambar)
+                                <img src="{{ asset('storage/' . $promo->gambar) }}" class="w-full h-full object-cover">
+                            @else
+                                {{-- JIKA TIDAK ADA GAMBAR: Tampilkan Polos/Gradient Elegan --}}
+                                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#2C241B] to-[#4A3B32]">
+                                    {{-- Ikon/Logo Samar --}}
+                                    <svg class="w-24 h-24 text-[#D4B595] opacity-20" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                                    </svg>
+                                </div>
+                            @endif
+                            
+                            {{-- Gradient Overlay (Agar teks di atasnya terbaca) --}}
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#2C241B] via-transparent to-transparent opacity-90"></div>
+                            
+                            {{-- Badge Diskon Besar --}}
+                            <div class="absolute bottom-6 left-8 flex items-end gap-3 z-10">
+                                <span class="text-6xl font-serif font-bold text-[#D4B595] leading-none drop-shadow-lg">
+                                    {{ $promo->persentase_diskon }}<span class="text-3xl">%</span>
+                                </span>
+                                <span class="text-white font-medium text-sm mb-2 tracking-widest uppercase opacity-90">Off</span>
+                            </div>
+                        </div>
+
+                        {{-- KONTEN BAWAH --}}
+                        <div class="p-8 pt-6 text-center relative">
+                            {{-- Indikator Slide (Dots) --}}
+                            @if($finalPromos->count() > 1)
+                                <div class="flex justify-center gap-2 mb-6 absolute -top-12 left-0 right-0 z-20">
+                                    @foreach($finalPromos as $dotIndex => $dot)
+                                        <button @click="activeSlide = {{ $dotIndex }}" 
+                                                class="w-2 h-2 rounded-full transition-all duration-300 {{ $index == $dotIndex ? 'bg-[#D4B595] w-6' : 'bg-white/30 hover:bg-white' }}"></button>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <h3 class="font-serif text-3xl font-bold text-[#2C241B] mb-3 leading-tight">
+                                {{ $promo->judul }}
+                            </h3>
+                            
+                            <!-- <div class="inline-block bg-[#F0EAE0] px-4 py-1.5 rounded-lg mb-4">
+                                <span class="text-xs text-[#8C7B70] uppercase font-bold tracking-wider">Kode:</span>
+                                <span class="font-mono text-[#2C241B] font-bold ml-1 tracking-widest">{{ $promo->kode_promo }}</span> -->
+                            <!-- </div> --> 
+
+                            <p class="text-[#8C7B70] text-sm leading-relaxed mb-8 line-clamp-2 px-4">
+                                {{ $promo->deskripsi }}
+                            </p>
+
+                            {{-- Tombol Navigasi --}}
+                            <div class="flex items-center gap-3">
+                                @if($finalPromos->count() > 1)
+                                    <button @click="prev()" class="p-4 rounded-xl border border-[#D4B595] text-[#D4B595] hover:bg-[#F8F4E9] transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                    </button>
+                                @endif
+
+                                @php
+                                    $targetId = null;
+                                    if ($promo->menus && $promo->menus->isNotEmpty()) {
+                                        $targetId = $promo->menus->first()->id;
+                                    }
+                                @endphp
+
+                                <a href="{{ route('menu', ['promo_id' => $promo->id]) }}{{ $targetId ? '#menu-' . $targetId : '' }}"
+                                   class="flex-1 py-4 bg-[#2C241B] text-[#D4B595] rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#4A3B32] hover:shadow-xl transition-all flex items-center justify-center gap-2 group">
+                                    <span>Pakai Sekarang</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+
+                                @if($finalPromos->count() > 1)
+                                    <button @click="next()" class="p-4 rounded-xl border border-[#D4B595] text-[#D4B595] hover:bg-[#F8F4E9] transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+    @endif
 @endsection

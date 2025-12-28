@@ -56,17 +56,7 @@
                                 @error('judul') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                             </div>
 
-                            {{-- Kode Promo --}}
-                            <div>
-                                <label class="block text-sm font-bold text-[#4A403A] mb-1">Kode Voucher (Unik)</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>
-                                    </div>
-                                    <input type="text" wire:model="kode_promo" class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-[#D4B595] focus:border-[#D4B595] uppercase font-mono tracking-wide" placeholder="DISKON50">
-                                </div>
-                                @error('kode_promo') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
-                            </div>
+                            {{-- [DIHAPUS] INPUT KODE PROMO SUDAH HILANG DARI SINI --}}
 
                             {{-- Diskon --}}
                             <div>
@@ -185,9 +175,6 @@
         {{-- CONTENT LIST CARD --}}
         <div class="bg-white rounded-[2rem] shadow-xl border border-[#F0EAE0] overflow-hidden">
             
-            {{-- Search & Filter Bar (Optional addition for future) --}}
-            {{-- <div class="p-6 border-b border-[#F0EAE0]"> ... </div> --}}
-
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-100">
                     <thead class="bg-[#FAF8F5]">
@@ -224,6 +211,7 @@
                                 {{-- Kode & Diskon --}}
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex flex-col items-start gap-1">
+                                        {{-- KODE TETAP DITAMPILKAN DI SINI (HASIL GENERATE) --}}
                                         <span class="px-2.5 py-0.5 inline-flex text-xs leading-5 font-mono font-bold rounded-md bg-gray-100 text-gray-600 border border-gray-200 group-hover:bg-white group-hover:border-[#D4B595] transition-colors">
                                             {{ $promo->kode_promo }}
                                         </span>
