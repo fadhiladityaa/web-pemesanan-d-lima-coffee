@@ -6,81 +6,87 @@ use Illuminate\Database\Seeder;
 use App\Models\Promo;
 use App\Models\Daftar_menu;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class PromoSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // 1. Ambil beberapa menu acak untuk dihubungkan ke promo
-        // Pastikan tabel daftar_menus sudah ada isinya sebelum menjalankan ini!
-        $menus = Daftar_menu::inRandomOrder()->limit(3)->get();
+        // Matikan Foreign Key Check untuk reset data
+        Schema::disableForeignKeyConstraints();
+        Promo::truncate();
+        // Hapus data di tabel pivot menu_promo juga
+        DB::table('menu_promo')->truncate(); 
 
-        if ($menus->isEmpty()) {
-            $this->command->warn('Tabel Daftar Menu masih kosong. Harap seed menu terlebih dahulu agar relasi promo berfungsi.');
-            return;
-        }
+        // 1. Ambil ID Menu dari Database untuk Relasi
+        $menuKopiSusu     = Daftar_menu::where('nama_menu', 'Kopi Susu')->first();
+        $menuNasgor       = Daftar_menu::where('nama_menu', 'Nasi Goreng Spesial + Es Teh')->first();
+        $menuPisangGoreng = Daftar_menu::where('nama_menu', 'Pisang Goreng')->first();
+        $menuSodaGembira  = Daftar_menu::where('nama_menu', 'Soda Gembira')->first();
+        $menuUbiGoreng    = Daftar_menu::where('nama_menu', 'Ubi Goreng')->first();
+        $menuKopiAren     = Daftar_menu::where('nama_menu', 'Es Kopi Susu Gula Aren')->first();
 
-        // ==========================================
-        // PROMO 1: KOPI PAGI (Diskon 20%)
-        // ==========================================
+        // ==================== PROMO 1: SARAPAN HEMAT ====================
         $promo1 = Promo::create([
-            'judul' => 'Semangat Pagi',
-            'deskripsi' => 'Awali harimu dengan diskon 20% untuk varian kopi pilihan. Berlaku sampai jam 11 siang.',
-            'kode_promo' => 'KOPIPAGI',
+            'judul'             => 'Morning Booster',
+            'deskripsi'         => 'Awali harimu dengan segelas Kopi Susu hangat dan Pisang Goreng renyah.',
             'persentase_diskon' => 20,
-            'tanggal_mulai' => Carbon::now(),
-            'tanggal_berakhir' => Carbon::now()->addDays(30),
-            'status' => 'aktif',
-            // Pastikan file gambar ini ada di storage, atau biarkan null jika ingin pakai placeholder
-            'gambar' => null, 
+            'tanggal_mulai'     => Carbon::now(),
+            'tanggal_berakhir'  => Carbon::now()->addMonths(1),
+            'status'            => 'aktif',
+            'gambar'            => 'promo_morning.jpg',
         ]);
 
-        // Hubungkan promo ini ke menu pertama yang kita ambil tadi
-        // Ini yang membuat fitur SCROLL OTOMATIS bekerja
-        $promo1->menus()->attach($menus[0]->id);
+        if ($menuKopiSusu && $menuPisangGoreng) {
+            $promo1->menus()->attach([$menuKopiSusu->id, $menuPisangGoreng->id]);
+        }
 
-
-        // ==========================================
-        // PROMO 2: HEMAT AKHIR BULAN (Diskon 50%)
-        // ==========================================
+        // ==================== PROMO 2: MAKAN KENYANG ====================
         $promo2 = Promo::create([
-            'judul' => 'Hemat Akhir Bulan',
-            'deskripsi' => 'Dompet menipis? Tenang, D\'Lima punya solusi diskon setengah harga!',
-            'kode_promo' => 'GAJIAN',
-            'persentase_diskon' => 50,
-            'tanggal_mulai' => Carbon::now(),
-            'tanggal_berakhir' => Carbon::now()->addDays(7),
-            'status' => 'aktif',
-            'gambar' => null,
+            'judul'             => 'Paket Kenyang Puas',
+            'deskripsi'         => 'Makan siang hemat! Nasi Goreng Spesial sudah termasuk Es Teh jumbo.',
+            'persentase_diskon' => 15,
+            'tanggal_mulai'     => Carbon::now(),
+            'tanggal_berakhir'  => Carbon::now()->addMonths(1),
+            'status'            => 'aktif',
+            'gambar'            => 'promo_lunch.jpg',
         ]);
 
-        // Hubungkan promo ini ke menu kedua
-        // Jika menu kedua tersedia, pasang relasinya
-        if (isset($menus[1])) {
-            $promo2->menus()->attach($menus[1]->id);
+        if ($menuNasgor) {
+            $promo2->menus()->attach([$menuNasgor->id]);
         }
 
-
-        // ==========================================
-        // PROMO 3: PAKET NONGKRONG (Diskon 10%)
-        // ==========================================
+        // ==================== PROMO 3: NON-COFFEE CHILL ====================
         $promo3 = Promo::create([
-            'judul' => 'Paket Nongkrong',
-            'deskripsi' => 'Ajak temanmu nongkrong asik dengan potongan harga spesial.',
-            'kode_promo' => 'NONGKI',
+            'judul'             => 'Segar Sore Ceria',
+            'deskripsi'         => 'Nikmati sore santai dengan Soda Gembira dan Ubi Goreng.',
             'persentase_diskon' => 10,
-            'tanggal_mulai' => Carbon::now()->subDays(1), // Sudah mulai kemarin
-            'tanggal_berakhir' => Carbon::now()->addMonths(1),
-            'status' => 'aktif',
-            'gambar' => null,
+            'tanggal_mulai'     => Carbon::now(),
+            'tanggal_berakhir'  => Carbon::now()->addWeeks(2),
+            'status'            => 'aktif',
+            'gambar'            => 'promo_chill.jpg',
         ]);
 
-        // Hubungkan promo ini ke menu ketiga
-        if (isset($menus[2])) {
-            $promo3->menus()->attach($menus[2]->id);
+        if ($menuSodaGembira && $menuUbiGoreng) {
+            $promo3->menus()->attach([$menuSodaGembira->id, $menuUbiGoreng->id]);
         }
+
+        // ==================== PROMO 4: BEST SELLER ====================
+        $promo4 = Promo::create([
+            'judul'             => 'Flash Sale Gula Aren',
+            'deskripsi'         => 'Diskon spesial untuk menu favorit Es Kopi Susu Gula Aren.',
+            'persentase_diskon' => 25,
+            'tanggal_mulai'     => Carbon::now(),
+            'tanggal_berakhir'  => Carbon::now()->addDays(7),
+            'status'            => 'aktif',
+            'gambar'            => 'promo_aren.jpg',
+        ]);
+
+        if ($menuKopiAren) {
+            $promo4->menus()->attach([$menuKopiAren->id]);
+        }
+
+        Schema::enableForeignKeyConstraints();
     }
 }
