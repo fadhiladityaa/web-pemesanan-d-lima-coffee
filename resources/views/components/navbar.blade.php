@@ -15,6 +15,16 @@
             {{-- DESKTOP LINKS --}}
             <div
                 class="links text-white lg:flex sm:gap-6 lg:gap-10 sm:text-[16px] lg:text-[18px] items-center sm:hidden hidden font-poppins font-medium">
+                {{-- 3. EDUKASI --}}
+                <a href="{{ route('dashboard') }}"
+                    class="relative py-1 transition-all duration-300
+                {{ Request::is('dashboard*')
+                    ? 'text-white font-bold border-b-2 border-white'
+                    : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
+                    Dashboard
+                </a>
+
+
                 {{-- 1. MENU --}}
                 <a href="{{ route('menu') }}"
                     class="relative py-1 transition-all duration-300 
@@ -30,8 +40,8 @@
                         <a href="{{ route('pesanan.saya') }}"
                             class="relative py-1 transition-all duration-300 
                             {{ Request::routeIs('pesanan.saya')
-                        ? 'text-white font-bold border-b-2 border-white'
-                        : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
+                                ? 'text-white font-bold border-b-2 border-white'
+                                : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
                             Pesanan Saya
                         </a>
                     @endif
