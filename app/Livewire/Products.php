@@ -15,10 +15,8 @@ use Livewire\Attributes\Title;
 
 class Products extends Component
 {
-    // Variabel yang sudah ada
     public $search = '';
 
-    // Variabel untuk filter
     public $promo_id = null;
     public $kategoriFilter = '';
 
@@ -59,7 +57,6 @@ class Products extends Component
 
     
             $finalPrice = $menu->harga; // Default harga normal
-
             // Cek apakah user sedang membuka halaman lewat link promo?
             if ($this->promo_id) {
                 $promo = Promo::find($this->promo_id);

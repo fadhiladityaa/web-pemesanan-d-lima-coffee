@@ -15,43 +15,50 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // --- 1. CEK USER LOGIN (Agar tidak error jika Guest masuk) ---
+        // [LOGIKA LAMA - TETAP AMAN]
         if (!$user) {
             return redirect()->route('login');
         }
 
-        // --- 2. LOGIKA REDIRECT (POLISI LALU LINTAS) ---
-        // Jika yang masuk ternyata ADMIN, langsung oper ke Dashboard Admin
+        // [LOGIKA LAMA - TETAP AMAN]
+        // Pengecekan Admin tetap prioritas utama
         if ($user->isAdmin()) {
             return redirect()->route('dashboard.pesanan.masuk');
         }
-        // -----------------------------------------------------------
 
-        // KODE ASLI DASHBOARD PELANGGAN KAMU (TIDAK BERUBAH) ---
-        
-        // Ambil pesanan terakhir
         $lastOrder = Order::where('user_id', $user->id)
             ->latest()
             ->first();
 
-        // Produk unggulan: 3 item
+        // [LOGIKA LAMA - TETAP AMAN]
+        // Note: Saya pastikan take(10) agar slider rekomendasi bisa digeser
         $featuredProducts = Daftar_menu::where('is_featured', 1)
-            ->take(3)
+            ->take(10) 
             ->get();
 
-        // Cuplikan edukasi: 1 artikel terbaru
+        // [LOGIKA LAMA - TETAP AMAN]
         $edukasi = Edukasi::latest()->first();
 
-        // 3 promo terbaru
-        $promos = Promo::latest()->take(3)->get();
-        $title = 'Dashboard Pelanggan';
-        return view('dashboard-pelanggan', compact(
-            'user',
-            'lastOrder',
-            'featuredProducts',
-            'edukasi',
-            'promos',
-            'title'
-        ));
+        // [LOGIKA LAMA - TETAP AMAN]
+        // Slider Promo (Daftar promo yang berjejer)
+        $promos = Promo::where('status', 'aktif')->latest()->take(5)->get();
+
+
+      $popupPromos = Promo::where('status', 'aktif')
+        // ->whereDate('tanggal_mulai', '<=', now())
+        // ->whereDate('tanggal_berakhir', '>=', now())
+        // ->latest()
+        ->take(5) // Ambil 5 promo terbaru
+        ->get();  // Pakai get() bukan first()
+
+    $title = 'Dashboard Pelanggan';
+
+    // [UPDATE COMPACT]
+    // Ganti 'popupPromo' menjadi 'popupPromos'
+    return view('dashboard-pelanggan', compact(
+        'user', 'lastOrder', 'featuredProducts', 'edukasi', 'promos', 'title', 
+        'popupPromos' // <--- Perhatikan ada huruf 's'
+    ));
+
     }
 }

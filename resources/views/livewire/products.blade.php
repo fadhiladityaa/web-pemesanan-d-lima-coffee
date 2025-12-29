@@ -96,7 +96,8 @@
 
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($menus as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] Menambahkan ID untuk target scroll dan scroll-mt-40 untuk margin atas --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -188,7 +189,8 @@
 
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($coffee as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Coffee --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -276,7 +278,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($non_coffee as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Non Coffee --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -365,7 +368,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($moctail as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Moctail --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -455,7 +459,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($makanan_ringan as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Makanan Ringan --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -544,7 +549,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($makanan_berat as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Makanan Berat --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"

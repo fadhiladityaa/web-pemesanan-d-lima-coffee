@@ -28,11 +28,6 @@ use GuzzleHttp\Middleware;
 // route ke home
 Route::get('/', [LandingController::class, 'index']);
 
-
-// Route::get('/menu', [HomeController::class, 'index'])->middleware('auth')->name('menu');
-
-
-
 // route fitur register
 // route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest')->name('register');
@@ -85,14 +80,11 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
 });
 
 
-Route::get('/menu/detail-menu/{daftar_menus}', DetailMenu::class)->name('detail.menu')->Middleware('auth');
+Route::get('/menu/detail-menu/{id}', DetailMenu::class)->name('detail.menu')->Middleware('auth');
 Route::get('/pesanan-saya', PesananSaya::class)->name('pesanan.saya');
-
-
 
 //  EDUKASI UNTUK PELANGGAN - gunakan component yang sudah ada
 Route::get('/edukasi', \App\Livewire\EdukasiPelanggan::class)->name('edukasi')->middleware('auth');
-
 
 //  Route untuk tombol "Lihat Halaman Pelanggan" di admin
 Route::get('/edukasi-pelanggan', function () {
