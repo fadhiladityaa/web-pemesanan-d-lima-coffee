@@ -167,17 +167,13 @@
                 </div>
             @empty
                 <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
-                    <p>Menu tidak ditemukan</p>
-                    <p class="mt-1 text-sm text-gray-400">
-                        Tidak ada menu yang cocok dengan "{{ $search }}"
-                    </p>
+                    <p>Tidak ada menu yang cocok dengan "{{ $search }}"</p>
                     <button wire:click="resetFilters"
                         class="mt-2 px-4 py-2 bg-primary text-white rounded-full hover:bg-yellow-800 transition-colors duration-300">
                         Kembali ke Semua Menu
                     </button>
                 </div>
             @endforelse
-
         </div>
     @endif
 
@@ -259,7 +255,7 @@
             @empty
                 <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
                     {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
-                    <p>Menu tidak ditemukan</p>
+                    <p>Menu tidak ditemukan.</p>
                     @if (isset($activePromo))
                         <button wire:click="resetFilters"
                             class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
@@ -347,7 +343,7 @@
             @empty
                 <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
                     {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
-                    <p>Menu tidak ditemukan</p>
+                    <p>Menu tidak ditemukan.</p>
                     @if (isset($activePromo))
                         <button wire:click="resetFilters"
                             class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
@@ -436,7 +432,7 @@
             @empty
                 <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
                     {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
-                    <p>Menu tidak ditemukan</p>
+                    <p>Menu tidak ditemukan.</p>
                     @if (isset($activePromo))
                         <button wire:click="resetFilters"
                             class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
@@ -614,16 +610,16 @@
                 </div>
             @empty
                 <div class="col-span-full lg:text-md text-center text-gray-500 italic mt-4">
-                    <p>Menu tidak ditemukan</p>
-                    <p class="mt-1 text-sm text-gray-400">
-                        Tidak ada menu yang cocok dengan "{{ $search }}"
-                    </p>
-                    <button wire:click="resetFilters" class="mt-2 px-4 py-2 bg-primary text-white rounded-full">
-                        Kembali ke Semua Menu
-                    </button>
+                    {{-- [MODIFIKASI] Pesan Kosong lebih informatif saat reset --}}
+                    <p>Menu tidak ditemukan.</p>
+                    @if (isset($activePromo))
+                        <button wire:click="resetFilters"
+                            class="mt-2 text-[#947257] text-sm font-bold underline hover:text-[#5c4033]">
+                            Kembali ke Semua Menu
+                        </button>
+                    @endif
                 </div>
             @endforelse
-
         </div>
         {{-- end makanan berat --}}
     @endif
