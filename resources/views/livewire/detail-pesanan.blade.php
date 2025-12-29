@@ -40,6 +40,7 @@
             <thead>
                 <tr class="bg-gray-100 text-gray-700">
                     <th class="p-3 text-left">Menu</th>
+                    <th class="p-3 text-left">Catatan</th>
                     <th class="p-3 text-center">Jumlah</th>
                     <th class="p-3 text-right">Harga</th>
                 </tr>
@@ -48,6 +49,7 @@
                 @foreach ($order->order_items as $item)
                     <tr class="border-b">
                         <td class="p-3">{{ $item->daftar_menu->nama_menu }}</td>
+                        <td class="p-3">{{ $item->notes }}</td>
                         <td class="p-3 text-center">{{ $item->quantity }}</td>
                         <td class="p-3 text-right">
                             Rp. {{ number_format($item->harga, 0, ',', '.') }}
