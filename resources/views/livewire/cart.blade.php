@@ -1,7 +1,7 @@
 <div class="">
     {{-- Cart untuk desktop --}}
     <div
-        class="shadow-soft p-5 rounded-lg hidden lg:mt-[20rem] md:block lg:max-h-[80vh] overflow-y-auto bg-white border border-gray-100">
+        class="shadow-soft p-5 rounded-lg hidden lg:mt-[26rem] md:block lg:max-h-[80vh] overflow-y-auto bg-white border border-gray-100">
         <div class="flex justify-between">
             <h2 id="otw" class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
             <span
@@ -14,7 +14,7 @@
         <div class="cart-items-container mt-4">
             @if ($cart && $cart->cart_items && $cart->cart_items->count())
                 @foreach ($cart->cart_items as $item)
-                    <div x-data="{showNotes: false}"
+                    <div x-data="{ showNotes: false }"
                         class="items-container bg-primary/5 transition-all duration-150 hover:bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 lg:p-3 flex">
                         {{-- gambar produk --}}
                         <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
@@ -77,17 +77,20 @@
                                 @endif
 
                                 {{-- Notes Textarea (Expandable) --}}
+                                {{-- Notes Textarea (Expandable) --}}
                                 <div x-show="showNotes" x-transition:enter="transition ease-out duration-200"
                                     x-transition:enter-start="opacity-0 scale-95"
                                     x-transition:enter-end="opacity-100 scale-100"
                                     x-transition:leave="transition ease-in duration-150"
                                     x-transition:leave-start="opacity-100 scale-100"
                                     x-transition:leave-end="opacity-0 scale-95" class="mt-2">
+
                                     <textarea wire:model.debounce.500ms="notes.{{ $item->id }}"
                                         wire:change="updateNotes({{ $item->id }}, $event.target.value)" rows="2"
                                         placeholder="Contoh: Kurangi gula, tambah es, dll..."
                                         class="w-full text-xs border border-gray-300 rounded p-2 focus:outline-none focus:border-primary resize-none"
                                         maxlength="200">{{ $item->notes }}</textarea>
+
                                     <div class="flex justify-between mt-1">
                                         <span class="text-xs text-gray-500">
                                             Maks. 200 karakter

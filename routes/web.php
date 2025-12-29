@@ -29,7 +29,6 @@ use GuzzleHttp\Middleware;
 Route::get('/', [LandingController::class, 'index']);
 
 // route fitur register
-// route fitur register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest')->name('register');
 // Route::get('/menu', [LandingController::class, 'allMenu'])->name('landing.menu');
 

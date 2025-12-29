@@ -81,6 +81,7 @@ class Checkout extends Component
                 'quantity' => $item->quantity,
                 'harga' => $item->price,
                 'sub_total' => $item->quantity * $item->price,
+                'notes' => $item->notes, // ← TAMBAH INI
             ]);
         }
 
@@ -88,6 +89,7 @@ class Checkout extends Component
 
         return redirect()->route('pesanan.saya');
     }
+
 
 
     public function render()

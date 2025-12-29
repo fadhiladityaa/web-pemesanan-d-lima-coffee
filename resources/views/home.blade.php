@@ -28,14 +28,10 @@
 
         {{-- Keranjang --}}
 
-        @auth
-            @if (!auth()->user()->isAdmin())
-                <section>
-                    <div class="w-full sm:px-[32px] lg:px-0 lg:pr-[64px] mt-9 lg:mt-5 font-poppins lg:sticky top-24">
-                        <livewire:cart />
-                    </div>
-                </section>
-            @endif
-        @endauth
+        <section>
+            <div class="w-full sm:px-[32px] lg:px-0 lg:pr-[64px] mt-9 lg:mt-5 font-poppins lg:sticky top-24">
+                <livewire:cart />
+            </div>
+        </section>
     </div>
 @endsection
