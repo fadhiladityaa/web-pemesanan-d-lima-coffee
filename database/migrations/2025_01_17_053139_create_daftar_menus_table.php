@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('daftar_menus', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_menu')->unique;
+            $table->string('nama_menu')->unique();
             $table->integer('harga');
             $table->string('gambar')->nullable();
             $table->text('deskripsi');
