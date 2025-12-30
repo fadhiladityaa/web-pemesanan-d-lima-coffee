@@ -8,6 +8,7 @@ use App\Models\Daftar_menu;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PromoSeeder extends Seeder
 {
@@ -29,6 +30,7 @@ class PromoSeeder extends Seeder
 
         // ==================== PROMO 1: SARAPAN HEMAT ====================
         $promo1 = Promo::create([
+            'kode_promo'        => 'MORNING20', // ← TAMBAH INI
             'judul'             => 'Morning Booster',
             'deskripsi'         => 'Awali harimu dengan segelas Kopi Susu hangat dan Pisang Goreng renyah.',
             'persentase_diskon' => 20,
@@ -44,6 +46,7 @@ class PromoSeeder extends Seeder
 
         // ==================== PROMO 2: MAKAN KENYANG ====================
         $promo2 = Promo::create([
+            'kode_promo'        => 'KENYANG15', // ← TAMBAH INI
             'judul'             => 'Paket Kenyang Puas',
             'deskripsi'         => 'Makan siang hemat! Nasi Goreng Spesial sudah termasuk Es Teh jumbo.',
             'persentase_diskon' => 15,
@@ -59,6 +62,7 @@ class PromoSeeder extends Seeder
 
         // ==================== PROMO 3: NON-COFFEE CHILL ====================
         $promo3 = Promo::create([
+            'kode_promo'        => 'SEGAR10', // ← TAMBAH INI
             'judul'             => 'Segar Sore Ceria',
             'deskripsi'         => 'Nikmati sore santai dengan Soda Gembira dan Ubi Goreng.',
             'persentase_diskon' => 10,
@@ -74,6 +78,7 @@ class PromoSeeder extends Seeder
 
         // ==================== PROMO 4: BEST SELLER ====================
         $promo4 = Promo::create([
+            'kode_promo'        => 'AREN25', // ← TAMBAH INI
             'judul'             => 'Flash Sale Gula Aren',
             'deskripsi'         => 'Diskon spesial untuk menu favorit Es Kopi Susu Gula Aren.',
             'persentase_diskon' => 25,
