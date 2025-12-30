@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('promos', function (Blueprint $table) {
             $table->id();
             // Pastikan nama kolom ini 'judul', bukan 'title' atau 'name'
+            $table->string('kode_promo');
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->integer('persentase_diskon');
