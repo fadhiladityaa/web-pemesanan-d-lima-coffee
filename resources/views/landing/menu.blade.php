@@ -18,6 +18,8 @@
         <x-navbar></x-navbar>
     @endauth
 
+
+
     @guest
     <nav class="fixed w-full z-50 transition-all duration-300 bg-[#947257] shadow-xl border-b border-[#947257]" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,8 +27,8 @@
                 <!-- Branding -->
                 <div class="flex-shrink-0 flex items-center gap-3">
                     <a href="{{ url('/') }}" class="flex items-center gap-3">
-                        <img class="h-10 w-auto" src="{{ asset('img/Logo-DLima-Coffe.png') }}" alt="Logo">
-                        <span class="font-bold text-2xl text-black tracking-wide">D'Lima Coffee</span>
+                        <img class="h-10 w-auto rounded-full" src="{{ asset('img/Logo-DLima-Coffe.png') }}" alt="Logo">
+                        <span class="font-[Sriracha] font-bold text-2xl text-white tracking-wide">D'Lima Coffee</span>
                     </a>
                 </div>
 

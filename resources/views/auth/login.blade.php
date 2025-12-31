@@ -13,6 +13,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-[Poppins] min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#2a1a10] via-[#5c3a21] to-[#C67C4E]">
+    
+    <x-back-button />
 
     <div class="absolute inset-0 bg-[url('/img/beans-pattern.png')] opacity-10 pointer-events-none"></div>
 
@@ -90,7 +92,7 @@
                 <!-- Button -->
                 <button type="submit" 
                     class="w-full bg-primary hover:bg-[#A66236] text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-4 focus:ring-primary/50 text-sm tracking-wide uppercase">
-                    Masuk Sekarang
+                    Login
                 </button>
 
                 <!-- Footer -->

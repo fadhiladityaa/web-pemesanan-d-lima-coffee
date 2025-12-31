@@ -34,7 +34,7 @@
                 {{-- 2. MENU --}}
                 <a href="{{ route('landing.menu') }}"
                     class="relative py-1 transition-all duration-300 
-                    {{ Request::routeIs('menu')
+                    {{ Request::routeIs('landing.menu')
                         ? 'text-white font-bold border-b-2 border-white'
                         : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
                     Menu
@@ -153,7 +153,7 @@
                 {{-- Menu Mobile --}}
                 <li>
                     <a href="{{ route('landing.menu') }}"
-                        class="{{ Request::routeIs('menu') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
+                        class="{{ Request::routeIs('landing.menu') ? 'bg-[#947257] text-white font-bold' : 'hover:bg-[#f3e9e2]' }}">
                         ☕ Menu
                     </a>
                 </li>

@@ -60,6 +60,7 @@ Route::get('/checkout', function () {
 })->name('checkout')->middleware('auth');
 
 Route::get('/buy-now/{id}', [\App\Http\Controllers\CartController::class, 'buyNow'])->name('cart.buyNow')->middleware('auth');
+Route::get('/order/{id}/receipt', [\App\Http\Controllers\OrderController::class, 'printReceipt'])->name('order.receipt')->middleware('auth');
 Route::post('/midtrans/callback', [\App\Http\Controllers\MidtransController::class, 'callback']);
 
 

@@ -70,6 +70,10 @@
 
     {{-- Update Status --}}
     <div class="flex gap-3 justify-end">
+        <button wire:click="updateStatus('canceled')" 
+                class="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+            Tandai Cancel
+        </button>
         <button wire:click="updateStatus('proses')" 
                 class="px-5 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">
             Tandai Proses

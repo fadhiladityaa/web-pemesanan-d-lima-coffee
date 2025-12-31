@@ -20,8 +20,8 @@
             <div class="flex justify-between items-center h-20">
                 <!-- Branding -->
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <img class="h-10 w-auto" src="{{ asset('img/Logo-DLima-Coffe.png') }}" alt="Logo">
-                    <span class="font-bold text-2xl text-black tracking-wide">D'Lima Coffee</span>
+                    <img class="h-10 w-auto rounded-full" src="{{ asset('img/Logo-DLima-Coffe.png') }}" alt="Logo">
+                    <span class="font-[Sriracha] font-bold text-2xl text-white tracking-wide">D'Lima Coffee</span>
                 </div>
 
                 <!-- Desktop Menu -->
@@ -244,7 +244,7 @@
              <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl border border-gray-100 max-w-5xl mx-auto scale-100 hover:scale-[1.01] transition-transform duration-500" data-aos="zoom-in">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                      <!-- Location -->
-                    <div class="flex items-start space-x-6 group">
+                    <a href="https://www.google.com/maps/search/?api=1&query=D'Lima+Coffee+Jln.+Delima+Parepare" target="_blank" rel="noopener noreferrer" class="flex items-start space-x-6 group hover:opacity-80 transition-opacity">
                         <div class="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
                              <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
@@ -255,7 +255,7 @@
                                 Parepare, Sulawesi Selatan
                             </p>
                         </div>
-                    </div>
+                    </a>
                     
                     <!-- Contact -->
                     <div class="flex items-start space-x-6 group">

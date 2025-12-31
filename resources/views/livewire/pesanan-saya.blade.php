@@ -82,6 +82,11 @@
                         class="w-full bg-green-400 px-4 hover:bg-green-600 transition-all duration-150 rounded-lg py-2  text-white font-semibold">
                         Bayar
                     </button>
+                @elseif ($order->payment_status == 'paid')
+                     <a href="{{ route('order.receipt', $order->id) }}" target="_blank"
+                        class="w-full block text-center bg-blue-500 px-4 hover:bg-blue-600 transition-all duration-150 rounded-lg py-2 text-white font-semibold">
+                        Download Nota
+                    </a>
                 @endif
             </div>
 
