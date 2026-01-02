@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('persentase_diskon');
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');
-            $table->string('status')->default('aktif'); // aktif / tidak_aktif
+            $table->string('status')->default('aktif'); // aktif / tidak_aktif/ oke
             $table->string('gambar')->nullable();
             $table->timestamps();
         });
