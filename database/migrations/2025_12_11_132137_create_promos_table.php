@@ -9,14 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-        public function up(): void
+    public function up(): void
     {
         Schema::create('promos', function (Blueprint $table) {
             $table->id();
             // Pastikan nama kolom ini 'judul', bukan 'title' atau 'name'
-            $table->string('judul'); 
+            $table->string('kode_promo');
+            $table->string('judul');
             $table->text('deskripsi')->nullable();
-            $table->string('kode_promo')->unique();
             $table->integer('persentase_diskon');
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');

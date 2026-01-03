@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('harga', 10, 2);
             $table->decimal('sub_total', 10, 2); // snake_case lebih konsisten
+            $table->text('notes')->nullable();
         });
     }
 

@@ -45,6 +45,8 @@
         {{-- <x-footer></x-footer> --}}
     @endunless
 
+
+    <x-footer></x-footer>
     @livewireScripts 
 </body>
 </html>

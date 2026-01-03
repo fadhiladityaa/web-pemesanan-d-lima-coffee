@@ -15,9 +15,18 @@ class MenuManagement extends Component
         Daftar_menu::find($id)->delete();
         session()->flash('message', 'Menu berhasil dihapus.');
     }
-    
+
     #[Title('Menu Management')]
     #[Layout('layouts.admin')]
+    public function toggleFeatured($id)
+    {
+        $menu = \App\Models\Daftar_menu::find($id); // Pastikan Model benar
+        if ($menu) {
+            $menu->is_featured = !$menu->is_featured;
+            $menu->save();
+            session()->flash('message', 'Status rekomendasi diubah!');
+        }
+    }
     public function render()
     {
         return view('livewire.dashboard.menu-management', [

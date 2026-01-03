@@ -5,7 +5,7 @@ export default defineConfig({
     // server: {
     //     host: '0.0.0.0',
     //     hmr: {
-    //         host: '10.125.152.238', // GANTI DENGAN IP LOKAL KAMU!
+    //         host: '192.168.1.9', // GANTI DENGAN IP LOKAL KAMU!
     //         protocol: 'ws'
     //     },
     // },

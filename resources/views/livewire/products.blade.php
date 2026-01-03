@@ -1,5 +1,4 @@
 <div class="lg:mb-10">
-
     {{-- Kategori Menu --}}
     <section>
         <div
@@ -19,7 +18,7 @@
     {{-- [BARU] SECTION BANNER PROMO (Hanya muncul jika ada promo aktif) --}}
     @if (isset($activePromo) && $activePromo)
         <div
-            class="relative top-12 overflow-hidden rounded-xl bg-gradient-to-r from-[#fff8e1] to-[#fff3e0] border border-amber-200 shadow-sm p-4 sm:p-6 mb-20 mt-36 sm:mt-0 animate-fade-in-down">
+            class="relative top-5 overflow-hidden rounded-xl bg-gradient-to-r from-[#fff8e1] to-[#fff3e0] border border-amber-200 shadow-sm p-4 sm:p-6 mb-20 mt-36 sm:mt-0 animate-fade-in-down">
             {{-- Hiasan Background --}}
             <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-amber-300 rounded-full opacity-20 blur-2xl">
             </div>
@@ -97,7 +96,8 @@
 
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($menus as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] Menambahkan ID untuk target scroll dan scroll-mt-40 untuk margin atas --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -156,10 +156,14 @@
                                 Lihat detail menu
                             </button>
                         </a>
-                        <button wire:click="addToCart({{ $item->id }})"
-                            class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
-                            Tambah
-                        </button>
+                        @auth
+                            @if (!auth()->user()->isAdmin())
+                                <button wire:click="addToCart({{ $item->id }})"
+                                    class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                                    Tambah
+                                </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @empty
@@ -185,7 +189,8 @@
 
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($coffee as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Coffee --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -239,10 +244,14 @@
                                 Lihat detail menu
                             </button>
                         </a>
-                        <button wire:click="addToCart({{ $item->id }})"
-                            class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
-                            Tambah
-                        </button>
+                        @auth
+                            @if (!auth()->user()->isAdmin())
+                                <button wire:click="addToCart({{ $item->id }})"
+                                    class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                                    Tambah
+                                </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @empty
@@ -269,7 +278,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($non_coffee as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Non Coffee --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -323,10 +333,14 @@
                                 Lihat detail menu
                             </button>
                         </a>
-                        <button wire:click="addToCart({{ $item->id }})"
-                            class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
-                            Tambah
-                        </button>
+                        @auth
+                            @if (!auth()->user()->isAdmin())
+                                <button wire:click="addToCart({{ $item->id }})"
+                                    class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                                    Tambah
+                                </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @empty
@@ -354,7 +368,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($moctail as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Moctail --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -408,10 +423,14 @@
                                 Lihat detail menu
                             </button>
                         </a>
-                        <button wire:click="addToCart({{ $item->id }})"
-                            class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
-                            Tambah
-                        </button>
+                        @auth
+                            @if (!auth()->user()->isAdmin())
+                                <button wire:click="addToCart({{ $item->id }})"
+                                    class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                                    Tambah
+                                </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @empty
@@ -440,7 +459,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($makanan_ringan as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Makanan Ringan --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -494,10 +514,14 @@
                                 Lihat detail menu
                             </button>
                         </a>
-                        <button wire:click="addToCart({{ $item->id }})"
-                            class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
-                            Tambah
-                        </button>
+                        @auth
+                            @if (!auth()->user()->isAdmin())
+                                <button wire:click="addToCart({{ $item->id }})"
+                                    class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                                    Tambah
+                                </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @empty
@@ -525,7 +549,8 @@
         </section>
         <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
             @forelse ($makanan_berat as $item)
-                <div class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem]">
+                {{-- [MODIFIKASI] ID Target untuk Makanan Berat --}}
+                <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
                             class="w-full h-full object-cover rounded-lg -translate-y-4 hover:scale-110 transition-all duration-500"
@@ -579,10 +604,14 @@
                                 Lihat detail menu
                             </button>
                         </a>
-                        <button wire:click="addToCart({{ $item->id }})"
-                            class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
-                            Tambah
-                        </button>
+                        @auth
+                            @if (!auth()->user()->isAdmin())
+                                <button wire:click="addToCart({{ $item->id }})"
+                                    class="text-[12px] sm:text-[18px] text-white bg-primary w-full sm:py-2 p-[5px] font-light rounded-[4px] hover:bg-yellow-800 transition-colors duration-500">
+                                    Tambah
+                                </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @empty

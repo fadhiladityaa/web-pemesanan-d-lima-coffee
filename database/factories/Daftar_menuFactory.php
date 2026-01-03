@@ -19,11 +19,11 @@ class Daftar_menuFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_menu' => fake()->words(2, true),
+            'nama_menu' => fake()->word(),
             'harga' => fake()->numberBetween(10000, 50000),
-            'gambar' => fake()->image('public/img', 640, 480, 'food', false),
-            'deskripsi' => fake()->sentence(30),
-            'pesan' => fake()->words(2, true),
+            'gambar' => fake()->imageUrl(640, 480, 'food'),
+            'deskripsi' => fake()->sentence(10),
+            'pesan' => 'Ringan & ramah', // default lebih konsisten
             'category_id' => MenuCategory::factory(),
         ];
     }

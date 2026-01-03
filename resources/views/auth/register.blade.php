@@ -11,7 +11,7 @@
 </head>
 <body class="font-[Poppins] min-h-screen flex items-center justify-center p-4 bg-gradient-to-bl from-[#2a1a10] via-[#5c3a21] to-[#C67C4E]">
     
-    <x-back-button />
+
     
     <div class="absolute inset-0 bg-[url('/img/beans-pattern.png')] opacity-10 pointer-events-none"></div>
 

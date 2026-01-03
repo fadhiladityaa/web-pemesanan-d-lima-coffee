@@ -1,6 +1,7 @@
 <div class="">
     {{-- Cart untuk desktop --}}
-    <div class="shadow-soft p-5 rounded-lg hidden md:block lg:max-h-[80vh] overflow-y-auto bg-white border border-gray-100">
+    <div
+        class="shadow-soft p-5 rounded-lg hidden lg:mt-[26rem] md:block lg:max-h-[80vh] overflow-y-auto bg-white border border-gray-100">
         <div class="flex justify-between">
             <h2 id="otw" class="sm:text-[1.7rem] lg:text-[1.3rem]">Keranjang</h2>
             <span
@@ -13,17 +14,17 @@
         <div class="cart-items-container mt-4">
             @if ($cart && $cart->cart_items && $cart->cart_items->count())
                 @foreach ($cart->cart_items as $item)
-                    <div
+                    <div x-data="{ showNotes: false }"
                         class="items-container bg-primary/5 transition-all duration-150 hover:bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 lg:p-3 flex">
                         {{-- gambar produk --}}
                         <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
                             class="w-24 h-24 mr-3 sm:w-36 rounded-lg lg:w-20 lg:h-20"
-                            alt="{{ $item->daftar_menu->nama }}">
+                            alt="{{ $item->daftar_menu->nama_menu }}">
 
                         {{-- detail harga --}}
                         <div
-                            class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 lg:gap-1 gap-3">
-                            <span class="text-[.9rem] sm:text-[1.4rem] lg:text-[1rem]">
+                            class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 lg:gap-1 gap-3 flex-1">
+                            <span class="text-[.9rem] sm:text-[1.4rem] lg:text-[1rem] font-medium">
                                 {{ $item->daftar_menu->nama_menu }}
                             </span>
                             <span class="text-[.7rem] text-slate-600 sm:text-[1.3rem] lg:text-[.8rem]">
@@ -36,10 +37,69 @@
                             {{-- counter --}}
                             <div class="counter-container flex gap-3 mt-2">
                                 <span wire:click="decrementQuantity({{ $item->id }})"
-                                    class="px-3 sm:px-5 sm:py-[0.1rem] lg:px-3 cursor-pointer sm:text-lg rounded-[4px] bg-[#CACACA]">-</span>
-                                <span class="sm:text-lg">{{ $item->quantity }}</span>
+                                    class="px-3 sm:px-5 sm:py-[0.1rem] lg:px-3 cursor-pointer sm:text-lg rounded-[4px] bg-[#CACACA] hover:bg-gray-400 transition-colors">-</span>
+                                <span class="sm:text-lg font-medium">{{ $item->quantity }}</span>
                                 <span wire:click="incrementQuantity({{ $item->id }})"
-                                    class="px-3 sm:px-5 sm:py-[0.1rem] lg:px-3 cursor-pointer sm:text-lg rounded-[4px] bg-[#CACACA]">+</span>
+                                    class="px-3 sm:px-5 sm:py-[0.1rem] lg:px-3 cursor-pointer sm:text-lg rounded-[4px] bg-[#CACACA] hover:bg-gray-400 transition-colors">+</span>
+                            </div>
+
+                            {{-- NOTES SECTION (Expandable) --}}
+                            <div class="notes-container mt-3 pt-3 border-t border-gray-300">
+                                <button @click="showNotes = !showNotes"
+                                    class="flex items-center gap-1 text-xs text-gray-700 hover:text-primary transition-colors w-full text-left">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                    <span class="font-medium">Catatan</span>
+                                    @if ($item->notes)
+                                        <span
+                                            class="ml-1 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs bg-primary/10 text-primary">
+                                            ✓
+                                        </span>
+                                    @endif
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-auto transition-transform"
+                                        :class="{ 'rotate-180': showNotes }" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+
+                                {{-- Notes Preview (if exists) --}}
+                                @if ($item->notes)
+                                    <div x-show="!showNotes" class="mt-2">
+                                        <p class="text-xs text-gray-600 bg-gray-50 p-2 rounded border border-gray-200">
+                                            {{ Str::limit($item->notes, 50) }}
+                                        </p>
+                                    </div>
+                                @endif
+
+                                {{-- Notes Textarea (Expandable) --}}
+                                {{-- Notes Textarea (Expandable) --}}
+                                <div x-show="showNotes" x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 scale-95"
+                                    x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-150"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-95" class="mt-2">
+
+                                    <textarea wire:model.debounce.500ms="notes.{{ $item->id }}"
+                                        wire:change="updateNotes({{ $item->id }}, $event.target.value)" rows="2"
+                                        placeholder="Contoh: Kurangi gula, tambah es, dll..."
+                                        class="w-full text-xs border border-gray-300 rounded p-2 focus:outline-none focus:border-primary resize-none"
+                                        maxlength="200">{{ $item->notes }}</textarea>
+
+                                    <div class="flex justify-between mt-1">
+                                        <span class="text-xs text-gray-500">
+                                            Maks. 200 karakter
+                                        </span>
+                                        <span class="text-xs text-gray-500">
+                                            {{ strlen($item->notes ?? '') }}/200
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -116,7 +176,8 @@
                         <div class="text-left">
                             <p class="font-semibold">Keranjang</p>
                             <p class="text-sm opacity-90">
-                                Rp. {{ number_format($cart->cart_items->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
+                                Rp.
+                                {{ number_format($cart->cart_items->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
                             </p>
                         </div>
                     </div>
@@ -146,8 +207,8 @@
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-3">
                                 <div class="relative">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                     </svg>
@@ -166,7 +227,8 @@
                                 </svg>
                             </button>
                         </div>
-                        <p class="text-sm text-gray-500 mt-1"> {{ optional($cart)->cart_items?->sum('quantity') ?? 0 }} items
+                        <p class="text-sm text-gray-500 mt-1">
+                            {{ optional($cart)->cart_items?->sum('quantity') ?? 0 }} items
                         </p>
                     </div>
                 </div>
@@ -174,41 +236,108 @@
                 {{-- Cart Items (Scrollable) --}}
                 <div class="flex-1 overflow-y-auto px-4 py-3">
                     @foreach ($cart->cart_items as $item)
+                        {{-- Di dalam @foreach ($cart->cart_items as $item) --}}
                         <div
                             class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 mb-3 bg-white hover:bg-gray-50 transition-colors">
                             {{-- Gambar --}}
                             <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
                                 class="w-16 h-16 rounded-lg object-cover flex-shrink-0"
-                                alt="{{ $item->daftar_menu->nama }}">
+                                alt="{{ $item->daftar_menu->nama_menu }}">
 
                             {{-- Detail --}}
                             <div class="flex-1 min-w-0">
-                                <h3 class="font-medium text-gray-800 truncate">{{ $item->daftar_menu->nama_menu }}
-                                </h3>
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-medium text-gray-800 truncate">{{ $item->daftar_menu->nama_menu }}
+                                    </h3>
+                                    <p class="text-primary font-bold text-sm ml-2 whitespace-nowrap">
+                                        Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}
+                                    </p>
+                                </div>
+
                                 <p class="text-xs text-gray-500 mt-1">
                                     Rp {{ number_format($item->price, 0, ',', '.') }} × {{ $item->quantity }}
                                 </p>
 
-                                {{-- Tombol + - SEDERHANA --}}
+                                {{-- Tombol + - --}}
                                 <div class="flex items-center gap-3 mt-2">
                                     <div class="flex items-center gap-2">
                                         <button wire:click="decrementQuantity({{ $item->id }})"
-                                            class="w-7 h-7 rounded-md bg-gray-100 flex items-center justify-center hover:bg-gray-200 active:scale-95 transition-all font-bold text-gray-700">
+                                            class="w-7 h-7 rounded-md bg-gray-100 flex items-center justify-center hover:bg-gray-200 active:scale-95 transition-all font-bold text-gray-700"
+                                            aria-label="Kurangi jumlah">
                                             –
                                         </button>
                                         <span
                                             class="w-8 text-center font-medium text-gray-800">{{ $item->quantity }}</span>
                                         <button wire:click="incrementQuantity({{ $item->id }})"
-                                            class="w-7 h-7 rounded-md bg-gray-100 flex items-center justify-center hover:bg-gray-200 active:scale-95 transition-all font-bold text-gray-700">
+                                            class="w-7 h-7 rounded-md bg-gray-100 flex items-center justify-center hover:bg-gray-200 active:scale-95 transition-all font-bold text-gray-700"
+                                            aria-label="Tambah jumlah">
                                             +
                                         </button>
                                     </div>
+                                </div>
 
-                                    {{-- Harga Total per Item --}}
-                                    <div class="ml-auto">
-                                        <p class="text-primary font-bold text-sm">
-                                            Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}
-                                        </p>
+                                {{-- NOTES MOBILE --}}
+                                <div class="notes-mobile mt-3 pt-3 border-t border-gray-200">
+                                    <div x-data="{ showNotes: false }" class="w-full">
+                                        {{-- Notes Toggle Button --}}
+                                        <button @click="showNotes = !showNotes" type="button"
+                                            class="flex items-center gap-1.5 text-xs text-gray-600 hover:text-primary transition-colors w-full justify-between">
+                                            <div class="flex items-center gap-1.5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                                <span
+                                                    class="font-medium">{{ $item->notes ? 'Edit Catatan' : 'Tambah Catatan' }}</span>
+                                                @if ($item->notes)
+                                                    <span
+                                                        class="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs bg-primary/10 text-primary ml-1">
+                                                        ✓
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="h-3 w-3 transition-transform"
+                                                :class="{ 'rotate-180': showNotes }" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </button>
+
+                                        {{-- Notes Textarea (Expandable) --}}
+                                        <div x-show="showNotes" x-transition:enter="transition ease-out duration-200"
+                                            x-transition:enter-start="opacity-0 scale-95"
+                                            x-transition:enter-end="opacity-100 scale-100"
+                                            x-transition:leave="transition ease-in duration-150"
+                                            x-transition:leave-start="opacity-100 scale-100"
+                                            x-transition:leave-end="opacity-0 scale-95" class="mt-2">
+                                            <textarea wire:model.debounce.500ms="notes.{{ $item->id }}"
+                                                wire:change="updateNotes({{ $item->id }}, $event.target.value)" rows="2"
+                                                placeholder="Contoh: Kurangi gula, tanpa es, pakai susu almond..."
+                                                class="w-full text-xs border border-gray-300 rounded-lg p-2.5 focus:ring-1 focus:ring-primary/30 focus:border-primary resize-none bg-gray-50"
+                                                maxlength="200">{{ $item->notes }}</textarea>
+                                            <div class="flex justify-between items-center mt-1 px-1">
+                                                <span class="text-xs text-gray-400">
+                                                    Maks. 200 karakter
+                                                </span>
+                                                <span class="text-xs text-gray-500">
+                                                    {{ strlen($item->notes ?? '') }}/200
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {{-- Notes Preview (if exists) --}}
+                                        @if ($item->notes && !$item->notes->isDirty())
+                                            <div x-show="!showNotes" class="mt-1.5">
+                                                <p
+                                                    class="text-xs text-gray-700 bg-gray-50 p-2 rounded border border-gray-200">
+                                                    {{ Str::limit($item->notes, 60) }}
+                                                </p>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

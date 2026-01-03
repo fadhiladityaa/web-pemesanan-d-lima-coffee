@@ -272,7 +272,7 @@
                                 <div class="relative">
                                     <div
                                         class="w-10 h-10 rounded-full bg-gradient-to-r from-primary/20 to-primary/10 flex items-center justify-center text-primary font-bold text-sm group-hover:scale-110 transition-transform duration-300">
-                                        {{ substr($order->user->name, 0, 1) }}
+                                        {{ substr($order->user->name ?? 'Unknown', 0, 1) }}
                                     </div>
                                     @if ($order->payment_status === 'paid')
                                         <div
@@ -283,7 +283,7 @@
                                 <div class="ml-3">
                                     <p
                                         class="text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors">
-                                        {{ $order->user->name }}
+                                        {{ $order->user->name ?? 'User Terhapus' }}
                                     </p>
                                     <p class="text-xs text-gray-500">{{ $order->no_hp }}</p>
                                 </div>

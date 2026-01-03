@@ -5,6 +5,34 @@
             <span class="block sm:inline">{{ $errors->first('payment') }}</span>
         </div>
     @endif
+
+    {{-- Link ke whatsapp --}}
+    <div class="fixed bottom-6 right-6 z-50 group">
+        <a href="https://wa.me/6285194890094?text=Halo%20saya%20perlu%20bantuan!" target="_blank"
+            class="block">
+
+            <!-- Tooltip -->
+            <div
+                class="absolute right-14 bottom-3 bg-gray-800 text-white px-3 py-2 mr-1 rounded-lg 
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                    whitespace-nowrap text-sm">
+                Chat dengan kami!
+                <div class="absolute top-1/2 right-[-6px] transform -translate-y-1/2">
+                    <div class="border-8 border-transparent border-l-gray-800"></div>
+                </div>
+            </div>
+
+            <!-- WhatsApp Button -->
+            <div
+                class="bg-green-500 hover:bg-green-600 p-3 rounded-full shadow-lg 
+                   transition-all duration-300 hover:scale-110 hover:shadow-xl">
+                <img src="{{ asset('img/whatsapp-svgrepo-com.svg') }}" class="w-8 h-8" alt="Chat WhatsApp">
+            </div>
+        </a>
+    </div>
+    {{-- End link ke whatsapp --}}
+
+
     @forelse ($orders as $order)
         <div class="bg-white rounded-xl shadow-lg mb-8 overflow-hidden border border-gray-100">
             {{-- Header Pesanan --}}
@@ -29,13 +57,22 @@
             <div class="px-6 py-6 flex flex-col gap-3">
                 <div>
                     <p class="text-sm text-gray-500 mb-1">Metode Pembayaran</p>
-                    <p class="text-sm py-1 px-3 bg-green-100 w-16 text-center text-green-700 font-semibold border-green-400 border rounded-full">
+                    <p
+                        class="text-sm py-1 px-3 bg-green-100 w-16 text-center text-green-700 font-semibold border-green-400 border rounded-full">
                         {{ $order->metode_pembayaran }}
                     </p>
                 </div>
                 <div>
+                    <p class="text-sm text-gray-500 mb-1">Tipe pesanan</p>
+                    <p
+                        class="text-sm py-1 px-3 bg-blue-100  {{ $order->tipe_pesanan === 'Take away' ? 'w-28' : 'w-20' }} text-center text-blue-700 font-semibold border-blue-400 border rounded-full">
+                        {{ $order->tipe_pesanan }}
+                    </p>
+                </div>
+                <div>
                     <p class="text-sm text-gray-500 mb-1">Status pembayaran</p>
-                    <p class="text-sm py-1 px-3 capitalize {{ $order->payment_status === 'pending' ? 'bg-yellow-100 text-yellow-700 w-24 border-yellow-400' : 'bg-green-100 text-green-700 w-16 border-green-400'}} border text-center font-semibold rounded-xl">
+                    <p
+                        class="text-sm py-1 px-3 capitalize {{ $order->payment_status === 'pending' ? 'bg-yellow-100 text-yellow-700 w-24 border-yellow-400' : 'bg-green-100 text-green-700 w-16 border-green-400' }} border text-center font-semibold rounded-full">
                         {{ $order->payment_status }}
                     </p>
                 </div>
@@ -71,7 +108,7 @@
                     </tbody>
                 </table>
 
-                 <div class="my-5">
+                <div class="my-5">
                     <p class="text-sm text-gray-500">Total Pembayaran</p>
                     <p class="text-2xl font-bold text-gray-800">
                         Rp. {{ number_format($order->total, 0, ',', '.') }}
@@ -96,7 +133,7 @@
     @empty
         <div class="text-center py-16">
             <p class="text-gray-400 text-lg">Belum ada pesanan.</p>
-            <a href="{{ route('landing.menu') }}"
+            <a href="{{ route('menu') }}"
                 class="mt-4 inline-block px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
                 Mulai Belanja
             </a>

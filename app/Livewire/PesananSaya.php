@@ -32,25 +32,30 @@ class PesananSaya extends Component
                 'first_name' => $order->user->name,
                 'phone'      => $order->user->noHp,
             ],
+            'enabled_payments' => [
+                'qris',
+                'gopay',
+                'dana',
+            ],
         ];
 
         try {
             // Manual API Call to bypass library error 10023
             $serverKey = trim(config('midtrans.server_key')); // TRIM spasi yang mungkin terbawa saat copy-aste
             $isProduction = config('midtrans.is_production');
-            
+
             // Debugging: Cek nilai config yang terbaca
             \Illuminate\Support\Facades\Log::info('Midtrans Config Debug:', [
                 'server_key_prefix' => substr($serverKey, 0, 10) . '...', // Hide full key for security
                 'is_production' => $isProduction,
-                'resolved_url' => $isProduction 
-                    ? 'https://app.midtrans.com/snap/v1/transactions' 
+                'resolved_url' => $isProduction
+                    ? 'https://app.midtrans.com/snap/v1/transactions'
                     : 'https://app.sandbox.midtrans.com/snap/v1/transactions'
             ]);
 
             $auth = base64_encode($serverKey . ':');
             $url = $isProduction
-                ? 'https://app.midtrans.com/snap/v1/transactions' 
+                ? 'https://app.midtrans.com/snap/v1/transactions'
                 : 'https://app.sandbox.midtrans.com/snap/v1/transactions';
 
             $ch = curl_init();
@@ -63,13 +68,17 @@ class PesananSaya extends Component
                 'Accept: application/json',
                 'Authorization: Basic ' . $auth
             ]);
-            
-            // Konfigurasi Network Fix (Sama seperti test_connect.php yang berhasil)
+
+            // Konfigurasi Network (Secure untuk Production, Insecure untuk Dev jika perlu)
             curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+            // Bypass SSL hanya jika bukan production (untuk mengatasi error cainfo lokal)
+            if (!$isProduction) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            }
 
             $response = curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -85,14 +94,13 @@ class PesananSaya extends Component
             }
 
             $result = json_decode($response, true);
-            
+
             if (!isset($result['token'])) {
-                 throw new \Exception('Invalid Response: ' . $response);
+                throw new \Exception('Invalid Response: ' . $response);
             }
 
             $this->snapToken = $result['token'];
             $this->dispatch('openPayment', snapToken: $this->snapToken);
-
         } catch (\Exception $e) {
             $this->addError('payment', 'Error: ' . $e->getMessage());
         }

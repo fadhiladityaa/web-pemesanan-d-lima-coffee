@@ -16,6 +16,7 @@ class Checkout extends Component
     public $uang_dibayar = 0;
     public $total = 0;
     public $kembalian = 0;
+    public $tipe_pesanan = '';
 
     public function mount()
     {
@@ -64,6 +65,7 @@ class Checkout extends Component
             'user_id' => $user->id,
             'alamat' => $this->alamat,
             'no_hp' => $this->no_hp,
+            'tipe_pesanan' => $this->tipe_pesanan,
             'metode_pembayaran' => $this->metode_pembayaran,
             'payment_status' => $this->metode_pembayaran === 'Cash' ? 'paid' : 'pending',
             'order_status' => 'proses',
@@ -79,6 +81,7 @@ class Checkout extends Component
                 'quantity' => $item->quantity,
                 'harga' => $item->price,
                 'sub_total' => $item->quantity * $item->price,
+                'notes' => $item->notes, // ← TAMBAH INI
             ]);
         }
 
@@ -86,6 +89,7 @@ class Checkout extends Component
 
         return redirect()->route('pesanan.saya');
     }
+
 
 
     public function render()
