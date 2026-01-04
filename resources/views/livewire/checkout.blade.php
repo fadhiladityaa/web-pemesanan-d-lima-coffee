@@ -36,10 +36,7 @@
                         class="w-full border rounded-md px-3 py-2 mt-1 focus:ring focus:ring-primary text-slate-500">
                         <option value="">Pilih metode</option>
                         <option value="Cash">Cash</option>
-                        <option value="Transfer Bank">Transfer Bank</option>
-                        <option value="OVO">OVO</option>
-                        <option value="DANA">DANA</option>
-                        <option value="GoPay">GoPay</option>
+                        <option value="Qris">Qris</option>
                     </select>
                     @error('metode_pembayaran')
                         <span class="text-red-500 text-sm">{{ $message }}</span>

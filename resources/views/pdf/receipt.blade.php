@@ -126,9 +126,9 @@
             <tbody>
                 @foreach($order->order_items as $item)
                 <tr>
-                    <td>{{ $item->daftar_menu->nama ?? 'Unknown Item' }}</td>
-                    <td>{{ $item->jumlah }}</td>
-                    <td class="price">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
+                    <td>{{ $item->daftar_menu->nama_menu ?? 'Unknown Item' }}</td>
+                    <td>{{ $item->quantity }}</td>
+                    <td class="price">Rp {{ number_format($item->daftar_menu->harga, 0, ',', '.') }}</td>
                 </tr>
                 @endforeach
             </tbody>
