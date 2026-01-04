@@ -87,7 +87,7 @@
 
         <!-- Copyright -->
         <div class="border-t border-gray-800 pt-8 text-center">
-            <p class="text-gray-500 text-sm">© 2025 D'Lima Coffee. All rights reserved.</p>
+            <p class="text-gray-500 text-sm">© 2026 D'Lima Coffee. All rights reserved.</p>
         </div>
     </div>
 </footer>
