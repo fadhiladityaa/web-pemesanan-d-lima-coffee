@@ -69,12 +69,16 @@ class PesananSaya extends Component
                 'Authorization: Basic ' . $auth
             ]);
 
-            // Konfigurasi Network Fix (Sama seperti test_connect.php yang berhasil)
+            // Konfigurasi Network (Secure untuk Production, Insecure untuk Dev jika perlu)
             curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
             curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+            // Bypass SSL hanya jika bukan production (untuk mengatasi error cainfo lokal)
+            if (!$isProduction) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            }
 
             $response = curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

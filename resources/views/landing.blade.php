@@ -30,39 +30,28 @@
                 <!-- Branding -->
                 <div class="flex-shrink-0 flex items-center gap-3">
                     <img class="h-10 w-auto rounded-full" src="{{ asset('img/Logo-DLima-Coffe.png') }}" alt="Logo">
-                    <span class="font-bold text-2xl text-white font-[Sriracha] tracking-wide">D'Lima Coffee</span>
+                    <span class="font-[Sriracha] font-bold text-2xl text-white tracking-wide">D'Lima Coffee</span>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
                     @guest
-                        <a href="#home"
-                            class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Beranda</a>
+                        <a href="#home" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Beranda</a>
                     @endguest
-                    <a href="{{ auth()->check() ? route('menu') : '#menu' }}"
-                        class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Menu</a>
-                    <a href="#about"
-                        class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Tentang</a>
-                    <a href="#contact"
-                        class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Kontak</a>
-
+                    <a href="{{ auth()->check() ? route('menu') : '#menu' }}" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Menu</a>
+                    <a href="#about" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Tentang</a>
+                    <a href="#contact" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Kontak</a>
+                    
                     <div class="h-6 w-px bg-gray-300 mx-4"></div>
 
-                    @if (Route::has('login'))
-                        @auth
-                            <a href="{{ url('/dashboard') }}"
-                                class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all">Dashboard</a>
-                        @else
-                            <div class="flex items-center gap-4">
-                                <a href="{{ route('login') }}"
-                                    class="text-sm font-semibold text-white hover:text-primary transition-colors">Login</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}"
-                                        class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all transform hover:scale-105">Register</a>
-                                @endif
-                            </div>
-                        @endauth
-                    @endif
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all">Dashboard</a>
+                    @else
+                        <div class="flex items-center gap-4">
+                            <a href="{{ route('login') }}" class="text-sm font-semibold text-white hover:text-primary transition-colors">Login</a>
+                            <a href="{{ route('register') }}" class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all transform hover:scale-105">Register</a>
+                        </div>
+                    @endauth
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -113,12 +102,25 @@
         class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-black">
         <!-- Background Slider -->
         <div id="hero-slider" class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-100"
-                style="background-image: url('{{ asset('img/bg-hero.png') }}')"></div>
-            <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
-                style="background-image: url('{{ asset('img/bg1.jpeg') }}')"></div>
-            <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
-                style="background-image: url('{{ asset('img/bg2.jpg') }}')"></div>
+            @php
+                $heroes = \App\Models\LandingHero::orderBy('order')->get();
+            @endphp
+
+            @if ($heroes->isNotEmpty())
+                @foreach ($heroes as $index => $hero)
+                    <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}"
+                        style="background-image: url('{{ asset('storage/' . $hero->image_path) }}')">
+                    </div>
+                @endforeach
+            @else
+                {{-- Fallback Images --}}
+                <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-100"
+                    style="background-image: url('{{ asset('img/bg-hero.png') }}')"></div>
+                <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
+                    style="background-image: url('{{ asset('img/bg1.jpeg') }}')"></div>
+                <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0"
+                    style="background-image: url('{{ asset('img/bg2.jpg') }}')"></div>
+            @endif
             <!-- Dark Overlay for Readability -->
             <div class="absolute inset-0 bg-black/60"></div>
         </div>
@@ -309,18 +311,10 @@
             <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl border border-gray-100 max-w-5xl mx-auto scale-100 hover:scale-[1.01] transition-transform duration-500"
                 data-aos="zoom-in">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <!-- Location -->
-                    <div class="flex items-start space-x-6 group">
-                        <div
-                            class="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
-                            <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
+                     <!-- Location -->
+                    <a href="https://www.google.com/maps/search/?api=1&query=D'Lima+Coffee+Jln.+Delima+Parepare" target="_blank" rel="noopener noreferrer" class="flex items-start space-x-6 group hover:opacity-80 transition-opacity">
+                        <div class="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                             <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
                         <div>
                             <h3 class="text-2xl font-bold mb-3 text-gray-900">Lokasi Kami</h3>
@@ -329,8 +323,8 @@
                                 Parepare, Sulawesi Selatan
                             </p>
                         </div>
-                    </div>
-
+                    </a>
+                    
                     <!-- Contact -->
                     <div class="flex items-start space-x-6 group">
                         <div
@@ -512,13 +506,8 @@
 
                 slides[currentSlide].classList.remove('opacity-0');
                 slides[currentSlide].classList.add('opacity-100');
-            }, 6000); // Increased duration slightly
+            }, 4000); // 4 seconds interval
         }
     </script>
 </body>
-<<<<<<< HEAD
-
 </html>
-=======
-</html>
->>>>>>> fadhil/Fitur-revisi

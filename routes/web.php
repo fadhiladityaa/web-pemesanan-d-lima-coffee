@@ -6,7 +6,7 @@ use App\Livewire\PesananSaya;
 
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\loginController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -39,11 +39,23 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // route untuk login 
-Route::get('/login', [loginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [loginController::class, 'authenticate'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+
+// Forgot Password Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    
+    Route::get('/verify-otp', [App\Http\Controllers\ForgotPasswordController::class, 'showVerifyForm'])->name('password.verify');
+    Route::post('/verify-otp', [App\Http\Controllers\ForgotPasswordController::class, 'verifyOtp'])->name('password.verify.post');
+    
+    Route::get('/reset-password', [App\Http\Controllers\ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [App\Http\Controllers\ForgotPasswordController::class, 'reset'])->name('password.update');
+});
 
 // route  untuk logout
-Route::post('/logout', [loginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // route untuk profile
 Route::get('/profil-pengguna', [ProfileController::class, 'index'])->middleware('auth')->name('profile-pengguna');
@@ -58,6 +70,7 @@ Route::get('/checkout', function () {
 })->name('checkout')->middleware('auth');
 
 Route::get('/buy-now/{id}', [\App\Http\Controllers\CartController::class, 'buyNow'])->name('cart.buyNow')->middleware('auth');
+Route::get('/order/{id}/receipt', [\App\Http\Controllers\OrderController::class, 'printReceipt'])->name('order.receipt')->middleware('auth');
 Route::post('/midtrans/callback', [\App\Http\Controllers\MidtransController::class, 'callback']);
 
 
@@ -76,6 +89,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
     Route::get('/pesanan-masuk', PesananMasuk::class)->name('dashboard.pesanan.masuk');
     Route::get('/edukasi-management', Edukasi::class)->name('dashboard.edukasi.management');
     Route::get('/promo-management', PromoManagement::class)->name('dashboard.promo.management');
+    Route::get('/landing-management', \App\Livewire\LandingPageManagement::class)->name('dashboard.landing.management');
 });
 
 

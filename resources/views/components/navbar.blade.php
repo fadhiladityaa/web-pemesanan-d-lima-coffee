@@ -28,7 +28,7 @@
                 {{-- 1. MENU --}}
                 <a href="{{ route('menu') }}"
                     class="relative py-1 transition-all duration-300 
-                    {{ Request::routeIs('menu')
+                    {{ Request::routeIs('landing.menu')
                         ? 'text-white font-bold border-b-2 border-white'
                         : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
                     Menu
@@ -68,6 +68,17 @@
                         </a>
                     @endif
                 @endauth
+
+                {{-- Login & Register Desktop --}}
+                @guest
+                    <div class="flex items-center gap-4">
+                        <a href="{{ route('login') }}" class="text-white hover:text-white/80 font-medium transition">Login</a>
+                        <a href="{{ route('register') }}"
+                            class="px-5 py-2 rounded-full bg-white text-[#947257] font-bold hover:bg-gray-100 transition shadow-md">
+                            Register
+                        </a>
+                    </div>
+                @endguest
 
                 {{-- Avatar Profile Desktop --}}
                 <div class="flex items-center gap-3">
@@ -148,6 +159,21 @@
 
                                 <div class="divider my-0"></div>
 
+                                {{-- Login & Register Mobile --}}
+                                @guest
+                                    <li>
+                                        <a href="{{ route('login') }}" class="font-bold text-[#947257] hover:bg-[#f3e9e2]">
+                                            🔐 Login
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('register') }}" class="font-bold text-[#947257] hover:bg-[#f3e9e2]">
+                                            ✨ Register
+                                        </a>
+                                    </li>
+                                    <div class="divider my-0"></div>
+                                @endguest
+
 
 
                                 {{-- Menu Mobile --}}
@@ -199,5 +225,5 @@
                                 </li>
                             </ul>
                         </div>
-                </div>
+    </div>
 </nav>
