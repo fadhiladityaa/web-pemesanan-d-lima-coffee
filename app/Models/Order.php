@@ -10,15 +10,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Order extends Model
 {
     protected $guarded = ['id'];
-    protected $table = 'orders'; 
+    protected $table = 'orders';
 
 
     public function user(): BelongsTo
     {
-       return  $this->belongsTo(User::class);
+        return  $this->belongsTo(User::class);
     }
 
-    public function order_items() {
+    public function order_items()
+    {
         return $this->hasMany(OrderItem::class);
     }
 }
