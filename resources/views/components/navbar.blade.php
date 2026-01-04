@@ -28,7 +28,7 @@
                 {{-- 1. MENU --}}
                 <a href="{{ route('menu') }}"
                     class="relative py-1 transition-all duration-300 
-                    {{ Request::routeIs('landing.menu')
+                    {{ Request::routeIs('menu')
                         ? 'text-white font-bold border-b-2 border-white'
                         : 'text-white/70 hover:text-white hover:border-b-2 hover:border-white/30' }}">
                     Menu
