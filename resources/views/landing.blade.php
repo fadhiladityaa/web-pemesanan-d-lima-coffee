@@ -17,6 +17,24 @@
         .hero-text-shadow {
             text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         }
+
+        #navbar {
+            width: 100%;
+            left: 0;
+            right: 0;
+            padding-right: calc(100vw - 100%);
+        }
+
+        /* Alternative: Force full width */
+        .fixed {
+            position: fixed;
+            width: 100vw !important;
+            max-width: 100vw !important;
+            left: 0 !important;
+            right: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
     </style>
 </head>
 
@@ -25,7 +43,7 @@
     <!-- Navbar -->
     <nav class="fixed w-full z-50 transition-all duration-300 bg-[#947257] shadow-xl border-b border-[#947257]"
         id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-screen mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Branding -->
                 <div class="flex-shrink-0 flex items-center gap-3">
@@ -36,20 +54,27 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
                     @guest
-                        <a href="#home" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Beranda</a>
+                        <a href="#home"
+                            class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Beranda</a>
                     @endguest
-                    <a href="{{ auth()->check() ? route('menu') : '#menu' }}" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Menu</a>
-                    <a href="#about" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Tentang</a>
-                    <a href="#contact" class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Kontak</a>
-                    
+                    <a href="{{ auth()->check() ? route('menu') : '#menu' }}"
+                        class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Menu</a>
+                    <a href="#about"
+                        class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Tentang</a>
+                    <a href="#contact"
+                        class="relative py-1 transition-all duration-300 sm:text-[16px] lg:text-[18px] font-poppins font-medium text-white/70 hover:text-white hover:border-b-2 hover:border-white/30">Kontak</a>
+
                     <div class="h-6 w-px bg-gray-300 mx-4"></div>
 
                     @auth
-                        <a href="{{ route('dashboard') }}" class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all">Dashboard</a>
+                        <a href="{{ route('dashboard') }}"
+                            class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all">Dashboard</a>
                     @else
                         <div class="flex items-center gap-4">
-                            <a href="{{ route('login') }}" class="text-sm font-semibold text-white hover:text-primary transition-colors">Login</a>
-                            <a href="{{ route('register') }}" class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all transform hover:scale-105">Register</a>
+                            <a href="{{ route('login') }}"
+                                class="text-sm font-semibold text-white hover:text-primary transition-colors">Login</a>
+                            <a href="{{ route('register') }}"
+                                class="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow hover:bg-opacity-90 transition-all transform hover:scale-105">Register</a>
                         </div>
                     @endauth
                 </div>
@@ -57,7 +82,7 @@
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button
-                        class="mobile-menu-button p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none">
+                        class="mobile-menu-button p-2 rounded-md text-gray-100 hover:bg-gray-100 hover:text-gray-600 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16"></path>
@@ -311,10 +336,20 @@
             <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl border border-gray-100 max-w-5xl mx-auto scale-100 hover:scale-[1.01] transition-transform duration-500"
                 data-aos="zoom-in">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                     <!-- Location -->
-                    <a href="https://www.google.com/maps/search/?api=1&query=D'Lima+Coffee+Jln.+Delima+Parepare" target="_blank" rel="noopener noreferrer" class="flex items-start space-x-6 group hover:opacity-80 transition-opacity">
-                        <div class="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
-                             <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <!-- Location -->
+                    <a href="https://www.google.com/maps/search/?api=1&query=D'Lima+Coffee+Jln.+Delima+Parepare"
+                        target="_blank" rel="noopener noreferrer"
+                        class="flex items-start space-x-6 group hover:opacity-80 transition-opacity">
+                        <div
+                            class="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                            <svg class="w-8 h-8 text-primary group-hover:text-white transition-colors duration-300"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
                         </div>
                         <div>
                             <h3 class="text-2xl font-bold mb-3 text-gray-900">Lokasi Kami</h3>
@@ -324,7 +359,7 @@
                             </p>
                         </div>
                     </a>
-                    
+
                     <!-- Contact -->
                     <div class="flex items-start space-x-6 group">
                         <div
@@ -349,7 +384,7 @@
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                 <!-- Brand & Description -->
                 <div>
@@ -510,4 +545,5 @@
         }
     </script>
 </body>
+
 </html>
