@@ -187,7 +187,7 @@
             </div>
         </section>
 
-        <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
+        <div class="grid grid-cols-2 gap-3 mt-7 lg:col-span-2">
             @forelse ($coffee as $item)
                 {{-- [MODIFIKASI] ID Target untuk Coffee --}}
                 <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
@@ -276,7 +276,7 @@
                 <h2 class="text-2xl sm:text-3xl text-slate-800 py-3">Non Coffee</h2>
             </div>
         </section>
-        <div class="grid grid-cols-2 gap-2 mt-7 lg:col-span-2">
+        <div class="grid grid-cols-2 gap-3 mt-7 lg:col-span-2">
             @forelse ($non_coffee as $item)
                 {{-- [MODIFIKASI] ID Target untuk Non Coffee --}}
                 <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
