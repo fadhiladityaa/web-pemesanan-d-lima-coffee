@@ -20,6 +20,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
     {{-- icons --}}
 
+    <link rel="icon" href="{{ asset('img/logo-warkop 1.svg') }}" type="image/x-icon">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     
