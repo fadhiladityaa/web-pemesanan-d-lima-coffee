@@ -17,15 +17,21 @@
                     <div x-data="{ showNotes: false }"
                         class="items-container bg-primary/5 transition-all duration-150 hover:bg-[#E8E8E8] mt-2 sm:mt-6 shadow-md rounded-md text-slate-800 p-3 lg:p-3 flex">
                         {{-- gambar produk --}}
-                        <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
-                            class="w-24 h-24 mr-3 sm:w-36 rounded-lg lg:w-20 lg:h-20"
-                            alt="{{ $item->daftar_menu->nama_menu }}">
+                        @if($item->daftar_menu)
+                            <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
+                                class="w-24 h-24 mr-3 sm:w-36 rounded-lg lg:w-20 lg:h-20"
+                                alt="{{ $item->daftar_menu->nama_menu }}">
+                        @else
+                           <div class="w-24 h-24 mr-3 sm:w-36 rounded-lg lg:w-20 lg:h-20 bg-gray-200 flex items-center justify-center text-xs text-center text-gray-500">
+                                Produk Tidak Tersedia
+                            </div>
+                        @endif
 
                         {{-- detail harga --}}
                         <div
                             class="pricing-container flex sm:mt-1 sm:mr-[15rem] lg:mr-0 flex-col lg:mt-0 lg:ml-2 lg:gap-1 gap-3 flex-1">
                             <span class="text-[.9rem] sm:text-[1.4rem] lg:text-[1rem] font-medium">
-                                {{ $item->daftar_menu->nama_menu }}
+                                {{ $item->daftar_menu ? $item->daftar_menu->nama_menu : 'Item dihapus' }}
                             </span>
                             <span class="text-[.7rem] text-slate-600 sm:text-[1.3rem] lg:text-[.8rem]">
                                 {{ number_format($item->price, 0, ',', '.') }} x {{ $item->quantity }} =
@@ -240,14 +246,21 @@
                         <div
                             class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 mb-3 bg-white hover:bg-gray-50 transition-colors">
                             {{-- Gambar --}}
-                            <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
-                                class="w-16 h-16 rounded-lg object-cover flex-shrink-0"
-                                alt="{{ $item->daftar_menu->nama_menu }}">
+                            @if($item->daftar_menu)
+                                <img src="{{ Storage::url($item->daftar_menu->gambar) }}"
+                                    class="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+                                    alt="{{ $item->daftar_menu->nama_menu }}">
+                            @else
+                                <div class="w-16 h-16 rounded-lg bg-gray-200 flex items-center justify-center flex-shrink-0 text-[10px] text-center text-gray-500">
+                                    N/A
+                                </div>
+                            @endif
 
                             {{-- Detail --}}
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start">
-                                    <h3 class="font-medium text-gray-800 truncate">{{ $item->daftar_menu->nama_menu }}
+                                    <h3 class="font-medium text-gray-800 truncate">
+                                        {{ $item->daftar_menu ? $item->daftar_menu->nama_menu : 'Item dihapus' }}
                                     </h3>
                                     <p class="text-primary font-bold text-sm ml-2 whitespace-nowrap">
                                         Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}

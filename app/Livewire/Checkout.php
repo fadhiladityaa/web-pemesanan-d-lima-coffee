@@ -28,6 +28,7 @@ class Checkout extends Component
         'no_hp' => 'required|string',
         'metode_pembayaran' => 'required|string',
         'uang_dibayar' => 'nullable|numeric|min:0',
+        'tipe_pesanan' => 'required|in:Take away,Dine in',
     ];
 
     public function updatedMetodePembayaran($value)

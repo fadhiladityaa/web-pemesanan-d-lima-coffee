@@ -18,7 +18,9 @@ class Cart extends Component
     {
         $cart = CartModel::where('user_id', Auth::id())
             ->where('status', 'pending')
-            ->with('cart_items.daftar_menu')
+            ->with(['cart_items.daftar_menu' => function ($query) {
+                $query->withTrashed();
+            }])
             ->first();
 
         // Load existing notes jika ada

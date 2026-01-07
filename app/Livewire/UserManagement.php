@@ -60,10 +60,9 @@ class UserManagement extends Component
             return;
         }
 
-        // Menggunakan forceDelete() agar data benar-benar terhapus dari database
         $user = User::find($id);
         if ($user) {
-            $user->forceDelete();
+            $user->delete();
         }
         session()->flash('message', 'Pengguna berhasil dihapus.');
     }
