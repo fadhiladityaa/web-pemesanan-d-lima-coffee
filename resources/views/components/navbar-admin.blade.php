@@ -81,30 +81,6 @@
 {{-- Topbar Desktop --}}
 <header class="hidden md:flex fixed top-0 left-64 right-0 h-20 bg-[#947257] text-white items-center justify-between px-6 z-40">
     <h1 class="text-lg font-bold">Dashboard Admin</h1>
-    <div class="flex items-center gap-4">
-        <button class="relative">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-            </svg>
-            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-        </button>
-
-        <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-sm btn-ghost rounded-full">
-                <img src="{{ asset('img/user-avatar.png') }}" class="w-8 h-8 rounded-full" alt="User">
-            </div>
-            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-40 p-2 text-slate-800 shadow">
-                <li><a href="{{ route('dashboard.profile') }}">Profil</a></li>
-                <li>
-                    <form action="/logout" method="POST">
-                        @csrf
-                        <button type="submit">Logout</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </div>
 </header>
 
 {{-- Mobile Header --}}
