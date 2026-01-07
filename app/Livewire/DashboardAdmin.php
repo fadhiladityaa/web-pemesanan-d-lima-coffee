@@ -20,11 +20,9 @@ class DashboardAdmin extends Component
 
     public function mount()
     {
-        // Set default ke bulan dan tahun saat ini
         $this->selectedMonth = date('m');
         $this->selectedYear = date('Y');
 
-        // Generate pilihan bulan (1-12)
         $this->months = [
             '01' => 'Januari',
             '02' => 'Februari',
@@ -40,7 +38,6 @@ class DashboardAdmin extends Component
             '12' => 'Desember'
         ];
 
-        // Generate pilihan tahun (2 tahun terakhir + tahun ini)
         $this->years = range(now()->year - 4, now()->year);
     }
 
@@ -50,19 +47,20 @@ class DashboardAdmin extends Component
         return Daftar_menu::count();
     }
 
-    // Pendapatan Bulan Terpilih
+    // Pendapatan Bulan Terpilih - ORDER COMPLETED SAJA
     public function getMonthlyRevenueProperty()
     {
-        return Order::where('payment_status', 'paid')
+        return Order::where('order_status', '!=', 'cancelled') // Semua kecuali cancelled
             ->whereMonth('created_at', $this->selectedMonth)
             ->whereYear('created_at', $this->selectedYear)
             ->sum('total');
     }
 
-    // Total Pesanan Bulan Terpilih
+    // Total Pesanan Bulan Terpilih - SEMUA ORDER KECUALI CANCELLED
     public function getMonthlyOrdersProperty()
     {
-        return Order::whereMonth('created_at', $this->selectedMonth)
+        return Order::where('order_status', '!=', 'cancelled')
+            ->whereMonth('created_at', $this->selectedMonth)
             ->whereYear('created_at', $this->selectedYear)
             ->count();
     }
@@ -73,26 +71,26 @@ class DashboardAdmin extends Component
             return 0;
         }
 
-        $paidOrders = Order::whereMonth('created_at', $this->selectedMonth)
+        $completedOrders = Order::whereMonth('created_at', $this->selectedMonth)
             ->whereYear('created_at', $this->selectedYear)
-            ->where('payment_status', 'paid')
+            ->where('order_status', 'completed') // ← INI YANG BENAR
             ->count();
 
-        return round(($paidOrders / $this->monthlyOrders) * 100);
+        return round(($completedOrders / $this->monthlyOrders) * 100);
     }
 
-    // Menu Terlaris Bulan Terpilih untuk Chart
+    // Menu Terlaris Bulan Terpilih - ORDER COMPLETED SAJA
     public function getTopMenusProperty()
     {
         return OrderItem::selectRaw('
-                daftar_menu_id, 
-                SUM(quantity) as total_terjual,
-                daftar_menus.nama_menu as nama_menu,
-                daftar_menus.harga as harga
-            ')
+            daftar_menu_id, 
+            SUM(quantity) as total_terjual,
+            daftar_menus.nama_menu as nama_menu,
+            daftar_menus.harga as harga
+        ')
             ->join('daftar_menus', 'order_items.daftar_menu_id', '=', 'daftar_menus.id')
             ->join('orders', 'order_items.order_id', '=', 'orders.id')
-            ->where('orders.payment_status', 'paid')
+            ->where('orders.order_status', '!=', 'cancelled') // Semua kecuali cancelled
             ->whereMonth('orders.created_at', $this->selectedMonth)
             ->whereYear('orders.created_at', $this->selectedYear)
             ->groupBy('daftar_menu_id', 'daftar_menus.nama_menu', 'daftar_menus.harga')
@@ -101,10 +99,11 @@ class DashboardAdmin extends Component
             ->get();
     }
 
-    // Order Terbaru (5 terbaru)
+    // Order Terbaru (5 terbaru) - SEMUA ORDER KECUALI CANCELLED
     public function getRecentOrdersProperty()
     {
         return Order::with(['user', 'order_items.daftar_menu'])
+            ->where('order_status', '!=', 'cancelled')
             ->latest()
             ->limit(5)
             ->get();
@@ -115,19 +114,32 @@ class DashboardAdmin extends Component
     {
         $topMenus = $this->topMenus;
 
+        if ($topMenus->isEmpty()) {
+            return [
+                'labels' => [],
+                'datasets' => [[
+                    'label' => 'Jumlah Terjual',
+                    'data' => [],
+                    'backgroundColor' => [],
+                    'borderColor' => '#1F2937',
+                    'borderWidth' => 1
+                ]]
+            ];
+        }
+
         $labels = $topMenus->pluck('nama_menu')->toArray();
         $data = $topMenus->pluck('total_terjual')->toArray();
         $backgroundColors = [
-            '#3B82F6',
-            '#10B981',
-            '#F59E0B',
-            '#EF4444',
-            '#8B5CF6',
-            '#06B6D4',
-            '#84CC16',
-            '#F97316',
-            '#EC4899',
-            '#6366F1'
+            '#FF6B6B',
+            '#4ECDC4',
+            '#FFD166',
+            '#06D6A0',
+            '#118AB2',
+            '#EF476F',
+            '#073B4C',
+            '#7209B7',
+            '#F3722C',
+            '#577590'
         ];
 
         return [
@@ -178,6 +190,7 @@ class DashboardAdmin extends Component
             'recentOrders' => $this->recentOrders,
             'chartData' => $this->chartData,
             'selectedPeriod' => $this->selectedPeriod,
+            'conversionRate' => $this->conversionRate,
         ]);
     }
 }
