@@ -3,6 +3,14 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    <IfModule mod_headers.c>
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set X-Frame-Options "SAMEORIGIN"
+        Header always set X-XSS-Protection "1; mode=block"
+        Header always unset X-Powered-By
+        Header unset X-Powered-By
+    </IfModule>
+
     RewriteEngine On
 
     # Handle Authorization Header

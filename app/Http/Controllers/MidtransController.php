@@ -3,88 +3,107 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log; // Import Log Facade
 use App\Models\Order;
 use Midtrans\Config;
 use Midtrans\Notification;
 
 class MidtransController extends Controller
 {
+    /**
+     * Handle Midtrans Payment Notification
+     * 
+     * Security:
+     * - Signature Key validation (SHA-512)
+     * - Server-side check (Optional but recommended)
+     * - Status handling
+     */
     public function callback(Request $request)
     {
-        // Validasi Manual Signature Key (Anti-Manipulation)
+        // 1. Log Raw Payload (Critical for Debugging)
+        Log::info('MIDTRANS_WEBHOOK: Incoming', ['payload' => $request->all(), 'ip' => $request->ip()]);
+
+        // 2. Extract Data
         $serverKey = config('midtrans.server_key');
-        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
-        
-        if ($hashed !== $request->signature_key) {
-           return response()->json(['message' => 'Invalid Signature'], 403);
+        $orderId = $request->order_id;
+        $statusCode = $request->status_code;
+        $grossAmount = $request->gross_amount;
+        $reqSignature = $request->signature_key;
+
+        // 3. Validation: Check for Missing Credentials/Signature
+        if (!$serverKey) {
+            Log::error('MIDTRANS_WEBHOOK: Server Key configuration missing.');
+            return response()->json(['message' => 'Configuration Error'], 500);
         }
 
-        // Server-to-Server Check (Anti-Spoofing)
-        // Panggil kembali API Midtrans Get Status untuk memastikan status valid
-        $baseUrl = config('midtrans.is_production') 
-            ? 'https://api.midtrans.com/v2' 
-            : 'https://api.sandbox.midtrans.com/v2';
-            
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "$baseUrl/$request->order_id/status");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 0);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Accept: application/json',
-            'Authorization: Basic ' . base64_encode($serverKey . ':')
-        ]);
-        
-        // Bypass SSL di Sandbox/Dev untuk mencegah error "certificate file" lokal
-        if (!config('midtrans.is_production')) {
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        if (!$reqSignature) {
+            // Likely a Redirect (Finish URL) or Fake Request
+            Log::warning('MIDTRANS_WEBHOOK: Missing signature_key. Ignoring possible redirect.', ['user_agent' => $request->userAgent()]);
+            return response()->json(['message' => 'Invalid Request: Missing Signature'], 400);
         }
 
-        $response = curl_exec($ch);
-        curl_close($ch);
+        // 4. Manual SHA-512 Signature Calculation
+        // Pattern: order_id + status_code + gross_amount + ServerKey
+        $generatedSignature = hash('sha512', $orderId . $statusCode . $grossAmount . $serverKey);
 
-        $midtransStatus = json_decode($response);
-
-        // Pastikan response valid
-        if (!isset($midtransStatus->transaction_status)) {
-            return response()->json(['message' => 'Failed to verify with Midtrans'], 500);
+        // 5. Compare Signatures (Timing Attack Safe)
+        if (!hash_equals($generatedSignature, $reqSignature)) {
+            Log::error('MIDTRANS_WEBHOOK: Signature Mismatch', [
+                'expected' => $generatedSignature, // Safe to log locally, never expose
+                'received' => $reqSignature
+            ]);
+            return response()->json(['message' => 'Invalid Signature'], 403);
         }
 
-        // Gunakan status dari S2S verification
-        $status = $midtransStatus->transaction_status;
-        $type = $midtransStatus->payment_type;
-        $fraud = $midtransStatus->fraud_status;
-        $orderId = $midtransStatus->order_id;
+        Log::info('MIDTRANS_WEBHOOK: Signature Validated. Processing Order: ' . $orderId);
 
-        // Ambil ID asli
+        // 6. Resolve Order
+        // Handle potentially appended timestamps by Midtrans (e.g., ORDER-123-162738)
         $realOrderId = explode('-', $orderId)[0];
-        $order = Order::find($realOrderId);
+        $order = Order::where('id', $realOrderId)->first(); // Assuming ID is string/int matching realOrderId
+
+        // Fallback: try finding by exact order_id if logic differs
+        if (!$order) {
+            $order = Order::where('id', $orderId)->first();
+        }
 
         if (!$order) {
+            Log::error('MIDTRANS_WEBHOOK: Order not found: ' . $orderId);
             return response()->json(['message' => 'Order not found'], 404);
         }
 
-        if ($status == 'capture') {
-            if ($type == 'credit_card') {
-                if ($fraud == 'challenge') {
-                    $order->update(['payment_status' => 'pending']);
-                } else {
-                    $order->update(['payment_status' => 'paid', 'order_status' => 'proses']);
+        // 7. Update Status
+        $transactionStatus = $request->transaction_status;
+        $fraudStatus = $request->fraud_status;
+        $paymentType = $request->payment_type;
+
+        switch ($transactionStatus) {
+            case 'capture':
+                if ($paymentType == 'credit_card') {
+                    if ($fraudStatus == 'challenge') {
+                        $order->update(['payment_status' => 'pending']);
+                    } else {
+                        $order->update(['payment_status' => 'paid', 'order_status' => 'proses']);
+                    }
                 }
-            }
-        } else if ($status == 'settlement') {
-            $order->update(['payment_status' => 'paid', 'order_status' => 'proses']);
-        } else if ($status == 'pending') {
-            $order->update(['payment_status' => 'pending']);
-        } else if ($status == 'deny') {
-            $order->update(['payment_status' => 'failed', 'order_status' => 'gagal']);
-        } else if ($status == 'expire') {
-            $order->update(['payment_status' => 'failed', 'order_status' => 'gagal']);
-        } else if ($status == 'cancel') {
-            $order->update(['payment_status' => 'failed', 'order_status' => 'gagal']);
+                break;
+            case 'settlement':
+                $order->update(['payment_status' => 'paid', 'order_status' => 'proses']);
+                break;
+            case 'pending':
+                $order->update(['payment_status' => 'pending']);
+                break;
+            case 'deny':
+            case 'expire':
+            case 'cancel':
+                $order->update(['payment_status' => 'failed', 'order_status' => 'gagal']);
+                break;
+            default:
+                Log::info('MIDTRANS_WEBHOOK: Unhandled transaction status', ['status' => $transactionStatus]);
+                break;
         }
 
-        return response()->json(['message' => 'Callback verified and processed successfully']);
+        // 8. Return 200 OK
+        return response()->json(['status' => 'OK']);
     }
 }

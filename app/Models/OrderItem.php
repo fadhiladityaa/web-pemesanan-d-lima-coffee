@@ -18,6 +18,6 @@ class OrderItem extends Model
 
     public function daftar_menu()
     {
-        return $this->belongsTo(Daftar_menu::class);
+        return $this->belongsTo(Daftar_menu::class)->withTrashed();
     }
 }

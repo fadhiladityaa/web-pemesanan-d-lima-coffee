@@ -66,7 +66,7 @@
                     <p class="text-sm text-gray-500 mb-1">Tipe pesanan</p>
                     <p
                         class="text-sm py-1 px-3 bg-blue-100  {{ $order->tipe_pesanan === 'Take away' ? 'w-28' : 'w-20' }} text-center text-blue-700 font-semibold border-blue-400 border rounded-full">
-                        {{ $order->tipe_pesanan }}
+                        {{ $order->tipe_pesanan ?: '-' }}
                     </p>
                 </div>
                 <div>
@@ -98,7 +98,7 @@
                     <tbody>
                         @foreach ($order->order_items as $item)
                             <tr class="border-b hover:bg-gray-50">
-                                <td class="p-3">{{ $item->daftar_menu->nama_menu }}</td>
+                                <td class="p-3">{{ $item->daftar_menu->nama_menu ?? 'Menu Tidak Tersedia' }}</td>
                                 <td class="p-3 text-center">{{ $item->quantity }}</td>
                                 <td class="p-3 text-right">
                                     Rp. {{ number_format($item->harga, 0, ',', '.') }}
