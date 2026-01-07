@@ -32,8 +32,8 @@
                         </div>
                         <div>
                             <p class="font-medium">D'Lima Coffee Main Store</p>
-                            <p>Jl. Raya Coffee No. 123</p>
-                            <p>Bandung, Jawa Barat 40123</p>
+                            <p>Jl. Delima, Kompleks Islamic Center</p>
+                            <p>Parepare, Sulawesi Selatan, 91111</p>
                         </div>
                     </div>
 
@@ -43,17 +43,7 @@
                             <img src="{{ asset('img/phone-call-svgrepo-com.svg') }}" alt="Phone" class="w-full h-full">
                         </div>
                         <div>
-                            <p>+62 812 3456 7890</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3 mt-4">
-                        <div class="w-6 h-6">
-                            <!-- Email Icon - Ganti dengan gambar Anda -->
-                            <img src="{{ asset('img/email-8-svgrepo-com (1).svg') }}" alt="Email" class="w-full h-full">
-                        </div>
-                        <div>
-                            <p>hello@dlimacoffee.com</p>
+                            <p>+62 851-9489-0094</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +63,7 @@
                 <div class="mt-8">
                     <h3 class="text-xl font-semibold mb-4">Follow Us</h3>
                     <div class="flex gap-4">
-                        <a href="https://instagram.com/dlimacoffee" target="_blank"
+                        <a href="https://www.instagram.com/dlimacoffee?igsh=MTFjdDRlN3VkNGthNA==" target="_blank"
                             class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-white transition-all">
                             <div class="w-5 h-5">
                                 <!-- Instagram Logo - Ganti dengan gambar Anda -->

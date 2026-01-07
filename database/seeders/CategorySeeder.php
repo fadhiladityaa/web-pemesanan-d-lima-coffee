@@ -14,8 +14,8 @@ class CategorySeeder extends Seeder
             ['name' => 'Coffee'],
             ['name' => 'Non Coffee'],
             ['name' => 'Moctail'],
-            ['name' => 'Makanan Ringan'],
-            ['name' => 'Makanan Berat'],
+            ['name' => 'Snack'],
+            ['name' => 'Main Course'],
         ];
 
         foreach($category as $c) {

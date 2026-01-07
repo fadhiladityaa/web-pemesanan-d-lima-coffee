@@ -2,7 +2,7 @@
     {{-- Kategori Menu --}}
     <section>
         <div
-            class="category-section mt-32 lg:mt-52 scrollbar-hide flex gap-3 sm:gap-4 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            class="category-section mt-32 lg:mt-64 scrollbar-hide flex gap-3 sm:gap-4 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
 
             @foreach ($category as $item)
                 <button onclick="getElementById('{{ $item->name }}').scrollIntoView({behavior: 'smooth'})"
@@ -18,7 +18,7 @@
     {{-- [BARU] SECTION BANNER PROMO (Hanya muncul jika ada promo aktif) --}}
     @if (isset($activePromo) && $activePromo)
         <div
-            class="relative top-5 overflow-hidden rounded-xl  bg-gradient-to-r from-[#fff8e1] to-[#fff3e0] border border-amber-200 shadow-sm p-4 sm:p-6 mb-20 mt-5 sm:mt-0 animate-fade-in-down">
+            class="relative top-5 overflow-hidden rounded-xl lg:mt-20  bg-gradient-to-r from-[#fff8e1] to-[#fff3e0] border border-amber-200 shadow-sm p-4 sm:p-6 mb-20 mt-5 sm:mt-0 animate-fade-in-down">
             {{-- Hiasan Background --}}
             <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-amber-300 rounded-full opacity-20 blur-2xl">
             </div>
@@ -449,17 +449,17 @@
         {{-- end moctail --}}
 
 
-        <span id="Makanan Ringan"></span>
-        {{-- Makanan Ringan --}}
+        <span id="Snack"></span>
+        {{-- Snack --}}
         <section
             class="border-l-[5px] border-primary mt-20 pl-5 rounded-[.130rem] shadow-sm w-[16rem] lg:w-[18rem] font-poppins">
             <div class="category-makanan text-black mt-10">
-                <h2 class="text-2xl sm:text-3xl text-slate-800 py-3">Makanan Ringan</h2>
+                <h2 class="text-2xl sm:text-3xl text-slate-800 py-3">Snack</h2>
             </div>
         </section>
         <div class="grid grid-cols-2 gap-3 mt-7 lg:col-span-2">
-            @forelse ($makanan_ringan as $item)
-                {{-- [MODIFIKASI] ID Target untuk Makanan Ringan --}}
+            @forelse ($snack as $item)
+                {{-- [MODIFIKASI] ID Target untuk Snack --}}
                 <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
@@ -537,19 +537,19 @@
                 </div>
             @endforelse
         </div>
-        {{-- end makanan ringan --}}
+        {{-- end Snack --}}
 
 
-        <span id="Makanan Berat"></span>
-        {{-- Makanan Berat --}}
+        <span id="Main Course"></span>
+        {{-- Main Course --}}
         <section class="border-l-[5px] border-primary mt-20 pl-5 rounded-[.130rem] shadow-sm w-[16rem] font-poppins">
             <div class="category-makanan text-black mt-10">
-                <h2 class="text-2xl sm:text-3xl text-slate-800 py-3">Makanan Berat</h2>
+                <h2 class="text-2xl sm:text-3xl text-slate-800 py-3">Main Course</h2>
             </div>
         </section>
         <div class="grid grid-cols-2 gap-3 mt-7 lg:col-span-2">
-            @forelse ($makanan_berat as $item)
-                {{-- [MODIFIKASI] ID Target untuk Makanan Berat --}}
+            @forelse ($main_course as $item)
+                {{-- [MODIFIKASI] ID Target untuk Main Course --}}
                 <div id="menu-{{ $item->id }}" class="flex font-poppins flex-col items-start shadow-soft sm:p-5 p-3 lg:p-6 lg:mt-5 lg:w-[22rem] scroll-mt-40">
                     <div class="w-full relative rounded-lg overflow-hidden aspect-[4/4]">
                         <img src="{{ Storage::url($item->gambar) }}"
@@ -627,7 +627,7 @@
                 </div>
             @endforelse
         </div>
-        {{-- end makanan berat --}}
+        {{-- end Main course --}}
     @endif
 
 

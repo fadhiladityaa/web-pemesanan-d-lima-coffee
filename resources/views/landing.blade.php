@@ -188,14 +188,15 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 @foreach ($menus as $menu)
+                    {{-- {{ dd($menus) }} --}}
                     <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 group"
                         data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                         <div class="h-64 overflow-hidden relative"> <!-- Taller image area -->
                             @if ($menu->foto_menu)
-                                <img src="{{ asset('storage/' . $menu->foto_menu) }}" alt="{{ $menu->nama_menu }}"
+                                <img src="{{ Storage::url($menu->gambar) }}" alt="{{ $menu->nama_menu }}"
                                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             @else
-                                <img src="https://via.placeholder.com/300" alt="{{ $menu->nama_menu }}"
+                                <img src="{{ Storage::url($menu->gambar) }}" alt="{{ $menu->nama_menu }}"
                                     class="w-full h-full object-cover">
                             @endif
                             <div
@@ -383,8 +384,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
-        <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <footer class="bg-gray-900 text-white pt-16 mt-14 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                 <!-- Brand & Description -->
                 <div>
@@ -399,7 +400,7 @@
                             class="inline-flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-all duration-300">
                             <div class="w-6 h-6">
                                 <!-- WhatsApp Logo - Ganti dengan gambar Anda -->
-                                <img src="{{ asset('img/whatsapp-icon.png') }}" alt="WhatsApp"
+                                <img src="{{ asset('img/whatsapp-svgrepo-com.svg') }}" alt="WhatsApp"
                                     class="w-full h-full">
                             </div>
                             <span>Chat via WhatsApp</span>
@@ -414,33 +415,24 @@
                         <div class="flex items-start gap-3">
                             <div class="w-6 h-6 mt-1">
                                 <!-- Location Icon - Ganti dengan gambar Anda -->
-                                <img src="{{ asset('img/location-icon.png') }}" alt="Location"
+                                <img src="{{ asset('img/location-pin-svgrepo-com.svg') }}" alt="Location"
                                     class="w-full h-full">
                             </div>
                             <div>
                                 <p class="font-medium">D'Lima Coffee Main Store</p>
-                                <p>Jl. Raya Coffee No. 123</p>
-                                <p>Bandung, Jawa Barat 40123</p>
+                                <p>Jl. Delima, Kompleks Islamic Center</p>
+                                <p>Parepare, Sulawesi Selatan, 91111</p>
                             </div>
                         </div>
 
                         <div class="flex items-center gap-3 mt-4">
                             <div class="w-6 h-6">
                                 <!-- Phone Icon - Ganti dengan gambar Anda -->
-                                <img src="{{ asset('img/phone-icon.png') }}" alt="Phone" class="w-full h-full">
+                                <img src="{{ asset('img/phone-call-svgrepo-com.svg') }}" alt="Phone"
+                                    class="w-full h-full">
                             </div>
                             <div>
-                                <p>+62 812 3456 7890</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-3 mt-4">
-                            <div class="w-6 h-6">
-                                <!-- Email Icon - Ganti dengan gambar Anda -->
-                                <img src="{{ asset('img/email-icon.png') }}" alt="Email" class="w-full h-full">
-                            </div>
-                            <div>
-                                <p>hello@dlimacoffee.com</p>
+                                <p>+62 851-9489-0094</p>
                             </div>
                         </div>
                     </div>
@@ -460,29 +452,11 @@
                     <div class="mt-8">
                         <h3 class="text-xl font-semibold mb-4">Follow Us</h3>
                         <div class="flex gap-4">
-                            <a href="https://instagram.com/dlimacoffee" target="_blank"
+                            <a href="https://www.instagram.com/dlimacoffee?igsh=MTFjdDRlN3VkNGthNA==" target="_blank"
                                 class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-white transition-all">
                                 <div class="w-5 h-5">
                                     <!-- Instagram Logo - Ganti dengan gambar Anda -->
-                                    <img src="{{ asset('img/instagram-icon.png') }}" alt="Instagram"
-                                        class="w-full h-full">
-                                </div>
-                            </a>
-
-                            <a href="https://facebook.com/dlimacoffee" target="_blank"
-                                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-white transition-all">
-                                <div class="w-5 h-5">
-                                    <!-- Facebook Logo - Ganti dengan gambar Anda -->
-                                    <img src="{{ asset('img/facebook-icon.png') }}" alt="Facebook"
-                                        class="w-full h-full">
-                                </div>
-                            </a>
-
-                            <a href="https://tiktok.com/@dlimacoffee" target="_blank"
-                                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-white transition-all">
-                                <div class="w-5 h-5">
-                                    <!-- TikTok Logo - Ganti dengan gambar Anda -->
-                                    <img src="{{ asset('img/tiktok-icon.png') }}" alt="TikTok"
+                                    <img src="{{ asset('img/instagram-167-svgrepo-com.svg') }}" alt="Instagram"
                                         class="w-full h-full">
                                 </div>
                             </a>
@@ -493,10 +467,11 @@
 
             <!-- Copyright -->
             <div class="border-t border-gray-800 pt-8 text-center">
-                <p class="text-gray-500 text-sm">© 2025 D'Lima Coffee. All rights reserved.</p>
+                <p class="text-gray-500 text-sm">© 2026 D'Lima Coffee. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

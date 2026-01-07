@@ -85,7 +85,7 @@ class Products extends Component
     #[Title('Daftar Menu')]
     public function render()
     {
-        $categoryNames = ['Coffee', 'Non Coffee', 'Moctail', 'Makanan Ringan', 'Makanan Berat'];
+        $categoryNames = ['Coffee', 'Non Coffee', 'Moctail', 'Snack', 'Main Course'];
 
         // 1. AMBIL DATA PROMO AKTIF
         $activePromo = $this->promo_id ? Promo::find($this->promo_id) : null;
@@ -135,8 +135,8 @@ class Products extends Component
             'coffee' => $filteredCategories['coffee'],
             'non_coffee' => $filteredCategories['non_coffee'],
             'moctail' => $filteredCategories['moctail'],
-            'makanan_ringan' => $filteredCategories['makanan_ringan'],
-            'makanan_berat' => $filteredCategories['makanan_berat'],
+            'snack' => $filteredCategories['snack'],
+            'main_course' => $filteredCategories['main_course'],
             'activePromo' => $activePromo,
             'search' => $this->search, // Kirim juga variabel search ke view
             'category' => MenuCategory::all(),
