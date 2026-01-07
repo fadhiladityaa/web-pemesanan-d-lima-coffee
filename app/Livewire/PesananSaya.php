@@ -35,7 +35,6 @@ class PesananSaya extends Component
             'enabled_payments' => [
                 'qris',
                 'gopay',
-                'dana',
             ],
         ];
 
